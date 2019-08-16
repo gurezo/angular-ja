@@ -1,7 +1,7 @@
 # モジュールのイントロダクション
 
 Angularアプリケーションはモジュール型のアプリケーションで、 *NgModules* という独自のモジュール方式を備えています。
-NgModuleは、アプリケーションドメイン、ワークフロー、または密接に関連する一連の機能をまとめたコードブロックのコンテナです。コンポーネント、サービスプロバイダー、およびNgModuleを含むスコープをもつ他のコードファイルを含めることができます。他のNgModuleからエクスポートされた機能をインポートしたり、他のNgModuleで使用するために選択した機能をエクスポートします。
+NgModuleは、アプリケーションドメイン、ワークフロー、または密接に関連する一連の機能をまとめたコードブロックのコンテナです。それは、コンポーネントと、サービスプロバイダーと、および、包含するNgModuleによってスコープが規定された他のコードファイルとを含めることができます。他のNgModuleからエクスポートされた機能をインポートしたり、他のNgModuleで使用するために選択した機能をエクスポートします。
 
 すべてのAngularアプリケーションには少なくとも1つのNgModuleクラスがあり、[*ルートモジュール*](guide/bootstrapping)は通常`AppModule`と呼ばれ、`app.module.ts`という名前のファイルにあります。ルートのNgModuleを*ブートストラップする*ことでアプリを起動します。
 
@@ -23,7 +23,7 @@ NgModuleは`@NgModule`で装飾されたクラスとして定義されていま�
 
 単純なルートNgModuleの定義は次のとおりです。
 
-<code-example path="architecture/src/app/mini-app.ts" region="module" header="src/app/app.module.ts" linenums="false"></code-example>
+<code-example path="architecture/src/app/mini-app.ts" region="module" header="src/app/app.module.ts"></code-example>
 
 <div class="alert is-helpful">
 
@@ -56,10 +56,12 @@ NgModuleは、そのコンポーネントの *コンパイルコンテキスト*
 コンポーネントを作成すると、そのコンポーネントは *ホストビュー* という単一のビューに直接関連付けられます。ホストビューは、他のコンポーネントのホストビューである *埋め込みビュー* を含むことができるビュー階層のルートにすることができます。これらのコンポーネントは、同じNgModuleに存在することも、他のNgModuleからインポートすることもできます。 ツリー内のビューは、任意の深さにネストすることができます。
 
 <div class="alert is-helpful">
-    **注意:** ビューの階層構造は、AngularがDOMおよびアプリケーションデータの変更を検出して対応する方法における重要な要素です。
+
+**注意:** ビューの階層構造は、AngularがDOMおよびアプリケーションデータの変更を検出して対応する方法における重要な要素です。
+
 </div>
 
-## NgModules と JavaScript モジュール
+## NgModules と JavaScript モジュール
 
 NgModuleシステムは、JavaScriptオブジェクトのコレクションを管理するJavaScript（ES2015）モジュールシステムとは異なり、関連しません。これら2つは、 *相補的な* モジュールシステムです。両方を使ってアプリを書くことができます。
 
@@ -67,9 +69,9 @@ JavaScriptでは、各 *ファイル* はモジュールであり、ファイル
 モジュールは、いくつかのオブジェクトを`export`キーワードでマークすることによって、それらを公開することを宣言します。
 他のJavaScriptモジュールはimportステートメントを使用して、他のモジュールのパブリックオブジェクトにアクセスします。
 
-<code-example path="architecture/src/app/app.module.ts" region="imports" linenums="false"></code-example>
+<code-example path="architecture/src/app/app.module.ts" region="imports"></code-example>
 
-<code-example path="architecture/src/app/app.module.ts" region="export" linenums="false"></code-example>
+<code-example path="architecture/src/app/app.module.ts" region="export"></code-example>
 
 <div class="alert is-helpful">
   <a href="http://exploringjs.com/es6/ch_modules.html">ウェブ上のJavaScriptモジュールシステムの詳細をご覧ください。</a>
@@ -85,17 +87,17 @@ Angularは、JavaScriptモジュールのコレクションを読み込みます
 
 たとえば、Angularの`Component`デコレーターを`@angular/core`ライブラリから次のようにインポートします。
 
-<code-example path="architecture/src/app/app.component.ts" region="import" linenums="false"></code-example>
+<code-example path="architecture/src/app/app.component.ts" region="import"></code-example>
 
 また、JavaScriptのimportステートメントを使用してAngular *ライブラリ* からNgModuleをインポートします。
-たとえば、次のコードは `platformModule` NgModuleを ` platform-browser` ライブラリからインポートします。
+たとえば、次のコードは `BrowserModule` NgModuleを ` platform-browser` ライブラリからインポートします。
 
-<code-example path="architecture/src/app/mini-app.ts" region="import-browser-module" linenums="false"></code-example>
+<code-example path="architecture/src/app/mini-app.ts" region="import-browser-module"></code-example>
 
 上の単純なルートモジュールの例では、アプリケーションモジュールは `BrowserModule`内のものを必要とします。
 そのものにアクセスするには、このように`@NgModule`メタデータの`imports`に追加します。
 
-<code-example path="architecture/src/app/mini-app.ts" region="ngmodule-imports" linenums="false"></code-example>
+<code-example path="architecture/src/app/mini-app.ts" region="ngmodule-imports"></code-example>
 
 このように、AngularとJavaScriptのモジュールシステムを *共に* 使用しています。2つのシステムはいずれも"imports"と"exports"という語彙を共通して持っており混乱しやすいですが、使用するにつれてコンテキストの違いに慣れるでしょう。
 
