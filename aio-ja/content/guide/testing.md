@@ -41,9 +41,9 @@ Chrome ...: Executed 3 of 3 SUCCESS (0.135 secs / 0.205 secs)
 
 Chromeブラウザも開きます。そして"Jasmine HTML Reporter"内に次のようにテストのアウトプットを表示します。
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/testing/initial-jasmine-html-reporter.png' alt="Jasmine HTML Reporter in the browser">
-</figure>
+</div>
 
 ほとんどの人にとって、このブラウザのアウトプットのほうがコンソールのログよりも読みやすいでしょう。
 テスト行をクリックしてそのテストだけを再実行したり、説明をクリックして選択したテストグループ("test suite")を再実行することができます。
@@ -352,9 +352,19 @@ AngularのDIにサービスの作成とコンストラクター引数の順序�
 <code-example
   path="testing/src/app/demo/demo.testbed.spec.ts"
   region="value-service-before-each"
-  header="app/demo/demo.testbed.spec.ts (provide ValueService in beforeEach"></code-example>
+  header="app/demo/demo.testbed.spec.ts (provide ValueService in beforeEach)">
+</code-example>
 
-それからサービスのクラスを引数として`TestBed.get()`を呼び出して、テスト内部でそれを注入してください。
+それからサービスのクラスを引数として`TestBed.inject()`を呼び出して、テスト内部でそれを注入してください。
+
+<div class="alert is-helpful">
+
+**Note:** We used to have `TestBed.get()` instead of `TestBed.inject()`.
+The `get` method wasn't type safe, it always returned `any`, and this is error prone.
+We decided to migrate to a new function instead of updating the existing one given
+the large scale use that would have an immense amount of breaking changes.
+
+</div>
 
 <code-example
   path="testing/src/app/demo/demo.testbed.spec.ts"
@@ -603,6 +613,16 @@ ng generate component banner --inline-template --inline-style --module app
   path="testing/src/app/banner/banner-initial.component.spec.ts"
   region="v1"
   header="app/banner/banner-external.component.spec.ts (initial)"></code-example>
+
+<div class="alert is-helpful">
+
+Because `compileComponents` is asynchronous, it uses
+the [`async`](api/core/testing/async) utility
+function imported from `@angular/core/testing`.
+
+Please refer to the [async](#async) section for more details.
+
+</div>
 
 #### セットアップを減らす
 
@@ -1040,16 +1060,16 @@ Angularは階層的な注入システムを持ちます。
   region="injected-service"
   header="WelcomeComponent's injector"></code-example>
 
-{@a testbed-get}
+{@a testbed-inject}
 
-#### _TestBed.get()_
+#### _TestBed.inject()_
 
-`TestBed.get()`経由でルートインジェクターからサービスを取得することも_できます_。
+`TestBed.inject()`経由でルートインジェクターからサービスを取得することも_できます_。
 これは覚えやすく、あまり冗長ではありません。
 しかし、Angularがコンポーネントとサービスのインスタンスをテストのルートインジェクターに注入する場合にのみ機能します。
 
 このテストスイートでは、`UserService`の_唯一_のプロバイダーはルートテスティングモジュールなので、
-`TestBed.get()`を次のように呼び出すことは安全です:
+`TestBed.inject()`を次のように呼び出すことは安全です:
 
 <code-example
   path="testing/src/app/welcome/welcome.component.spec.ts"
@@ -1058,7 +1078,7 @@ Angularは階層的な注入システムを持ちます。
 
 <div class="alert is-helpful">
 
-`TestBed.get()`が機能しないユースケースについては、
+`TestBed.inject()`が機能しないユースケースについては、
 いつ、そしてなぜかわりにコンポーネントのインジェクターからサービスを取得しなくてはいけないのかを説明する
 [_コンポーネントのプロバイダーを上書きする_](#component-override)セクションを参照してください。
 
@@ -1080,7 +1100,7 @@ Angularは階層的な注入システムを持ちます。
 
 #### 最後のステップとテスト
 
-次では、`TestBed.get()`を使用して`beforeEach()`を完了しています:
+次では、`TestBed.inject()`を使用して`beforeEach()`を完了しています:
 
 <code-example path="testing/src/app/welcome/welcome.component.spec.ts" region="setup" header="app/welcome/welcome.component.spec.ts"></code-example>
 
@@ -1189,7 +1209,8 @@ Angularが`ngOnInit`を呼び出す最初の変更検知サイクルの_直後_�
 
 #### _fakeAsync()_を使用した非同期テスト
 
-`fakeAsync()`機能を使うためには、 `zone-testing`をインポートする必要があります。詳細は[セットアップガイド](guide/setup#appendix-test-using-fakeasyncasync)を参照してください。
+`fakeAsync()`機能を使うためには、 `zone.js/dist/zone-testing`をテストセットアップファイルでインポートする必要があります。
+Angular CLIで作成されたプロジェクトであれば、 `zone-testing` はすでに `src/test.ts` でインポートされています。
 
 次のテストは、サービスが`ErrorObservable`を返すときに期待される動作を確認します。
 
@@ -1207,22 +1228,29 @@ fakeAsync(() => { /* test body */ })`
 テスト本体は同期的に見えます。
 `Promise.then()`のようなネストされた構文はなく、制御の流れを混乱させることはありません。
 
+<div class="alert is-helpful">
+
+Limitation: The `fakeAsync()` function won't work if the test body makes an `XMLHttpRequest` (XHR) call.
+XHR calls within a test are rare, but if you need to call XHR, see [`async()`](#async), below.
+
+</div>
+
 {@a tick}
 
 #### _tick()_関数
 
-(仮想)クロックを進めるには、`tick()`を呼び出さなければなりません。
+(仮想)クロックを進めるには、[tick()](api/core/testing/tick) を呼び出さなければなりません。
 
-`tick()`を呼び出すことでペンディング中のすべての非同期アクティビティが終了するまでの時間の経過をシミュレートします。
+[tick()](api/core/testing/tick) を呼び出すことでペンディング中のすべての非同期アクティビティが終了するまでの時間の経過をシミュレートします。
 このケースでは、エラーハンドラー内の`setTimeout()`を待機します。
 
-`tick()` 関数はパラメーターとしてミリ秒を受け取ります（指定されていない場合はデフォルトで0になります）。このパラメーターは、仮想クロックの進捗状況を表します。たとえば、 `fakeAsync()` テスト中に `setTimeout(fn, 100)` がある場合は、 tick(100) を使用してfnコールバックをトリガーする必要があります。
+[tick()](api/core/testing/tick) 関数はパラメーターとしてミリ秒を受け取ります（指定されていない場合はデフォルトで0になります）。このパラメーターは、仮想クロックの進捗状況を表します。たとえば、 `fakeAsync()` テスト中に `setTimeout(fn, 100)` がある場合は、 tick(100) を使用してfnコールバックをトリガーする必要があります。
 
 <code-example
   path="testing/src/app/demo/async-helper.spec.ts"
   region="fake-async-test-tick"></code-example>
 
-`tick`関数は、`TestBed`と一緒にインポートするAngularテスティングユーティリティの1つです。
+[tick()](api/core/testing/tick) 関数は、`TestBed`と一緒にインポートするAngularテスティングユーティリティの1つです。
 これは`fakeAsync()`と対になっており、`fakeAsync()`の内部でのみ呼び出すことができます。
 
 #### fakeAsync() 内部での日時の比較
@@ -1365,7 +1393,7 @@ PromiseかObservableのどちらかを返すファクトリー関数を受け取
 `ngOnInit()`の後に、引用にはプレースホルダー値(`'...'`)が表示されることに注意してください。
 最初の引用はまだ届いていません。
 
-最初の引用をObservableからフラッシュするには、`tick()`を呼び出します。
+最初の引用をObservableからフラッシュするには、[tick()](api/core/testing/tick) を呼び出します。
 次に、`detectChanges()`を呼び出して、Angularに画面を更新するように指示します。
 
 それから、引用の要素に期待されるテキストが表示することをアサートしてみましょう。
@@ -1374,13 +1402,13 @@ PromiseかObservableのどちらかを返すファクトリー関数を受け取
 
 #### _async()_を使用した非同期テスト
 
-`async()`機能を使うためには、 `zone-testing`をインポートする必要があります。詳細は[セットアップガイド](guide/setup#appendix-test-using-fakeasyncasync)を参照してください。
+`async()`機能を使うためには、 `zone.js/dist/zone-testing`をテストセットアップファイルでインポートする必要があります。
+Angular CLIで作成されたプロジェクトであれば、 `zone-testing` はすでに `src/test.ts` でインポートされています。
 
 `fakeAsync()`ユーティリティ関数にはいくつかの制限があります。
-特に、テスト本体が`XHR`呼び出しを行う場合は動作しません。
-
-テスト中の`XHR`呼び出しはまれであるため、普通は`fakeAsync()`を使うことができます。
-しかし、`XHR`を呼び出す必要がある場合は、`async()`について知る必要があるでしょう。
+特に、テスト本体が`XMLHttpRequest` （XHR）呼び出しを行う場合は動作しません。
+テスト中のXHR呼び出しはまれであるため、普通は[`fakeAsync()`](#fake-async)を使うことができます。
+しかし、`XMLHttpRequest`を呼び出す必要がある場合は、`async()`について知る必要があるでしょう。
 
 <div class="alert is-helpful">
 
@@ -1411,7 +1439,7 @@ PromiseやObservableのコールバック内で`done()`を呼び出す必要は�
 #### _whenStable_
 
 テストは、`getQuote()` Observableが次の引用を発行するのを待つ必要があります。
-`tick()`を呼び出す代わりに、`fixture.whenStable()`を呼び出します。
+[tick()](api/core/testing/tick) を呼び出す代わりに、`fixture.whenStable()`を呼び出します。
 
 `fixture.whenStable()`は、
 JavaScriptエンジンのタスクキューが空になったときに解決するPromiseを返します。
@@ -1521,7 +1549,7 @@ Jasmineのテストが同期的であることに注意してください。
   region="test-scheduler-flush"></code-example>
 
 このステップは、
-以前の`fakeAsync()`と`async()`での例の中での`tick()`と`whenStable()`と似た目的を果たします。
+以前の`fakeAsync()`と`async()`での例の中での [tick()](api/core/testing/tick) と`whenStable()`と似た目的を果たします。
 テストのバランスはそれらの例と同じです。
 
 ### マーブルエラーテスト
@@ -1533,7 +1561,7 @@ Jasmineのテストが同期的であることに注意してください。
   region="error-test"></code-example>
 
 コンポーネント自体がエラーを処理するときに`setTimeout()`を呼び出すため、
-これはまだ非同期テストです。`fakeAsync()`と`tick()`を呼び出す必要があります。
+これはまだ非同期テストです。`fakeAsync()`と [tick()](api/core/testing/tick) を呼び出す必要があります。
 
 マーブルObservableの定義を見てください。
 
@@ -2208,9 +2236,9 @@ _別_の総合テストでは、ユーザーが認証され、許可されてい
 
 `HeroDetailComponent`は、タイトル、2つのヒーローのフィールド、2つのボタンをもつシンプルなビューです。
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/testing/hero-detail.component.png' alt="HeroDetailComponent in action">
-</figure>
+</div>
 
 しかし、このシンプルなフォームでも多くの複雑なテンプレートを持ちます。
 
@@ -2635,9 +2663,9 @@ _クラスのみ_のテストは役に立ちますが、
 
 <code-example path="testing/src/app/shared/highlight.directive.spec.ts" region="test-component" header="app/shared/highlight.directive.spec.ts (TestComponent)"></code-example>
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/testing/highlight-directive-spec.png' alt="HighlightDirective spec in action">
-</figure>
+</div>
 
 <div class="alert is-helpful">
 
@@ -2710,15 +2738,15 @@ DOMとのやりとりがほとんどありません。
 
 1. Karmaのブラウザウィンドウを表示します（前に隠れています）。
 1. **DEBUG**ボタンをクリックします。新しいブラウザタブが開き、テストを再実行します。
-1. ブラウザの開発者ツール（Windowsでは`Ctrl-Shift-I`、OSXでは`Command-Option-I`）を開きます。
+1. ブラウザの開発者ツール（Windowsでは`Ctrl-Shift-I`、macOSでは`Command-Option-I`）を開きます。
 1. "sources"セクションを選択します。
 1. `1st.spec.ts`テストファイル（Control/Command-Pを押して、その後にファイル名を入力してください）を開きます。
 1. テストにブレークポイントをセットします。
 1. ブラウザを更新すると、ブレークポイントで停止します。
 
-<figure>
+<div class="lightbox">
   <img src='generated/images/guide/testing/karma-1st-spec-debug.png' alt="Karma debugging">
-</figure>
+</div>
 
 <hr>
 
@@ -3029,8 +3057,8 @@ Angular テスティングユーティリティには、`TestBed`、`ComponentFi
 
   <tr>
     <td style="vertical-align: top">
-      {@a testbed-get}
-      <code>get</code>
+      {@a testbed-inject}
+      <code>inject</code>
     </td>
 
     <td>
@@ -3042,13 +3070,13 @@ Angular テスティングユーティリティには、`TestBed`、`ComponentFi
 
       サービスがオプショナルな場合はどうなるでしょうか?
 
-      `TestBed.get()`メソッドはオプショナルな第2引数を受け取ります。
+      `TestBed.inject()`メソッドはオプショナルな第2引数を受け取ります。
       これはAngularがプロバイダーを見つけることができない場合に返すオブジェクトです
       （この例では`null`）:
 
       <code-example path="testing/src/app/demo/demo.testbed.spec.ts" region="testbed-get-w-null" header="app/demo/demo.testbed.spec.ts"></code-example>
 
-      `get`を呼び出した後、`TestBed`の構成は現在のスペックの期間中フリーズします。
+      `TestBed.inject`を呼び出した後、`TestBed`の構成は現在のスペックの期間中フリーズします。
 
     </td>
   </tr>
@@ -3207,7 +3235,7 @@ _フィクスチャー_のメソッドにより、Angularはコンポーネン�
       また、`detectChanges`を呼び出すまで、`name`のバインディングは更新されません。
 
       `detectChanges(false)`として呼び出さない場合、
-      循環更新を確認するためにあとで`checkNoChanges`を実行してください。
+      循環更新を確認するためにあとで `checkNoChanges` を実行してください。
 
     </td>
   </tr>

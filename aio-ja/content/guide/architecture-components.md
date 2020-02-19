@@ -1,6 +1,6 @@
 # コンポーネントのイントロダクション
 
-*コンポーネント*は、ビューと呼ばれる画面のパッチを制御します。
+*コンポーネント*は、*ビュー*と呼ばれる画面のパッチを制御します。
 たとえば、個々のコンポーネントは[チュートリアル](tutorial)の次のビューを定義して制御します。
 
 * ナビゲーションリンクをもつアプリのルート
@@ -10,7 +10,7 @@
 コンポーネントの—ビューをサポートするための—アプリケーションロジックをクラス内に定義します。
 クラスは、プロパティとメソッドのAPIを介してビューとやり取りします。
 
-たとえば、`HeroListComponent`tにはヒーローの配列を保持する`heroes`プロパティがあります。
+たとえば、`HeroListComponent`にはヒーローの配列を保持する`heroes`プロパティがあります。
 その`selectHero()`メソッドは、ユーザーがクリックしてそのリストからヒーローを選択すると`selectedHero`プロパティを設定します。
 コンポーネントはサービスからヒーローを取得します。これはコンストラクターのTypeScript[パラメータプロパティ](http://www.typescriptlang.org/docs/handbook/classes.html#parameter-properties)です。
 サービスは、依存性の注入システムを介してコンポーネントに提供されます。
@@ -51,9 +51,9 @@ Angularはこれらのタグ間に`HeroListComponent`ビューのインスタン
 
 ビューは通常、階層的に配置されており、UIセクションまたはページ全体を1つの単位として変更したり表示したり非表示にしたりできます。コンポーネントに直ちに関連付けられたテンプレートは、そのコンポーネントの*ホストビュー*を定義します。コンポーネントは、他のコンポーネントによってホストされる、*埋め込みビュー*を含むビュー階層を定義することもできます。
 
-<figure>
-<img src="generated/images/guide/architecture/component-tree.png" alt="コンポーネントツリー" class="left">
-</figure>
+<div class="lightbox">
+  <img src="generated/images/guide/architecture/component-tree.png" alt="Component tree" class="left">
+</div>
 
 ビュー階層には、同じNgModule内のコンポーネントからのビューを含めることができますが、異なるNgModuleで定義されたコンポーネントからのビューも含めることができます（しばしば含みます）。
 
@@ -81,9 +81,9 @@ Angular は、テンプレートの部分をコンポーネントの各部分に
 
 次の図は、データバインディングマークアップの4つの形式を示しています。各形式には、DOMへ、DOMから、またはその両方の方向があります。
 
-<figure>
-<img src="generated/images/guide/architecture/databinding.png" alt="データバインディング" class="left">
-</figure>
+<div class="lightbox">
+  <img src="generated/images/guide/architecture/databinding.png" alt="Data Binding" class="left">
+</div>
 
 `HeroListComponent`テンプレートのこの例は、これらの3つの形式を使用しています。
 
@@ -110,15 +110,15 @@ Angular は、テンプレートの部分をコンポーネントの各部分に
 Angular は、JavaScriptイベントサイクルごとに*すべての*データバインディングを1回処理しますが、
 それはアプリケーションコンポーネントツリーのルートからすべての子コンポーネントを経由します。
 
-<figure>
-  <img src="generated/images/guide/architecture/component-databinding.png" alt="データバインディング" class="left">
-</figure>
+<div class="lightbox">
+  <img src="generated/images/guide/architecture/component-databinding.png" alt="Data Binding" class="left">
+</div>
 
 データバインディングはテンプレートとそのコンポーネント間の通信で重要な役割を果たし、親コンポーネントと子コンポーネント間の通信においても重要です。
 
-<figure>
-  <img src="generated/images/guide/architecture/parent-child-binding.png" alt="親子間バインディング" class="left">
-</figure>
+<div class="lightbox">
+  <img src="generated/images/guide/architecture/parent-child-binding.png" alt="Parent/Child binding" class="left">
+</div>
 
 ### パイプ {@a pipes}
 

@@ -8,13 +8,7 @@
 
 *stage*や*production*など、さまざまなデフォルト設定を持ったさまざまな名前付きビルド設定をプロジェクトに定義することができます。
 
-個々の名前付きビルド設定は、`build`、`serve`や`test`など、さまざまなビルドターゲットに適用されるオプションすべてについてデフォルト設定をもつことができます。[Angular CLI](cli)の`build`、`serve`、そして`test`コマンドは、ファイルを目的のターゲット環境に適したバージョンに置き換えることができます。
-
-次の図はプロジェクトが複数のビルドターゲットをもつ様子を示しています。これらのビルドターゲットは、定義した名前付き設定を使って実行することができます。
-
-<figure>
-  <img src="generated/images/guide/build/build-config-targets.gif" alt="build configurations and targets">
-</figure>
+それぞれの名前付き設定は、`build`、`serve`や`test`など、さまざまな[builderターゲット](guide/glossary#target)に適用されるオプションすべてについてデフォルト設定をもつことができます。[Angular CLI](cli)の`build`、`serve`、そして`test`コマンドは、ファイルを目的のターゲット環境に適したバージョンに置き換えることができます。
 
 ### 環境固有のデフォルトの設定
 
@@ -233,7 +227,7 @@ CLI設定ファイル（`angular.json`）内の、各[環境設定](#app-environ
     <td>name</td>
     <td>
     
-    バンドルの名前（type=bundle`の場合）。
+    バンドルの名前（`type=bundle`の場合）。
     
     </td>
   </tr>
@@ -297,10 +291,9 @@ AutoprefixerはCSSに接頭辞をつける際に`browserslist`の設定を探し
 
 特定のブラウザとバージョンをターゲットにする方法の例については[browserslistのリポジトリ](https://github.com/browserslist/browserslist)を参照してください。
 
-<div class="alert is-helpful">
-後方互換性
+### Backward compatibility with Lighthouse
 
-もしプログレッシブウェブアプリを作成したくてプロジェクト評価に[Lighthouse](https://developers.google.com/web/tools/lighthouse/)を使用したい場合は、[古いFlexbox](https://developers.google.com/web/tools/lighthouse/audits/old-flexbox)の接頭辞を削除するために、次のbrowserslistエントリを`package.json`に追加してください:
+もしプログレッシブウェブアプリを作成したくてプロジェクト評価に[Lighthouse](https://developers.google.com/web/tools/lighthouse/)を使用したい場合は、[古いFlexbox](https://developers.google.com/web/tools/lighthouse/audits/old-flexbox)の接頭辞を削除するために、次の`browserslist`エントリを`package.json`に追加してください:
 
 ```
 "browserslist": [
@@ -310,13 +303,29 @@ AutoprefixerはCSSに接頭辞をつける際に`browserslist`の設定を探し
 ]
 ```
 
-</div>
+### Backward compatibility with CSS grid
+
+CSS grid layout support in Autoprefixer, which was previously on by default, is off by default in Angular 8 and higher.
+
+To use CSS grid with IE10/11, you must explicitly enable it using the `autoplace` option.
+To do this, add the following to the top of the global styles file (or within a specific css selector scope):
+
+```
+/* autoprefixer grid: autoplace /
+```
+or
+```
+/ autoprefixer grid: no-autoplace */
+```
+
+For more information, see [Autoprefixer documentation](https://autoprefixer.github.io/).
+
 
 {@a proxy}
 
 ## バックエンドサーバーへのプロキシ
 
-`--proxy-config`ビルドオプションにファイルを渡すことで、`webpack dev server`の[プロキシサポート](https://webpack.js.org/configuration/dev-server/#devserver-proxy)を使って、特定のURLをバックエンドサーバーに転送することができます。
+`--proxy-config`ビルドオプションにファイルを渡すことで、`webpack dev server`の[プロキシサポート](https://webpack.js.org/configuration/dev-server/#devserverproxy)を使って、特定のURLをバックエンドサーバーに転送することができます。
 たとえば、`http://localhost:4200/api`に対するすべての要求を`http://localhost:3000/api`で実行しているサーバーに転送するには、次の手順を実行してください。
 
 1. `proxy.conf.json` ファイルを、 `package.json` と同じディレクトリにある `src/` フォルダの中に作成します。
@@ -347,7 +356,7 @@ AutoprefixerはCSSに接頭辞をつける際に`browserslist`の設定を探し
 4. このプロキシ設定で開発サーバーを起動するには、`ng serve`を実行します。
 
 プロキシ設定ファイルを編集して設定オプションを追加することができます。次にいくつか例を示します。
-すべてのオプションの説明については、[webpack DevServer ドキュメンテーション](https://webpack.js.org/configuration/dev-server/#devserver-proxy)を参照してください。
+すべてのオプションの説明については、[webpack DevServer ドキュメンテーション](https://webpack.js.org/configuration/dev-server/#devserverproxy)を参照してください。
 
 プロキシ設定ファイルを編集した場合、変更を有効にするために`ng serve`プロセスを再起動する必要があることに注意してください。
 
