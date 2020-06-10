@@ -1,6 +1,6 @@
-# AOT metadata errors
+# AOT メタデータエラー
 
-The following are metadata errors you may encounter, with explanations and suggested corrections.
+次に、発生する可能性のあるメタデータエラーと、説明および推奨される修正を示します。
 
 [Expression form not supported](#expression-form-not-supported)<br>
 [Reference to a local (non-exported) symbol](#reference-to-a-local-symbol)<br>
@@ -22,30 +22,30 @@ The following are metadata errors you may encounter, with explanations and sugge
 
 <div class="alert is-helpful">
 
-*The compiler encountered an expression it didn't understand while evaluating Angular metadata.*
+*コンパイラは、Angular メタデータの評価中に理解できない式を検出しました.*
 
 </div>
 
-Language features outside of the compiler's [restricted expression syntax](guide/aot-compiler#expression-syntax)
-can produce this error, as seen in the following example:
+次の例に示すように、コンパイラの[制限された式の構文](guide/aot-compiler#expression-syntax)の外側の言語機能により、
+このエラーが発生する可能性があります:
 
 ```ts
 // ERROR
 export class Fooish { ... }
 ...
-const prop = typeof Fooish; // typeof is not valid in metadata
+const prop = typeof Fooish; // typeof はメタデータでは無効です
   ...
-  // bracket notation is not valid in metadata
+  // ブラケット表記はメタデータでは無効です
   { provide: 'token', useValue: { [prop]: 'value' } };
   ...
 ```
 
-You can use `typeof` and bracket notation in normal application code.
-You just can't use those features within expressions that define Angular metadata.
+通常のアプリケーションコードでは、`typeof` とブラケット表記を使用できます。
+Angular メタデータを定義する式の中でこれらの機能を使用することはできません。
 
-Avoid this error by sticking to the compiler's [restricted expression syntax](guide/aot-compiler#expression-syntax)
-when writing Angular metadata
-and be wary of new or unusual TypeScript features.
+Angular メタデータを記述するときに
+コンパイラの[制限された式の構文](guide/aot-compiler#expression-syntax)に従うことでこのエラーを回避し、
+新しいまたは特徴的な TypeScript の機能に注意してください。
 
 <hr>
 

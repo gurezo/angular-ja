@@ -235,18 +235,17 @@ Angular の項の中で冪等な式は、
 イベントへの対応は、Angular の「単方向データフロー」の反対側です。
 あなたは、このイベントループのターンの間に、何でも、どこでも自由に変更できます。
 
-テンプレート式と同様に、テンプレート *文*
-は JavaScript のような言語を使用します。
+テンプレート式と同様に、テンプレート *文* は JavaScript のような言語を使用します。
 テンプレート文パーサーはテンプレート式パーサーとは異なり、
-特に基本的な代入(`=`)と連鎖式（<code>;</code> または <code>,</code>）の両方をサポートします。
+特に基本的な代入(`=`)と <code>;</code>による連鎖式の両方をサポートします。
 
-ただし、特定の JavaScript 構文は許可されていません:
+ただし、特定の JavaScriptとテンプレート式の構文は許可されていません:
 
 * <code>new</code>
 * `++` や `--` などの、インクリメント、デクリメント演算子
 * `+=` and `-=` などの代入演算子
 * ビット演算子 `|` や `&`
-* [テンプレート式演算子](guide/template-syntax#expression-operators)
+* [パイプ演算子](guide/template-syntax#pipe)
 
 ### 文のコンテキスト
 
@@ -283,21 +282,21 @@ Angular の項の中で冪等な式は、
 
 {@a binding-syntax}
 
-## Binding syntax: an overview
+## バインディング構文: 概要
 
-Data-binding is a mechanism for coordinating what users see, specifically
-with application data values.
-While you could push values to and pull values from HTML,
-the application is easier to write, read, and maintain if you turn these tasks over to a binding framework.
-You simply declare bindings between binding sources, target HTML elements, and let the framework do the rest.
+データバインディングは、アプリケーションのデータ値を使用して、
+ユーザーに表示される内容を調整するための仕組みです。
+HTML に値をプッシュしたり、プルしたりすることはできますが、
+これらの雑用をバインディングフレームワークに任せることで、アプリケーションの読み書きや保守が簡単になります。
+あなたはバインディングソースとターゲット HTML 要素の間のバインディングを宣言するだけで、あとはフレームワークにお任せです。
 
-For a demonstration of the syntax and code snippets in this section, see the <live-example name="binding-syntax">binding syntax example</live-example>.
+このセクションで示す構文のデモとコードスニペットについては <live-example name="binding-syntax">バインディング構文の例</live-example>を参照してください。
 
-Angular provides many kinds of data-binding. Binding types can be grouped into three categories distinguished by the direction of data flow:
+Angular はさまざまな種類のデータバインディングを提供します。バインディングタイプは、データフローの方向によって3つのカテゴリーに分類できます。
 
-* From the _source-to-view_
-* From _view-to-source_
-* Two-way sequence: _view-to-source-to-view_
+* _ソースからビュー_
+* _ビューからソース_
+* 双方向シーケンス: _ビューとソースの双方向_
 
 <style>
   td, th {vertical-align: top}
@@ -312,23 +311,23 @@ Angular provides many kinds of data-binding. Binding types can be grouped into t
   </col>
   <tr>
     <th>
-      Type
+      タイプ
     </th>
     <th>
-      Syntax
+      構文
     </th>
     <th>
-      Category
+      カテゴリ
     </th>
 
   </tr>
   <tr>
      <td>
-      Interpolation<br>
-      Property<br>
-      Attribute<br>
-      Class<br>
-      Style
+      補間<br>
+      プロパティ<br>
+      属性<br>
+      クラス<br>
+      スタイル
     </td>
     <td>
 
@@ -341,11 +340,11 @@ Angular provides many kinds of data-binding. Binding types can be grouped into t
     </td>
 
     <td>
-      One-way<br>from data source<br>to view target
+      単方向<br>データソースから<br>ビューターゲットへ
     </td>
     <tr>
       <td>
-        Event
+        イベント
       </td>
       <td>
         <code-example>
@@ -355,12 +354,12 @@ Angular provides many kinds of data-binding. Binding types can be grouped into t
       </td>
 
       <td>
-        One-way<br>from view target<br>to data source
+        単方向<br>ビューターゲットから<br>データソースへ
       </td>
     </tr>
     <tr>
       <td>
-        Two-way
+        双方向
       </td>
       <td>
         <code-example>
@@ -369,25 +368,25 @@ Angular provides many kinds of data-binding. Binding types can be grouped into t
         </code-example>
       </td>
       <td>
-        Two-way
+        双方向
       </td>
     </tr>
   </tr>
 </table>
 
-Binding types other than interpolation have a **target name** to the left of the equal sign, either surrounded by punctuation, `[]` or `()`,
-or preceded by a prefix: `bind-`, `on-`, `bindon-`.
+補間以外のバインディングタイプは、等号の左側に **ターゲット名** があり、記号(`[]`、`()`)で囲まれているか、
+または接頭辞 `bind-`、`on-`、`bindon-` が前に付いています。
 
-The *target* of a binding is the property or event inside the binding punctuation: `[]`, `()` or `[()]`.
+バインディングの *ターゲット* は、バインディングの記号 `[]`, `()`, `[()]` で囲まれたプロパティかイベントです。
 
-Every public member of a **source** directive is automatically available for binding.
-You don't have to do anything special to access a directive member in a template expression or statement.
+すべての **ソース** ディレクティブのパブリックメンバは、自動的にバインディングできるようになっています。
+テンプレートの式や文からディレクティブのメンバにアクセスするために、特別に何かをする必要はありません。
 
 
-### Data-binding and HTML
+### データバインディングとHTML {@a data-binding-and-html}
 
-In the normal course of HTML development, you create a visual structure with HTML elements, and
-you modify those elements by setting element attributes with string constants.
+通常の HTML 開発では、HTML 要素を使用して視覚的な構造を作り、
+文字列定数を要素の属性に設定することによってそれらの要素を変更します。
 
 ```html
 <div class="special">Plain old HTML</div>
@@ -395,105 +394,105 @@ you modify those elements by setting element attributes with string constants.
 <button disabled>Save</button>
 ```
 
-With data-binding, you can control things like the state of a button:
+データバインディングを使えば、ボタンの状態などを制御することができます:
 
 <code-example path="binding-syntax/src/app/app.component.html" region="disabled-button" header="src/app/app.component.html"></code-example>
 
-Notice that the binding is to the `disabled` property of the button's DOM element,
-**not** the attribute. This applies to data-binding in general. Data-binding works with *properties* of DOM elements, components, and directives, not HTML *attributes*.
+バインディングの対象は、ボタンの DOM 要素の `disabled` プロパティで、属性 **ではない** ことに注意してください。
+これはデータバインディング一般に適用されます。データバインディングは、DOM 要素、コンポーネント、ディレクティブの *プロパティ* に対するもので、HTML *属性* に対するものではありません。
 
 
-### HTML attribute vs. DOM property
+### HTML 属性 vs. DOM プロパティ {@a html-attribute-vs-dom-property}
 
-The distinction between an HTML attribute and a DOM property is key to understanding
-how Angular binding works. **Attributes are defined by HTML. Properties are accessed from DOM (Document Object Model) nodes.**
+HTML 属性と DOM プロパティの違いは、Angular バインディングがどのように機能するかを理解する上で非常に重要です。
+**属性は HTML によって定義されています。プロパティは DOM(Document Object Model)ノードからアクセスされます。**
 
-* A few HTML attributes have 1:1 mapping to properties; for example, `id`.
+* いくつかの HTML 属性は、プロパティへの1対1のマッピングを持っています。`id` はその一例です。
 
-* Some HTML attributes don't have corresponding properties; for example, `aria-*`.
+* 一部の HTML 属性には対応するプロパティがありません。`aria-*` はその一例です。
 
-* Some DOM properties don't have corresponding attributes; for example, `textContent`.
+* 一部の DOM プロパティには対応する属性がありません。`textContent` はその一例です。
 
-It is important to remember that *HTML attribute* and the *DOM property* are different things, even when they have the same name.
-In Angular, the only role of HTML attributes is to initialize element and directive state.
+たとえ同じ名前だったとしても、 *HTML 属性* と *DOM プロパティ* は別物だということを肝に銘じておきましょう。
+Angular での HTML 属性の役割は、要素やディレクティブの状態を初期化することだけです。
 
-**Template binding works with *properties* and *events*, not *attributes*.**
+**テンプレートバインディングは *属性* ではなく *プロパティ* と *イベント* に対するものです。**
 
-When you write a data-binding, you're dealing exclusively with the *DOM properties* and *events* of the target object.
+データバインディングを書くときは、対象のオブジェクトの *DOM プロパティ* と *イベント* だけを扱います。
 
 <div class="alert is-helpful">
 
-This general rule can help you build a mental model of attributes and DOM properties:
-**Attributes initialize DOM properties and then they are done.
-Property values can change; attribute values can't.**
+この一般的なルールは、属性と DOM プロパティのメンタルモデルを構築するのに役立ちます:
+**属性は DOM プロパティを初期化するとその役割を終えます。
+プロパティは変化します。属性は変化しません。**
 
-There is one exception to this rule.
-Attributes can be changed by `setAttribute()`, which re-initializes corresponding DOM properties.
+このルールにはひとつだけ例外があります。
+属性は `setAttribute()` で変えることができ、それによって対応する DOM プロパティも再初期化されます。
 
 </div>
 
-For more information, see the [MDN Interfaces documentation](https://developer.mozilla.org/en-US/docs/Web/API#Interfaces) which has API docs for all the standard DOM elements and their properties.
-Comparing the [`<td>` attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/td) attributes to the [`<td>` properties](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableCellElement) provides a helpful example for differentiation.
-In particular, you can navigate from the attributes page to the properties via "DOM interface" link, and navigate the inheritance hierarchy up to `HTMLTableCellElement`.
+詳しくは、すべての標準 DOM 要素やそのプロパティについての API ドキュメントがある [MDN Interfaces documentation](https://developer.mozilla.org/en-US/docs/Web/API#Interfaces) を参照してください。
+[`<td>` の属性](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/td) と [`<td>` のプロパティ](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableCellElement) を見比べれば、より違いがはっきりするでしょう。
+具体的には、属性のページの "DOM interface" リンクをたどることでプロパティのページに移動でき、 `HTMLTableCellElement` まで継承の階層を移動できます。
 
 
-#### Example 1: an `<input>`
+#### 例 1: `<input>`
 
-When the browser renders `<input type="text" value="Sarah">`, it creates a
-corresponding DOM node with a `value` property initialized to "Sarah".
+ブラウザが `<input type="text" value="Sarah">` をレンダリングするとき、
+ブラウザは `value` プロパティが "Sarah" で初期化された DOM ノードを作ります。
 
 ```html
 <input type="text" value="Sarah">
 ```
 
-When the user enters "Sally" into the `<input>`, the DOM element `value` *property* becomes "Sally".
-However, if you look at the HTML attribute `value` using `input.getAttribute('value')`, you can see that the *attribute* remains unchanged&mdash;it returns "Sarah".
+ユーザーが `<input>` に「Sally」と入力すると、DOM 要素の `value` プロパティは「Sally」になります。
+しかし、`input.getAttribute('value')` で HTML の `value` 属性を見れば分かるとおり、 *属性* は変わらず「Sarah」のままです。
 
-The HTML attribute `value` specifies the *initial* value; the DOM `value` property is the *current* value.
+HTML 属性の `value` は *初期値* を指定します。DOM の `value` プロパティは *現在* の値です。
 
-To see attributes versus DOM properties in a functioning app, see the <live-example name="binding-syntax"></live-example> especially for binding syntax.
+実際に動くアプリで属性と DOM プロパティの違いを見るには、<live-example name="binding-syntax"></live-example> のバインディング構文を見てください。
 
-#### Example 2: a disabled button
+#### 例 2: disabled ボタン
 
-The `disabled` attribute is another example. A button's `disabled`
-*property* is `false` by default so the button is enabled.
+`disabled` 属性はもうひとつの例です。
+ボタンの `disabled` *プロパティ* のデフォルトは `false` なので、ボタンは有効な状態です。
 
-When you add the `disabled` *attribute*, its presence alone
-initializes the button's `disabled` *property* to `true`
-so the button is disabled.
+`disabled` *属性* を追加すると、その存在だけでボタンの
+`disabled` *プロパティ* が `true` に初期化されるため、
+ボタンは無効になります。
 
 ```html
 <button disabled>Test Button</button>
 ```
 
-Adding and removing the `disabled` *attribute* disables and enables the button.
-However, the value of the *attribute* is irrelevant,
-which is why you cannot enable a button by writing `<button disabled="false">Still Disabled</button>`.
+`disabled` *属性* の追加と削除で、ボタンの無効、有効が切り換わります。
+しかし *属性* の値とは無関係なため、
+`<button disabled="false">Still Disabled</button>` と書いてボタンを有効にすることはできません。
 
-To control the state of the button, set the `disabled` *property*,
+ボタンの状態を制御するには `disabled` *プロパティ* を設定します。
 
 <div class="alert is-helpful">
 
-Though you could technically set the `[attr.disabled]` attribute binding, the values are different in that the property binding requires to a boolean value, while its corresponding attribute binding relies on whether the value is `null` or not. Consider the following:
+技術的には属性バインディング `[attr.disabled]` を設定することはできますが、値は次のように異なります。プロパティバインディングがブーリアンの値を必要とするのに対して、対応する属性バインディングは、値が `null` かそうでないかを見ています。
 
 ```html
 <input [disabled]="condition ? true : false">
 <input [attr.disabled]="condition ? 'disabled' : null">
 ```
 
-Generally, use property binding over attribute binding as it is more intuitive (being a boolean value), has a shorter syntax, and is more performant.
+一般的には、属性バインディングよりもプロパティバインディングを使ったほうが、ブーリアンの値なのでより直感的で、構文も短く、パフォーマンスもよいです。
 
 </div>
 
 
-To see the `disabled` button example in a functioning app, see the <live-example name="binding-syntax"></live-example> especially for binding syntax. This example shows you how to toggle the disabled property from the component.
+実際に動くアプリで `disabled` ボタンの動作を見るには、<live-example name="binding-syntax"></live-example> のバインディング構文を見てください。この例ではコンポーネントから disabled プロパティをトグルする方法を示しています。
 
-## Binding types and targets
+## バインディングタイプとターゲット {@a binding-types-and-targets}
 
-The **target of a data-binding** is something in the DOM.
-Depending on the binding type, the target can be a property (element, component, or directive),
-an event (element, component, or directive), or sometimes an attribute name.
-The following table summarizes the targets for the different binding types.
+**データバインディングのターゲット** はDOM内のものです。
+バインディングタイプに応じて、ターゲットはプロパティ（要素、コンポーネント、ディレクティブ）、
+イベント（要素、コンポーネント、ディレクティブ）、また時には属性の名前となります。
+次の表はさまざまなバインディングタイプのターゲットをまとめたものです。
 
 <style>
   td, th {vertical-align: top}
@@ -508,26 +507,26 @@ The following table summarizes the targets for the different binding types.
   </col>
   <tr>
     <th>
-      Type
+      タイプ
     </th>
     <th>
-      Target
+      ターゲット
     </th>
     <th>
-      Examples
+      例
     </th>
   </tr>
   <tr>
     <td>
-      Property
+      プロパティ
     </td>
     <td>
-      Element&nbsp;property<br>
-      Component&nbsp;property<br>
-      Directive&nbsp;property
+      要素のプロパティ<br>
+      コンポーネントのプロパティ<br>
+      ディレクティブのプロパティ
     </td>
     <td>
-      <code>src</code>, <code>hero</code>, and <code>ngClass</code> in the following:
+      以下の <code>src</code>, <code>hero</code>, <code>ngClass</code>:
       <code-example path="template-syntax/src/app/app.component.html" region="property-binding-syntax-1"></code-example>
       <!-- For more information, see [Property Binding](guide/property-binding). -->
     </td>
@@ -537,12 +536,12 @@ The following table summarizes the targets for the different binding types.
       Event
     </td>
     <td>
-      Element&nbsp;event<br>
-      Component&nbsp;event<br>
-      Directive&nbsp;event
+      要素のイベント<br>
+      コンポーネントのイベント<br>
+      ディレクティブのイベント
     </td>
     <td>
-      <code>click</code>, <code>deleteRequest</code>, and <code>myClick</code> in the following:
+      以下の <code>click</code>, <code>deleteRequest</code>, <code>myClick</code>:
       <code-example path="template-syntax/src/app/app.component.html" region="event-binding-syntax-1"></code-example>
       <!-- KW--Why don't these links work in the table? -->
       <!-- <div>For more information, see [Event Binding](guide/event-binding).</div> -->
@@ -550,10 +549,10 @@ The following table summarizes the targets for the different binding types.
   </tr>
   <tr>
     <td>
-      Two-way
+      双方向
     </td>
     <td>
-      Event and property
+      イベントとプロパティ
     </td>
     <td>
       <code-example path="template-syntax/src/app/app.component.html" region="2-way-binding-syntax-1"></code-example>
@@ -561,11 +560,11 @@ The following table summarizes the targets for the different binding types.
   </tr>
   <tr>
     <td>
-      Attribute
+      属性
     </td>
     <td>
-      Attribute
-      (the&nbsp;exception)
+      属性
+      (例外です)
     </td>
     <td>
       <code-example path="template-syntax/src/app/app.component.html" region="attribute-binding-syntax-1"></code-example>
@@ -573,10 +572,10 @@ The following table summarizes the targets for the different binding types.
   </tr>
   <tr>
     <td>
-      Class
+      クラス
     </td>
     <td>
-      <code>class</code> property
+      <code>class</code> プロパティ
     </td>
     <td>
       <code-example path="template-syntax/src/app/app.component.html" region="class-binding-syntax-1"></code-example>
@@ -584,10 +583,10 @@ The following table summarizes the targets for the different binding types.
   </tr>
   <tr>
     <td>
-      Style
+      スタイル
     </td>
     <td>
-      <code>style</code> property
+      <code>style</code> プロパティ
     </td>
     <td>
       <code-example path="template-syntax/src/app/app.component.html" region="style-binding-syntax-1"></code-example>
@@ -601,287 +600,287 @@ The following table summarizes the targets for the different binding types.
 
 {@a property-binding}
 
-## Property binding `[property]`
+## プロパティバインディング `[property]`
 
-Use property binding to _set_ properties of target elements or
-directive `@Input()` decorators. For an example
-demonstrating all of the points in this section, see the
-<live-example name="property-binding">property binding example</live-example>.
+プロパティバインディングを使うことで、対象の要素のプロパティや
+ディレクティブの `@Input()` デコレーターを _設定_ できます。
+このセクションのすべてのポイントについてのデモは
+<live-example name="property-binding">プロパティバインディングの例</live-example>を参照してください。
 
-### One-way in
+### 内側への単方向 {@a one-way-in}
 
-Property binding flows a value in one direction,
-from a component's property into a target element property.
+プロパティバインディングは、値をコンポーネントのプロパティから
+対象の要素のプロパティへと、単方向に流します。
 
-You can't use property
-binding to read or pull values out of target elements. Similarly, you cannot use
-property binding to call a method on the target element.
-If the element raises events, you can listen to them with an [event binding](guide/template-syntax#event-binding).
+プロパティバインディングは、
+対象の要素から値を読み出したり引き出したりすることには使えません。同様に、
+プロパティバインディングで対象の要素のメソッドを呼び出すこともできません。
+要素が発生するイベントは、 [イベントバインディング](guide/template-syntax#event-binding)を使ってリッスンすることができます。
 
-If you must read a target element property or call one of its methods,
-see the API reference for [ViewChild](api/core/ViewChild) and
-[ContentChild](api/core/ContentChild).
+対象の要素のプロパティを読んだり、メソッドを呼び出したりする必要があるときは、
+API リファレンスの [ViewChild](api/core/ViewChild) や
+[ContentChild](api/core/ContentChild) を参照してください。
 
-### Examples
+### 例
 
-The most common property binding sets an element property to a component
-property value. An example is
-binding the `src` property of an image element to a component's `itemImageUrl` property:
+一番よくあるプロパティバインディングは、要素のプロパティを
+コンポーネントのプロパティの値に設定するものです。例では
+イメージ要素の `src` プロパティを、コンポーネントの `itemImageUrl` プロパティにバインドしています:
 
 <code-example path="property-binding/src/app/app.component.html" region="property-binding" header="src/app/app.component.html"></code-example>
 
-Here's an example of binding to the `colSpan` property. Notice that it's not `colspan`,
-which is the attribute, spelled with a lowercase `s`.
+これは `colSpan` プロパティのバインディングの例です。`s` を小文字で書く属性
+`colspan` とは違うことに注意してください。
 
 <code-example path="property-binding/src/app/app.component.html" region="colSpan" header="src/app/app.component.html"></code-example>
 
-For more details, see the [MDN HTMLTableCellElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableCellElement) documentation.
+詳しくは [MDN HTMLTableCellElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableCellElement) のドキュメントを参照してください。
 
 <!-- Add link when Attribute Binding updates are merged:
 For more about `colSpan` and `colspan`, see (Attribute Binding)[guide/template-syntax]. -->
 
-Another example is disabling a button when the component says that it `isUnchanged`:
+もうひとつの例ではコンポーネントが `isUnchanged` のときにボタンを無効化しています:
 
 <code-example path="property-binding/src/app/app.component.html" region="disabled-button" header="src/app/app.component.html"></code-example>
 
-Another is setting a property of a directive:
+こちらはディレクティブのプロパティを設定しています:
 
 <code-example path="property-binding/src/app/app.component.html" region="class-binding" header="src/app/app.component.html"></code-example>
 
-Yet another is setting the model property of a custom component&mdash;a great way
-for parent and child components to communicate:
+また、こちらはカスタムコンポーネントのモデルプロパティを設定しています&mdash;
+親コンポーネントと子コンポーネントがやりとりするための優れた方法です:
 
 <code-example path="property-binding/src/app/app.component.html" region="model-property-binding" header="src/app/app.component.html"></code-example>
 
-### Binding targets
+### バインディングターゲット
 
-An element property between enclosing square brackets identifies the target property.
-The target property in the following code is the image element's `src` property.
+角括弧で囲まれた要素のプロパティは、ターゲットプロパティを識別します。
+次のコードのターゲットプロパティは、img 要素の `src` プロパティです。
 
 <code-example path="property-binding/src/app/app.component.html" region="property-binding" header="src/app/app.component.html"></code-example>
 
-There's also the `bind-` prefix alternative:
+代わりに `bind-` 接頭辞を使うこともできます:
 
 <code-example path="property-binding/src/app/app.component.html" region="bind-prefix" header="src/app/app.component.html"></code-example>
 
 
-In most cases, the target name is the name of a property, even
-when it appears to be the name of an attribute.
-So in this case, `src` is the name of the `<img>` element property.
+ターゲットの名前が属性の名前に見えたとしても、
+プロパティの名前であることがほとんどです。
+この場合は `src` は `<img>` 要素のプロパティの名前です。
 
-Element properties may be the more common targets,
-but Angular looks first to see if the name is a property of a known directive,
-as it is in the following example:
+要素のプロパティはより一般的なターゲットかもしれませんが、
+次の例のように、
+Angular は最初に名前が既知のディレクティブのプロパティであるかどうかを確認します:
 
 <code-example path="property-binding/src/app/app.component.html" region="class-binding" header="src/app/app.component.html"></code-example>
 
-Technically, Angular is matching the name to a directive `@Input()`,
-one of the property names listed in the directive's `inputs` array
-or a property decorated with `@Input()`.
-Such inputs map to the directive's own properties.
+技術的には、Angular は名前をディレクティブの `@Input()` 、
+ディレクティブの `inputs` 配列に書かれたプロパティ名、
+`@Input()` で装飾されたプロパティに対して照合します。
+そのような入力はディレクティブ自身のプロパティにマッピングされます。
 
-If the name fails to match a property of a known directive or element, Angular reports an “unknown directive” error.
+名前が既知のディレクティブまたは要素のプロパティと一致しない場合、Angular は “unknown directive” エラーを報告します。
 
 <div class="alert is-helpful">
 
-Though the target name is usually the name of a property,
-there is an automatic attribute-to-property mapping in Angular for
-several common attributes. These include `class`/`className`, `innerHtml`/`innerHTML`, and
-`tabindex`/`tabIndex`.
+ターゲットの名前は一般にはプロパティの名前ですが、
+いくつかの属性については Angular が属性-プロパティを自動でマッピングします。
+`class`/`className`、`innerHtml`/`innerHTML`、`tabindex`/`tabIndex`
+がその例です。
 
 </div>
 
 
-### Avoid side effects
+### 副作用を避ける {@a avoid-side-effects}
 
-Evaluation of a template expression should have no visible side effects.
-The expression language itself, or the way you write template expressions,
-helps to a certain extent;
-you can't assign a value to anything in a property binding expression
-nor use the increment and decrement operators.
+テンプレート式の評価には目に見える副作用はありません。
+式の言語自体や、テンプレート式の記述方法は、
+ある程度その役に立ちます。
+プロパティバインディング式でに何か値を代入したり、
+インクリメント演算子とデクリメント演算子を使用することはできません。
 
-For example, you could have an expression that invoked a property or method that had
-side effects. The expression could call something like `getFoo()` where only you
-know what `getFoo()` does. If `getFoo()` changes something
-and you happen to be binding to that something,
-Angular may or may not display the changed value. Angular may detect the
-change and throw a warning error.
-As a best practice, stick to properties and to methods that return
-values and avoid side effects.
+たとえば、式は副作用のあるプロパティやメソッドを呼び出すかもしれません。
+式は `getFoo()` のようなものを呼び出すことができますが、
+`getFoo()` が何をするかを知っているのはあなただけです。
+もし `getFoo()` が何かを変更し、それがバインディングされていたとすると、
+Angular は変更後の値を表示するかもしれないし、しないかもしれません。
+Angular は変更を検知して警告のエラーを起こすかもしれません。
+値を返すだけで副作用がないプロパティやメソッドを使うことが
+ベストプラクティスです。
 
-### Return the proper type
+### 適切な型を返す {@a return-the-proper-type}
 
-The template expression should evaluate to the type of value
-that the target property expects.
-Return a string if the target property expects a string, a number if it
-expects a number, an object if it expects an object, and so on.
+テンプレート式は、ターゲットプロパティが期待する値の型として
+評価されるべきです。
+ターゲットプロパティが文字列を期待する場合は文字列を、数値を期待する場合は数値を、
+オブジェクトを期待する場合はオブジェクトを返してください。
 
-In the following example, the `childItem` property of the `ItemDetailComponent` expects a string, which is exactly what you're sending in the property binding:
+次の例の `ItemDetailComponent` の `childItem` プロパティは文字列を期待していて、それはプロパティバインディングが送り込む型と一致しています:
 
 <code-example path="property-binding/src/app/app.component.html" region="model-property-binding" header="src/app/app.component.html"></code-example>
 
-You can confirm this by looking in the `ItemDetailComponent` where the `@Input` type is set to a string:
+`ItemDetailComponent` を見ると `@Input` の型が文字列になっていることが確認できます:
 <code-example path="property-binding/src/app/item-detail/item-detail.component.ts" region="input-type" header="src/app/item-detail/item-detail.component.ts (setting the @Input() type)"></code-example>
 
-As you can see here, the `parentItem` in `AppComponent` is a string, which the `ItemDetailComponent` expects:
+`ItemDetailComponent` が期待するとおり、`AppComponent` の `parentItem` も文字列です:
 <code-example path="property-binding/src/app/app.component.ts" region="parent-data-type" header="src/app/app.component.ts"></code-example>
 
-#### Passing in an object
+#### オブジェクトを渡す {@a passing-in-an-object}
 
-The previous simple example showed passing in a string. To pass in an object,
-the syntax and thinking are the same.
+先ほどの簡単な例では文字列を渡していました。
+オブジェクトを渡すときの文法や考え方も似たようなものです。
 
-In this scenario, `ListItemComponent` is nested within `AppComponent` and the `item` property expects an object.
+`AppComponent` の中に `ItemListComponent` がネストされていて `item` プロパティがオブジェクトを期待しているものとします。
 
 <code-example path="property-binding/src/app/app.component.html" region="pass-object" header="src/app/app.component.html"></code-example>
 
-The `item` property is declared in the `ListItemComponent` with a type of `Item` and decorated with `@Input()`:
+`items` プロパティは `ItemListComponent` の中で宣言されており、型は `Item` で `@Input()` で修飾されています:
 
-<code-example path="property-binding/src/app/list-item/list-item.component.ts" region="item-input" header="src/app/list-item.component.ts"></code-example>
+<code-example path="property-binding/src/app/item-list/item-list.component.ts" region="item-input" header="src/app/item-list.component.ts"></code-example>
 
-In this sample app, an `Item` is an object that has two properties; an `id` and a `name`.
+サンプルアプリでは `Item` は `id` と `name` の2つのプロパティを持ったオブジェクトです。
 
 <code-example path="property-binding/src/app/item.ts" region="item-class" header="src/app/item.ts"></code-example>
 
-While a list of items exists in another file, `mock-items.ts`, you can
-specify a different item in `app.component.ts` so that the new item will render:
+`mock-items.ts` という別のファイルにアイテムのリストがありますが、
+新しいアイテムを表示するために `app.component.ts` で別のアイテムを指定することができます:
 
 <code-example path="property-binding/src/app/app.component.ts" region="pass-object" header="src/app.component.ts"></code-example>
 
-You just have to make sure, in this case, that you're supplying an object because that's the type of `item` and is what the nested component, `ListItemComponent`, expects.
+この場合はオブジェクトの配列を指定していることに注意してください。この型は `items` の型であり、ネストされたコンポーネント `ListItemComponent` が求める型でもあります。
 
-In this example, `AppComponent` specifies a different `item` object
-(`currentItem`) and passes it to the nested `ListItemComponent`. `ListItemComponent` was able to use `currentItem` because it matches what an `Item` object is according to `item.ts`. The `item.ts` file is where
-`ListItemComponent` gets its definition of an `item`.
+この例では `AppComponent` は別の `item` オブジェクト (`currentItems`) を指定し、
+それをネストされた `ItemListComponent` に渡しています。`item.ts` に書かれた `Item` の形と `currentItems` の形が一致するため、 `ItemListComponent` はそれを使うことができます。
+`item.ts` ファイルは `ItemListComponent` が `item` の定義を得るために参照しているファイルです。
 
-### Remember the brackets
+### 角括弧を忘れずに {@a remember-the-brackets}
 
-The brackets, `[]`, tell Angular to evaluate the template expression.
-If you omit the brackets, Angular treats the string as a constant
-and *initializes the target property* with that string:
+角括弧 `[]` は Angular にテンプレート式を評価するように指示します。
+角括弧を省略すると Angular は文字列を定数として扱い、
+その文字列で *ターゲットプロパティを初期化* します。
 
 <code-example path="property-binding/src/app/app.component.html" region="no-evaluation" header="src/app.component.html"></code-example>
 
 
-Omitting the brackets will render the string
-`parentItem`, not the value of `parentItem`.
+角括弧を忘れると `parentItem` の値ではなく
+`parentItem` という文字列が表示されてしまいます。
 
-### One-time string initialization
+### ワンタイムの文字列の初期化 {@a one-time-string-initialization}
 
-You *should* omit the brackets when all of the following are true:
+次のすべてが当てはまる場合は、角括弧を省略する *べき* です:
 
-* The target property accepts a string value.
-* The string is a fixed value that you can put directly into the template.
-* This initial value never changes.
+* ターゲットプロパティが文字列値を受け入れる。
+* 文字列がテンプレートに直接書き込める固定値。
+* この初期値が変化しない。
 
-You routinely initialize attributes this way in standard HTML, and it works
-just as well for directive and component property initialization.
-The following example initializes the `prefix` property of the `StringInitComponent` to a fixed string,
-not a template expression. Angular sets it and forgets about it.
+普段の標準の HTML ではこの方法で属性を初期化していますが、
+これはディレクティブやコンポーネントのプロパティの初期化に対しても同様に機能します。
+次の例では、`StringInitComponent` の `prefix` プロパティをテンプレート式ではなく固定の文字列で初期化します。
+Angular はそれを設定し、それについて忘れます。
 
 <code-example path="property-binding/src/app/app.component.html" region="string-init" header="src/app/app.component.html"></code-example>
 
-The `[item]` binding, on the other hand, remains a live binding to the component's `currentItem` property.
+一方で `[item]` バインディングは、コンポーネントの `currentItem` プロパティへのライブバインディングです。
 
-### Property binding vs. interpolation
+### プロパティバインディング vs. 補間 {@a property-binding-vs-interpolation}
 
-You often have a choice between interpolation and property binding.
-The following binding pairs do the same thing:
+補間とプロパティバインディングのどちらかを選べるシーンがよくあります。
+次のバインディングのペアは同じことをします:
 
 <code-example path="property-binding/src/app/app.component.html" region="property-binding-interpolation" header="src/app/app.component.html"></code-example>
 
-Interpolation is a convenient alternative to property binding in
-many cases. When rendering data values as strings, there is no
-technical reason to prefer one form to the other, though readability
-tends to favor interpolation. However, *when setting an element
-property to a non-string data value, you must use property binding*.
+多くの場合、補間はプロパティバインディングよりも簡単な手段です。
+データの値を文字列として表示するときは、
+技術的にはどちらでもよく、読みやすさは補間に分があります。
+しかし *要素のプロパティに文字列以外の値を設定する場合は、
+プロパティバインディングを使う必要があります。*
 
-### Content security
+### コンテンツのセキュリティ {@a content-security}
 
-Imagine the following malicious content.
+次の *悪意のある* コンテンツを想像してください。
 
 <code-example path="property-binding/src/app/app.component.ts" region="malicious-content" header="src/app/app.component.ts"></code-example>
 
-In the component template, the content might be used with interpolation:
+コンポーネントのテンプレートでは、コンテンツが補間で使われることがあります:
 
 <code-example path="property-binding/src/app/app.component.html" region="malicious-interpolated" header="src/app/app.component.html"></code-example>
 
-Fortunately, Angular data binding is on alert for dangerous HTML. In the above case,
-the HTML displays as is, and the Javascript does not execute. Angular **does not**
-allow HTML with script tags to leak into the browser, neither with interpolation
-nor property binding.
+幸いなことに、Angular のデータバインディングは危険な HTML に対して警戒しています。
+先ほどの例では HTML がそのまま表示され、Javascript は実行されません。
+Angular は、補間でもプロパティバインディングでも、
+script タグが含まれた HTML をブラウザにリークすることを *許しません。*
 
-In the following example, however, Angular [sanitizes](guide/security#sanitization-and-security-contexts)
-the values before displaying them.
+次の例では値を表示する前に
+Angular が[サニタイズ](guide/security#sanitization-and-security-contexts)しています。
 
 <code-example path="property-binding/src/app/app.component.html" region="malicious-content" header="src/app/app.component.html"></code-example>
 
-Interpolation handles the `<script>` tags differently than
-property binding but both approaches render the
-content harmlessly. The following is the browser output
-of the `evilTitle` examples.
+補間は `<script>` タグを
+プロパティバインディングとは違った方法で扱いますが、
+どちらの方法でもコンテンツを無害な形で表示します。
+ブラウザで `evilTitle` を表示した例がこちらになります。
 
 <code-example language="bash">
-"Template <script>alert("evil never sleeps")</script> Syntax" is the interpolated evil title.
+"Template &lt;script&gt;alert("evil never sleeps")&lt;/script&gt; Syntax" is the interpolated evil title.
 "Template alert("evil never sleeps")Syntax" is the property bound evil title.
 </code-example>
 
 <hr/>
 {@a other-bindings}
 
-## Attribute, class, and style bindings
+## 属性、クラス、スタイルのバインディング {@a attribute-class-and-style-bindings}
 
-The template syntax provides specialized one-way bindings for scenarios less well-suited to property binding.
+テンプレート構文には、プロパティ・バインディングがあまり適していないシナリオのために、特殊な単方向バインディングがあります。
 
-To see attribute, class, and style bindings in a functioning app, see the <live-example name="attribute-binding"></live-example> especially for this section.
+このセクションで示す、属性、クラス、スタイルのバインディングについては <live-example name="attribute-binding"></live-example> で実際に動かすことができます。
 
 
-### Attribute binding
+### 属性バインディング {@a attribute-binding}
 
-Set the value of an attribute directly with an **attribute binding**. This is the only exception to the rule that a binding sets a target property and the only binding that creates and sets an attribute.
+**属性バインディング** を使うと属性の値を直接設定できます。これは、バインディングがターゲット・プロパティを設定するというルールの唯一の例外であり、属性を作成して設定する唯一のバインディングです。
 
-Usually, setting an element property with a [property binding](guide/template-syntax#property-binding)
-is preferable to setting the attribute with a string. However, sometimes
-there is no element property to bind, so attribute binding is the solution.
+通常は、文字列で属性を設定するよりも、
+[プロパティバインディング](guide/template-syntax#property-binding)で要素のプロパティを設定する方が望ましいです。
+しかし、バインドする要素のプロパティがない場合もあるので、属性バインディングが解決策となります。
 
-Consider the [ARIA](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA) and
-[SVG](https://developer.mozilla.org/en-US/docs/Web/SVG). They are purely attributes, don't correspond to element properties, and don't set element properties. In these cases, there are no property targets to bind to.
+[ARIA](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA) と
+[SVG](https://developer.mozilla.org/en-US/docs/Web/SVG) について考えてみましょう。これらは純粋に属性であり、要素のプロパティに対応しておらず、要素のプロパティを設定していません。これらの場合、バインドするプロパティターゲットはありません。
 
-Attribute binding syntax resembles property binding, but
-instead of an element property between brackets, start with the prefix `attr`,
-followed by a dot (`.`), and the name of the attribute.
-You then set the attribute value, using an expression that resolves to a string,
-or remove the attribute when the expression resolves to `null`.
+属性バインディングの構文はプロパティバインディングに似ていますが、
+括弧で囲まれた要素プロパティの代わりに、接頭辞 `attr` で始まり、
+その後にドット (`.`) と属性名が続きます。
+文字列になる式を使うと属性値を設定でき、
+式が `null` になると属性を削除します。
 
-One of the primary use cases for attribute binding
-is to set ARIA attributes, as in this example:
+属性バインディングの主な使用例のひとつは、
+この例のような ARIA 属性の設定です:
 
 <code-example path="attribute-binding/src/app/app.component.html" region="attrib-binding-aria" header="src/app/app.component.html"></code-example>
 
 <div class="alert is-helpful">
 
-#### `colspan` and `colSpan`
+#### `colspan` と `colSpan` {@a colspan-and-colspan}
 
-Notice the difference between the `colspan` attribute and the `colSpan` property.
+`colspan` 属性と `colSpan` プロパティの違いに注意してください。
 
-If you wrote something like this:
+このように書いたとすると:
 
 <code-example language="html">
   &lt;tr&gt;&lt;td colspan="{{1 + 1}}"&gt;Three-Four&lt;/td&gt;&lt;/tr&gt;
 </code-example>
 
-You'd get this error:
+このようなエラーが発生するでしょう:
 
 <code-example language="bash">
   Template parse errors:
   Can't bind to 'colspan' since it isn't a known native property
 </code-example>
 
-As the message says, the `<td>` element does not have a `colspan` property. This is true
-because `colspan` is an attribute&mdash;`colSpan`, with a capital `S`, is the
-corresponding property. Interpolation and property binding can set only *properties*, not attributes.
+メッセージが示すように `<td>` 要素には `colspan` プロパティがありません。
+`colspan` は属性なので、そのとおりです&mdash;対応するプロパティは `S` が大文字の `colSpan` です。
+補間やプロパティバインディングが設定できるのは *プロパティ* だけで、属性はできません。
 
-Instead, you'd use property binding and write it like this:
+代わりに、プロパティバインディングを使ってこのように書くことができます:
 
 <code-example path="attribute-binding/src/app/app.component.html" region="colSpan" header="src/app/app.component.html"></code-example>
 
@@ -890,28 +889,28 @@ Instead, you'd use property binding and write it like this:
 
 <hr/>
 
-### Class binding
+### クラスバインディング {@a class-binding}
 
-Here's how to set the `class` attribute without a binding in plain HTML:
+素の HTML で、バインディングを使わずに `class` 属性を指定する方法はこうです:
 
 ```html
 <!-- standard class attribute setting -->
 <div class="foo bar">Some text</div>
 ```
 
-You can also add and remove CSS class names from an element's `class` attribute with a **class binding**.
+**クラスバインディング** を使うことで、要素の `class` 属性に CSS クラス名を追加したり削除したりすることができます。
 
-To create a single class binding, start with the prefix `class` followed by a dot (`.`) and the name of the CSS class (for example, `[class.foo]="hasFoo"`). 
-Angular adds the class when the bound expression is truthy, and it removes the class when the expression is falsy (with the exception of `undefined`, see [styling delegation](#styling-delegation)).
+クラス単体のバインディングを作るには、接頭辞 `class` にドット (`.`) と CSS クラス名をつけます (たとえば `[class.foo]="hasFoo"`)。
+Angular はバインドされた式が truthy の場合にクラスを追加し、式が falsy の場合にクラスを削除します (`undefined` の場合は例外です。詳しくは[スタイル委譲](#styling-delegation)を見てください)。
 
-To create a binding to multiple classes, use a generic `[class]` binding without the dot (for example, `[class]="classExpr"`).
-The expression can be a space-delimited string of class names, or you can format it as an object with class names as the keys and truthy/falsy expressions as the values. 
-With object format, Angular will add a class only if its associated value is truthy. 
+複数のクラスのバインディングを作るには、ドットがない汎用的な `[class]` バインディングを使います (たとえば `[class]="classExpr"`)。
+式はクラス名をスペースで区切った文字列にすることもできますし、クラス名をキーにして truthy/falsy 式を値にしたオブジェクト形式にすることもできます。
+オブジェクト形式では、Angular は関連する値が truthy の場合にのみクラスを追加します。
 
-It's important to note that with any object-like expression (`object`, `Array`, `Map`, `Set`, etc), the identity of the object must change for the class list to be updated.
-Updating the property without changing object identity will have no effect.
+注意しなければならないのは、オブジェクトのような表現 (`object`, `Array`, `Map`, `Set` など) では、クラスリストを更新するためにはオブジェクト自身を変更する必要があることです。
+オブジェクト自身を変更せずにプロパティを更新しても何の効果もありません。
 
-If there are multiple bindings to the same class name, conflicts are resolved using [styling precedence](#styling-precedence).
+同じクラス名について複数のバインディングがある場合は[スタイリングの優先順位](#styling-precedence)にしたがって競合が解決されます。
 
 <style>
   td, th {vertical-align: top}
@@ -928,26 +927,26 @@ If there are multiple bindings to the same class name, conflicts are resolved us
   </col>
   <tr>
     <th>
-      Binding Type
+      バインディングタイプ
     </th>
     <th>
-      Syntax
+      構文
     </th>
     <th>
-      Input Type
+      入力タイプ
     </th>
     <th>
-      Example Input Values
+      入力値の例
     </th>
   </tr>
   <tr>
-    <td>Single class binding</td>
+    <td>クラス単体のバインディング</td>
     <td><code>[class.foo]="hasFoo"</code></td>
     <td><code>boolean | undefined | null</code></td>
     <td><code>true</code>, <code>false</code></td>
   </tr>
   <tr>
-    <td rowspan=3>Multi-class binding</td>
+    <td rowspan=3>複数クラスのバインディング</td>
     <td rowspan=3><code>[class]="classExpr"</code></td>
     <td><code>string</code></td>
     <td><code>"my-class-1 my-class-2 my-class-3"</code></td>
@@ -963,43 +962,43 @@ If there are multiple bindings to the same class name, conflicts are resolved us
 </table>
 
 
-The [NgClass](#ngclass) directive can be used as an alternative to direct `[class]` bindings. 
-However, using the above class binding syntax without `NgClass` is preferred because due to improvements in class binding in Angular, `NgClass` no longer provides significant value, and might eventually be removed in the future.
+直接 `[class]` バインディングを使わずに [NgClass](#ngclass) ディレクティブを使うこともできます。
+しかし、Angular のクラスバインディングの改善により、 `NgClass` は重要な価値を提供しなくなり、将来的には削除される可能性があるため、 `NgClass` を使用せずに上記のクラスバインディング構文を使用することが望ましいです。
 
 
 <hr/>
 
-### Style binding
+### スタイルバインディング {@a style-binding}
 
-Here's how to set the `style` attribute without a binding in plain HTML:
+素の HTML で、バインディングを使わずに `style` 属性を指定する方法はこうです:
 
 ```html
 <!-- standard style attribute setting -->
 <div style="color: blue">Some text</div>
 ```
 
-You can also set styles dynamically with a **style binding**.
+**スタイルバインディング** を使うことで動的にスタイルを設定できます。
 
-To create a single style binding, start with the prefix `style` followed by a dot (`.`) and the name of the CSS style property (for example, `[style.width]="width"`). 
-The property will be set to the value of the bound expression, which is normally a string.
-Optionally, you can add a unit extension like `em` or `%`, which requires a number type.
+スタイル単体のバインディングを作るには、接頭辞 `style` にドット (`.`) と CSS スタイルプロパティの名前をつけます (たとえば `[style.width]="width"`)。
+このプロパティは、バインドされた式の値 (通常は文字列) に設定されます。
+オプションで、`em` や `%` のような単位を追加して数値型を要求するようにもできます。
 
 <div class="alert is-helpful">
 
-Note that a _style property_ name can be written in either
-[dash-case](guide/glossary#dash-case), as shown above, or
-[camelCase](guide/glossary#camelcase), such as `fontSize`.
+_スタイルプロパティ_ の名前は前述のとおり
+[dash-case](guide/glossary#dash-case) で書くこともできますし、
+`fontSize` のように [camelCase](guide/glossary#camelcase) で書くこともできます。
 
 </div>
 
-If there are multiple styles you'd like to toggle, you can bind to the `[style]` property directly without the dot (for example, `[style]="styleExpr"`).
-The expression attached to the `[style]` binding is most often a string list of styles like `"width: 100px; height: 100px;"`. 
+切り替えたいスタイルが複数あるときは、ドットのない `[style]` プロパティに直接バインドできます (たとえば `[style]="styleExpr"`)。
+ほとんどの場合、 `[style]` バインディングでアタッチされる式は `"width: 100px; height: 100px;"` のようなスタイルを並べた文字列です。
 
-You can also format the expression as an object with style names as the keys and style values as the values, like `{width: '100px', height: '100px'}`. 
-It's important to note that with any object-like expression (`object`, `Array`, `Map`, `Set`, etc), the identity of the object must change for the class list to be updated.
-Updating the property without changing object identity will have no effect.
+式には、 `{width: '100px', height: '100px'}` のように、スタイルの名前をキーに、スタイルの値を値にしたオブジェクトを与えることもできます。
+注意しなければならないのは、オブジェクトのような表現 (`object`, `Array`, `Map`, `Set` など) では、スタイルリストを更新するためにはオブジェクト自身を変更する必要があることです。
+オブジェクト自身を変更せずにプロパティを更新しても何の効果もありません。
 
-If there are multiple bindings to the same style property, conflicts are resolved using [styling precedence rules](#styling-precedence).
+同じスタイルプロパティについて複数のバインディングがある場合は[スタイリングの優先順位](#styling-precedence)にしたがって競合が解決されます。
 
 <style>
   td, th {vertical-align: top}
@@ -1016,33 +1015,33 @@ If there are multiple bindings to the same style property, conflicts are resolve
   </col>
   <tr>
     <th>
-      Binding Type
+      バインディングタイプ
     </th>
     <th>
-      Syntax
+      構文
     </th>
     <th>
-      Input Type
+      入力タイプ
     </th>
     <th>
-      Example Input Values
+      入力値の例
     </th>
   </tr>
   <tr>
-    <td>Single style binding</td>
+    <td>スタイル単体のバインディング</td>
     <td><code>[style.width]="width"</code></td>
     <td><code>string | undefined | null</code></td>
     <td><code>"100px"</code></td>
   </tr>
   <tr>
   <tr>
-    <td>Single style binding with units</td>
+    <td>単位つきのスタイル単体のバインディング</td>
     <td><code>[style.width.px]="width"</code></td>
     <td><code>number | undefined | null</code></td>
     <td><code>100</code></td>
   </tr>
     <tr>
-    <td rowspan=3>Multi-style binding</td>
+    <td rowspan=3>複数スタイルのバインディング</td>
     <td rowspan=3><code>[style]="styleExpr"</code></td>
     <td><code>string</code></td>
     <td><code>"width: 100px; height: 100px"</code></td>
@@ -1057,155 +1056,155 @@ If there are multiple bindings to the same style property, conflicts are resolve
   </tr>
 </table>
 
-The [NgStyle](#ngstyle) directive can be used as an alternative to direct `[style]` bindings. 
-However, using the above style binding syntax without `NgStyle` is preferred because due to improvements in style binding in Angular, `NgStyle` no longer provides significant value, and might eventually be removed in the future.
+直接 `[style]` バインディングを使わずに [NgStyle](#ngstyle) ディレクティブを使うこともできます。
+しかし、Angular のスタイルバインディングの改善により、 `NgStyle` は重要な価値を提供しなくなり、将来的には削除される可能性があるため、 `NgStyle` を使用せずに上記のクラスバインディング構文を使用することが望ましいです。
 
 
 <hr/>
 
 {@a styling-precedence}
-### Styling Precedence
+### スタイリングの優先順位
 
-A single HTML element can have its CSS class list and style values bound to a multiple sources (for example, host bindings from multiple directives).
+ひとつの HTML 要素について、CSS のクラスリストやスタイルの値を複数のソース (たとえば複数のディレクティブからのホストバインディング) にバインドすることができます。
 
-When there are multiple bindings to the same class name or style property, Angular uses a set of precedence rules to resolve conflicts and determine which classes or styles are ultimately applied to the element.
+同じクラス名やスタイルプロパティに複数のバインディングがあるとき、Angular は優先順位のルールにしたがって競合を解決し、どのクラスやスタイルを最終的に要素に適用するかを決定します。
 
 <div class="alert is-helpful">
-<h4>Styling precedence (highest to lowest)</h4>
+<h4>スタイリングの優先順位 (高い方から低い方へ)</h4>
 
-1. Template bindings
-    1. Property binding (for example, `<div [class.foo]="hasFoo">` or `<div [style.color]="color">`)
-    1. Map binding (for example, `<div [class]="classExpr">` or `<div [style]="styleExpr">`)
-    1. Static value (for example, `<div class="foo">` or `<div style="color: blue">`) 
-1. Directive host bindings
-    1. Property binding (for example, `host: {'[class.foo]': 'hasFoo'}` or `host: {'[style.color]': 'color'}`)
-    1. Map binding (for example, `host: {'[class]': 'classExpr'}` or `host: {'[style]': 'styleExpr'}`)
-    1. Static value (for example, `host: {'class': 'foo'}` or `host: {'style': 'color: blue'}`)    
-1. Component host bindings
-    1. Property binding (for example, `host: {'[class.foo]': 'hasFoo'}` or `host: {'[style.color]': 'color'}`)
-    1. Map binding (for example, `host: {'[class]': 'classExpr'}` or `host: {'[style]': 'styleExpr'}`)
-    1. Static value (for example, `host: {'class': 'foo'}` or `host: {'style': 'color: blue'}`)    
+1. テンプレートバインディング
+    1. プロパティバインディング (たとえば `<div [class.foo]="hasFoo">` や `<div [style.color]="color">`)
+    1. マップバインディング (たとえば `<div [class]="classExpr">` や `<div [style]="styleExpr">`)
+    1. 静的な値 (たとえば `<div class="foo">` や `<div style="color: blue">`) 
+1. ディレクティブのホストバインディング
+    1. プロパティバインディング (たとえば `host: {'[class.foo]': 'hasFoo'}` や `host: {'[style.color]': 'color'}`)
+    1. マップバインディング (たとえば `host: {'[class]': 'classExpr'}` や `host: {'[style]': 'styleExpr'}`)
+    1. 静的な値 (たとえば `host: {'class': 'foo'}` や `host: {'style': 'color: blue'}`)    
+1. コンポーネントのホストバインディング
+    1. プロパティバインディング (たとえば `host: {'[class.foo]': 'hasFoo'}` や `host: {'[style.color]': 'color'}`)
+    1. マップバインディング (たとえば `host: {'[class]': 'classExpr'}` や `host: {'[style]': 'styleExpr'}`)
+    1. 静的な値 (たとえば `host: {'class': 'foo'}` や `host: {'style': 'color: blue'}`)    
 
 </div>
 
-The more specific a class or style binding is, the higher its precedence.
+クラスやスタイルのバインディングが詳細なほど、優先度が高くなります。
 
-A binding to a specific class (for example, `[class.foo]`) will take precedence over a generic `[class]` binding, and a binding to a specific style (for example, `[style.bar]`) will take precedence over a generic `[style]` binding.
+特定のクラス (たとえば `[class.foo]`) へのバインディングは、汎用的な `[class]` へのバインディングよりも優先され、特定のスタイル (たとえば `[style.bar]`) へのバインディングは、汎用的な `[style]` へのバインディングよりも優先されます。
 
 <code-example path="attribute-binding/src/app/app.component.html" region="basic-specificity" header="src/app/app.component.html"></code-example>
 
-Specificity rules also apply when it comes to bindings that originate from different sources. 
-It's possible for an element to have bindings in the template where it's declared, from host bindings on matched directives, and from host bindings on matched components.
+異なるソースからのバインディングがあるときは、詳細度のルールも適用されます。
+要素は、宣言されたテンプレートから、対応するディレクティブのホストバインディングから、対応するコンポーネントのホストバインディングからのバインディングをもつことができます。
 
-Template bindings are the most specific because they apply to the element directly and exclusively, so they have the highest precedence.
+テンプレートバインディングは、要素に対して直接、排他的に適用するため、もっとも詳細度が高く、もっとも高い優先順位を持ちます。
 
-Directive host bindings are considered less specific because directives can be used in multiple locations, so they have a lower precedence than template bindings.
+ディレクティブは複数の場所で使えるため、ディレクティブのホストバインディングはあまり詳細でないとみなされ、テンプレートバインディングよりも優先順位が低くなります。
 
-Directives often augment component behavior, so host bindings from components have the lowest precedence. 
+ディレクティブはコンポーネントの動作を拡張することがあるため、コンポーネントによるホストバインディングの優先度は低くなります。
 
 <code-example path="attribute-binding/src/app/app.component.html" region="source-specificity" header="src/app/app.component.html"></code-example>
 
-In addition, bindings take precedence over static attributes. 
+さらに、バインディングは静的な属性よりも優先されます。
 
-In the following case, `class` and `[class]` have similar specificity, but the `[class]` binding will take precedence because it is dynamic.
+次のケースでは `class` と `[class]` は同じ詳細度を持ちますが、 `[class]` バインディングのほうが動的なため優先度が高くなります。
 
 <code-example path="attribute-binding/src/app/app.component.html" region="dynamic-priority" header="src/app/app.component.html"></code-example>
 
 {@a styling-delegation}
-### Delegating to styles with lower precedence
+### 優先度が低いスタイルへの委譲 {@a delegating-to-styles-with-lower-precedence}
 
-It is possible for higher precedence styles to "delegate" to lower precedence styles using `undefined` values.
-Whereas setting a style property to `null` ensures the style is removed, setting it to `undefined` will cause Angular to fall back to the next-highest precedence binding to that style.
+`undefined` 値を使うことで、高い優先度のスタイルから低い優先度のスタイルに "委譲" することができます。
+スタイルプロパティを `null` にするとスタイルは確実に削除される一方、 `undefined` に設定すると Angular はそのスタイルについて優先度が次に高いバインディングにフォールバックする動作をします。
 
-For example, consider the following template: 
+たとえば次のようなテンプレートを考えます:
 
 <code-example path="attribute-binding/src/app/app.component.html" region="style-delegation" header="src/app/app.component.html"></code-example>
 
-Imagine that the `dirWithHostBinding` directive and the `comp-with-host-binding` component both have a `[style.width]` host binding.
-In that case, if `dirWithHostBinding` sets its binding to `undefined`, the `width` property will fall back to the value of the `comp-with-host-binding` host binding.
-However, if `dirWithHostBinding` sets its binding to `null`, the `width` property will be removed entirely.
+`dirWithHostBinding` ディレクティブと `comp-with-host-binding` コンポーネントの両方が `[style.width]` ホストバインディングをもつとします。
+そこでもし `dirWithHostBinding` がそのバインディングを `undefined` に設定すれば、 `width` プロパティは `comp-with-host-binding` のホストバインディングの値にフォールバックします。
+もし `dirWithHostBinding` がそのバインディングを `null` に設定すれば、 `width` プロパティは完全に削除されます。
 
 
 {@a event-binding}
 
-## Event binding `(event)`
+## イベントバインディング `(event)`
 
-Event binding allows you to listen for certain events such as
-keystrokes, mouse movements, clicks, and touches. For an example
-demonstrating all of the points in this section, see the <live-example name="event-binding">event binding example</live-example>.
+イベントバインディングを使えば、キー操作、マウス移動、クリック、タッチなどの
+イベントをリッスンすることができます。このセクションで示すすべてのポイントのデモについては
+<live-example name="event-binding">イベントバインディングの例</live-example>を参照してください。
 
-Angular event binding syntax consists of a **target event** name
-within parentheses on the left of an equal sign, and a quoted
-template statement on the right.
-The following event binding listens for the button's click events, calling
-the component's `onSave()` method whenever a click occurs:
+Angular のイベントバインディングの構文は、等号の左側にある
+括弧に囲まれた **ターゲットイベント** の名前と、
+等号の右側にある引用符に囲まれたテンプレート文から成り立ちます。
+次のイベントバインディングはボタンのクリックイベントをリッスンし、
+クリックされたらコンポーネントの `onSave()` メソッドを呼び出します:
 
 <div class="lightbox">
   <img src='generated/images/guide/template-syntax/syntax-diagram.svg' alt="Syntax diagram">
 </div>
 
-### Target event
+### ターゲットイベント {@a target-event}
 
-As above, the target is the button's click event.
+前に示したとおり、ターゲットはボタンのクリックイベントです。
 
 <code-example path="event-binding/src/app/app.component.html" region="event-binding-1" header="src/app/app.component.html"></code-example>
 
-Alternatively, use the `on-` prefix, known as the canonical form:
+または、標準形式として知られている接頭辞 `on-` を使うこともできます:
 
 <code-example path="event-binding/src/app/app.component.html" region="event-binding-2" header="src/app/app.component.html"></code-example>
 
-Element events may be the more common targets, but Angular looks first to see if the name matches an event property
-of a known directive, as it does in the following example:
+要素のイベントは、より一般的なターゲットかもしれませんが、次の例で示すように、
+Angular は名前が既知のディレクティブのイベントプロパティと一致するかどうかを最初に調べます。
 
 <code-example path="event-binding/src/app/app.component.html" region="custom-directive" header="src/app/app.component.html"></code-example>
 
-If the name fails to match an element event or an output property of a known directive,
-Angular reports an “unknown directive” error.
+名前が、要素のイベントや、既知のディレクティブの出力プロパティと一致しないときは、
+Angular は “unknown directive” エラーを報告します。
 
 
-### *$event* and event handling statements
+### *$event* とイベントハンドル文 {@a event-and-event-handling-statements}
 
-In an event binding, Angular sets up an event handler for the target event.
+イベントバインディングでは、Angular はターゲットイベントのイベントハンドラーをセットアップします。
 
-When the event is raised, the handler executes the template statement.
-The template statement typically involves a receiver, which performs an action
-in response to the event, such as storing a value from the HTML control
-into a model.
+イベントが発生すると、ハンドラーはテンプレート文を実行します。
+通常、テンプレート文にはレシーバーが含まれます。
+レシーバーでは、HTML コントロールの値をモデルに格納するなどといった、
+イベントに反応したアクションを実行します。
 
-The binding conveys information about the event. This information can include data values such as an event object, string, or number named `$event`.
+バインディングは、イベントに関する情報を伝えます。この情報には、 `$event` という名前でイベントオブジェクト、文字列、数値などのデータ値を含めることができます。
 
-The target event determines the shape of the `$event` object.
-If the target event is a native DOM element event, then `$event` is a
-[DOM event object](https://developer.mozilla.org/en-US/docs/Web/Events),
-with properties such as `target` and `target.value`.
+`$event` オブジェクトの形式はターゲットのイベントによって決まります。
+ターゲットのイベントがネイティブの DOM 要素イベントであれば、 `$event` は
+`target` や `target.value` といったプロパティを持った
+[DOM イベントオブジェクト](https://developer.mozilla.org/en-US/docs/Web/Events)です。
 
-Consider this example:
+この例について考えてみましょう:
 
 <code-example path="event-binding/src/app/app.component.html" region="event-binding-3" header="src/app/app.component.html"></code-example>
 
-This code sets the `<input>` `value` property by binding to the `name` property.
-To listen for changes to the value, the code binds to the `input`
-event of the `<input>` element.
-When the user makes changes, the `input` event is raised, and the binding executes
-the statement within a context that includes the DOM event object, `$event`.
+このコードでは、 `name` プロパティをバインドすることで `<input>` の `value` を設定しています。
+値の変化をリッスンするため、 `<input>` 要素の
+`input` イベントにバインドしています。
+ユーザーが値を変更すると `input` イベントが発生し、
+バインディングは DOM イベントオブジェクト `$event` を含むコンテキストで文を実行します。
 
-To update the `name` property, the changed text is retrieved by following the path `$event.target.value`.
+`name` プロパティを更新するため、パス `$event.target.value` を使って変更されたテキストを取得します。
 
-If the event belongs to a directive&mdash;recall that components
-are directives&mdash;`$event` has whatever shape the directive produces.
+イベントがディレクティブに属している場合&mdash;コンポーネントはディレクティブであることを思い出してください
+&mdash;`$event` はディレクティブが生成する形式となります。
 
 
-### Custom events with `EventEmitter`
+### `EventEmitter` によるカスタムイベント {@a custom-events-with-eventemitter}
 
-Directives typically raise custom events with an Angular [EventEmitter](api/core/EventEmitter).
-The directive creates an `EventEmitter` and exposes it as a property.
-The directive calls `EventEmitter.emit(payload)` to fire an event, passing in a message payload, which can be anything.
-Parent directives listen for the event by binding to this property and accessing the payload through the `$event` object.
+典型的なディレクティブは、Angular の [EventEmitter](api/core/EventEmitter) によってカスタムイベントを発生させます。
+ディレクティブは `EventEmitter` を作り、プロパティとして公開します。
+ディレクティブはイベントを起こすために `EventEmitter.emit(payload)` を呼び出し、任意のメッセージペイロードを渡します。
+親ディレクティブは、プロパティをバインドしてイベントをリッスンし、 `$event` オブジェクトを通じてペイロードにアクセスします。
 
-Consider an `ItemDetailComponent` that presents item information and responds to user actions.
-Although the `ItemDetailComponent` has a delete button, it doesn't know how to delete the hero. It can only raise an event reporting the user's delete request.
+`ItemDetailComponent` がアイテムの情報を表示して、ユーザーアクションに反応するものだとします。
+`ItemDetailComponent` には削除ボタンがありますが、それ自身はヒーローを削除する方法を知りません。ユーザーの削除要求を伝えるイベントを発生させるだけです。
 
-Here are the pertinent excerpts from that `ItemDetailComponent`:
+`ItemDetailComponent` の関連コードの抜粋です:
 
 
 <code-example path="event-binding/src/app/item-detail/item-detail.component.html" header="src/app/item-detail/item-detail.component.html (template)" region="line-through"></code-example>
@@ -1213,136 +1212,136 @@ Here are the pertinent excerpts from that `ItemDetailComponent`:
 <code-example path="event-binding/src/app/item-detail/item-detail.component.ts" header="src/app/item-detail/item-detail.component.ts (deleteRequest)" region="deleteRequest"></code-example>
 
 
-The component defines a `deleteRequest` property that returns an `EventEmitter`.
-When the user clicks *delete*, the component invokes the `delete()` method,
-telling the `EventEmitter` to emit an `Item` object.
+コンポーネントは `EventEmitter` を返す `deleteRequest` プロパティを定義しています。
+ユーザーが *delete* をクリックすると、コンポーネントは `delete()` メソッドを呼び出し、
+`EventEmitter` に `Item` オブジェクトを出力させます。
 
-Now imagine a hosting parent component that binds to the `deleteRequest` event
-of the `ItemDetailComponent`.
+ホストする親コンポーネントが `ItemDetailComponent` の `deleteRequest`
+にバインドしているとしましょう。
 
 <code-example path="event-binding/src/app/app.component.html" header="src/app/app.component.html (event-binding-to-component)" region="event-binding-to-component"></code-example>
 
-When the `deleteRequest` event fires, Angular calls the parent component's
-`deleteItem()` method, passing the *item-to-delete* (emitted by `ItemDetail`)
-in the `$event` variable.
+`deleteRequest` イベントが発生すると、Angular は親コンポーネントの
+`deleteItem()` メソッドを呼び出し、 `$event` 変数の *削除するアイテム* (`ItemDetail` によって出力)
+を渡します。
 
-### Template statements have side effects
+### テンプレート文は副作用をもつ {@a template-statements-have-side-effects}
 
-Though [template expressions](guide/template-syntax#template-expressions) shouldn't have [side effects](guide/template-syntax#avoid-side-effects), template
-statements usually do. The `deleteItem()` method does have
-a side effect: it deletes an item.
+[テンプレート式](guide/template-syntax#template-expressions)は[副作用](guide/template-syntax#avoid-side-effects)をもつべきではありませんが、
+テンプレート文には通常副作用があります。
+`deleteItem()` メソッドには、アイテムを削除するという副作用があります。
 
-Deleting an item updates the model, and depending on your code, triggers
-other changes including queries and saving to a remote server.
-These changes propagate through the system and ultimately display in this and other views.
+アイテムの削除によってモデルが更新され、どういうコードを書くかにもよりますが、
+リモートサーバーへの問い合わせや保存といったその他の変化も引き起こします。
+これらの変化はシステムを伝播していき、最終的にはさまざまなビューによって表示されます。
 
 
 <hr/>
 
 {@a two-way}
 
-## Two-way binding `[(...)]`
+## 双方向バインディング `[(...)]`
 
-Two-way binding gives your app a way to share data between a component class and
-its template.
+双方向バインディングを使うと、コンポーネントクラスとそのテンプレートとの間で
+データを共有することができます。
 
-For a demonstration of the syntax and code snippets in this section, see the <live-example name="two-way-binding">two-way binding example</live-example>.
+このセクションで示す文法のデモやコードスニペットについては、<live-example name="two-way-binding">双方向バインディングの例</live-example> をご覧ください。
 
-### Basics of two-way binding
+### 双方向バインディングの基本 {@a basics-of-two-way-binding}
 
-Two-way binding does two things:
+双方向バインディングがすることは2つです:
 
-1. Sets a specific element property.
-1. Listens for an element change event.
+1. 特定の要素のプロパティを設定します。
+1. 要素の変更イベントをリッスンします。
 
-Angular offers a special _two-way data binding_ syntax for this purpose, `[()]`.
-The `[()]` syntax combines the brackets
-of property binding, `[]`, with the parentheses of event binding, `()`.
+Angular は、この目的のための特別な _双方向データバインディング_ の構文、`[()]` を提供しています。
+`[(x)]` 構文は、プロパティバインディングの括弧 `[]`
+とイベントバインディングの括弧 `()` を組み合わせたものです。
 
 <div class="callout is-important">
 
 <header>
-  [( )] = banana in a box
+  [( )] = 箱の中のバナナ
 </header>
 
-Visualize a *banana in a box* to remember that the parentheses go _inside_ the brackets.
+括弧が角括弧の _中_ にあることを覚えておくために *箱の中のバナナ* を思い描いてください。
 
 </div>
 
-The `[()]` syntax is easy to demonstrate when the element has a settable
-property called `x` and a corresponding event named `xChange`.
-Here's a `SizerComponent` that fits this pattern.
-It has a `size` value property and a companion `sizeChange` event:
+`[()]` 構文は、要素が `x` という設定可能なプロパティと
+対応する `xChange` というイベントを持っているときに簡単に説明できます。
+このパターンに合う `SizerComponent` は次のようになります。
+これは、`size` 値プロパティと、それに付随する `sizeChange` イベントを持ちます:
 
 <code-example path="two-way-binding/src/app/sizer/sizer.component.ts" header="src/app/sizer.component.ts"></code-example>
 
 <code-example path="two-way-binding/src/app/sizer/sizer.component.html" header="src/app/sizer.component.html"></code-example>
 
-The initial `size` is an input value from a property binding.
-Clicking the buttons increases or decreases the `size`, within
-min/max value constraints,
-and then raises, or emits, the `sizeChange` event with the adjusted size.
+`size` の初期値は、プロパティバインディングからの入力値です。
+ボタンをクリックすると、
+最小値/最大値の制限内で `size` が増減し、
+調整されたサイズで `sizeChange` イベントが発生（発行）します。
 
-Here's an example in which the `AppComponent.fontSizePx` is two-way bound to the `SizerComponent`:
+`AppComponent.fontSizePx` が `SizerComponent` に双方向でバインドされている例は次のようになります:
 
 <code-example path="two-way-binding/src/app/app.component.html" header="src/app/app.component.html (two-way-1)" region="two-way-1"></code-example>
 
-The `AppComponent.fontSizePx` establishes the initial `SizerComponent.size` value.
+`AppComponent.fontSizePx` は、`SizerComponent.size` の初期値を与えます。
 
 <code-example path="two-way-binding/src/app/app.component.ts" header="src/app/app.component.ts" region="font-size"></code-example>
 
-Clicking the buttons updates the `AppComponent.fontSizePx` via the two-way binding.
-The revised `AppComponent.fontSizePx` value flows through to the _style_ binding,
-making the displayed text bigger or smaller.
+ボタンをクリックすると、双方向バインディングによって `AppComponent.fontSizePx` が更新されます。
+変更された `AppComponent.fontSizePx` 値は _スタイル_ バインディングに流れ込み、
+表示されるテキストが大きくなったり小さくなったりします。
 
-The two-way binding syntax is really just syntactic sugar for a _property_ binding and an _event_ binding.
-Angular desugars the `SizerComponent` binding into this:
+双方向バインディングの構文は、実際には _プロパティ_ バインディングと _イベント_ バインディングの単なる糖衣構文です。
+Angular は次のように `SizerComponent` バインディングを _デシュガー_ します:
 
 <code-example path="two-way-binding/src/app/app.component.html" header="src/app/app.component.html (two-way-2)" region="two-way-2"></code-example>
 
-The `$event` variable contains the payload of the `SizerComponent.sizeChange` event.
-Angular assigns the `$event` value to the `AppComponent.fontSizePx` when the user clicks the buttons.
+`$event` 変数には、`SizerComponent.sizeChange` イベントのペイロードが含まれています。
+ユーザーがボタンをクリックすると、Angular は `$event` 値を `AppComponent.fontSizePx` に割り当てます。
 
-### Two-way binding in forms
+### フォームでの双方向バインディング {@a two-way-binding-in-forms}
 
-The two-way binding syntax is a great convenience compared to
-separate property and event bindings. It would be convenient to
-use two-way binding with HTML form elements like `<input>` and
-`<select>`. However, no native HTML element follows the `x`
-value and `xChange` event pattern.
+双方向バインディングの構文は、プロパティとイベントを
+別々にバインドするのに比べて非常に便利です。
+`<input>` や `<select>` のような HTML の
+form 要素を使って双方向バインディングを使うと便利です。
+ただし、`x` 値および `xChange` イベントパターンに従うネイティブ HTML 要素はありません。
 
-For more on how to use two-way binding in forms, see
-Angular [NgModel](guide/template-syntax#ngModel).
+フォームでの双方向バインディングについての詳細は
+Angular [NgModel](guide/template-syntax#ngModel) を参照してください.
 
 <hr/>
 
 {@a directives}
 
-## Built-in directives
+## 組み込みディレクティブ {@a built-in-directives}
 
-Angular offers two kinds of built-in directives: attribute
-directives and structural directives. This segment reviews some of the most common built-in directives,
-classified as either [_attribute_ directives](guide/template-syntax#attribute-directives) or [_structural_ directives](guide/template-syntax#structural-directives) and has its own <live-example name="built-in-directives">built-in directives example</live-example>.
+Angular には2種類の組み込みディレクティブがあります。属性ディレクティブと構造ディレクティブです。
+ここでは、[_属性_ ディレクティブ](guide/template-syntax#attribute-directives)か[_構造_ ディレクティブ](guide/template-syntax#structural-directives)に分類される、
+一般的な組み込みディレクティブについて見ていきます。<live-example name="built-in-directives">組み込みディレクティブの例</live-example>もあります。
 
-For more detail, including how to build your own custom directives, see [Attribute Directives](guide/attribute-directives) and [Structural Directives](guide/structural-directives).
+自作のディレクティブの作り方といった詳細については、[属性ディレクティブ](guide/attribute-directives)や[構造ディレクティブ](guide/structural-directives)を参照してください。
 
 <hr/>
 
 {@a attribute-directives}
 
-### Built-in attribute directives
+### 組み込み属性ディレクティブ {@a built-in-attribute-directives}
 
-Attribute directives listen to and modify the behavior of
-other HTML elements, attributes, properties, and components.
-You usually apply them to elements as if they were HTML attributes, hence the name.
+属性ディレクティブは、他の HTML 要素、属性、プロパティ、コンポーネントの
+動作をリッスンして変更します。
+それらは通常、HTML の属性であるかのように要素に適用されます。
 
-Many NgModules such as the [`RouterModule`](guide/router "Routing and Navigation")
-and the [`FormsModule`](guide/forms "Forms") define their own attribute directives.
-The most common attribute directives are as follows:
+[`RouterModule`](guide/router "Routing and Navigation")
+や [`FormsModule`](guide/forms "Forms") などの多くの NgModule では独自の属性ディレクティブを定義しています。
+もっとも一般的に使用されている属性ディレクティブは次のとおりです:
 
-* [`NgClass`](guide/template-syntax#ngClass)&mdash;adds and removes a set of CSS classes.
-* [`NgStyle`](guide/template-syntax#ngStyle)&mdash;adds and removes a set of HTML styles.
-* [`NgModel`](guide/template-syntax#ngModel)&mdash;adds two-way data binding to an HTML form element.
+* [`NgClass`](guide/template-syntax#ngClass) - 一連の CSS クラスを追加および削除する
+* [`NgStyle`](guide/template-syntax#ngStyle) - 一連の HTML スタイルを追加および削除する
+* [`NgModel`](guide/template-syntax#ngModel) - HTML の form 要素への双方向データバインディング
 
 <hr/>
 
@@ -1350,31 +1349,31 @@ The most common attribute directives are as follows:
 
 ### `NgClass`
 
-Add or remove several CSS classes simultaneously with `ngClass`.
+`ngClass` を使うと、CSS クラスの追加と削除を同時にできます。
 
 <code-example path="built-in-directives/src/app/app.component.html" region="special-div" header="src/app/app.component.html"></code-example>
 
 <div class="alert is-helpful">
 
-To add or remove a *single* class, use [class binding](guide/template-syntax#class-binding) rather than `NgClass`.
+追加、削除するクラスが *ひとつだけ* のときは、`NgClass` よりも[クラスバインディング](guide/template-syntax#class-binding)を使いましょう。
 
 </div>
 
-Consider a `setCurrentClasses()` component method that sets a component property,
-`currentClasses`, with an object that adds or removes three classes based on the
-`true`/`false` state of three other component properties. Each key of the object is a CSS class name; its value is `true` if the class should be added,
-`false` if it should be removed.
+コンポーネントがもつ他の3つのプロパティの `true`/`false` 状態に基づいて、3つのクラスの追加または削除をする
+コンポーネントのプロパティ `currentClasses` オブジェクトを設定する `setCurrentClasses` コンポーネントメソッド
+を考えてみましょう。オブジェクトの各キーは CSS クラス名になります。
+クラスを追加する必要がある場合はその値を `true` に、削除する必要がある場合は `false` にしてください。
 
 <code-example path="built-in-directives/src/app/app.component.ts" region="setClasses" header="src/app/app.component.ts"></code-example>
 
-Adding an `ngClass` property binding to `currentClasses` sets the element's classes accordingly:
+`currentClasses` への `ngClass` プロパティバインディングを追加すると、それに応じて要素のクラスが設定されます: 
 
 <code-example path="built-in-directives/src/app/app.component.html" region="NgClass-1" header="src/app/app.component.html"></code-example>
 
 <div class="alert is-helpful">
 
-Remember that in this situation you'd call `setCurrentClasses()`,
-both initially and when the dependent properties change.
+初期化時と、依存するプロパティ変更時の両方で、
+`setCurrentClasses()` を呼び出す必要があることを忘れないでください。
 
 </div>
 
@@ -1384,29 +1383,29 @@ both initially and when the dependent properties change.
 
 ### `NgStyle`
 
-Use `NgStyle` to set many inline styles simultaneously and dynamically, based on the state of the component.
+`NgStyle` を使うと、コンポーネントの状態に応じて、たくさんのインラインスタイルを同時に動的に設定することができます。
 
-#### Without `NgStyle`
+#### `NgStyle` を使わないケース {@a without-ngstyle}
 
-For context, consider setting a *single* style value with [style binding](guide/template-syntax#style-binding), without `NgStyle`.
+*単一の* スタイルの値を設定するときは `NgStyle` ではなく[スタイルバインディング](guide/template-syntax#style-binding)を使うことを検討してください。
 
 <code-example path="built-in-directives/src/app/app.component.html" region="without-ng-style" header="src/app/app.component.html"></code-example>
 
-However, to set *many* inline styles at the same time, use the `NgStyle` directive.
+*たくさん* のインラインスタイルを同時に設定するときは、`NgStyle` ディレクティブを使いましょう。
 
-The following is a `setCurrentStyles()` method that sets a component
-property, `currentStyles`, with an object that defines three styles,
-based on the state of three other component properties:
+次に示すのは、コンポーネントプロパティ `currentStyles` に、
+他のコンポーネントプロパティ3つの状態に基づいた3つのスタイルを定義するオブジェクトを設定する、
+`setCurrentStyles()` メソッドです。
 
 <code-example path="built-in-directives/src/app/app.component.ts" region="setStyles" header="src/app/app.component.ts"></code-example>
 
-Adding an `ngStyle` property binding to `currentStyles` sets the element's styles accordingly:
+`currentStyles` への `ngStyle` プロパティバインディングを追加すると、それに応じて要素のスタイルが設定されます: 
 
 <code-example path="built-in-directives/src/app/app.component.html" region="NgStyle-2" header="src/app/app.component.html"></code-example>
 
 <div class="alert is-helpful">
 
-Remember to call `setCurrentStyles()`, both initially and when the dependent properties change.
+初期化時と、依存するプロパティ変更時の両方で、 `setCurrentStyles()` を呼び出す必要があることを忘れないでください。
 
 </div>
 
@@ -1415,69 +1414,69 @@ Remember to call `setCurrentStyles()`, both initially and when the dependent pro
 
 {@a ngModel}
 
-### `[(ngModel)]`: Two-way binding
+### `[(ngModel)]`: 双方向バインディング {@a ngmodel-two-way-binding}
 
-The `NgModel` directive allows you to display a data property and
-update that property when the user makes changes. Here's an example:
+`NgModel` ディレクティブを使うと、データプロパティを表示したり、
+ユーザー操作に応じてプロパティを更新したりすることができます。例を示します:
 
 <code-example path="built-in-directives/src/app/app.component.html" header="src/app/app.component.html (NgModel example)" region="NgModel-1"></code-example>
 
 
-#### Import `FormsModule` to use `ngModel`
+#### `ngModel` を使うために `FormsModule` をインポートする {@a import-formsmodule-to-use-ngmodel}
 
-Before using the `ngModel` directive in a two-way data binding,
-you must import the `FormsModule` and add it to the NgModule's `imports` list.
-Learn more about the `FormsModule` and `ngModel` in [Forms](guide/forms#ngModel).
+双方向のデータバインディングで `ngModel` ディレクティブを使う前に、
+`FormsModule` をインポートして NgModule の `imports` リストに加える必要があります。
+[Forms](guide/forms#ngModel) で `FormsModule` と `ngModel` について詳しく知ることができます。
 
-Remember to import the `FormsModule` to make `[(ngModel)]` available as follows:
+`[(ngModel)]` を使えるようにするため、次のように `FormsModule` をインポートすることを忘れないでください:
 
 <code-example path="built-in-directives/src/app/app.module.ts" header="src/app/app.module.ts (FormsModule import)" region="import-forms-module"></code-example>
 
 
-You could achieve the same result with separate bindings to
-the `<input>` element's  `value` property and `input` event:
+`<input>` 要素の `value` プロパティと `input` イベントへの
+別々のバインディングによって、同じことができます:
 
 <code-example path="built-in-directives/src/app/app.component.html" region="without-NgModel" header="src/app/app.component.html"></code-example>
 
-To streamline the syntax, the `ngModel` directive hides the details behind its own `ngModel` input and `ngModelChange` output properties:
+構文を簡素化するため、`ngModel` ディレクティブは `ngModel` 入力プロパティと `ngModelChange` 出力プロパティの詳細を隠蔽しています:
 
 <code-example path="built-in-directives/src/app/app.component.html" region="NgModelChange" header="src/app/app.component.html"></code-example>
 
-The `ngModel` data property sets the element's value property and the `ngModelChange` event property
-listens for changes to the element's value.
+`ngModel` データプロパティは要素の値プロパティを設定し、
+`ngModelChange` イベントプロパティは要素の値の変更をリッスンします。
 
-#### `NgModel` and value accessors
+#### `NgModel` と値アクセサ {@a ngmodel-and-value-accessors}
 
-The details are specific to each kind of element and therefore the `NgModel` directive only works for an element
-supported by a [ControlValueAccessor](api/forms/ControlValueAccessor)
-that adapts an element to this protocol.
-Angular provides *value accessors* for all of the basic HTML form elements and the
-[Forms](guide/forms) guide shows how to bind to them.
+詳細な動作は要素によって異なるため、`NgModel` ディレクティブは、
+要素をこのプロトコルに適応させる [ControlValueAccessor](api/forms/ControlValueAccessor)
+がサポートする要素に対してのみ機能します。
+Angular は、基本的な HTML のフォーム要素すべてについて *値アクセサ* を提供しており、
+[フォーム](guide/forms)ガイドでそれらにバインドする方法を説明しています。
 
-You can't apply `[(ngModel)]` to a non-form native element or a
-third-party custom component until you write a suitable value accessor. For more information, see
-the API documentation on [DefaultValueAccessor](https://angular.io/api/forms/DefaultValueAccessor).
+適切な値アクセサを作らない限り、
+`[(ngModel)]` をフォーム以外のネイティブ要素またはサードパーティのカスタムコンポーネントに適用することはできません。
+詳しくは [DefaultValueAccessor](api/forms/DefaultValueAccessor) の API ドキュメントを参照してください。
 
-You don't need a value accessor for an Angular component that
-you write because you can name the value and event properties
-to suit Angular's basic [two-way binding syntax](guide/template-syntax#two-way)
-and skip `NgModel` altogether.
-The `sizer` in the
-[Two-way Binding](guide/template-syntax#two-way) section is an example of this technique.
+自作した Angular コンポーネントについては、
+Angular の基本的な[双方向バインディングの構文](guide/template-syntax#two-way)に
+合った値とイベントのプロパティ名をつければ、
+値アクセサを作らずに済み、`NgModel` も省略できます。
+[双方向バインディング](guide/template-syntax#two-way)セクションの `sizer` は
+このテクニックの一例です。
 
-Separate `ngModel` bindings are an improvement over binding to the
-element's native properties, but you can streamline the binding with a
-single declaration using the `[(ngModel)]` syntax:
+個別の `ngModel` バインディングは、
+要素のネイティブプロパティにバインドするよりもよいですが、
+`[(ngModel)]` 構文を使えば宣言ひとつにバインディングをスリム化できます。
 
 <code-example path="built-in-directives/src/app/app.component.html" region="NgModel-1" header="src/app/app.component.html"></code-example>
 
-This `[(ngModel)]` syntax can only _set_ a data-bound property.
-If you need to do something more, you can write the expanded form;
-for example, the following changes the `<input>` value to uppercase:
+`[(ngModel)]` 構文ができるのは、データバウンドのプロパティの _設定_ だけです。
+さらに何かする必要があるときは、展開された形式で書くことができます;
+次の例では、`<input>` の値を大文字に変換しています:
 
 <code-example path="built-in-directives/src/app/app.component.html" region="uppercase" header="src/app/app.component.html"></code-example>
 
-Here are all variations in action, including the uppercase version:
+大文字化を含むすべての書き方が動いている様子です:
 
 <div class="lightbox">
   <img src='generated/images/guide/built-in-directives/ng-model-anim.gif' alt="NgModel variations">
@@ -1487,30 +1486,30 @@ Here are all variations in action, including the uppercase version:
 
 {@a structural-directives}
 
-## Built-in _structural_ directives
+## 組み込みの _構造_ ディレクティブ {@a built-in-structural-directives}
 
-Structural directives are responsible for HTML layout.
-They shape or reshape the DOM's structure, typically by adding, removing, and manipulating
-the host elements to which they are attached.
+構造ディレクティブは HTML レイアウトを担当します。
+それらがアタッチされているホスト要素に対する追加、削除、加工といった、
+DOM 構造の形成、または再形成を行います。
 
-This section is an introduction to the common built-in structural directives:
+このセクションでは、一般的な組み込みの構造ディレクティブについて紹介します:
 
-* [`NgIf`](guide/template-syntax#ngIf)&mdash;conditionally creates or destroys subviews from the template.
-* [`NgFor`](guide/template-syntax#ngFor)&mdash;repeat a node for each item in a list.
-* [`NgSwitch`](guide/template-syntax#ngSwitch)&mdash;a set of directives that switch among alternative views.
+* [`NgIf`](guide/template-syntax#ngIf)&mdash;条件に応じてテンプレートからサブビューを作成、または破棄します。
+* [`NgFor`](guide/template-syntax#ngFor)&mdash;リストの各項目に対してノードを繰り返します。
+* [`NgSwitch`](guide/template-syntax#ngSwitch)&mdash;いくつかのビューから選んで表示するディレクティブ一式です。
 
 <div class="alert is-helpful">
 
-The deep details of structural directives are covered in the
-[Structural Directives](guide/structural-directives) guide,
-which explains the following:
+構造ディレクティブについての詳細を記した
+[構造ディレクティブ](guide/structural-directives)ガイドでは、
+次の内容を説明しています:
 
-* Why you
-[prefix the directive name with an asterisk (\*)](guide/structural-directives#the-asterisk--prefix).
-* Using [`<ng-container>`](guide/structural-directives#ngcontainer "<ng-container>")
-to group elements when there is no suitable host element for the directive.
-* How to write your own structural directive.
-* That you can only apply [one structural directive](guide/structural-directives#one-per-element "one per host element") to an element.
+* なぜ
+[ディレクティブ名の先頭にアスタリスク (\*) をつけるのか](guide/structural-directives#the-asterisk--prefix)。
+* ディレクティブをホストする適切な要素がないときに [`<ng-container>`](guide/structural-directives#ngcontainer "<ng-container>")
+でグルーピングする方法。
+* 構造ディレクティブの作り方。
+* ひとつの要素には[ひとつの構造ディレクティブ](guide/structural-directives#one-per-element "one per host element")しか適用できないこと。
 
 </div>
 
@@ -1520,62 +1519,62 @@ to group elements when there is no suitable host element for the directive.
 
 ### NgIf
 
-You can add or remove an element from the DOM by applying an `NgIf` directive to
-a host element.
-Bind the directive to a condition expression like `isActive` in this example.
+ホスト要素に
+`NgIf` ディレクティブを適用することで、DOM に要素を追加、削除することができます。
+この例では、ディレクティブから条件式 `isActive` にバインドしています。
 
 <code-example path="built-in-directives/src/app/app.component.html" region="NgIf-1" header="src/app/app.component.html"></code-example>
 
 <div class="alert is-helpful">
 
-Don't forget the asterisk (`*`) in front of `ngIf`. For more information
-on the asterisk, see the [asterisk (*) prefix](guide/structural-directives#the-asterisk--prefix) section of
-[Structural Directives](guide/structural-directives).
+`ngIf` の前にアスタリスク (`*`) をつけるのを忘れないでください。
+アスタリスクについての詳細は、[構造ディレクティブ](guide/structural-directives)の
+[アスタリスク (*) 接頭辞](guide/structural-directives#the-asterisk--prefix)セクションを参照してください。
 
 </div>
 
-When the `isActive` expression returns a truthy value, `NgIf` adds the
-`ItemDetailComponent` to the DOM.
-When the expression is falsy, `NgIf` removes the `ItemDetailComponent`
-from the DOM, destroying that component and all of its sub-components.
+`isActive` が truthy な値を返すとき、`NgIf` は
+DOM に `ItemDetailComponent` を追加します。
+式が falsy なら、`NgIf` は DOM から `ItemDetailComponent` を削除し、
+そのコンポーネントと、そのサブコンポーネントすべてを破棄します。
 
 
-#### Show/hide vs. `NgIf`
+#### Show/hide と `NgIf` {@a showhide-vs-ngif}
 
-Hiding an element is different from removing it with `NgIf`.
-For comparison, the following example shows how to control
-the visibility of an element with a
-[class](guide/template-syntax#class-binding) or [style](guide/template-syntax#style-binding) binding.
+要素を非表示にすることは、`NgIf` で削除することとは異なります。
+次の例では、[class](guide/template-syntax#class-binding) と
+[style](guide/template-syntax#style-binding) バインディングが、
+それぞれどのように要素の表示状態を制御しているかを比較しています。
 
 <code-example path="built-in-directives/src/app/app.component.html" region="NgIf-3" header="src/app/app.component.html"></code-example>
 
-When you hide an element, that element and all of its descendants remain in the DOM.
-All components for those elements stay in memory and
-Angular may continue to check for changes.
-You could be holding onto considerable computing resources and degrading performance
-unnecessarily.
+要素を非表示にすると、要素とその子孫すべては DOM に残ります。
+それらの要素のすべてのコンポーネントはメモリ上に残り、
+Angular は変更を検出し続けることがあります。
+かなりのコンピューティングリソースを使い、
+不必要にパフォーマンスを低下させている可能性があります。
 
-`NgIf` works differently. When `NgIf` is `false`, Angular removes the element and its descendants from the DOM.
-It destroys their components, freeing up resources, which
-results in a better user experience.
+`NgIf` は違った動作をします。`NgIf` が `false` のとき、Angular は要素とその子孫を DOM から削除します。
+コンポーネントも削除し、リソースを解放するので、
+よりよいユーザー体験を提供できます。
 
-If you are hiding large component trees, consider `NgIf` as a more
-efficient alternative to showing/hiding.
+大きなコンポーネントツリーを非表示にするときは、
+より効率的な手段として `NgIf` を使うことを検討してください。
 
 <div class="alert is-helpful">
 
-For more information on `NgIf` and `ngIfElse`, see the [API documentation about NgIf](api/common/NgIf).
+`NgIf` と `ngIfElse` については [NgIf の API ドキュメント](api/common/NgIf)で詳しく知ることができます。
 
 </div>
 
-#### Guard against null
+#### null 対策 {@a guard-against-null}
 
-Another advantage of `ngIf` is that you can use it to guard against null. Show/hide
-is best suited for very simple use cases, so when you need a guard, opt instead for `ngIf`. Angular will throw an error if a nested expression tries to access a property of `null`.
+`ngIf` のもうひとつの長所は null 対策として使えることです。
+表示/非表示がとてもシンプルなユースケースで、もし null 対策が必要なら `ngIf` を使ってください。ネストされた式が `null` のプロパティにアクセスしようとすると、Angular はエラーを投げます。
 
-The following shows `NgIf` guarding two `<div>`s.
-The `currentCustomer` name appears only when there is a `currentCustomer`.
-The `nullCustomer` will not be displayed as long as it is `null`.
+次の例では、2つの `<div>` について `NgIf` で対策しています。
+`currentCustomer` の名前は `currentCustomer` が存在するときだけ表示されます。
+`nullCustomer` は、その値が `null` であれば表示されません。
 
 <code-example path="built-in-directives/src/app/app.component.html" region="NgIf-2" header="src/app/app.component.html"></code-example>
 
@@ -1583,8 +1582,8 @@ The `nullCustomer` will not be displayed as long as it is `null`.
 
 <div class="alert is-helpful">
 
-See also the
-[safe navigation operator](guide/template-syntax#safe-navigation-operator "Safe navigation operator (?.)") below.
+後述する
+[セーフナビゲーション演算子](guide/template-syntax#safe-navigation-operator "Safe navigation operator (?.)")もご覧ください。
 
 </div>
 <hr/>
@@ -1592,35 +1591,43 @@ See also the
 {@a ngFor}
 ### `NgFor`
 
-`NgFor` is a repeater directive&mdash;a way to present a list of items.
-You define a block of HTML that defines how a single item should be displayed
-and then you tell Angular to use that block as a template for rendering each item in the list.
-The text assigned to `*ngFor` is the instruction that guides the repeater process.
+`NgFor` は、項目のリストを表示する繰り返しディレクティブです。
+ひとつの項目を表示するための HTML ブロックを定義し、
+そのブロックをリストの各項目を表示するテンプレートとして使うよう Angular に伝えます。
+繰り返しのプロセスは `*ngFor` に与えられたテキストが指示します。
 
-The following example shows `NgFor` applied to a simple `<div>`. (Don't forget the asterisk (`*`) in front of `ngFor`.)
+次の例はシンプルな `<div>` に `NgFor` を適用したものです。 (`ngFor` の前にアスタリスク (`*`) をつけるのを忘れないでください) 
 
 <code-example path="built-in-directives/src/app/app.component.html" region="NgFor-1" header="src/app/app.component.html"></code-example>
 
-You can also apply an `NgFor` to a component element, as in the following example.
+<div class="alert is-helpful">
+
+`ngFor` の前にアスタリスク (`*`) をつけるのを忘れないでください。
+アスタリスクについての詳細は、[構造ディレクティブ](guide/structural-directives)の
+[アスタリスク (*) 接頭辞](guide/structural-directives#the-asterisk--prefix)セクションを参照してください。
+
+</div>
+
+次の例が示すように、コンポーネント要素に対しても `NgFor` を使うことができます。
 
 <code-example path="built-in-directives/src/app/app.component.html" region="NgFor-2" header="src/app/app.component.html"></code-example>
 
 {@a microsyntax}
 
 <div class="callout is-critical">
-<header>*ngFor microsyntax</header>
+<header>*ngFor マイクロシンタックス</header>
 
-The string assigned to `*ngFor` is not a [template expression](guide/template-syntax#template-expressions). Rather,
-it's a *microsyntax*&mdash;a little language of its own that Angular interprets.
-The string `"let item of items"` means:
+`*ngFor` に与えられた文字列は[テンプレート式](guide/template-syntax#template-expressions)ではありません。
+それは*マイクロシンタックス*&mdash;Angular が解釈する独自の小さな言語です。
+文字列 `"let item of items"` は次を意味します:
 
-> *Take each item in the `items` array, store it in the local `item` looping variable, and
-make it available to the templated HTML for each iteration.*
+> *`items` 配列の各項目を取り出し、ローカルのループ変数 `item` として保存し、
+繰り返しのたびにテンプレート HTML で使えるようにする。*
 
-Angular translates this instruction into an `<ng-template>` around the host element,
-then uses this template repeatedly to create a new set of elements and bindings for each `item`
-in the list.
-For more information about microsyntax, see the [Structural Directives](guide/structural-directives#microsyntax) guide.
+Angular はこの指示をホスト要素を囲む `<ng-template>` に変換し、
+このテンプレートを繰り返し使って一連の新しい要素を作り、それぞれにリストの `item`
+をバインディングします。
+マイクロシンタックスについての詳細は[構造ディレクティブ](guide/structural-directives#microsyntax)ガイドをご覧ください。
 
 </div>
 
@@ -1629,61 +1636,61 @@ For more information about microsyntax, see the [Structural Directives](guide/st
 
 {@a template-input-variables}
 
-#### Template input variables
+#### テンプレート入力変数
 
-The `let` keyword before `item` creates a template input variable called `item`.
-The `ngFor` directive iterates over the `items` array returned by the parent component's `items` property
-and sets `item` to the current item from the array during each iteration.
+`item` の前にある `let` キーワードは、`item` という名前のテンプレート入力変数を作ります。
+`ngFor` ディレクティブは、親コンポーネントの `items` プロパティが返す `items` 配列の中を反復し、
+反復中は `item` に配列の現在の項目を設定します。
 
-Reference `item` within the `ngFor` host element
-as well as within its descendants to access the item's properties.
-The following example references `item` first in an interpolation
-and then passes in a binding to the `item` property of the `<app-item-detail>` component.
+`item` を参照することで、
+`ngFor` のホスト要素やその子孫から項目のプロパティにアクセスできます。
+次の例では、まず補間で `item` を参照し、
+次に `<app-item-detail>` コンポーネントの `item` プロパティのバインディングに渡しています。
 
 <code-example path="built-in-directives/src/app/app.component.html" region="NgFor-1-2" header="src/app/app.component.html"></code-example>
 
-For more information about template input variables, see
-[Structural Directives](guide/structural-directives#template-input-variable).
+テンプレート入力変数についての詳細は
+[構造ディレクティブ](guide/structural-directives#template-input-variable)をご覧ください。
 
-#### `*ngFor` with `index`
+#### `index` を使った `*ngFor` {@a ngfor-with-index}
 
-The `index` property of the `NgFor` directive context
-returns the zero-based index of the item in each iteration.
-You can capture the `index` in a template input variable and use it in the template.
+`NgFor` ディレクティブのコンテキストでの `index` プロパティは、
+ゼロベースの各反復での配列の添字を返します。
+テンプレート入力変数の中で `index` をつかまえて、それをテンプレートで使うことができます。
 
-The next example captures the `index` in a variable named `i` and displays it with the item name.
+次の例では `index` を変数 `i` としてつかまえて、項目名とともに表示しています。
 
 <code-example path="built-in-directives/src/app/app.component.html" region="NgFor-3" header="src/app/app.component.html"></code-example>
 
 <div class="alert is-helpful">
 
-`NgFor` is implemented by the `NgForOf` directive. Read more about the other `NgForOf` context values such as `last`, `even`,
-and `odd` in the [NgForOf API reference](api/common/NgForOf).
+`NgFor` は `NgForOf` ディレクティブによって実装されています。`last`、`even`、`odd` といった、その他の `NgForOf` コンテキストの変数については、
+[NgForOf API リファレンス](api/common/NgForOf)をご覧ください。
 
 </div>
 
 {@a trackBy}
-#### *ngFor with `trackBy`
+#### `trackBy` を使った *ngFor {@a ngfor-with-trackby}
 
-If you use `NgFor` with large lists, a small change to one item, such as removing or adding an item, can trigger a cascade of DOM manipulations. For example, re-querying the server could reset a list with all new item objects, even when those items were previously displayed. In this case, Angular sees only a fresh list of new object references and has no choice but to replace the old DOM elements with all new DOM elements.
+大きなリストで `NgFor` を使うと、項目ひとつの追加や削除といった小さな変更が、多数の DOM 操作を引き起こすことがあります。たとえば、サーバーへの再問い合わせの結果がほとんど表示済みのものであっても、すべての項目を新しく作り直してしまうことがあります。このとき Angular は、新しいオブジェクトの参照のリストが与えられたことしか分からず、新しい DOM 要素で古い DOM 要素を置き換えることしかできません。
 
-You can make this more efficient with `trackBy`.
-Add a method to the component that returns the value `NgFor` should track.
-In this case, that value is the hero's `id`. If the `id` has already been rendered,
-Angular keeps track of it and doesn't re-query the server for the same `id`.
+`trackBy` を使うことで、これを効率化できます。
+`NgFor` が追跡すべき値を返すメソッドを、コンポーネントに追加します。
+この場合に返す値はヒーローの `id` の値です。`id` が表示済みであれば、
+Angular はそれを追跡し、同じ `id` に対してはサーバーに再問い合わせしません。
 
 <code-example path="built-in-directives/src/app/app.component.ts" region="trackByItems" header="src/app/app.component.ts"></code-example>
 
-In the microsyntax expression, set `trackBy` to the `trackByItems()` method.
+マイクロシンタックスの式で `trackBy` に `trackByItems()` メソッドを設定しています。
 
 <code-example path="built-in-directives/src/app/app.component.html" region="trackBy" header="src/app/app.component.html"></code-example>
 
-Here is an illustration of the `trackBy` effect.
-"Reset items" creates new items with the same `item.id`s.
-"Change ids" creates new items with new `item.id`s.
+`trackBy` の効果を図示します。
+"Reset items" では、新しい項目を同じ `item.id` で作っています。
+"Change ids" では、新しい項目を新しい `item.id` で作っています。
 
-* With no `trackBy`, both buttons trigger complete DOM element replacement.
-* With `trackBy`, only changing the `id` triggers element replacement.
+* `trackBy` を使わないと、どちらのボタンでもすべての DOM 要素置き換えが発生します。
+* `trackBy` を使うと、`id` を変更したときだけ要素の置き換えが発生します。
 
 <div class="lightbox">
   <img src="generated/images/guide/built-in-directives/ngfor-trackby.gif" alt="Animation of trackBy">
@@ -1692,22 +1699,22 @@ Here is an illustration of the `trackBy` effect.
 
 <div class="alert is-helpful">
 
-Built-in directives use only public APIs; that is,
-they do not have special access to any private APIs that other directives can't access.
+組み込みディレクティブは公開 API だけを使っています。
+他のディレクティブが使えない非公開 API を特別に使っているといったことはありません。
 
 </div>
 
 <hr/>
 
 {@a ngSwitch}
-## The `NgSwitch` directives
+## `NgSwitch` ディレクティブ {@a the-ngswitch-directives}
 
-NgSwitch is like the JavaScript `switch` statement.
-It displays one element from among several possible elements, based on a switch condition.
-Angular puts only the selected element into the DOM.
+NgSwitch は JavaScript の `switch` 文のようなものです。
+いくつかの要素の中から、条件に応じてひとつの要素を表示します。
+Angular は選ばれた要素だけを DOM に挿入します。
 <!-- API Flagged -->
-`NgSwitch` is actually a set of three, cooperating directives:
-`NgSwitch`, `NgSwitchCase`, and `NgSwitchDefault` as in the following example.
+`NgSwitch` は、実際には、次の例のように協調する3つのディレクティブ
+`NgSwitch`, `NgSwitchCase`, `NgSwitchDefault` の組み合わせです。
 
  <code-example path="built-in-directives/src/app/app.component.html" region="NgSwitch" header="src/app/app.component.html"></code-example>
 
@@ -1715,30 +1722,30 @@ Angular puts only the selected element into the DOM.
   <img src="generated/images/guide/built-in-directives/ngswitch.gif" alt="Animation of NgSwitch">
 </figure>
 
-`NgSwitch` is the controller directive. Bind it to an expression that returns
-the *switch value*, such as `feature`. Though the `feature` value in this
-example is a string, the switch value can be of any type.
+`NgSwitch` はコントローラーディレクティブです。`feature` のような
+*スイッチ値* を返す式にバインドしてください。この例では `feature`
+の値は文字列ですが、任意の型を使うことができます。
 
-**Bind to `[ngSwitch]`**. You'll get an error if you try to set `*ngSwitch` because
-`NgSwitch` is an *attribute* directive, not a *structural* directive.
-Rather than touching the DOM directly, it changes the behavior of its companion directives.
+**`[ngSwitch]` へのバインド**について。`NgSwitch` は*構造*ディレクティブではなく*属性*ディレクティブなので、
+`*ngSwitch` を設定しようとするとエラーになります。
+これは DOM を直接操作するのではなく、対応するディレクティブの動作に手を加えています。
 
-**Bind to `*ngSwitchCase` and `*ngSwitchDefault`**.
-The `NgSwitchCase` and `NgSwitchDefault` directives are _structural_ directives
-because they add or remove elements from the DOM.
+**`*ngSwitchCase` と `*ngSwitchDefault` へのバインド**について。
+`NgSwitchCase` と `NgSwitchDefault` ディレクティブは、DOM に要素を追加、削除するため、
+_構造_ ディレクティブです。
 
-* `NgSwitchCase` adds its element to the DOM when its bound value equals the switch value and removes
-its bound value when it doesn't equal the switch value.
+* `NgSwitchCase` は、バインドされた値がスイッチ値と同じなら DOM に要素を追加し、
+異なれば DOM から要素を削除します。
 
-* `NgSwitchDefault` adds its element to the DOM when there is no selected `NgSwitchCase`.
+* `NgSwitchDefault` は、どの `NgSwitchCase` も選択されていないときに DOM に要素を追加します。
 
-The switch directives are particularly useful for adding and removing *component elements*.
-This example switches among four `item` components defined in the `item-switch.components.ts` file.
-Each component has an `item` [input property](guide/template-syntax#inputs-outputs "Input property")
-which is bound to the `currentItem` of the parent component.
+スイッチディレクティブは、*コンポーネント要素*を追加、削除するときに特に便利です。
+この例では、 `item-switch.components.ts` で定義している4つの `item` コンポーネントを切り替えています。
+それぞれのコンポーネントは `item` [入力プロパティ](guide/template-syntax#inputs-outputs "Input property")を持ち、
+親コンポーネントの `currentItem` にバインドされています。
 
-Switch directives work as well with native elements and web components too.
-For example, you could replace the `<app-best-item>` switch case with the following.
+スイッチディレクティブは、ネイティブ要素や Web Components に対しても動作します。
+たとえば `<app-best-item>` になるケースを次のコードに置き換えることができます。
 
 <code-example path="built-in-directives/src/app/app.component.html" region="NgSwitch-div" header="src/app/app.component.html"></code-example>
 
@@ -1752,61 +1759,61 @@ For example, you could replace the `<app-best-item>` switch case with the follow
 
 {@a ref-var}
 
-## Template reference variables (`#var`)
+## テンプレート参照変数 (`#var`) {@a template-reference-variables-var}
 
-A **template reference variable** is often a reference to a DOM element within a template.
-It can also refer to a directive (which contains a component), an element, [TemplateRef](api/core/TemplateRef), or a <a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components" title="MDN: Web Components">web component</a>.
+**テンプレート参照変数**は、テンプレートから DOM 要素を参照するために使うことがあります。
+他にも、ディレクティブ（コンポーネントも含む）、要素、[TemplateRef](api/core/TemplateRef)、<a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components" title="MDN: Web Components">web components</a> を参照することができます。
 
-For a demonstration of the syntax and code snippets in this section, see the <live-example name="template-reference-variables">template reference variables example</live-example>.
+このセクションで示す文法のデモやコードスニペットについては<live-example name="template-reference-variables">テンプレート参照変数の例</live-example>で確認できます。
 
 
-Use the hash symbol (#) to declare a reference variable.
-The following reference variable, `#phone`, declares a `phone` variable on an `<input>` element.
+ハッシュ記号 (#) を使うことで参照変数を宣言できます。
+次の参照変数 `#phone` は、`<input>` を参照する `phone` 変数を宣言します。
 
 <code-example path="template-reference-variables/src/app/app.component.html" region="ref-var" header="src/app/app.component.html"></code-example>
 
-You can refer to a template reference variable anywhere in the component's template.
-Here, a `<button>` further down the template refers to the `phone` variable.
+テンプレート参照変数は、コンポーネントのテンプレートのどこからでも参照することができます。
+ここでは、テンプレートの下の方に出てくる `<button>` が `phone` 変数を参照しています。
 
 <code-example path="template-reference-variables/src/app/app.component.html" region="ref-phone" header="src/app/app.component.html"></code-example>
 
-<h3 class="no-toc">How a reference variable gets its value</h3>
+<h3 class="no-toc">参照変数がその値を得る方法</h3> {@a how-a-reference-variable-gets-its-value}
 
-In most cases, Angular sets the reference variable's value to the element on which it is declared.
-In the previous example, `phone` refers to the phone number `<input>`.
-The button's click handler passes the `<input>` value to the component's `callPhone()` method.
+ほとんどの場合、Angular は参照変数の値を、それが宣言された要素とします。
+前の例では `phone` は電話番号の `<input>` を参照しています。
+ボタンのクリックハンドラーは、`<input>` の値をコンポーネントの `callPhone()` メソッドに渡します。
 
-The `NgForm` directive can change that behavior and set the value to something else. In the following example, the template reference variable, `itemForm`, appears three times separated
-by HTML.
+`NgForm` ディレクティブはこの動作を変更することができ、値を少し違ったものに設定します。次の例では、テンプレート参照変数 `itemForm` は
+HTML の中でバラバラに3回出現します。
 
 <code-example path="template-reference-variables/src/app/app.component.html" region="ngForm" header="src/app/hero-form.component.html"></code-example>
 
-The reference value of itemForm, without the ngForm attribute value, would be
-the [HTMLFormElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement).
-There is, however, a difference between a Component and a Directive in that a `Component`
-will be referenced without specifying the attribute value, and a `Directive` will not
-change the implicit reference (that is, the element).
+属性の値が ngForm でなければ、itemForm が参照する値は
+[HTMLFormElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement) となります。
+ただし、コンポーネントとディレクティブには違いがあります。
+`Component` は属性の値がなくても参照されるのに対して、
+`Directive` は暗黙の参照（つまり要素）を変更しません。
 
 
 
-However, with `NgForm`, `itemForm` is a reference to the [NgForm](api/forms/NgForm "API: NgForm")
-directive with the ability to track the value and validity of every control in the form.
+しかしここでは `NgForm` があるので、`itemForm` は [NgForm](api/forms/NgForm "API: NgForm")
+ディレクティブへの参照となり、フォーム内のすべてのコントロールの値や妥当性を追うことができます。
 
-The native `<form>` element doesn't have a `form` property, but the `NgForm` directive does, which allows disabling the submit button
-if the `itemForm.form.valid` is invalid and passing the entire form control tree
-to the parent component's `onSubmit()` method.
+ネイティブの `<form>` 要素には `form` というプロパティはありませんが、`NgForm` ディレクティブにはあり、
+`itemForm.form.valid` が無効なら送信ボタンを無効化したり、
+親コンポーネントの `onSubmit()` メソッドにフォームコントロールツリー全体を渡したりできます。
 
-<h3 class="no-toc">Template reference variable considerations</h3>
+<h3 class="no-toc">テンプレート参照変数の考慮事項</h3> {@a template-reference-variable-considerations}
 
-A template _reference_ variable (`#phone`) is not the same as a template _input_ variable (`let phone`) such as in an [`*ngFor`](guide/template-syntax#template-input-variable).
-See [_Structural Directives_](guide/structural-directives#template-input-variable) for more information.
+テンプレート _参照_ 変数 (`#phone`) は、[`*ngFor`](guide/template-syntax#template-input-variable) に出てくるようなテンプレート _入力_ 変数 (`let phone`) とは異なります。
+詳しくは [_構造ディレクティブ_](guide/structural-directives#template-input-variable) をご覧ください。
 
-The scope of a reference variable is the entire template. So, don't define the same variable name more than once in the same template as the runtime value will be unpredictable.
+参照変数のスコープは、テンプレート全体です。実行時の値が予測不可能となるため、同じテンプレート内で同じ名前の変数を2回以上宣言しないでください。
 
-#### Alternative syntax
+#### 別の構文 {@a alternative-syntax}
 
-You can use the `ref-` prefix alternative to `#`.
-This example declares the `fax` variable as `ref-fax` instead of `#fax`.
+`#` の代わりに、接頭辞 `ref-` を使うこともできます。
+この例では `fax` 変数を `#fax` ではなく `ref-fax` で宣言しています。
 
 
 <code-example path="template-reference-variables/src/app/app.component.html" region="ref-fax" header="src/app/app.component.html"></code-example>
@@ -2257,11 +2264,11 @@ It works perfectly with long property paths such as `a?.b?.c?.d`.
 
 ### The non-null assertion operator ( `!` )
 
-As of Typescript 2.0, you can enforce [strict null checking](http://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-0.html "Strict null checking in TypeScript") with the `--strictNullChecks` flag. TypeScript then ensures that no variable is unintentionally null or undefined.
+As of Typescript 2.0, you can enforce [strict null checking](http://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-0.html "Strict null checking in TypeScript") with the `--strictNullChecks` flag. TypeScript then ensures that no variable is unintentionally `null` or `undefined`.
 
 In this mode, typed variables disallow `null` and `undefined` by default. The type checker throws an error if you leave a variable unassigned or try to assign `null` or `undefined` to a variable whose type disallows `null` and `undefined`.
 
-The type checker also throws an error if it can't determine whether a variable will be `null` or undefined at runtime. You tell the type checker not to throw an error by applying the postfix
+The type checker also throws an error if it can't determine whether a variable will be `null` or `undefined` at runtime. You tell the type checker not to throw an error by applying the postfix
 [non-null assertion operator, !](http://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-0.html#non-null-assertion-operator "Non-null assertion operator").
 
 The Angular non-null assertion operator, `!`, serves the same purpose in
@@ -2272,7 +2279,7 @@ to check that `item` is defined, you can assert that
 <code-example path="template-expression-operators/src/app/app.component.html" region="non-null" header="src/app/app.component.html"></code-example>
 
 When the Angular compiler turns your template into TypeScript code,
-it prevents TypeScript from reporting that `item` might be `null` or `undefined`.
+it prevents TypeScript from reporting that `item.color` might be `null` or `undefined`.
 
 Unlike the [_safe navigation operator_](guide/template-syntax#safe-navigation-operator "Safe navigation operator (?)"),
 the non-null assertion operator does not guard against `null` or `undefined`.
