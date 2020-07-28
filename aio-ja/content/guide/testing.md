@@ -503,10 +503,11 @@ Angularの`TestBed`は次のセクションで見るような、この種類の�
 きっと、あなたは`click()`メソッドがライトの_オン/オフ_状態を切り替えて、
 メッセージを適切にセットすることをテストしたいだけだと思います。
 
-このコンポーネントクラスには依存関係はありません。
-依存関係のないサービスをテストするには、`new`でサービスを作成し、
-そのAPIを叩いて、公開されている状態のエクスペクテーションをアサートします。
-コンポーネントクラスでも同じことをします。
+このコンポーネントクラスには依存関係はありません。これらのタイプのクラスをテストするには、依存関係のないサービスの場合と同じ手順に従います。
+
+1. newキーワードを使用してコンポーネントを作成します。
+2. APIを叩きます。
+3. 公開されている状態のエクスペクテーションをアサートします。
 
 <code-example
   path="testing/src/app/demo/demo.spec.ts"
@@ -883,8 +884,7 @@ Angularが**変更検知**を実行したときにバインディングが発生
 ユーザーがキーストロークを入力するか、非同期アクティビティ(AJAXなど)が完了したときに
 変更検知が自動的に起動します。
 
-`TestBed.createComponent`は変更検知をトリガー_しません_。
-この事実は改定したテストで確認されます:
+`TestBed.createComponent`は変更検知をトリガー_しません_。この事実は改定したテストで確認されます:
 
 <code-example
   path="testing/src/app/banner/banner.component.spec.ts" region="test-w-o-detect-changes"></code-example>
@@ -1033,8 +1033,7 @@ _テスト中のコンポーネント_に実際のサービスを注入する必
 このような動作は補足するのが難しい場合があります。
 実際の`UserService`の代わりにテストダブルを作成して登録する方がはるかに簡単で安全です。
 
-この特定のテストスイートは、
-`WelcomeComponent`とそのテストのニーズを満たす`UserService`の最小のモックを提供します:
+この特定のテストスイートは、`WelcomeComponent`とそのテストのニーズを満たす`UserService`の最小のモックを提供します:
 
 <code-example
   path="testing/src/app/welcome/welcome.component.spec.ts"
@@ -1083,18 +1082,6 @@ Angularは階層的な注入システムを持ちます。
 [_コンポーネントのプロバイダーを上書きする_](#component-override)セクションを参照してください。
 
 </div>
-
-{@a service-from-injector}
-
-#### 常にインジェクターからサービスを取得してください
-
-テスト本体にあるテストモジュールに提供されている`userServiceStub`
-オブジェクトを参照_しないでください_。
-**それは動作しません！**
-コンポーネントに注入された`userService`インスタンスは、完全に_異なる_オブジェクトであり、
-提供された`userServiceStub`のクローンです。
-
-<code-example path="testing/src/app/welcome/welcome.component.spec.ts" region="stub-not-injected" header="app/welcome/welcome.component.spec.ts"></code-example>
 
 {@a welcome-spec-setup}
 
@@ -1221,7 +1208,7 @@ Angular CLIで作成されたプロジェクトであれば、 `zone-testing` �
 `it()`関数が次の形式の引数を受け取ることに注目してください。
 
 ```javascript
-fakeAsync(() => { /* test body */ })`
+fakeAsync(() => { /* test body */ })
 ```
 
 `fakeAsync`関数は、特別な_fakeAsyncテストゾーン_でテスト本体を実行することによって、線形的なコーディングスタイルを可能にします。
@@ -1244,7 +1231,7 @@ XHR calls within a test are rare, but if you need to call XHR, see [`async()`](#
 [tick()](api/core/testing/tick) を呼び出すことでペンディング中のすべての非同期アクティビティが終了するまでの時間の経過をシミュレートします。
 このケースでは、エラーハンドラー内の`setTimeout()`を待機します。
 
-[tick()](api/core/testing/tick) 関数はパラメーターとしてミリ秒を受け取ります（指定されていない場合はデフォルトで0になります）。このパラメーターは、仮想クロックの進捗状況を表します。たとえば、 `fakeAsync()` テスト中に `setTimeout(fn, 100)` がある場合は、 tick(100) を使用してfnコールバックをトリガーする必要があります。
+[tick()](api/core/testing/tick)関数は、パラメーターとしてミリ秒とtickOptionsを受け入れます。ミリ秒（指定されていない場合はデフォルトの0）パラメーターは、仮想クロックの進み具合を表します。たとえば、 `fakeAsync()` テストに `setTimeout(fn, 100)`がある場合、tick(100) を使用してfnコールバックをトリガーする必要があります。 tickOptionsは、processNewMacroTasksSynchronously（デフォルトはtrue）というプロパティをもつオプションのパラメーターであり、ティック時に新規生成されたマクロタスクを呼び出すかどうかを表します。
 
 <code-example
   path="testing/src/app/demo/async-helper.spec.ts"
@@ -1252,6 +1239,22 @@ XHR calls within a test are rare, but if you need to call XHR, see [`async()`](#
 
 [tick()](api/core/testing/tick) 関数は、`TestBed`と一緒にインポートするAngularテスティングユーティリティの1つです。
 これは`fakeAsync()`と対になっており、`fakeAsync()`の内部でのみ呼び出すことができます。
+
+#### tickOptions
+
+<code-example
+  path="testing/src/app/demo/async-helper.spec.ts"
+  region="fake-async-test-tick-new-macro-task-sync">
+</code-example>
+
+In this example, we have a new macro task (nested setTimeout), by default, when we `tick`, the setTimeout `outside` and `nested` will both be triggered.
+
+<code-example
+  path="testing/src/app/demo/async-helper.spec.ts"
+  region="fake-async-test-tick-new-macro-task-async">
+</code-example>
+
+And in some case, we don't want to trigger the new maco task when ticking, we can use `tick(milliseconds, {processNewMacroTasksSynchronously: false})` to not invoke new maco task.
 
 #### fakeAsync() 内部での日時の比較
 
@@ -1288,51 +1291,45 @@ import 'zone.js/dist/zone-testing';
 
 #### より多くのmacroTasksをサポートする
 
-デフォルトでは`fakeAsync()`は次の`macroTask`をサポートします。
+デフォルトでは`fakeAsync()`は次のmacro taskをサポートします。
 
-- setTimeout
-- setInterval
-- requestAnimationFrame
-- webkitRequestAnimationFrame
-- mozRequestAnimationFrame
+- `setTimeout`
+- `setInterval`
+- `requestAnimationFrame`
+- `webkitRequestAnimationFrame`
+- `mozRequestAnimationFrame`
 
-`HTMLCanvasElement.toBlob()`のような他の`macroTask`を実行したとき、`Unknown macroTask scheduled in fake async test`エラーがスローされます。
+`HTMLCanvasElement.toBlob()`のような他のmacro taskを実行したとき、`Unknown macroTask scheduled in fake async test`エラーがスローされます。
 
 <code-tabs>
   <code-pane
+    header="src/app/shared/canvas.component.spec.ts (failing)"
     path="testing/src/app/shared/canvas.component.spec.ts"
-    header="src/app/shared/canvas.component.spec.ts">
+    region="without-toBlob-macrotask">
   </code-pane>
   <code-pane
+    header="src/app/shared/canvas.component.ts"
     path="testing/src/app/shared/canvas.component.ts"
-    header="src/app/shared/canvas.component.ts">
+    region="main">
   </code-pane>
 </code-tabs>
 
-このようなケースをサポートしたい場合は、`beforeEach`でサポートしたい`macroTask`を定義する必要があります。
+このようなケースをサポートしたい場合は、`beforeEach`でサポートしたいmacro taskを定義する必要があります。
 たとえば次のようになります:
 
-```javascript
-beforeEach(() => {
-  window['__zone_symbol__FakeAsyncTestMacroTask'] = [
-    {
-      source: 'HTMLCanvasElement.toBlob',
-      callbackArgs: [{ size: 200 }]
-    }
-  ];
-});
+<code-example
+  header="src/app/shared/canvas.component.spec.ts (excerpt)"
+  path="testing/src/app/shared/canvas.component.spec.ts"
+  region="enable-toBlob-macrotask">
+</code-example>
 
-it('toBlob should be able to run in fakeAsync', fakeAsync(() => {
-    const canvas: HTMLCanvasElement = document.getElementById('canvas') as HTMLCanvasElement;
-    let blob = null;
-    canvas.toBlob(function(b) {
-      blob = b;
-    });
-    tick();
-    expect(blob.size).toBe(200);
-  })
-);
-```
+アプリで `<canvas>` 要素をZone.js対応にするために、 `zone-patch-canvas`  パッチをインポートする必要があることに注意してください（`polyfills.ts` または `<canvas>` を使用する特定のファイルのいずれかの中で）：
+
+<code-example
+  header="src/polyfills.ts or src/app/shared/canvas.component.ts"
+  path="testing/src/app/shared/canvas.component.ts"
+  region="import-canvas-patch">
+</code-example>
 
 #### 非同期のObservable
 
@@ -1925,7 +1922,7 @@ _ルーテッドコンポーネント_は`Router`ナビゲーションの行き�
 
 <div class="alert is-helpful">
 
-[ルーター](guide/router#route-parameters)ガイドでは、`ActivatedRoute.paramMap`について詳しく説明しています。
+[Router](guide/router) ガイドの[ActivatedRoute in action](guide/router#activated-route-in-action) セクションでは、`ActivatedRoute.paramMap`について詳しく説明しています。
 
 </div>
 
@@ -3113,7 +3110,7 @@ Angular テスティングユーティリティには、`TestBed`、`ComponentFi
 
     </td>
   </tr>
-</table
+</table>
 
 いくつかの`TestBed`インスタンスメソッドは静的な`TestBed`クラスメソッドがカバーしていないものです。
 これらはほとんど必要ありません。
@@ -3547,13 +3544,13 @@ Angularの`By`クラスには、共通述語の静的メソッドが3つあり�
 
 <hr>
 
-{@a faq}
+{@a useful-tips}
 
-## FAQ
+## Useful tips
 
 {@a q-spec-file-location}
 
-#### スペックファイルをテストするファイルの隣に置くのはなぜですか？
+#### スペックファイルはテストするファイルの隣に置く
 
 ユニットテストのスペックファイルは、テストするアプリケーションソースコードファイルと同じフォルダに置くことをお勧めします。
 
@@ -3563,11 +3560,9 @@ Angularの`By`クラスには、共通述語の静的メソッドが3つあり�
 - あなたがソースを移動するときは、（必然的に）テストを移動することを忘れません。
 - ソースファイルの名前を変更するときは、（必然的に）テストファイルの名前を変更することを忘れません。
 
-<hr>
-
 {@a q-specs-in-test-folder}
 
-#### テストフォルダにスペックを入れるのはいつですか？
+#### テストフォルダにスペックを入れる
 
 アプリケーションの統合的なスペックでは、
 フォルダやモジュールに分散された複数のパーツの相互作用をテストできます。
@@ -3579,15 +3574,17 @@ Angularの`By`クラスには、共通述語の静的メソッドが3つあり�
 もちろん、テストヘルパーをテストするスペックは、
 `test`フォルダ内の対応するヘルパーファイルの隣に置くほうがよいでしょう。
 
-{@a q-e2e}
+{@a q-kiss}
 
-#### なぜDOM統合のE2Eテストに頼らないのでしょうか？
+#### Keep it simple
 
-このガイドで説明されているコンポーネントのDOMテストでは、
-多くの場合、広範な設定と高度な技術が必要ですが、
-[ユニットテスト](#component-class-testing)は比較的簡単です。
+[Component class testing](#component-class-testing) should be kept very clean and simple.
+It should test only a single unit. On a first glance, you should be able to understand 
+what the test is testing. If it's doing more, then it doesn't belong here.
 
-#### なぜDOMの統合テストをエンドツーエンド（E2E）テストに任せないのですか？
+{@a q-end-to-end}
+
+#### E2E（エンドツーエンド）を使用して複数のユニットをテストする
 
 E2Eテストは、システム全体の高レベルな検証に最適です。
 しかし、ユニットテストで期待されるような包括的なテストカバレッジを与えることはできません。

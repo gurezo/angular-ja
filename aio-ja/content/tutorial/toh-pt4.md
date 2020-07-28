@@ -1,9 +1,16 @@
-# サービスの作成
+# サービスの追加
 
 Tour of Heroes の中で扱っている `HeroesComponent` は、今のところ仮のデータを取得して表示している状態です。
 
 このチュートリアルのリファクタリング後には、`HeroesComponent` は小さくなりビューをサポートすることに専念します。
 これはモックサービスを使用して、ユニットテストをより簡潔にすることにもつながります。
+
+<div class="alert is-helpful">
+
+  For the sample app that this page describes, see the <live-example></live-example>.
+
+</div>
+
 
 ## なぜサービスが必要なのか？
 
@@ -128,7 +135,7 @@ _providers_ についてより詳しく知りたい方は [Providers](guide/prov
 
 `HeroService` 型のプライベートプロパティである `heroService` をコンストラクターに追加しましょう。
 
-<code-example path="toh-pt4/src/app/heroes/heroes.component.ts" header="src/app/heroes/heroes.component.ts" region="ctor">
+<code-example path="toh-pt4/src/app/heroes/heroes.component.1.ts" header="src/app/heroes/heroes.component.ts" region="ctor">
 </code-example>
 
 このパラメータはプライベートな `heroService` プロパティとして定義されると同時に、 `HeroService` を注入すべき場所として認識されます。
@@ -137,7 +144,7 @@ Angular が `HeroesComponent` を生成する際、[依存性の注入](guide/de
 
 ### `getHeroes()` の追加
 
-サービスからヒーローデータを取得するための関数を作成しましょう。
+サービスからヒーローデータを取得するためのメソッドを作成しましょう。
 
 <code-example path="toh-pt4/src/app/heroes/heroes.component.1.ts" header="src/app/heroes/heroes.component.ts" region="getHeroes">
 </code-example>
@@ -360,27 +367,26 @@ Angular CLI によって生成された `MessagesComponent` のテンプレー�
 
 ["最終的なコードレビュー"](#final-code-review) タブ内に記載されている `messages.component.css` をコンポーネントのスタイルに追加すると、このメッセージUIの外観はよりよいものになるでしょう。
 
-## Add additional messages to hero service
+## `HeroService` にメッセージを追加する
 
-The following example shows how to send and display a message each time the user clicks on
-a hero, showing a history of the user's selections. This will be helpful when you get to the
-next section on [Routing](tutorial/toh-pt5).
+次の例は、ユーザーがヒーローをクリックするたびに、メッセージを送信、表示し、
+そしてユーザーの選択履歴を表示する方法を示します。
+これは、あなたが次ののセクション[Routing](tutorial/toh-pt5)を見るときに助けになります。
 
 <code-example header="src/app/heroes/heroes.component.ts"
 path="toh-pt4/src/app/heroes/heroes.component.ts">
 </code-example>
 
-The browser refreshes and the page displays the list of heroes.
-Refresh the browser to see the list of heroes, and scroll to the bottom to see the
-messages from the HeroService. Each time you click a hero, a new message appears to record
-the selection. Use the "clear" button to clear the message history.
+ブラウザが更新され、ページにヒーローリストを表示されます。
+ヒーローリストを見るためにブラウザを更新し、一番下までスクロールすると 
+`HeroService` からのメッセージを表示されます。あなたがヒーローをクリックするたびに、新しいメッセージが選択を登録して表示されます。
+メッセージ履歴を削除するために「clear」ボタンを使用します。
 
 {@a final-code-review}
 
 ## 最終的なコードレビュー
 
 このページで解説したコードを次に記載します。
-また、アプリケーションの見た目はリンク先のようになっているはずです。 <live-example></live-example>.
 
 <code-tabs>
 

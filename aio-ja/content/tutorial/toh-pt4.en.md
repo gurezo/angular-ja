@@ -1,9 +1,16 @@
-# Create services
+# Add services
 
 The Tour of Heroes `HeroesComponent` is currently getting and displaying fake data.
 
 After the refactoring in this tutorial, `HeroesComponent` will be lean and focused on supporting the view.
 It will also be easier to unit-test with a mock service.
+
+<div class="alert is-helpful">
+
+  For the sample app that this page describes, see the <live-example></live-example>.
+
+</div>
+
 
 ## Why services
 
@@ -122,7 +129,7 @@ Replace the definition of the `heroes` property with a simple declaration.
 
 Add a private `heroService` parameter of type `HeroService` to the constructor.
 
-<code-example path="toh-pt4/src/app/heroes/heroes.component.ts" header="src/app/heroes/heroes.component.ts" region="ctor">
+<code-example path="toh-pt4/src/app/heroes/heroes.component.1.ts" header="src/app/heroes/heroes.component.ts" region="ctor">
 </code-example>
 
 The parameter simultaneously defines a private `heroService` property and identifies it as a `HeroService` injection site.
@@ -132,7 +139,7 @@ sets the `heroService` parameter to the singleton instance of `HeroService`.
 
 ### Add `getHeroes()`
 
-Create a function to retrieve the heroes from the service.
+Create a method to retrieve the heroes from the service.
 
 <code-example path="toh-pt4/src/app/heroes/heroes.component.1.ts" header="src/app/heroes/heroes.component.ts" region="getHeroes">
 </code-example>
@@ -387,7 +394,7 @@ the selection. Use the "clear" button to clear the message history.
 
 ## Final code review
 
-Here are the code files discussed on this page and your app should look like this <live-example></live-example>.
+Here are the code files discussed on this page.
 
 <code-tabs>
 

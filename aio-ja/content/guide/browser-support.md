@@ -34,7 +34,7 @@ Angularは最新のブラウザをサポートしています。サポートし�
     </td>
 
     <td>
-      latest
+      latest and extended support release (ESR)
     </td>
   </tr>
 
@@ -53,16 +53,18 @@ Angularは最新のブラウザをサポートしています。サポートし�
       IE
     </td>
     <td>
-      11, 10, 9 ("compatibility view" mode not supported)
+      <div> 11, 10*, 9* ("compatibility view" mode not supported) </div>
+      <div>*deprecated in v10, see the {@link guide/deprecations#ie-9-10-and-mobile deprecations guide}.</div>
     </td>
   </tr>
  <tr>
    <tr>
     <td>
-      IE Mobile
+      IE Mobile*
     </td>
     <td>
       11
+      <div>*deprecated in v10, see the {@link guide/deprecations#ie-9-10-and-mobile deprecations guide}.</div>
     </td>
   </tr>
  <tr>
@@ -303,7 +305,7 @@ Angularのいくつかの機能では追加のポリフィルが必要になる�
     <td>
 
       [Router](guide/router) when using
-      [hash-based routing](guide/router#appendix-locationstrategy-and-browser-url-styles)
+      [hash-based routing](guide/router#location-strategy)
     </td>
 
     <td>

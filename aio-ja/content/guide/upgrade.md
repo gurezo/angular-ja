@@ -541,12 +541,14 @@ AngularJS のテンプレートの中であっても、 **Angular の属性記�
 
 <code-example format="">
   [myHero]="hero"
+  (heroDeleted)="handleHeroDeleted($event)"
 </code-example>
 
 しかし AngularJS のテンプレートから使う場合、ケバブケースを使わなければなりません。
 
 <code-example format="">
   [my-hero]="hero"
+  (hero-deleted)="handleHeroDeleted($event)"
 </code-example>
 
 </div>
@@ -960,6 +962,12 @@ angular.module('myHybridApp', [...])
 
 Angular のルーターを導入したならば、AngularJS と Angular での遷移のための単一のソースコードを使ったままで、統合された location サービスを通して Angular のルーターによって実行することができます。
 
+<!--
+TODO:
+Correctly document how to use AOT with SystemJS-based `ngUpgrade` apps (or better yet update the
+`ngUpgrade` examples/guides to use `@angular/cli`).
+See https://github.com/angular/angular/issues/35989.
+
 ## ハイブリッドのアプリケーションで事前コンパイルを使う
 
 他の Angular アプリケーションのように、ハイブリッドのアプリケーション上でも
@@ -979,6 +987,7 @@ AOT コンパイラも `index.html` にあるそれらのファイルを読み�
 </code-example>
 
 Angular のアプリケーションの AOT の恩恵をすべて得るために必要なことは以上です！
+-->
 
 ## PhoneCat のアップグレードのチュートリアル
 
@@ -1163,12 +1172,20 @@ NPM を使って新しい依存関係をインストールし、Bower パッケ�
   npm i typescript --save-dev
 </code-example>
 
-AngularJS と Jasmine ユニットテストフレームワークのように、
+AngularJS や AngularJS Material、Jasmine ユニットテストフレームワークのように、
 事前に型がパッケージされていない既存のライブラリの型定義を
 インストールします。
 
+For the PhoneCat app, we can install the necessary type definitions by running the following command:
+
 <code-example format="">
-  npm install @types/jasmine @types/angular @types/angular-animate @types/angular-cookies @types/angular-mocks @types/angular-resource @types/angular-route @types/angular-sanitize --save-dev
+  npm install @types/jasmine @types/angular @types/angular-animate @types/angular-aria @types/angular-cookies @types/angular-mocks @types/angular-resource @types/angular-route @types/angular-sanitize --save-dev
+</code-example>
+
+If you are using AngularJS Material, you can install the type definitions via:
+
+<code-example format="">
+  npm install @types/angular-material --save-dev
 </code-example>
 
 [TypeScript 設定](guide/typescript-configuration)ガイドに記載されているように、

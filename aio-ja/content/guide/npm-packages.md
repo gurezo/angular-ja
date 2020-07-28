@@ -93,9 +93,6 @@ Package name                                      | Description
 [ブラウザサポート](guide/browser-support)はどのブラウザがポリフィルを必要としていて
 ポリフィルの追加方法が説明されています。
 
-新しいAngularワークスペース用の `package.json` は[core-js](https://github.com/zloirock/core-js)パッケージをインストールします。
-これはいくつかの一般向けのブラウザに不足している機能のポリフィルです。
-
 
 {@a dev-dependencies}
 
@@ -121,7 +118,6 @@ Package name                                      | Description
 [**@angular&#8209;devkit/<br />build&#8209;angular**](https://github.com/angular/angular-cli/) | Angularのビルドツール
 [**@angular/cli**](https://github.com/angular/angular-cli/)                                    | Angularのコマンドラインツール
 **@angular/<br />compiler&#8209;cli**                                                          | Angular CLIの `ng build` と `ng serve` コマンドから呼び出されるAngularのコンパイラ
-**@angular/<br />language&#8209;service**                                                      | [Angular language service](guide/language-service)はコンポーネントのテンプレートを分析し、TypeScriptに対応したエディタを使用することで開発体験を向上させられる型とエラー情報を提供します。たとえば[Angular language service extension for VS Code](https://marketplace.visualstudio.com/items?itemName=Angular.ng-template)を見てください。
 **@types/... **                                                                                | JasmineやNode.jsといったサードパーティライブラリのTypeScriptの型定義ファイルです。
 [**codelyzer**](https://www.npmjs.com/package/codelyzer)                                       | Angularの[スタイルガイド](guide/styleguide)に準拠したAngularアプリケーションのためのLinterのルールです。
 **jasmine/... **                                                                               | [Jasmine](https://jasmine.github.io/)テストライブラリをサポートするパッケージです。

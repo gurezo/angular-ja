@@ -3,13 +3,15 @@
 After you understand the basic Angular building blocks, you can learn more
 about the features and tools that can help you develop and deliver Angular applications.
 
-* Work through the [Tour of Heroes](tutorial/index) tutorial to get a feel for how to fit the basic building blocks together to create a well-designed application.
+* Work through the [Tour of Heroes](tutorial) tutorial to get a feel for how to fit the basic building blocks together to create a well-designed application.
 
 * Check out the [Glossary](guide/glossary) to understand Angular-specific terms and usage.
 
 * Use the documentation to learn about key features in more depth, according to your stage of development and areas of interest.
 
 ## Application architecture
+
+* The [Components and templates](guide/displaying-data) guide explains how to connect the application data in your [components](guide/glossary#component) to your page-display [templates](guide/glossary#template), to create a complete interactive application.
 
 * The [NgModules](guide/ngmodules) guide provides in-depth information on the modular structure of an Angular application.
 
@@ -50,7 +52,7 @@ For some platforms and applications, you might also want to use the PWA (Progres
 
 ## Support for the development cycle
 
-The **Development Workflow** section describes the tools and processes you use to compile, test, and  and deploy Angular applications.
+The **Development Workflow** section describes the tools and processes you use to compile, test, and deploy Angular applications.
 
 * [CLI Command Reference](cli): The Angular CLI is a command-line tool that you use to create projects, generate application and library code, and perform a variety of ongoing development tasks such as testing, bundling, and deployment.
 

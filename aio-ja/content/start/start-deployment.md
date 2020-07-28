@@ -1,13 +1,11 @@
-# デプロイ
+# 試してみよう: デプロイ
 
 
 アプリケーションをデプロイするには、それをコンパイルしてから、JavaScript、CSS、およびHTMLをWebサーバー上でホストする必要があります。 ビルドされたAngularアプリケーションは非常に移植性が高く、あらゆる環境で動作したり、Node、Java、.NET、PHP、その他多くのテクノロジーによって提供されます。
 
 <div class="alert is-helpful">
 
-
-あなたが [はじめてのアプリ](start "Getting Started: Your First App") から直接来たのか、 [ルーティング](start/routing "Getting Started: Routing") 、 [データ管理](start/data "Getting Started: Managing Data") 、そして [フォーム](start/forms "Getting Started: Forms") セクションを通してオンラインストアアプリケーション全体を完成させたのかにかかわらず、あなたはこのセクションの指示にしたがってデプロイできるアプリケーションを持っています。
-
+[パート1](start "Try it: A basic app")から直接ここに来ても、[アプリ内ナビゲーション](start/start-routing "Try it: In-app navigation")、[データの管理](start/start-data "Try it: Manage data")、および[ユーザー入力用のフォーム](start/start-forms "Try it: Forms for user input")セクションを通してオンラインストアアプリケーションを完成させても、あなたはこのセクションの指示にしたがってデプロイできるアプリケーションをもっています。
 
 </div>
 
@@ -66,13 +64,13 @@ ng build --prod
 
 1. [Firebase](https://firebase.google.com/ "Firebase web site") で firebaseアカウントにサインアップしてください。
 1. 新しいプロジェクトを作成し、好きな名前を付けます。
-1. `npm install -g firebase-tools` を使用してデプロイメントを処理する `firebase-tools` CLIをインストールします。
+1. `ng add @angular/fire`を使用して、デプロイメントを処理する`@angular/fire` schematicsを追加します。
 1. CLIをFirebaseアカウントに接続し、 `firebase login` および `firebase init` を使用してプロジェクトへの接続を初期化します。
 1. プロンプトにしたがってホスティング用に作成した `Firebase` プロジェクトを選択します。
   - 最初のプロンプトで`Hosting`オプションを選択します。
   - 先ほどFirebaseで作ったプロジェクトを選択します。
   - 公開ディレクトリとして `dist/my-project-name` を選択します。
-1. StackBlitzがFirebaseにアプリケーションの提供方法を​​指示する `firebase.json` を作成したため、 `firebase deploy` を使用してアプリケーションをデプロイします。
+1. `ng deploy`でアプリケーションをデプロイします。
 1. デプロイが完了したら、 https://your-firebase-project-name.firebaseapp.com にアクセスして動かしてみましょう。
 
 ### 別のホストでAngularアプリをホストする
@@ -81,7 +79,7 @@ Angularアプリを別のWebホストでホストするには、ファイルを�
 シングルページアプリケーションを構築しているため、無効なURLを `index.html` ファイルにリダイレクトする必要があります。
 アプリケーションの開発と配布の詳細については、 [ビルドとサーブ](guide/build "Building and Serving Angular Apps") と [デプロイ](guide/deployment "Deployment guide") のガイドを参照してください。
 
-## 私たちのコミュニティに参加する
+## Angularコミュニティに参加する
 
 あなたはもうAngularの開発者です！ [この瞬間を共有](https://twitter.com/intent/tweet?url=https://angular.jp/start&text=Angularの入門チュートリアルを終了しました！ "Angular on Twitter") し、この入門についての考えをお聞かせください。 または、 [今後のエディションについての提案](https://github.com/angular/angular/issues/new/choose "Angular GitHub repository new issue form")を送信してください。
 
@@ -90,6 +88,6 @@ Angularはさらに多くの機能を提供します。 そして、あなたは
 * Angularは、モバイルアプリ、アニメーション、国際化、サーバーサイドレンダリングなどの高度な機能を提供します。
 * [Angular Material](https://material.angular.io/ "Angular Material web site") は、Material Designコンポーネントの広範なライブラリを提供しています。
 * [Angular Protractor](https://protractor.angular.io/ "Angular Protractor web site") はAngularアプリのエンドツーエンドのテストフレームワークを提供します。
-* Angularには、広範な[サードパーティ製のツールやライブラリのネットワーク](https://angular.io/resources "Angular resources list") もあります。
+* Angularには、広範な[サードパーティ製のツールやライブラリのネットワーク](resources "Angular resources list") もあります。
 
 [Angularのブログ](https://blog.angular.io/ "Angular blog") をフォローして最新の情報を入手してください。
