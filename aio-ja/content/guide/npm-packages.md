@@ -21,7 +21,7 @@ Node.jsとnpmの必要なバージョンとインストール方法について�
 `npm` と `yarn` は共に[`package.json`](https://docs.npmjs.com/files/package.json)ファイルで特定されたパッケージをインストールします。
 
 CLIコマンドの `ng new` は新しいワークスペースを作成するときに `package.json` ファイルを作成します。
-この `package.json` はCLIがワークスペースを作成するときに作成される最初のアプリプロジェクトを含む、ワークスペース内のすべてのプロジェクトから使用されます。
+この `package.json` はCLIがワークスペースを作成するときに作成される最初のアプリケーションプロジェクトを含む、ワークスペース内のすべてのプロジェクトから使用されます。
 
 はじめは、この `package.json` は_パッケージのスターターセット_を含んでいます。そのパッケージの一部はAngularが必要としているものや一般的なアプリケーションシナリオをサポートするものです。
 アプリケーションが成長するにつれて `package.json` にパッケージを追加します。
@@ -58,7 +58,7 @@ CLIコマンドの `ng new` は新しいワークスペースを作成すると�
 ### Angularパッケージ
 
 次のAngularのパッケージは新しいAngularワークスペース用のデフォルトの `package.json` ファイルの依存関係として含まれています。
-Angularのパッケージの完全な一覧は、[API reference](http://angular.jp/api?type=package) を見てください。
+Angularのパッケージの完全な一覧は、[API reference](https://angular.jp/api?type=package) を見てください。
 
 
 パッケージ名                                                                            | 説明
@@ -102,11 +102,11 @@ Package name                                      | Description
 
 新しく `devDependency` に追加するには、次のいずれかのコマンドを利用してください。
 
-<code-example language="sh" class="code-shell">
+<code-example language="sh">
   npm install --save-dev &lt;package-name&gt;
 </code-example>
 
-<code-example language="sh" class="code-shell">
+<code-example language="sh">
   yarn add --dev &lt;package-name&gt;
 </code-example>
 
@@ -119,12 +119,8 @@ Package name                                      | Description
 [**@angular/cli**](https://github.com/angular/angular-cli/)                                    | Angularのコマンドラインツール
 **@angular/<br />compiler&#8209;cli**                                                          | Angular CLIの `ng build` と `ng serve` コマンドから呼び出されるAngularのコンパイラ
 **@types/... **                                                                                | JasmineやNode.jsといったサードパーティライブラリのTypeScriptの型定義ファイルです。
-[**codelyzer**](https://www.npmjs.com/package/codelyzer)                                       | Angularの[スタイルガイド](guide/styleguide)に準拠したAngularアプリケーションのためのLinterのルールです。
 **jasmine/... **                                                                               | [Jasmine](https://jasmine.github.io/)テストライブラリをサポートするパッケージです。
 **karma/... **                                                                                 | [karma](https://www.npmjs.com/package/karma)テストランナーをサポートするパッケージです。
-[**protractor**](https://www.npmjs.com/package/protractor)                                     | AngularアプリケーションのためのE2Eフレームワークです。[WebDriverJS](https://github.com/SeleniumHQ/selenium/wiki/WebDriverJs)上に構築されています。
-[**ts-node**](https://www.npmjs.com/package/ts-node)                                           | Node.jsのためのTypeScript実行環境とREPL
-[**tslint**](https://www.npmjs.com/package/tslint)                                             | 可読性、保守性、機能性のエラーについてTypeScriptのコードをチェックする静的解析ツールです。
 [**typescript**](https://www.npmjs.com/package/typescript)                                     | *tsc*(TypeScript Compiler)を含むTypeScriptのランゲージサーバー
 
 

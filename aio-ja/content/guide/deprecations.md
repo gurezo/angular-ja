@@ -3,7 +3,7 @@
 Angular strives to balance innovation and stability.
 Sometimes, APIs and features become obsolete and need to be removed or replaced so that Angular can stay current with new best practices, changing dependencies, or changes in the (web) platform itself.
 
-To make these transitions as easy as possible, we deprecate APIs and features for a period of time before removing them. This gives you time to update your apps to the latest APIs and best practices.
+To make these transitions as easy as possible, we deprecate APIs and features for a period of time before removing them. This gives you time to update your applications to the latest APIs and best practices.
 
 This guide contains a summary of all Angular APIs and features that are currently deprecated.
 
@@ -20,7 +20,7 @@ For step-by-step instructions on how to update to the latest Angular release, us
 
 ## Index
 
-To help you future-proof your apps, the following table lists all deprecated APIs and features, organized by the release in which they are candidates for removal. Each item is linked to the section later in this guide that describes the deprecation reason and replacement options.
+To help you future-proof your projects, the following table lists all deprecated APIs and features, organized by the release in which they are candidates for removal. Each item is linked to the section later in this guide that describes the deprecation reason and replacement options.
 
 <!--
 deprecation -> removal cheat sheet
@@ -30,26 +30,25 @@ v6 - v9
 v7 - v10
 v8 - v11
 v9 - v12
+v10 - v13
+v11 - v14
+v12 - v15
 -->
 
 
 | Area                          | API or Feature                                                                | May be removed in |
 | ----------------------------- | ---------------------------------------------------------------------------   | ----------------- |
-| `@angular/bazel`              | [`Bazel builder and schematics`](#bazelbuilder)                               | v10 |
 | `@angular/common`             | [`ReflectiveInjector`](#reflectiveinjector)                                   | <!--v8--> v11 |
 | `@angular/common`             | [`CurrencyPipe` - `DEFAULT_CURRENCY_CODE`](api/common/CurrencyPipe#currency-code-deprecation) | <!--v9--> v11 |
-| `@angular/core`               | [`CollectionChangeRecord`](#core)                                             | <!--v7--> v11 |
+| `@angular/common/http`        | [`XhrFactory`](api/common/http/XhrFactory)                                    | <!--v12--> v15 |
 | `@angular/core`               | [`DefaultIterableDiffer`](#core)                                              | <!--v7--> v11 |
 | `@angular/core`               | [`ReflectiveKey`](#core)                                                      | <!--v8--> v11 |
 | `@angular/core`               | [`RenderComponentType`](#core)                                                | <!--v7--> v11 |
-| `@angular/core`               | [`ViewEncapsulation.Native`](#core)                                           | <!--v6--> v11 |
 | `@angular/core`               | [`WrappedValue`](#core)                                                       | <!--v10--> v12 |
 | `@angular/forms`              | [`ngModel` with reactive forms](#ngmodel-reactive)                            | <!--v6--> v11 |
-| `@angular/router`             | [`preserveQueryParams`](#router)                                              | <!--v7--> v11 |
 | `@angular/upgrade`            | [`@angular/upgrade`](#upgrade)                                                | <!--v8--> v11 |
 | `@angular/upgrade`            | [`getAngularLib`](#upgrade-static)                                            | <!--v8--> v11 |
 | `@angular/upgrade`            | [`setAngularLib`](#upgrade-static)                                            | <!--v8--> v11 |
-| `@angular/platform-webworker` | [All entry points](api/platform-webworker)                                    | <!--v8--> v11 |
 | template syntax               | [`<template`>](#template-tag)                                                 | <!--v7--> v11 |
 | polyfills                     | [reflect-metadata](#reflect-metadata)                                         | <!--v8--> v11 |
 | npm package format            | [`esm5` and `fesm5` entry-points in @angular/* npm packages](guide/deprecations#esm5-fesm5) | <!-- v9 --> v11 |
@@ -58,12 +57,12 @@ v9 - v12
 | `@angular/core`               | [`ANALYZE_FOR_ENTRY_COMPONENTS`](api/core/ANALYZE_FOR_ENTRY_COMPONENTS)       | <!--v9--> v11 |
 | `@angular/router`             | [`loadChildren` string syntax](#loadChildren)                                 | <!--v9--> v11 |
 | `@angular/core/testing`       | [`TestBed.get`](#testing)                                                     | <!--v9--> v12 |
+| `@angular/core/testing`       | [`async`](#testing)                                                           | <!--v9--> v12 |
+| `@angular/forms`              | [`FormBuilder.group` legacy options parameter](api/forms/FormBuilder#group)   | <!--v11--> v14 |
 | `@angular/router`             | [`ActivatedRoute` params and `queryParams` properties](#activatedroute-props) | unspecified |
 | template syntax               | [`/deep/`, `>>>`, and `::ng-deep`](#deep-component-style-selector)            | <!--v7--> unspecified |
-| browser support               | [`IE 9 and 10, IE mobile`](#ie-9-10-and-mobile)                               | <!--v10--> v11 |
 
-
-
+For information about Angular CDK and Angular Material deprecations, see the [changelog](https://github.com/angular/components/blob/master/CHANGELOG.md).
 
 ## Deprecated APIs
 
@@ -72,7 +71,7 @@ This section contains a complete list all of the currently-deprecated APIs, with
 
 <div class="alert is-helpful">
 
-Tip: In the [API reference section](api) of this doc site, deprecated APIs are indicated by ~~strikethrough.~~ You can filter the API list by [**Status: deprecated**](api?status=deprecated).
+Tip: In the [API reference section](api) of this site, deprecated APIs are indicated by ~~strikethrough.~~ You can filter the API list by [**Status: deprecated**](api?status=deprecated).
 
 </div>
 
@@ -84,24 +83,28 @@ Tip: In the [API reference section](api) of this doc site, deprecated APIs are i
 | [`CurrencyPipe` - `DEFAULT_CURRENCY_CODE`](api/common/CurrencyPipe#currency-code-deprecation) | `{provide: DEFAULT_CURRENCY_CODE, useValue: 'USD'}` | v9                    | From v11 the default code will be extracted from the locale data given by `LOCAL_ID`, rather than `USD`. |
 
 
+{@a common-http}
+### @angular/common/http
+
+| API                                          | Replacement                          | Deprecation announced | Notes |
+| -------------------------------------------- | ------------------------------------ | --------------------- | ----- |
+| [`XhrFactory`](api/common/http/XhrFactory)   | `XhrFactory` in `@angular/common`    | v12                   | The `XhrFactory` has moved from `@angular/common/http` to `@angular/common`. |
+
+
 {@a core}
 ### @angular/core
 
 | API | Replacement | Deprecation announced | Notes |
 | --- | ----------- | --------------------- | ----- |
-| [`CollectionChangeRecord`](api/core/CollectionChangeRecord) | [`IterableChangeRecord`](api/core/IterableChangeRecord) | v4 | none |
 | [`DefaultIterableDiffer`](api/core/DefaultIterableDiffer) | n/a | v4 | Not part of public API. |
-| [`ReflectiveInjector`](api/core/ReflectiveInjector) | [`Injector.create`](api/core/Injector#create)  | v5 | See [`ReflectiveInjector`](#reflectiveinjector) |
+| [`ReflectiveInjector`](api/core/ReflectiveInjector) | `{@link Injector#create Injector.create()}` | v5 | See [`ReflectiveInjector`](#reflectiveinjector) |
 | [`ReflectiveKey`](api/core/ReflectiveKey) | none | v5 | none |
-| [`ViewEncapsulation.Native`](api/core/ViewEncapsulation#Native) | [`ViewEncapsulation.ShadowDom`](api/core/ViewEncapsulation#ShadowDom) | v6 | Use the native encapsulation mechanism of the renderer. See [view.ts](https://github.com/angular/angular/blob/3e992e18ebf51d6036818f26c3d77b52d3ec48eb/packages/core/src/metadata/view.ts#L32).
 | [`defineInjectable`](api/core/defineInjectable) | `ɵɵdefineInjectable` | v8 | Used only in generated code. No source code should depend on this API. |
 | [`entryComponents`](api/core/NgModule#entryComponents) | none | v9 | See [`entryComponents`](#entryComponents) |
 | [`ANALYZE_FOR_ENTRY_COMPONENTS`](api/core/ANALYZE_FOR_ENTRY_COMPONENTS) | none | v9 | See [`ANALYZE_FOR_ENTRY_COMPONENTS`](#entryComponents) |
 | [`WrappedValue`](api/core/WrappedValue) | none | v10 | See [removing `WrappedValue`](#wrapped-value) |
-
-
-
-
+| [`async`](api/core/testing/async) | [`waitForAsync`](api/core/testing/waitForAsync) | v11 | The `async` function from `@angular/core/testing` has been renamed to `waitForAsync` in order to avoid confusion with the native JavaScript `async` syntax. The existing function is deprecated and will be removed in a future version. |
+[ `ViewChildren.emitDistinctChangesOnly` / `ContentChildren.emitDistinctChangesOnly` | none (was part of [issue #40091](https://github.com/angular/angular/issues/40091)) ] | This is a temporary flag introduced as part of bugfix of [issue #40091](https://github.com/angular/angular/issues/40091) and will be removed. |
 
 {@a testing}
 ### @angular/core/testing
@@ -109,6 +112,7 @@ Tip: In the [API reference section](api) of this doc site, deprecated APIs are i
 | API | Replacement | Deprecation announced | Notes |
 | --- | ----------- | --------------------- | ----- |
 | [`TestBed.get`](api/core/testing/TestBed#get) | [`TestBed.inject`](api/core/testing/TestBed#inject) | v9 | Same behavior, but type safe. |
+| [`async`](api/core/testing/async) | [`waitForAsync`](api/core/testing/waitForAsync) | v10 | Same behavior, but rename to avoid confusion. |
 
 
 {@a forms}
@@ -117,27 +121,8 @@ Tip: In the [API reference section](api) of this doc site, deprecated APIs are i
 | API | Replacement | Deprecation announced | Notes |
 | --- | ----------- | --------------------- | ----- |
 | [`ngModel` with reactive forms](#ngmodel-reactive) | [`FormControlDirective`](api/forms/FormControlDirective) | v6 | none |
+| [`FormBuilder.group` legacy options parameter](api/forms/FormBuilder#group) | [`AbstractControlOptions` parameter value](api/forms/AbstractControlOptions) | v11 | none |
 
-{@a router}
-### @angular/router
-
-| API | Replacement | Deprecation announced | Notes |
-| --- | ----------- | --------------------- | ----- |
-| [`preserveQueryParams`](api/router/NavigationExtras#preserveQueryParams) | [`queryParamsHandling`](api/router/NavigationExtras#queryParamsHandling) | v4 | none |
-
-{@a platform-webworker}
-### @angular/platform-webworker
-
-| API | Replacement | Deprecation announced | Notes |
-| --- | ----------- | --------------------- | ----- |
-| [All entry points](api/platform-webworker) | none | v8 | See [platform-webworker](#webworker-apps). |
-
-{@a platform-webworker-dynamic}
-### @angular/platform-webworker-dynamic
-
-| API | Replacement | Deprecation announced | Notes |
-| --- | ----------- | --------------------- | ----- |
-| [All entry points](api/platform-webworker-dynamic) | none | v8 | See [platform-webworker](#webworker-apps). |
 
 {@a upgrade}
 ### @angular/upgrade
@@ -165,7 +150,7 @@ This section lists all of the currently-deprecated features, which includes temp
 ### Bazel builder and schematics
 
 Bazel builder and schematics were introduced in Angular Labs to let users try out Bazel without having to manage Bazel version and BUILD files.
-This feature has been deprecated. For more information, please refer to the [migration doc](https://github.com/angular/angular/blob/master/packages/bazel/src/schematics/README.md).
+This feature has been deprecated. For more information, please refer to the [migration doc](https://github.com/angular/angular/blob/master/packages/bazel/docs/BAZEL_SCHEMATICS.md).
 
 {@a wtf}
 ### Web Tracing Framework integration
@@ -245,7 +230,7 @@ this.value = 'some value';
 ```
 
 By default, when you use this pattern, you will see a deprecation warning once in dev
-mode. You can choose to silence this warning by providing a config for
+mode. You can choose to silence this warning by configuring
 `ReactiveFormsModule` at import time:
 
 ```ts
@@ -255,7 +240,7 @@ imports: [
 ```
 
 Alternatively, you can choose to surface a separate warning for each instance of this
-pattern with a config value of `"always"`. This may help to track down where in the code
+pattern with a configuration value of `"always"`. This may help to track down where in the code
 the pattern is being used as the code is being updated.
 
 
@@ -331,7 +316,7 @@ const routes: Routes = [{
 | `params` | `paramMap` |
 | `queryParams` | `queryParamMap` |
 
-For more information see the [Getting route information](guide/router#activated-route) section of the [Router guide](guide/router).
+For more information see the [Getting route information](guide/router-reference#activated-route) section of the [Router guide](guide/router).
 
 
 {@a reflect-metadata}
@@ -373,7 +358,7 @@ should be written when the `valueChange` event fires.
 <option *ngFor="let optionName of options" [(value)]="optionName"></option>
 ```
 
-However, in practice, Angular simply ignores two-way bindings to template variables. Starting in version 8, attempting to write to template variables is deprecated. In a future version, we will throw to indicate that the write is not supported.
+However, in practice, Angular ignores two-way bindings to template variables. Starting in version 8, attempting to write to template variables is deprecated. In a future version, we will throw to indicate that the write is not supported.
 
 ```html
 <option *ngFor="let optionName of options" [value]="optionName"></option>
@@ -393,28 +378,6 @@ These two properties have subtle differences, so switching to `textContent` unde
 
 All of the `wtf*` APIs are deprecated and will be removed in a future version.
 
-{@a webworker-apps}
-### Running Angular applications in platform-webworker
-
-The `@angular/platform-*` packages enable Angular to be run in different contexts. For examples,
-`@angular/platform-server` enables Angular to be run on the server, and `@angular/platform-browser`
-enables Angular to be run in a web browser.
-
-`@angular/platform-webworker` was introduced in Angular version 2 as an experiment in leveraging
-Angular's rendering architecture to run an entire web application in a
-[web worker](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API). We've learned a lot
-from this experiment and have come to the conclusion that running the entire application in a web
-worker is not the best strategy for most applications.
-
-Going forward, we will focus our efforts related to web workers around their primary use case of
-offloading CPU-intensive, non-critical work needed for initial rendering (such as in-memory search
-and image processing). Learn more in the
-[guide to Using Web Workers with the Angular CLI](guide/web-worker).
-
-As of Angular version 8, all  `platform-webworker` APIs are deprecated.
-This includes both packages: `@angular/platform-webworker` and
-`@angular/platform-webworker-dynamic`.
-
 {@a entryComponents}
 ### `entryComponents` and `ANALYZE_FOR_ENTRY_COMPONENTS` no longer required
 Previously, the `entryComponents` array in the `NgModule` definition was used to tell the compiler which components would be created and inserted dynamically. With Ivy, this isn't a requirement anymore and the `entryComponents` array can be removed from existing module declarations. The same applies to the `ANALYZE_FOR_ENTRY_COMPONENTS` injection token.
@@ -422,7 +385,7 @@ Previously, the `entryComponents` array in the `NgModule` definition was used to
 {@a moduleWithProviders}
 ### `ModuleWithProviders` type without a generic
 
-Some Angular libraries, such as `@angular/router` and `@ngrx/store`, implement APIs that return a type called `ModuleWithProviders` (typically via a method named `forRoot()`).
+Some Angular libraries, such as `@angular/router` and `@ngrx/store`, implement APIs that return a type called `ModuleWithProviders` (typically using a method named `forRoot()`).
 This type represents an `NgModule` along with additional providers.
 Angular version 9 deprecates use of `ModuleWithProviders` without an explicitly generic type, where the generic type refers to the type of the `NgModule`.
 In a future version of Angular, the generic will no longer be optional.
@@ -463,22 +426,8 @@ export class MyModule {
 }
 ```
 
-
-{@a ie-9-10-and-mobile}
-### IE 9, 10, and IE mobile support
-
-Support for IE 9 and 10 has been deprecated, as well as support for IE Mobile. These will be dropped in a future version.
-Supporting outdated browsers like these increases bundle size, code complexity, and test load, and also requires time and effort that could be spent on improvements to the framework.
-For example, fixing issues can be more difficult, as a straightforward fix for modern browsers could break old ones that have quirks due to not receiving updates from vendors.
-
-The final decision was made on three key points:
-* __Vendor support__: Microsoft dropped support of IE 9 and 10 on 1/12/16, meaning they no longer provide security updates or technical support. Additionally, Microsoft dropped support for Windows 10 Mobile in December 2019.
-* __Usage statistics__: We looked at usage trends for IE 9 and 10 (as well as IE Mobile) from various sources and all indicated that usage percentages were extremely small (fractions of 1%).
-* __Feedback from partners__: We also reached out to some of our Angular customers and none expressed concern about dropping IE 9, 10, nor IE Mobile support.
-
-
 {@a wrapped-value}
-###  `WrappedValue` 
+###  `WrappedValue`
 
 The purpose of `WrappedValue` is to allow the same object instance to be treated as different for the purposes of change detection.
 It is commonly used with the `async` pipe in the case where the `Observable` produces the same instance of the value.
@@ -488,7 +437,15 @@ No replacement is planned for this deprecation.
 
 If you rely on the behavior that the same object instance should cause change detection, you have two options:
 - Clone the resulting value so that it has a new identity.
-- Explicitly call [`ChangeDetectorRef.detectChanges()`](api/core/ChangeDetectorRef#detectchanges) to force the update. 
+- Explicitly call [`ChangeDetectorRef.detectChanges()`](api/core/ChangeDetectorRef#detectchanges) to force the update.
+
+### Internet Explorer 11
+Angular support for Microsoft's Internet Explorer 11 (IE11) is deprecated and will be removed in Angular v13.
+Ending IE11 support allows Angular to take advantage of web platform APIs present only in evergreen browsers, resulting in better APIs for developers and more capabilities for application users.
+An additional motivation behind this removal is the drop in global usage of IE11 to just ~1% (as of March 2021).
+For full rationale and discussion behind this deprecation see [RFC: Internet Explorer 11 support deprecation and removal](https://github.com/angular/angular/issues/41840).
+
+*Note: IE11 will be supported in Angular v12 LTS releases through November 2022.*
 
 {@a deprecated-cli-flags}
 ## Deprecated CLI APIs and Options
@@ -499,65 +456,34 @@ This section contains a complete list all of the currently deprecated CLI flags.
 
 | API/Option                      | May be removed in | Notes                                                                           |
 | ------------------------------- | ----------------- |-------------------------------------------------------------------------------- |
-| `i18nFile`                      | <!--v9--> v11     | Specified in the project locale configuration in version 9 and later.           |
-| `i18nFormat`                    | <!--v9--> v11     | Format is now automatically detected.                                           |
-| `i18nLocale`                    | <!--v9--> v11     | New [localization option](/guide/i18n#localize-config) in version 9 and later.  |
-| `lazyModules`                   | <!--v9--> v11     | Used with deprecated SystemJsNgModuleLoader.                                    |
-| `rebaseRootRelativeCssUrls`     | <!--v8--> v11     | Intended only to assist with specific migration issues.                         |
-| `scripts[].lazy`                | <!--v8--> v11     | Renamed to `scripts[].inject`.                                                  |
-| `styles[].lazy`                 | <!--v8--> v11     | Renamed to `styles[].inject`.                                                   |
-| `i18nFormat`                    | <!--v9--> v11     | Renamed to `format` to simplify the user experience.                            |
-| `i18nLocale`                    | <!--v9--> v11     | Redundant with project’s source locale.                                         |
-| `scripts[].lazy`                | <!--v8--> v11     | Renamed to `scripts[].inject`.                                                  |
-| `styles[].lazy`                 | <!--v8--> v11     | Renamed to `styles[].inject`.                                                   |
-| `i18nFile`                      | <!--v9--> v11     | Specified in the project locale configuration in version 9 and later.           |
-| `i18nFormat`                    | <!--v9--> v11     | Format is now automatically detected.                                           |
-| `i18nLocale`                    | <!--v9--> v11     | New [localization option](/guide/i18n#localize-config) in version 9 and later.  |
-| `lazyModules`                   | <!--v9--> v11     | Used with deprecated SystemJsNgModuleLoader.                                    |
-
-### @angular-devkit/core
-
-| API/Option                      | May be removed in | Notes                                                                           |
-| ------------------------------- | ----------------- |-------------------------------------------------------------------------------- |
-| `ModuleNotFoundException`       | <!--v8--> v10     | Not used within projects. Used with Tooling API only. Not Yarn PnP compatible and not used in the Angular CLI. Use Node.js [require.resolve](https://nodejs.org/api/modules.html#modules_require_resolve_request_options).|
-| `resolve`                       | <!--v8--> v10     | Not used within projects. Used with Tooling API only. Not Yarn PnP compatible and not used in the Angular CLI. Use Node.js [require.resolve](https://nodejs.org/api/modules.html#modules_require_resolve_request_options).|
-| `setResolveHook`                | <!--v8--> v10     | Not used within projects. Used with Tooling API only. Not Yarn PnP compatible and not used in the Angular CLI. Use Node.js [require.resolve](https://nodejs.org/api/modules.html#modules_require_resolve_request_options).|
-| `ResolveOptions`                | <!--v8--> v10     | Not used within projects. Used with Tooling API only. Not Yarn PnP compatible and not used in the Angular CLI. Use Node.js [require.resolve](https://nodejs.org/api/modules.html#modules_require_resolve_request_options).|
-| `terminal`                      | <!--v8--> v10     | Unused implementation of terminal codes (color).                                |
-| `isObservable`                  | <!--v8--> v10     | Not used within projects. Used with Tooling API only. Use `isObservable` function from the `rxjs` package.|
-
-### @ngtools/webpack
-
-| API/Option                      | May be removed in | Notes                                                                           |
-| ------------------------------- | ----------------- |-------------------------------------------------------------------------------- |
-| `discoverLazyRoutes`            | <!--v9--> TBD     | Used with deprecated SystemJsNgModuleLoader.                                    |
-| `additionalLazyModules`         | <!--v9--> TBD     | Used with deprecated SystemJsNgModuleLoader.                                    |
-| `additionalLazyModuleResources` | <!--v9--> TBD     | Used with deprecated SystemJsNgModuleLoader.                                    |
+| `extractCss`                    | <!--v11--> v13     | No longer required to disable CSS extraction during development.               |
+| `i18nFormat`                    | <!--v9--> v12      | Format is now automatically detected.                                           |
+| `i18nLocale`                    | <!--v9--> v12      | New [localization option](/guide/i18n#localize-config) in version 9 and later.  |
+| `hmrWarning`                    | <!--v11--> v13     | No longer has an effect.                                                       |
+| `servePathDefaultWarning`       | <!--v11--> v13     | No longer has an effect.                                                       |
 
 ### @schematics/angular
 
 | API/Option                      | May be removed in | Notes                                                                           |
 | ------------------------------- | ----------------- |-------------------------------------------------------------------------------- |
-| `entryComponent`                | <!--v9--> TBD     | No longer needed with Ivy.                                                      |
+| `lintFix`                       | <!--v11--> v12    | Deprecated as part of TSLint deprecation.                                      |
 
 {@a removed}
 ## Removed APIs
 
-The following APIs have been removed starting with version 10.0.0*:
+The following APIs have been removed starting with version 11.0.0*:
 
 | Package          | API            | Replacement | Notes |
 | ---------------- | -------------- | ----------- | ----- |
-| `@angular/core`  | Undecorated base classes that use Angular features | Add Angular decorator | See [migration guide](guide/migration-undecorated-classes) for more info |
-| `@angular/core`  | `ModuleWithProviders` without a generic             | `ModuleWithProviders` with a generic | See [migration guide](guide/migration-module-with-providers) for more info |
-| `@angular/core`  | Style Sanitization | no action needed | See [style sanitization API removal](#style-sanitization) for more info
+| `@angular/router` | `preserveQueryParams` | [`queryParamsHandling`](api/router/UrlCreationOptions#queryParamsHandling) | |
 
-*To see APIs removed in version 9, check out this guide on the [version 9 docs site](https://v9.angular.io/guide/deprecations#removed).
+*To see APIs removed in version 10, check out this guide on the [version 10 docs site](https://v10.angular.io/guide/deprecations#removed).
 
 
 {@a esm5-fesm5}
 ### `esm5` and `fesm5` code formats in @angular/* npm packages
 
-As of Angular v8, the CLI primarily consumes the `fesm2015` variant of the code distributed via `@angular/*` npm packages.
+As of Angular v8, the CLI primarily consumes the `fesm2015` variant of the code distributed as part of `@angular/*` npm packages.
 This renders the `esm5` and `fesm5` distributions obsolete and unnecessary, adding bloat to the package size and slowing down npm installations.
 
 This removal has no impact on CLI users, unless they modified their build configuration to explicitly consume these code distributions.
@@ -601,18 +527,6 @@ In practical terms, the `package.json` of all `@angular` packages has changed in
 ```
 
 For more information about the npm package format, see the [Angular Package Format spec](https://goo.gl/jB3GVv).
-
-{@a removed}
-## Removed APIs
-
-The following APIs have been removed starting with version 10.0.0*:
-
-| Package          | API            | Replacement | Notes |
-| ---------------- | -------------- | ----------- | ----- |
-| `@angular/core`  | Undecorated base classes that use Angular features | Add Angular decorator | See [migration guide](guide/migration-undecorated-classes) for more info |
-| `@angular/core`  | `ModuleWithProviders` without a generic             | `ModuleWithProviders` with a generic | See [migration guide](guide/migration-module-with-providers) for more info |
-
-*To see APIs removed in version 9, check out this guide on the [version 9 docs site](https://v9.angular.io/guide/deprecations#removed).
 
 {@a style-sanitization}
 ### Style Sanitization for `[style]` and `[style.prop]` bindings

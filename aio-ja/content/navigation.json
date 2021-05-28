@@ -56,61 +56,18 @@
     {
       "url": "docs",
       "title": "イントロダクション",
-      "tooltip": "Angularドキュメントの紹介",
+      "tooltip": "Welcome to the Angular documentation set.",
       "hidden": false,
       "translated": true
     },
     {
-      "title": "入門",
+      "title": "はじめに",
       "tooltip": "Set up your environment and learn basic concepts",
       "children": [
-        {
-          "url": "guide/setup-local",
-          "title": "セットアップ",
-          "tooltip": "Angular CLIを使用してローカル開発用にセットアップします。",
-          "translated": true
-        },
-        {
-          "title": "Angularの概念",
-          "tooltip": "Angularアプリケーションの基本概念の紹介",
-          "children": [
-            {
-              "url": "guide/architecture",
-              "title": "基本概念の紹介",
-              "tooltip": "Angularアプリケーションの基本構成要素",
-              "translated": true
-            },
-            {
-              "url": "guide/architecture-modules",
-              "title": "モジュールの紹介",
-              "tooltip": "NgModuleについて",
-              "translated": true
-            },
-            {
-              "url": "guide/architecture-components",
-              "title": "Componentの紹介",
-              "tooltip": "コンポーネント、テンプレート、およびビューについて。",
-              "translated": true
-            },
-            {
-              "url": "guide/architecture-services",
-              "title": "サービスとDIの紹介",
-              "tooltip": "サービスと依存性の注入について。",
-              "translated": true
-            },
-            {
-              "url": "guide/architecture-next-steps",
-              "title": "次のステップ",
-              "tooltip": "基本のその先へ。",
-              "translated": true
-            }
-          ]
-        },
-        {
-          "url": "guide/glossary",
-          "title": "用語集",
-          "tooltip": "Angular の用語の中でももっとも重要なものに関する、簡潔な定義集です。",
-          "translated": true
+        { 
+          "url": "guide/what-is-angular",
+          "title": "Angularとは？",
+          "tooltip": "A brief description of the Angular platform."
         },
         {
           "title": "試してみよう",
@@ -118,13 +75,13 @@
           "children": [
             {
               "url": "start",
-              "title": "サンプルアプリ",
+              "title": "入門",
               "tooltip": "Angularのコンポーネントモデル、テンプレートの構文、およびコンポーネントのコミュニケーションについて見てみましょう",
               "translated": true
             },
             {
               "url": "start/start-routing",
-              "title": "アプリ内ナビゲーション",
+              "title": "ナビゲーションの追加",
               "tooltip": "ブラウザのURLを使用した異なるページビュー間のナビゲーション",
               "translated": true
             },
@@ -149,188 +106,38 @@
           ]
         },
         {
-          "title": "チュートリアル: Tour of Heroes",
-          "tooltip": "Tour of Heroesチュートリアルでは、TypeScriptでAngularアプリケーションを作成する手順を説明します",
-          "children": [
-            {
-              "url": "tutorial",
-              "title": "イントロダクション",
-              "tooltip": "Tour of Heroesアプリとチュートリアルの紹介",
-              "translated": true
-            },
-            {
-              "url": "tutorial/toh-pt0",
-              "title": "プロジェクトの作成",
-              "tooltip": "アプリケーションシェルを作成します",
-              "translated": true
-            },
-            {
-              "url": "tutorial/toh-pt1",
-              "title": "1. ヒーローエディター",
-              "tooltip": "Part 1: シンプルなエディターを組み立てます",
-              "translated": true
-            },
-            {
-              "url": "tutorial/toh-pt2",
-              "title": "2. リストの表示",
-              "tooltip": "Part 2: ヒーローのリストを備えたmaster/detailページを組み立てます",
-              "translated": true
-            },
-            {
-              "url": "tutorial/toh-pt3",
-              "title": "3. フィーチャーコンポーネントの作成",
-              "tooltip": "Part 3: master/detailビューを複数のコンポーネントに分割してリファクタリングします",
-              "translated": true
-            },
-            {
-              "url": "tutorial/toh-pt4",
-              "title": "4. サービスの追加",
-              "tooltip": "Part 4: ヒーローのデータを管理するための再利用可能なサービスを作ります",
-              "translated": true
-            },
-            {
-              "url": "tutorial/toh-pt5",
-              "title": "5. アプリ内ナビゲーションの追加",
-              "tooltip": "Part 5: Angularルーターを追加してビュー間を移動します",
-              "translated": true
-            },
-            {
-              "url": "tutorial/toh-pt6",
-              "title": "6. サーバーからデータの取得",
-              "tooltip": "Part 6: HTTPを使ってヒーローのデータを取得・保存します",
-              "translated": true
-            }
-          ]
+          "url": "guide/setup-local",
+          "title": "セットアップ",
+          "tooltip": "Angular CLIを使用してローカル開発用にセットアップします。",
+          "translated": true
         }
       ]
     },
     {
-      "title": "基礎",
-      "tooltip": "The fundamentals of Angular",
+      "title": "Angularを理解する",
+      "tooltip": "Learn the concepts essential to becoming a proficient Angular developer.",
       "children": [
         {
-          "title": "コンポーネント & テンプレート",
-          "tooltip": "データバインディングによる動的ビューの構築",
+          "title": "コンポーネント",
+          "tooltip": "Building dynamic views with data binding",
           "children": [
             {
-              "url": "guide/displaying-data",
-              "title": "データの表示",
-              "tooltip": "プロパティのバインディングは、UIにアプリデータを表示するのに役立ちます。",
+              "url": "guide/component-overview",
+              "title": "概要",
+              "tooltip": "Overview of how to create Angular components.",
               "translated": true
-            },
-            {
-              "title": "テンプレート構文",
-              "tooltip": "Syntax to use in templates for binding, expressions, and directives.",
-              "children": [
-                {
-                  "url": "guide/template-syntax",
-                  "title": "イントロダクション",
-                  "tooltip": "データバインディングを使用してデータを表示し、ユーザーイベントを利用するテンプレートの作成方法を学びます。",
-                  "translated": false
-                },
-                {
-                  "url": "guide/interpolation",
-                  "title": "補間",
-                  "tooltip": "An introduction to interpolation and expressions in HTML.",
-                  "translated": true
-                },
-                {
-                  "url": "guide/template-statements",
-                  "title": "テンプレート文",
-                  "tooltip": "Introductory guide to statements in templates that respond to events that components, directives, or elements raise.",
-                  "translated": true
-                },
-                {
-                  "url": "guide/binding-syntax",
-                  "title": "バインディング構文",
-                  "tooltip": "Introductory guide to coordinating app values.",
-                  "translated": true
-                },
-                {
-                  "url": "guide/property-binding",
-                  "title": "プロパティバインディング",
-                  "tooltip": "Introductory guide to setting element or input properties.",
-                  "translated": true
-                },
-                {
-                  "url": "guide/attribute-binding",
-                  "title": "属性・クラス・スタイルバインディング",
-                  "tooltip": "Introductory guide to setting the value of HTML attributes.",
-                  "translated": true
-                },
-                {
-                  "url": "guide/event-binding",
-                  "title": "イベントバインディング",
-                  "tooltip": "Introductory guide to listening for user interaction.",
-                  "translated": true
-                },
-                {
-                  "url": "guide/two-way-binding",
-                  "title": "双方向バインディング",
-                  "tooltip": "Introductory guide to sharing data between a class and a template.",
-                  "translated": true
-                },
-                {
-                  "url": "guide/built-in-directives",
-                  "title": "組み込みディレクティブ",
-                  "tooltip": "Introductory guide to some of the most popular built-in directives.",
-                  "translated": true
-                },
-                {
-                  "url": "guide/template-reference-variables",
-                  "title": "テンプレート参照変数",
-                  "tooltip": "Introductory guide to referring to DOM elements within a template.",
-                  "translated": true
-                },
-                {
-                  "url": "guide/inputs-outputs",
-                  "title": "InputとOutput",
-                  "tooltip": "Introductory guide to sharing data between parent and child directives or components.",
-                  "translated": true
-                },
-                {
-                  "url": "guide/template-expression-operators",
-                  "title": "テンプレート式演算子",
-                  "tooltip": "Introductory guide to transforming data, ensuring safe navigation, and guarding against null variables in templates.",
-                  "translated": true
-                },
-                {
-                  "url": "guide/svg-in-templates",
-                  "title": "テンプレート内SVG",
-                  "tooltip": "Guide to using SVGs as templates to create interactive graphics.",
-                  "translated": true
-                }
-              ]
-            },
-            {
-              "url": "guide/user-input",
-              "title": "ユーザー入力",
-              "tooltip": "ユーザー入力はDOMイベントを発火します。イベントバインディングを使用してこれらのイベントをリッスンし、更新された値をコンポーネントとモデルに戻します。",
-              "translated": true
-            },
-            {
-              "url": "guide/attribute-directives",
-              "title": "属性ディレクティブ",
-              "tooltip": "属性ディレクティブは要素に振る舞いを付与します。",
-              "translated": true
-            },
-            {
-              "url": "guide/structural-directives",
-              "title": "構造ディレクティブ",
-              "tooltip": "構造ディレクティブはページのレイアウトを操作します。",
-              "translated": true
-            },
-            {
-              "url": "guide/pipes",
-              "title": "パイプ",
-              "tooltip": "パイプは、表示される値をテンプレート内で変換します。",
-              "translated": false
             },
             {
               "url": "guide/lifecycle-hooks",
               "title": "コンポーネントライフサイクルへのフック",
               "tooltip": "ディレクティブとコンポーネントが作成、変更、および破棄されるときに、コールバックのライフサイクル・フックメソッドが呼び出されます。",
-              "translated": false
+              "translated": true
+            },
+            {
+              "url": "guide/view-encapsulation",
+              "title": "ビューのカプセル化",
+              "tooltip": "Describes how component CSS styles are encapsulated into a component's view.",
+              "translated": true
             },
             {
               "url": "guide/component-interaction",
@@ -343,6 +150,17 @@
               "title": "コンポーネントスタイル",
               "tooltip": "コンポーネントに固有のCSSスタイルを追加します。",
               "translated": true
+            },
+            {
+              "url": "guide/inputs-outputs",
+              "title": "ディレクティブとコンポーネントの親子間でのデータ共有",
+              "tooltip": "Introductory guide to sharing data between parent and child directives or components.",
+              "translated": true
+            },
+            {
+              "url": "guide/content-projection",
+              "title": "Content Projection",
+              "tooltip": "Learn how to create reusable components using Angular's content projection feature."
             },
             {
               "url": "guide/dynamic-component-loader",
@@ -359,152 +177,98 @@
           ]
         },
         {
-          "title": "ユーザー入力フォーム",
-          "tooltip": "Forms creates a cohesive, effective, and compelling data entry experience.",
+          "title": "テンプレート",
+          "tooltip": "Syntax to use in templates for binding, expressions, and directives.",
           "children": [
             {
-              "url": "guide/forms-overview",
+              "url": "guide/template-syntax",
               "title": "イントロダクション",
-              "tooltip": "An Angular form coordinates a set of data-bound user controls, tracks changes, validates input, and presents errors.",
+              "tooltip": "データバインディングを使用してデータを表示し、ユーザーイベントを利用するテンプレートの作成方法を学びます。",
               "translated": true
             },
             {
-              "url": "guide/reactive-forms",
-              "title": "リアクティブフォーム",
-              "tooltip": "FormBuilder、グループ、および配列を使用してリアクティブフォームを作成しましょう",
+              "url": "guide/interpolation",
+              "title": "テキスト補間",
+              "tooltip": "An introduction to interpolation and expressions in HTML.",
+              "translated": true
+            },
+            {
+              "url": "guide/template-statements",
+              "title": "テンプレート文",
+              "tooltip": "Introductory guide to statements in templates that respond to events that components, directives, or elements raise.",
+              "translated": true
+            },
+            {
+              "url": "guide/pipes",
+              "title": "パイプ",
+              "tooltip": "パイプは、表示される値をテンプレート内で変換します。",
               "translated": false
             },
             {
-              "url": "guide/form-validation",
-              "title": "フォーム入力のバリデーション",
-              "tooltip": "ユーザーのフォーム入力を検証しましょう。",
+              "url": "guide/property-binding",
+              "title": "プロパティバインディング",
+              "tooltip": "Introductory guide to setting element or input properties.",
               "translated": false
             },
             {
-              "url": "guide/dynamic-form",
-              "title": "ダイナミックフォームの構築",
-              "tooltip": "Create dynamic form templates using FormGroup.",
+              "url": "guide/attribute-binding",
+              "title": "属性・クラス・スタイルバインディング",
+              "tooltip": "Introductory guide to setting the value of HTML attributes.",
+              "translated": true
+            },
+            {
+              "url": "guide/event-binding",
+              "title": "イベントバインディング",
+              "tooltip": "Introductory guide to listening for user interaction.",
+              "translated": true
+            },
+            {
+              "url": "guide/two-way-binding",
+              "title": "双方向バインディング",
+              "tooltip": "Introductory guide to sharing data between a class and a template.",
               "translated": false
+            },
+            {
+              "url": "guide/template-reference-variables",
+              "title": "テンプレート参照変数",
+              "tooltip": "Introductory guide to referring to DOM elements within a template.",
+              "translated": true
+            },
+            {
+              "url": "guide/inputs-outputs",
+              "title": "InputとOutput",
+              "tooltip": "Introductory guide to sharing data between parent and child directives or components.",
+              "translated": true
+            },
+            {
+              "url": "guide/svg-in-templates",
+              "title": "SVGテンプレート",
+              "tooltip": "Learn how to use SVGs as templates for Angular applications.",
+              "translated": true
             }
           ]
         },
         {
-          "title": "Observable と RxJS",
-          "tooltip": "Using observables for message passing in Angular.",
+          "title": "ディレクティブ",
+          "tooltip": "Control the behavior of elements and the layout of your pages with directives.",
           "children": [
             {
-              "url": "guide/observables",
-              "title": "Observableの概要",
-              "tooltip": "Observableを使用して、同期または非同期で値を渡します。",
-              "translated": true
-            },
-            {
-              "url": "guide/rx-library",
-              "title": "RxJSライブラリ",
-              "tooltip": "A library for reactive programming using observables to compose asynchronous or callback-based code.",
-              "translated": true
-            },
-            {
-              "url": "guide/observables-in-angular",
-              "title": "AngularでのObservable",
-              "tooltip": "How Angular subsystems use and expect observables.",
-              "translated": true
-            },
-            {
-              "url": "guide/practical-observable-usage",
-              "title": "実用的な使用法",
-              "tooltip": "Domains in which observables are particularly useful.",
-              "translated": true
-            },
-            {
-              "url": "guide/comparing-observables",
-              "title": "他の技術との比較",
-              "tooltip": "ObservableとPromiseや他のメッセージパッシングテクニックとの比較。",
-              "translated": true
-            }
-          ]
-        },
-        {
-          "title": "NgModules",
-          "tooltip": "NgModules.",
-          "children": [
-            {
-              "url": "guide/ngmodules",
-              "title": "NgModuleイントロダクション",
-              "tooltip": "アプリケーションを効率的にするためにNgModuleを使用しましょう。",
-              "translated": true
-            },
-            {
-              "url": "guide/ngmodule-vs-jsmodule",
-              "title": "JavaScriptモジュールとNgModule",
-              "tooltip": "JavaScriptモジュールとNgModuleを区別しましょう。",
+              "url": "guide/built-in-directives",
+              "title": "組み込みディレクティブ",
+              "tooltip": "Introductory guide to some of the most popular built-in directives.",
               "translated": false
             },
             {
-              "url": "guide/bootstrapping",
-              "title": "ルートモジュールによるアプリの起動",
-              "tooltip": "ルートの\"AppModule\"で、アプリケーションをどのように構築、起動するかをAngularに伝えましょう。",
-              "translated": true
-            },
-            {
-              "url": "guide/frequent-ngmodules",
-              "title": "よく使用されるモジュール",
-              "tooltip": "よく使用されるモジュールの紹介",
-              "translated": true
-            },
-            {
-              "url": "guide/module-types",
-              "title": "フィーチャーモジュールの種類",
-              "tooltip": "さまざまなタイプのフィーチャモジュールの説明。",
+              "url": "guide/attribute-directives",
+              "title": "属性ディレクティブ",
+              "tooltip": "属性ディレクティブは要素に振る舞いを付与します。",
               "translated": false
             },
             {
-              "url": "guide/entry-components",
-              "title": "エントリーコンポーネント",
-              "tooltip": "Angularのエントリコンポーネントに関するすべて。",
-              "translated": true
-            },
-            {
-              "url": "guide/feature-modules",
-              "title": "フィーチャーモジュール",
-              "tooltip": "コードを整理するためのフィーチャーモジュールを作成します。",
-              "translated": true
-            },
-            {
-              "url": "guide/providers",
-              "title": "依存オブジェクトの提供",
-              "tooltip": "Providing dependencies to NgModules.",
-              "translated": true
-            },
-            {
-              "url": "guide/singleton-services",
-              "title": "シングルトンサービス",
-              "tooltip": "シングルトンサービスの作成。",
-              "translated": true
-            },
-            {
-              "url": "guide/lazy-loading-ngmodules",
-              "title": "フィーチャーモジュールの遅延ロード",
-              "tooltip": "遅延ロードモジュールを使用してアプリを高速化します。",
-              "translated": true
-            },
-            {
-              "url": "guide/sharing-ngmodules",
-              "title": "モジュールの共有",
-              "tooltip": "NgModulesを共有してアプリを合理化しましょう。",
-              "translated": true
-            },
-            {
-              "url": "guide/ngmodule-api",
-              "title": "NgModule API",
-              "tooltip": "NgModuleの詳細を理解しましょう。",
-              "translated": true
-            },
-            {
-              "url": "guide/ngmodule-faq",
-              "title": "NgModuleのFAQ",
-              "tooltip": "NgModuleに関するよくある質問への回答。",
-              "translated": true
+              "url": "guide/structural-directives",
+              "title": "構造ディレクティブ",
+              "tooltip": "構造ディレクティブはページのレイアウトを操作します。",
+              "translated": false
             }
           ]
         },
@@ -519,196 +283,89 @@
               "translated": true
             },
             {
-              "url": "guide/hierarchical-dependency-injection",
-              "title": "階層的インジェクター",
-              "tooltip": "インジェクターツリーはコンポーネントツリーと平行し、入れ子になった依存関係をサポートします。",
-              "translated": true
-            },
-            {
               "url": "guide/dependency-injection-providers",
               "title": "依存関係プロバイダー",
               "tooltip": "More about the different kinds of providers.",
+              "translated": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "開発者ガイド",
+      "tooltip": "Learn more about how to use Angular to build your applications.",
+      "children": [
+        {
+          "title": "ルーティングとナビゲーション",
+          "tooltip": "Build in-app navigation among views using the Angular Router.",
+          "children": [
+            {
+              "url": "guide/routing-overview",
+              "title": "Overview",
+              "tooltip": "Introduces the Angular Router and lists topics that teach you how to add the router to your applications."
+            },
+            {
+              "url": "guide/router",
+              "title": "Common routing tasks",
+              "tooltip": "Task-based content on many of the common tasks associated with Angular routing, such as defining routs, setting up wildcard routes, and redirects."
+            },
+            {
+              "url": "guide/router-tutorial",
+              "title": "Tutorial: Routing in Single-page Applications",
+              "tooltip": "A tutorial that covers many patterns associated with Angular routing."
+            },
+            {
+              "url": "guide/routing-with-urlmatcher",
+              "title": "Tutorial: Creating custom route matches",
+              "tooltip": "Learn how to create a custom URL matcher with the Angular router."
+            },
+            {
+              "url": "guide/router-tutorial-toh",
+              "title": "Tutorial: Adding routing to Tour of Heroes",
+              "tooltip": "Explore how to use Angular's router. Based on the Tour of Heroes example."
+            },
+            {
+              "url": "guide/router-reference",
+              "title": "Router reference",
+              "tooltip": "Describes highlight some core router API concepts."
+            }
+          ]
+        },
+        {
+          "title": "フォーム",
+          "tooltip": "Forms creates a cohesive, effective, and compelling data entry experience.",
+          "children": [
+            {
+              "url": "guide/forms-overview",
+              "title": "イントロダクション",
+              "tooltip": "An Angular form coordinates a set of data-bound user controls, tracks changes, validates input, and presents errors.",
               "translated": true
             },
             {
-              "url": "guide/dependency-injection-in-action",
-              "title": "DIイン・アクション",
-              "tooltip": "依存性の注入のためのテクニック",
+              "url": "guide/reactive-forms",
+              "title": "リアクティブフォーム",
+              "tooltip": "FormBuilder、グループ、および配列を使用してリアクティブフォームを作成しましょう",
               "translated": true
             },
             {
-              "url": "guide/dependency-injection-navtree",
-              "title": "コンポーネントツリーのナビゲート",
-              "tooltip": "インジェクションツリーを使って親コンポーネントを見つけます。",
+              "url": "guide/form-validation",
+              "title": "フォーム入力のバリデーション",
+              "tooltip": "ユーザーのフォーム入力を検証しましょう。",
+              "translated": true
+            },
+            {
+              "url": "guide/dynamic-form",
+              "title": "ダイナミックフォームの構築",
+              "tooltip": "Create dynamic form templates using FormGroup.",
               "translated": true
             }
           ]
         },
         {
           "url": "guide/http",
-          "title": "HTTPによるサーバーアクセス",
+          "title": "HTTPクライアント",
           "tooltip": "リモートサーバーと通信するためにHTTPを使いましょう",
-          "translated": true
-        },
-        {
-          "url": "guide/router",
-          "title": "ルーティングと画面遷移",
-          "tooltip": "Build in-app navigation among views using the Angular Router.",
-          "translated": false
-        },
-        {
-          "url": "guide/security",
-          "title": "セキュリティ",
-          "tooltip": "Angularアプリケーションでのコンテンツセキュリティの開発",
-          "translated": true
-        }
-      ]
-    },
-    {
-      "title": "テクニック",
-      "tooltip": "環境に合わせたAngularの活用テクニック",
-      "children": [
-        {
-          "title": "アニメーション",
-          "tooltip": "Enhance the user experience with animation.",
-          "children": [
-            {
-              "url": "guide/animations",
-              "title": "イントロダクション",
-              "tooltip": "Angularアニメーションの基本的なテクニック",
-              "translated": true
-            },
-            {
-              "url": "guide/transition-and-triggers",
-              "title": "遷移とトリガー",
-              "tooltip": "トランジションとトリガーの高度なテクニック",
-              "translated": true
-            },
-            {
-              "url": "guide/complex-animation-sequences",
-              "title": "複雑なアニメーションシーケンス",
-              "tooltip": "複雑なAngularアニメーションシーケンス",
-              "translated": true
-            },
-            {
-              "url": "guide/reusable-animations",
-              "title": "再利用可能なアニメーション",
-              "tooltip": "再利用可能なアニメーションの作成",
-              "translated": true
-            },
-            {
-              "url": "guide/route-animations",
-              "title": "ルーティング遷移のアニメーション",
-              "tooltip": "ルーティング遷移をアニメーション化する",
-              "translated": true
-            }
-          ]
-        },
-        {
-          "url": "guide/i18n",
-          "title": "国際化 (i18n)",
-          "tooltip": "アプリのテンプレートテキストを複数の言語に翻訳します",
-          "translated": false
-        },
-        {
-          "url": "guide/accessibility",
-          "title": "アクセシビリティ",
-          "tooltip": "Design apps to be accessible to all users.",
-          "translated": true
-        },
-        {
-          "title": "Service WorkerとPWA",
-          "tooltip": "Angular Service Worker: アプリケーションリソースのキャッシュをコントロールします",
-          "children": [
-            {
-              "url": "guide/service-worker-intro",
-              "title": "イントロダクション",
-              "tooltip": "AngularのService Worker実装は低速なネットワーク接続におけるユーザー体験を改善します。",
-              "translated": true
-            },
-            {
-              "url": "guide/service-worker-getting-started",
-              "title": "Service Workerを始める",
-              "tooltip": "CLIプロジェクトでService Workerを有効化し、ブラウザでの振る舞いを監視します。",
-              "translated": true
-            },
-            {
-              "url": "guide/app-shell",
-              "title": "App Shell",
-              "tooltip": "Render a portion of your app quickly to improve the startup experience.",
-              "translated": true
-            },
-            {
-              "url": "guide/service-worker-communications",
-              "title": "Service Workerとの通信",
-              "tooltip": "Angular Service Workerとやりとりするためのサービスについて。",
-              "translated": true
-            },
-            {
-              "url": "guide/service-worker-devops",
-              "title": "プロダクションにおけるService Worker",
-              "tooltip": "Running apps with service workers, managing app update, debugging, and killing apps.",
-              "translated": true
-            },
-            {
-              "url": "guide/service-worker-config",
-              "title": "Service Workerの設定",
-              "tooltip": "Service Workerのキャッシュの振る舞いを設定します。",
-              "translated": true
-            }
-          ]
-        },
-        {
-          "url": "guide/web-worker",
-          "title": "Web Worker",
-          "tooltip": "Using web workers for background processing.",
-          "translated": true
-        },
-        {
-          "url": "guide/universal",
-          "title": "サーバーサイドレンダリング",
-          "tooltip": "Angular Universalを使ってサーバーサイドでHTMLをレンダリングしましょう。",
-          "translated": false
-        }
-      ]
-    },
-    {
-      "title": "開発ワークフロー",
-      "tooltip": "Build, testing, and deployment information.",
-      "children": [
-        {
-          "title": "AOT Compiler",
-          "tooltip": "Understanding ahead-of-time compilation.",
-          "children": [
-            {
-              "url": "guide/aot-compiler",
-              "title": "事前コンパイル",
-              "tooltip": "AOT（Ahead-of-Time）コンパイラを使用する理由と使用方法を学びましょう",
-              "translated": true
-            },
-            {
-              "url": "guide/angular-compiler-options",
-              "title": "Angularコンパイラオプション",
-              "tooltip": "AoTコンパイラの構成オプション。",
-              "translated": true
-            },
-            {
-              "url": "guide/aot-metadata-errors",
-              "title": "AoT Metadata Errors",
-              "tooltip": "Troubleshooting AOT compilation."
-            },
-            {
-              "url": "guide/template-typecheck",
-              "title": "テンプレート型チェック",
-              "tooltip": "Template type-checking in Angular.",
-              "translated": true
-            }
-          ]
-        },
-        {
-          "url": "guide/build",
-          "title": "ビルドとサーブ",
-          "tooltip": "Angularアプリのビルドとサーブ",
           "translated": true
         },
         {
@@ -772,75 +429,299 @@
           ]
         },
         {
-          "url": "guide/deployment",
-          "title": "Deployment",
-          "tooltip": "Learn how to deploy your Angular app."
+          "url": "guide/i18n",
+          "title": "国際化 (i18n)",
+          "tooltip": "アプリのテンプレートテキストを複数の言語に翻訳します",
+          "translated": false
         },
         {
-          "title": "Dev Tool Integration",
-          "tooltip": "Integrate with your development environment and tools.",
+          "title": "アニメーション",
+          "tooltip": "Enhance the user experience with animation.",
           "children": [
             {
-              "url": "guide/language-service",
-              "title": "Language Service",
-              "tooltip": "Angular Language Serviceを使って開発時間を短縮しましょう。",
+              "url": "guide/animations",
+              "title": "イントロダクション",
+              "tooltip": "Angularアニメーションの基本的なテクニック",
               "translated": true
             },
             {
-              "url": "guide/visual-studio-2015",
-              "title": "Visual Studio 2015 QuickStart",
-              "tooltip": "Use Visual Studio 2015 with the QuickStart files."
+              "url": "guide/transition-and-triggers",
+              "title": "遷移とトリガー",
+              "tooltip": "トランジションとトリガーの高度なテクニック",
+              "translated": true
+            },
+            {
+              "url": "guide/complex-animation-sequences",
+              "title": "複雑なアニメーションシーケンス",
+              "tooltip": "複雑なAngularアニメーションシーケンス",
+              "translated": true
+            },
+            {
+              "url": "guide/reusable-animations",
+              "title": "再利用可能なアニメーション",
+              "tooltip": "再利用可能なアニメーションの作成",
+              "translated": true
+            },
+            {
+              "url": "guide/route-animations",
+              "title": "ルーティング遷移のアニメーション",
+              "tooltip": "ルーティング遷移をアニメーション化する",
+              "translated": true
+            }
+          ]
+        },
+        {
+          "title": "Service WorkerとPWA",
+          "tooltip": "Angular Service Worker: アプリケーションリソースのキャッシュをコントロールします",
+          "children": [
+            {
+              "url": "guide/service-worker-intro",
+              "title": "イントロダクション",
+              "tooltip": "AngularのService Worker実装は低速なネットワーク接続におけるユーザー体験を改善します。",
+              "translated": true
+            },
+            {
+              "url": "guide/service-worker-getting-started",
+              "title": "Service Workerを始める",
+              "tooltip": "CLIプロジェクトでService Workerを有効化し、ブラウザでの振る舞いを監視します。",
+              "translated": true
+            },
+            {
+              "url": "guide/app-shell",
+              "title": "App Shell",
+              "tooltip": "Render a portion of your app quickly to improve the startup experience.",
+              "translated": true
+            },
+            {
+              "url": "guide/service-worker-communications",
+              "title": "Service Workerとの通信",
+              "tooltip": "Angular Service Workerとやりとりするためのサービスについて。",
+              "translated": true
+            },
+            {
+              "url": "guide/service-worker-devops",
+              "title": "プロダクションにおけるService Worker",
+              "tooltip": "Running apps with service workers, managing app update, debugging, and killing apps.",
+              "translated": true
+            },
+            {
+              "url": "guide/service-worker-config",
+              "title": "Service Workerの設定",
+              "tooltip": "Service Workerのキャッシュの振る舞いを設定します。",
+              "translated": true
             }
           ]
         }
       ]
     },
     {
-      "title": "設定",
-      "tooltip": "Workspace and project structure, configuration files.",
+      "title": "ベストプラクティス",
+      "tooltip": "Learn how to build robust, scalable applications.",
       "children": [
         {
-          "url": "guide/file-structure",
-          "title": "プロジェクトのファイル構造",
-          "tooltip": "ファイルシステムから見たときにAngularワークスペースがどのような構成をしているか説明します。",
+          "url": "guide/security",
+          "title": "セキュリティ",
+          "tooltip": "Angularアプリケーションでのコンテンツセキュリティの開発",
           "translated": true
         },
         {
-          "url": "guide/workspace-config",
-          "title": "ワークスペースの設定",
-          "tooltip": "\"angular.json\" ファイルにはAngular CLIコマンドによるワークスペースとプロジェクトのデフォルト設定が含まれています。",
+          "url": "guide/accessibility",
+          "title": "アクセシビリティ",
+          "tooltip": "Design apps to be accessible to all users.",
           "translated": true
         },
         {
-          "url": "guide/npm-packages",
-          "title": "npmパッケージ",
-          "tooltip": "推奨されるnpmパッケージと、パッケージ依存関係の指定方法。",
-          "translated": true
-        },
-
-        {
-          "url": "guide/typescript-configuration",
-          "title": "TypeScript設定",
-          "tooltip": "Angular開発者のためのTypeScript設定。",
+          "url": "guide/updating",
+          "title": "プロジェクトの更新",
+          "tooltip": "Angularアプリケーションとライブラリの最新バージョンへの更新に関する情報",
           "translated": true
         },
         {
-          "url": "guide/browser-support",
-          "title": "ブラウザサポート",
-          "tooltip": "ブラウザサポートとポリフィルのガイド",
+          "url": "guide/property-binding-best-practices",
+          "title": "プロパティバインディングベストプラクティス",
+          "tooltip": "Use property binding efficiently.",
           "translated": true
         },
         {
-          "url": "guide/strict-mode",
-          "title": "Strict mode",
-          "tooltip": "Reference documentation for Angular's strict mode."
+          "url": "guide/lazy-loading-ngmodules",
+          "title": "フィーチャーモジュールの遅延ロード",
+          "tooltip": "遅延ロードモジュールを使用してアプリを高速化します。",
+          "translated": true
+        },
+        {
+          "url": "guide/lightweight-injection-tokens",
+          "title": "Lightweight Injection Tokens for Libraries",
+          "tooltip": "Optimize client app size by designing library services with lightweight injection tokens."
         }
       ]
     },
     {
-      "title": "Angularを拡張する",
-      "tooltip": "Working with libraries and extending the CLI.",
+      "title": "Angularツール",
+      "tooltip": "Tools to help you build your Angular applications.",
       "children": [
+        {
+          "title": "開発ワークフロー",
+          "tooltip": "Build, and deployment information.",
+          "children": [
+            {
+              "url": "guide/deployment",
+              "title": "Deployment",
+              "tooltip": "Learn how to deploy your Angular app."
+            },
+            {
+              "title": "AOT Compiler",
+              "tooltip": "Understanding ahead-of-time compilation.",
+              "children": [
+                {
+                  "url": "guide/aot-compiler",
+                  "title": "事前コンパイル",
+                  "tooltip": "AOT（Ahead-of-Time）コンパイラを使用する理由と使用方法を学びましょう",
+                  "translated": true
+                },
+                {
+                  "url": "guide/angular-compiler-options",
+                  "title": "Angularコンパイラオプション",
+                  "tooltip": "AoTコンパイラの構成オプション。",
+                  "translated": true
+                },
+                {
+                  "url": "guide/aot-metadata-errors",
+                  "title": "AoT Metadata Errors",
+                  "tooltip": "Troubleshooting AOT compilation."
+                },
+                {
+                  "url": "guide/template-typecheck",
+                  "title": "テンプレート型チェック",
+                  "tooltip": "Template type-checking in Angular.",
+                  "translated": true
+                }
+              ]
+            },
+            {
+              "url": "guide/build",
+              "title": "ビルドとサーブ",
+              "tooltip": "Angularアプリのビルドとサーブ",
+              "translated": true
+            }
+          ]
+        },
+        {
+          "url": "guide/cli-builder",
+          "title": "CLI Builders",
+          "tooltip": "Using builders to customize Angular CLI."
+        },
+        {
+          "url": "guide/universal",
+          "title": "サーバーサイドレンダリング",
+          "tooltip": "Angular Universalを使ってサーバーサイドでHTMLをレンダリングしましょう。",
+          "translated": true
+        },
+        {
+          "url": "guide/language-service",
+          "title": "Language Service",
+          "tooltip": "Angular Language Serviceを使って開発時間を短縮しましょう。",
+          "translated": true
+        },
+        {
+          "title": "DevTools",
+          "tooltip": "DevTools",
+          "url": "guide/devtools"
+        },
+        {
+          "title": "Schematics",
+          "tooltip": "Understanding schematics.",
+          "children": [
+            {
+              "url": "guide/schematics",
+              "title": "Schematics 概要",
+              "tooltip": "Extending CLI generation capabilities.",
+              "translated": true
+            },
+            {
+              "url": "guide/schematics-authoring",
+              "title": "Authoring Schematics",
+              "tooltip": "Understand the structure of a schematic.",
+              "translated": true
+            },
+            {
+              "url": "guide/schematics-for-libraries",
+              "title": "Schematics for Libraries",
+              "tooltip": "Use schematics to integrate your library with the Angular CLI.",
+              "translated": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "チュートリアル",
+      "tooltip": "End-to-end tutorials for learning Angular concepts and patterns.",
+      "children": [
+        {
+          "title": "チュートリアル: Tour of Heroes",
+          "tooltip": "Tour of Heroesチュートリアルでは、TypeScriptでAngularアプリケーションを作成する手順を説明します",
+          "children": [
+            {
+              "url": "tutorial",
+              "title": "イントロダクション",
+              "tooltip": "Tour of Heroesアプリとチュートリアルの紹介",
+              "translated": true
+            },
+            {
+              "url": "tutorial/toh-pt0",
+              "title": "プロジェクトの作成",
+              "tooltip": "アプリケーションシェルを作成します",
+              "translated": true
+            },
+            {
+              "url": "tutorial/toh-pt1",
+              "title": "1. ヒーローエディター",
+              "tooltip": "Part 1: シンプルなエディターを組み立てます",
+              "translated": true
+            },
+            {
+              "url": "tutorial/toh-pt2",
+              "title": "2. リストの表示",
+              "tooltip": "Part 2: ヒーローのリストを備えたmaster/detailページを組み立てます",
+              "translated": true
+            },
+            {
+              "url": "tutorial/toh-pt3",
+              "title": "3. フィーチャーコンポーネントの作成",
+              "tooltip": "Part 3: master/detailビューを複数のコンポーネントに分割してリファクタリングします",
+              "translated": true
+            },
+            {
+              "url": "tutorial/toh-pt4",
+              "title": "4. サービスの追加",
+              "tooltip": "Part 4: ヒーローのデータを管理するための再利用可能なサービスを作ります",
+              "translated": true
+            },
+            {
+              "url": "tutorial/toh-pt5",
+              "title": "5. ナビゲーションの追加",
+              "tooltip": "Part 5: Angularルーターを追加してビュー間を移動します",
+              "translated": true
+            },
+            {
+              "url": "tutorial/toh-pt6",
+              "title": "6. サーバーからデータの取得",
+              "tooltip": "Part 6: HTTPを使ってヒーローのデータを取得・保存します",
+              "translated": true
+            }
+          ]
+        },
+        {
+          "url": "guide/forms",
+          "title": "Building a Template-driven Form",
+          "tooltip": "Create a template-driven form using directives and Angular template syntax."
+        },
+        {
+          "url": "guide/web-worker",
+          "title": "Web Worker",
+          "tooltip": "Using web workers for background processing.",
+          "translated": true
+        },
         {
           "title": "Angularライブラリ",
           "tooltip": "Extending Angular with shared libraries.",
@@ -864,61 +745,6 @@
               "translated": true
             }
           ]
-        },
-        {
-          "title": "Schematics",
-          "tooltip": "Understanding schematics.",
-          "children": [
-            {
-              "url": "guide/schematics",
-              "title": "Schematics 概要",
-              "tooltip": "Extending CLI generation capabilities.",
-              "translated": true
-            },
-            {
-              "url": "guide/schematics-authoring",
-              "title": "Authoring Schematics",
-              "tooltip": "Understand the structure of a schematic.",
-              "translated": true
-            },
-            {
-              "url": "guide/schematics-for-libraries",
-              "title": "Schematics for Libraries",
-              "tooltip": "Use schematics to integrate your library with the Angular CLI."
-            }
-          ]
-        },
-        {
-          "url": "guide/cli-builder",
-          "title": "CLI Builders",
-          "tooltip": "Using builders to customize Angular CLI."
-        }
-      ]
-    },
-    {
-      "title": "チュートリアル",
-      "tooltip": "End-to-end tutorials for learning Angular concepts and patterns.",
-      "children": [
-        {
-          "title": "ルーティング",
-          "tooltip": "End-to-end tutorials for learning about Angular's router.",
-          "children": [
-            {
-              "url": "guide/router-tutorial",
-              "title": "Using Angular Routes in a Single-page Application",
-              "tooltip": "A tutorial that covers many patterns associated with Angular routing."
-            },
-            {
-              "url": "guide/router-tutorial-toh",
-              "title": "Router tutorial: tour of heroes",
-              "tooltip": "Explore how to use Angular's router. Based on the Tour of Heroes example."
-            }
-          ]
-        },
-        {
-          "url": "guide/forms",
-          "title": "Building a Template-driven Form",
-          "tooltip": "Create a template-driven form using directives and Angular template syntax."
         }
       ]
     },
@@ -926,12 +752,6 @@
       "title": "リリース情報",
       "tooltip": "Angularのリリースプラクティス、アップデートの計画、そしてアップデートについての資料",
       "children": [
-        {
-          "url": "guide/updating",
-          "title": "プロジェクトの更新",
-          "tooltip": "Angularアプリケーションとライブラリの最新バージョンへの更新に関する情報",
-          "translated": true
-        },
         {
           "url": "guide/releases",
           "title": "リリースプラクティス",
@@ -945,13 +765,19 @@
           "translated": true
         },
         {
-          "title": "バージョン10へのアップデート",
-          "tooltip": "Support for updating your application from version 9 to 10.",
+          "url": "guide/browser-support",
+          "title": "ブラウザサポート",
+          "tooltip": "ブラウザサポートとポリフィルのガイド",
+          "translated": true
+        },
+        {
+          "title": "バージョン12へのアップデート",
+          "tooltip": "Support for updating your application from version 11 to 12.",
           "children": [
             {
-              "url": "guide/updating-to-version-10",
+              "url": "guide/updating-to-version-12",
               "title": "Overview",
-              "tooltip": "Everything you need to know for updating your application from version 9 to 10."
+              "tooltip": "Everything you need to know for updating your application from version 11 to 12."
             },
             {
               "url": "guide/ivy-compatibility",
@@ -959,40 +785,9 @@
               "tooltip": "Details to help you make sure your application is compatible with Ivy."
             },
             {
-              "title": "Migrations",
-              "tooltip": "Migration details regarding updating to version 10.",
-              "children": [
-                {
-                  "url": "guide/migration-module-with-providers",
-                  "title": "Missing ModuleWithProviders Generic",
-                  "tooltip": "Migration to add a generic type to any ModuleWithProviders usages that are missing the generic."
-                },
-                {
-                  "url": "guide/migration-undecorated-classes",
-                  "title": "Missing @Directive() Decorators",
-                  "tooltip": "Migration to add missing @Directive()/@Component() decorators."
-                },
-                {
-                  "url": "guide/migration-injectable",
-                  "title": "Missing @Injectable() Decorators",
-                  "tooltip": "Migration to add missing @Injectable() decorators and incomplete provider definitions."
-                },
-                {
-                  "url": "guide/migration-solution-style-tsconfig",
-                  "title": "Solution-style `tsconfig.json`",
-                  "tooltip": "Migration to create a solution-style `tsconfig.json`."
-                },
-                {
-                  "url": "guide/migration-update-libraries-tslib",
-                  "title": "`tslib` direct dependency",
-                  "tooltip": "Migration to a direct dependency on the `tslib` npm package."
-                },
-                {
-                  "url": "guide/migration-update-module-and-target-compiler-options",
-                  "title": "`module` and `target` compiler options",
-                  "tooltip": "Migration to update `module` and `target` compiler options."
-                }
-              ]
+              "url": "guide/migration-legacy-message-id",
+              "title": "Migration: Legacy Localization IDs",
+              "tooltip": "Learn how to migrate legacy IDs for localization to new, more stable ones."
             }
           ]
         },
@@ -1037,50 +832,334 @@
       ]
     },
     {
-      "title": "Angularスタイルと使い方",
-      "tooltip": "Angular構文、コーディング、および用語の要約。",
+      "title": "リファレンス",
+      "tooltip": "Reference guides for Angular features and tools.",
       "children": [
         {
-          "url": "guide/cheatsheet",
-          "title": "クイックリファレンス",
-          "tooltip": "よく使われるAngularのコーディングテクニックへのガイド",
+          "title": "概念",
+          "tooltip": "Reference documentation that explains how Angular features work.",
+          "children": [
+            {
+              "title": "Angularの概念",
+              "tooltip": "Introduction to basic concepts for Angular applications.",
+              "children": [
+                {
+                  "url": "guide/architecture",
+                  "title": "基本概念の紹介",
+                  "tooltip": "Angularアプリケーションの基本構成要素",
+                  "translated": true
+                },
+                {
+                  "url": "guide/architecture-modules",
+                  "title": "モジュールの紹介",
+                  "tooltip": "NgModuleについて",
+                  "translated": true
+                },
+                {
+                  "url": "guide/architecture-components",
+                  "title": "Componentの紹介",
+                  "tooltip": "コンポーネント、テンプレート、およびビューについて。",
+                  "translated": true
+                },
+                {
+                  "url": "guide/architecture-services",
+                  "title": "サービスとDIの紹介",
+                  "tooltip": "サービスと依存性の注入について。",
+                  "translated": true
+                },
+                {
+                  "url": "guide/architecture-next-steps",
+                  "title": "次のステップ",
+                  "tooltip": "基本のその先へ。",
+                  "translated": true
+                },
+                {
+                  "url": "guide/binding-syntax",
+                  "title": "バインディング構文",
+                  "tooltip": "Introductory guide to coordinating app values.",
+                  "translated": true
+                },
+                {
+                  "url": "guide/event-binding-concepts",
+                  "title": "イベントバインディングの仕組み",
+                  "tooltip": "About event binding.",
+                  "translated": true
+                },
+                {
+                  "url": "guide/template-reference-variables",
+                  "title": "テンプレート変数",
+                  "tooltip": "Introductory guide to referring to DOM elements within a template.",
+                  "translated": true
+                }
+              ]
+            },
+            {
+              "title": "ワークスペースとプロジェクト構成",
+              "tooltip": "Workspace and project file structure and configuration.",
+              "children": [
+                {
+                  "url": "guide/file-structure",
+                  "title": "プロジェクトのファイル構造",
+                  "tooltip": "ファイルシステムから見たときにAngularワークスペースがどのような構成をしているか説明します。",
+                  "translated": true
+                },
+                {
+                  "url": "guide/workspace-config",
+                  "title": "ワークスペースの設定",
+                  "tooltip": "\"angular.json\" ファイルにはAngular CLIコマンドによるワークスペースとプロジェクトのデフォルト設定が含まれています。",
+                  "translated": true
+                },
+                {
+                  "url": "guide/npm-packages",
+                  "title": "npmパッケージ",
+                  "tooltip": "推奨されるnpmパッケージと、パッケージ依存関係の指定方法。",
+                  "translated": true
+                },
+
+                {
+                  "url": "guide/typescript-configuration",
+                  "title": "TypeScript設定",
+                  "tooltip": "Angular開発者のためのTypeScript設定。",
+                  "translated": true
+                },
+                {
+                  "url": "guide/strict-mode",
+                  "title": "strictモード",
+                  "tooltip": "Reference documentation for Angular's strict mode.",
+                  "translated": true,
+                  "hidden": true
+                }
+              ]
+            },
+            {
+              "title": "NgModules",
+              "tooltip": "NgModules.",
+              "children": [
+                {
+                  "url": "guide/ngmodules",
+                  "title": "NgModuleイントロダクション",
+                  "tooltip": "アプリケーションを効率的にするためにNgModuleを使用しましょう。",
+                  "translated": true
+                },
+                {
+                  "url": "guide/ngmodule-vs-jsmodule",
+                  "title": "JavaScriptモジュールとNgModule",
+                  "tooltip": "JavaScriptモジュールとNgModuleを区別しましょう。",
+                  "translated": true
+                },
+                {
+                  "url": "guide/bootstrapping",
+                  "title": "ルートモジュールによるアプリの起動",
+                  "tooltip": "ルートの\"AppModule\"で、アプリケーションをどのように構築、起動するかをAngularに伝えましょう。",
+                  "translated": true
+                },
+                {
+                  "url": "guide/frequent-ngmodules",
+                  "title": "よく使用されるモジュール",
+                  "tooltip": "よく使用されるモジュールの紹介",
+                  "translated": true
+                },
+                {
+                  "url": "guide/module-types",
+                  "title": "フィーチャーモジュールの種類",
+                  "tooltip": "さまざまなタイプのフィーチャモジュールの説明。",
+                  "translated": true
+                },
+                {
+                  "url": "guide/entry-components",
+                  "title": "エントリーコンポーネント",
+                  "tooltip": "Angularのエントリコンポーネントに関するすべて。",
+                  "translated": true
+                },
+                {
+                  "url": "guide/feature-modules",
+                  "title": "フィーチャーモジュール",
+                  "tooltip": "コードを整理するためのフィーチャーモジュールを作成します。",
+                  "translated": true
+                },
+                {
+                  "url": "guide/providers",
+                  "title": "依存オブジェクトの提供",
+                  "tooltip": "Providing dependencies to NgModules.",
+                  "translated": true
+                },
+                {
+                  "url": "guide/singleton-services",
+                  "title": "シングルトンサービス",
+                  "tooltip": "シングルトンサービスの作成。",
+                  "translated": true
+                },
+                {
+                  "url": "guide/sharing-ngmodules",
+                  "title": "モジュールの共有",
+                  "tooltip": "NgModulesを共有してアプリを合理化しましょう。",
+                  "translated": true
+                },
+                {
+                  "url": "guide/ngmodule-api",
+                  "title": "NgModule API",
+                  "tooltip": "NgModuleの詳細を理解しましょう。",
+                  "translated": true
+                },
+                {
+                  "url": "guide/ngmodule-faq",
+                  "title": "NgModuleのFAQ",
+                  "tooltip": "NgModuleに関するよくある質問への回答。",
+                  "translated": true
+                }
+              ]
+            },
+            {
+              "title": "Observable と RxJS",
+              "tooltip": "Using observables for message passing in Angular.",
+              "children": [
+                {
+                  "url": "guide/observables",
+                  "title": "Observableの概要",
+                  "tooltip": "Observableを使用して、同期または非同期で値を渡します。",
+                  "translated": true
+                },
+                {
+                  "url": "guide/rx-library",
+                  "title": "RxJSライブラリ",
+                  "tooltip": "A library for reactive programming using observables to compose asynchronous or callback-based code.",
+                  "translated": true
+                },
+                {
+                  "url": "guide/observables-in-angular",
+                  "title": "AngularでのObservable",
+                  "tooltip": "How Angular subsystems use and expect observables.",
+                  "translated": true
+                },
+                {
+                  "url": "guide/practical-observable-usage",
+                  "title": "実用的な使用法",
+                  "tooltip": "Domains in which observables are particularly useful.",
+                  "translated": true
+                },
+                {
+                  "url": "guide/comparing-observables",
+                  "title": "他の技術との比較",
+                  "tooltip": "ObservableとPromiseや他のメッセージパッシングテクニックとの比較。",
+                  "translated": true
+                }
+              ]
+            },
+            {
+              "title": "依存性の注入",
+              "tooltip": "Using dependency injection in Angular.",
+              "children": [
+                {
+                  "url": "guide/hierarchical-dependency-injection",
+                  "title": "階層的インジェクター",
+                  "tooltip": "インジェクターツリーはコンポーネントツリーと平行し、入れ子になった依存関係をサポートします。",
+                  "translated": true
+                },
+                {
+                  "url": "guide/dependency-injection-in-action",
+                  "title": "DIイン・アクション",
+                  "tooltip": "依存性の注入のためのテクニック",
+                  "translated": true
+                }
+              ]
+            }
+
+          ]
+        },
+        {
+          "title": "CLIコマンドリファレンス",
+          "tooltip": "Angular CLIコマンドのリファレンス",
+          "children": [
+            {
+              "title": "概要",
+              "tooltip": "CLIツール、コマンド、および構文の紹介",
+              "url": "cli",
+              "translated": true
+            },
+            {
+              "title": "利用状況の解析",
+              "tooltip": "管理者向けに、ユーザーから利用状況分析を収集するためのガイド。",
+              "url": "cli/usage-analytics-gathering",
+              "translated": true
+            }
+          ]
+        },
+        {
+          "title": "APIリファレンス",
+          "tooltip": "Angularパッケージ、クラス、インターフェース、およびその他のタイプの詳細。",
+          "url": "api"
+        },
+        {
+          "title": "エラーリファレンス",
+          "tooltip": "Details of the errors that can be thrown by Angular.",
+          "children": [
+            {
+              "title": "概要",
+              "url": "errors",
+              "hidden": true
+            }
+          ]
+        },
+        { "title": "サンプルアプリケーション",
+          "tooltip": "List of all of the example applications in the Angular documentation.",
+          "url": "guide/example-apps-list"
+        },
+        {
+          "url": "guide/glossary",
+          "title": "用語集",
+          "tooltip": "Angular の用語の中でももっとも重要なものに関する、簡潔な定義集です。",
           "translated": true
         },
         {
-          "url": "guide/styleguide",
-          "title": "コーディングスタイルガイド",
-          "tooltip": "Guidelines for writing Angular code.",
-          "translated": true
+          "title": "Angularスタイルと使い方",
+          "tooltip": "Angular構文、コーディング、および用語の要約。",
+          "children": [
+            {
+              "url": "guide/cheatsheet",
+              "title": "クイックリファレンス",
+              "tooltip": "よく使われるAngularのコーディングテクニックへのガイド",
+              "translated": true
+            },
+            {
+              "url": "guide/styleguide",
+              "title": "コーディングスタイルガイド",
+              "tooltip": "Guidelines for writing Angular code.",
+              "translated": true
+            }
+          ]
         },
         {
-          "url": "guide/docs-style-guide",
-          "title": "Documentation Style Guide",
-          "tooltip": "Style guide for documentation authors"
+          "title": "Content Contributor's Guide",
+          "tooltip": "Describes how to contribute to the Angular documentation.",
+          "children": [
+            {
+              "url": "guide/contributors-guide-overview",
+              "title": "Overview",
+              "tooltip": "Provides an overview of how to contribute to Angular's documentation."
+            },
+            {
+              "url": "guide/reviewing-content",
+              "title": "Reviewing content",
+              "tooltip": "Keep Angular content up-to-date by reviewing topics for accuracy."
+            },
+            {
+              "url": "guide/updating-search-keywords",
+              "title": "Updating search keywords",
+              "tooltip": "Help users find the content they need by adding additional search keywords."
+            },
+            {
+              "url": "guide/updating-content-github-ui",
+              "title": "Updating content using GitHub UI",
+              "tooltip": "Update topics in the browser through the GitHub user interface."
+            },
+            {
+              "url": "guide/docs-style-guide",
+              "title": "Documentation Style Guide",
+              "tooltip": "Style guide for documentation authors"
+            }
+          ]
         }
       ]
-    },
-    {
-      "title": "CLIコマンドリファレンス",
-      "tooltip": "Angular CLIコマンドのリファレンス",
-      "children": [
-        {
-          "title": "概要",
-          "tooltip": "CLIツール、コマンド、および構文の紹介",
-          "url": "cli",
-          "translated": true
-        },
-        {
-          "title": "利用状況の解析",
-          "tooltip": "管理者向けに、ユーザーから利用状況分析を収集するためのガイド。",
-          "url": "cli/usage-analytics-gathering",
-          "translated": true
-        }
-      ]
-    },
-    {
-      "title": "APIリファレンス",
-      "tooltip": "Angularパッケージ、クラス、インターフェース、およびその他のタイプの詳細。",
-      "url": "api"
     }
   ],
 
@@ -1124,6 +1203,11 @@
           "tooltip": "Stack Overflow: where the community answers your technical Angular questions."
         },
         {
+          "url": "https://discord.gg/angular",
+          "title": "Join Discord",
+          "tooltip": "Join the discussions at Angular Community Discord server."
+        },
+        {
           "url": "https://gitter.im/angular/angular",
           "title": "Gitter",
           "tooltip": "Chat about Angular with other birds of a feather."
@@ -1149,7 +1233,7 @@
           "tooltip": "Post issues and suggestions on github."
         },
         {
-          "url": "http://www.meetup.com/topics/angularjs/",
+          "url": "https://www.meetup.com/topics/angularjs/",
           "title": "Meetups",
           "tooltip": "Attend a meetup and learn from fellow developers."
         },
@@ -1178,8 +1262,16 @@
           "title": "English Edition (Official)"
         },
         {
-          "title": "中文版",
+          "title": "Español",
+          "url": "http://docs.angular.lat/"
+        },
+        {
+          "title": "简体中文版",
           "url": "https://angular.cn/"
+        },
+        {
+          "title": "正體中文版",
+          "url": "https://angular.tw/"
         },
         {
           "title": "日本語版",
@@ -1191,21 +1283,5 @@
         }
       ]
     }
-  ],
-
-  "docVersions": [
-    {
-      "title": "v9",
-      "url": "https://v9.angular.io/"
-    },
-    {
-      "title": "v8",
-      "url": "https://v8.angular.io/"
-    },
-    { "title": "v7", "url": "https://v7.angular.io" },
-    { "title": "v6", "url": "https://v6.angular.io" },
-    { "title": "v5", "url": "https://v5.angular.io" },
-    { "title": "v4", "url": "https://v4.angular.io" },
-    { "title": "v2", "url": "https://v2.angular.io" }
   ]
 }

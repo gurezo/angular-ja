@@ -29,7 +29,7 @@ To create a new workspace and an initial app project:
   1. Ensure that you are not already in an Angular workspace folder. For example, if you have previously created the Getting Started workspace, change to the parent of that folder.
   2. Run the CLI command `ng new` and provide the name `angular-tour-of-heroes`, as shown here:
 
-  <code-example language="sh" class="code-shell">
+  <code-example language="sh">
      ng new angular-tour-of-heroes
   </code-example>
 
@@ -40,8 +40,7 @@ The Angular CLI installs the necessary Angular `npm` packages and other dependen
 It also creates the following workspace and starter project files:
 
   * A new workspace, with a root folder named `angular-tour-of-heroes`.
-  * An initial skeleton app project, also called `angular-tour-of-heroes` (in the `src` subfolder).
-  * An end-to-end test project (in the e2e subfolder).
+  * An initial skeleton app project in the `src/app` subfolder.
   * Related configuration files.
 
 The initial app project contains a simple Welcome app, ready to run.
@@ -50,7 +49,7 @@ The initial app project contains a simple Welcome app, ready to run.
 
 Go to the workspace directory and launch the application.
 
-<code-example language="sh" class="code-shell">
+<code-example language="sh">
   cd angular-tour-of-heroes
   ng serve --open
 </code-example>

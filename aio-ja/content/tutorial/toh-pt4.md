@@ -33,7 +33,7 @@ Angular による [*依存性の注入*](guide/dependency-injection) で、
 
 Angular CLI を使用して `HeroService` を作成しましょう。
 
-<code-example language="sh" class="code-shell">
+<code-example language="sh">
   ng generate service hero
 </code-example>
 
@@ -76,9 +76,9 @@ Angular CLI を使用して `HeroService` を作成しましょう。
 Angularが `HeroesComponent` へ注入する（[次に](#inject)行います）よりも前に、
 _プロバイダ_ を登録することで`HeroService`が依存性の注入システムで利用できるようにする必要があります。プロバイダーとは、サービスを作成または提供できるものです。この場合、`HeroService`クラスをインスタンス化してサービスを提供します。
 
-`HeroService`がこのサービスのプロバイダーとして登録されていることを確認するために、
-あなたは _インジェクター_ にこれを登録しています。
-インジェクターは、必要な場所でプロバイダーを選択して注入するためのオブジェクトです。
+`HeroService`を _インジェクター_ に登録することで、
+サービスが提供できるようになります。
+インジェクターとは、必要な場所でプロバイダーを選択して注入するためのオブジェクトです。
 
 デフォルトでは、Angular CLIコマンド `ng generate service`は、プロバイダーのメタデータ、つまり` providedIn: 'root'`を `@Injectable()` デコレーターに含めることで、プロバイダーをサービスの _ルートインジェクター_ に登録します。
 
@@ -124,7 +124,7 @@ _providers_ についてより詳しく知りたい方は [Providers](guide/prov
 <code-example path="toh-pt4/src/app/heroes/heroes.component.ts" header="src/app/heroes/heroes.component.ts (import HeroService)" region="hero-service-import">
 </code-example>
 
-`heroes` プロパティの定義を、単純な宣言に置き換えます。
+`heroes` プロパティの定義を宣言に置き換えます。
 
 <code-example path="toh-pt4/src/app/heroes/heroes.component.ts" header="src/app/heroes/heroes.component.ts" region="heroes">
 </code-example>
@@ -192,7 +192,7 @@ Angular が `HeroesComponent` を生成する際、[依存性の注入](guide/de
 
 ### Observable `HeroService`
 
-`Observable` は [RxJS ライブラリ](http://reactivex.io/rxjs/) で重要なクラスのひとつです。
+`Observable` は [RxJS ライブラリ](https://rxjs.dev/) で重要なクラスのひとつです。
 
 [HTTP に関する後の章](tutorial/toh-pt6), でも Angular の `HttpClient` メソッドが `Observable` を返すことに触れるでしょう。
 この章ではRxJSの `of()` 関数を使ってサーバーからのデータの取得をシミュレートします。
@@ -262,7 +262,7 @@ Angular が `HeroesComponent` を生成する際、[依存性の注入](guide/de
 
 Angular CLI を使い `MessagesComponent` を作成しましょう。
 
-<code-example language="sh" class="code-shell">
+<code-example language="sh">
   ng generate component messages
 </code-example>
 
@@ -281,7 +281,7 @@ Angular CLI は `src/app/messages` 配下にコンポーネントファイル群
 
 Angular CLI を使い、`src/app` 配下に `MessageService` を作成します。
 
-<code-example language="sh" class="code-shell">
+<code-example language="sh">
   ng generate service message
 </code-example>
 
@@ -371,16 +371,15 @@ Angular CLI によって生成された `MessagesComponent` のテンプレー�
 
 次の例は、ユーザーがヒーローをクリックするたびに、メッセージを送信、表示し、
 そしてユーザーの選択履歴を表示する方法を示します。
-これは、あなたが次ののセクション[Routing](tutorial/toh-pt5)を見るときに助けになります。
+これは、あなたが次のセクション[Routing](tutorial/toh-pt5)を見るときに助けになります。
 
 <code-example header="src/app/heroes/heroes.component.ts"
 path="toh-pt4/src/app/heroes/heroes.component.ts">
 </code-example>
 
-ブラウザが更新され、ページにヒーローリストを表示されます。
 ヒーローリストを見るためにブラウザを更新し、一番下までスクロールすると 
 `HeroService` からのメッセージを表示されます。あなたがヒーローをクリックするたびに、新しいメッセージが選択を登録して表示されます。
-メッセージ履歴を削除するために「clear」ボタンを使用します。
+メッセージ履歴を削除するために**Clear messages**ボタンを使用します。
 
 {@a final-code-review}
 
@@ -427,7 +426,7 @@ path="toh-pt4/src/app/heroes/heroes.component.ts">
 ## まとめ
 
 * `HeroService` クラスのデータ利用方法を修正しました
-* `HeroService`をルートレベルでサービスの _プロバイダ_ として登録し、アプリ内のどこにでも注入できるようにしました。
+* `HeroService`をルートレベルでサービスの _プロバイダ_ として登録し、アプリケーション内のどこにでも注入できるようにしました。
 * [Angular の依存性の注入](guide/dependency-injection) を使用して、それをコンポーネントに注入しました
 * `HeroService` の _データ取得_ メソッドを非同期化しました
 * `Observable` および、それを扱うために利用する RxJS ライブラリについて学びました

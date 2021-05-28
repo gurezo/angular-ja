@@ -1,5 +1,17 @@
 # ユーザー入力
 
+<div class="callout is-critical">
+<header>Marked for archiving</header>
+
+To ensure that you have the best experience possible, this topic is marked for archiving until we determine
+that it clearly conveys the most accurate information possible.
+
+In the meantime, this topic might be helpful: [Event binding](guide/event-binding).
+
+If you think this content should not be archived, please file a [GitHub issue](https://github.com/angular/angular/issues/new?template=3-docs-bug.md).
+
+</div>
+
 リンクをクリックしたり、ボタンを押したり、
 テキストを入力したりするようなユーザーアクションはDOMイベントを発生させます。
 このページでは、Angularのイベントバインディング構文を使用して
@@ -223,10 +235,10 @@ Angularは、ユーザーが_Enter_キーを押したときにのみイベント
 
 
 ## すべてをまとめましょう
-前のページに、[データを表示する](guide/displaying-data)方法を示しました。
+
 このページでは、イベントバインディング手法について説明しました。
 
-それでは、すべてのヒーローのリストを表示し、新しいヒーローをリストに追加できるマイクロアプリにまとめましょう。
+それでは、すべてのヒーローのリストを表示し、新しいヒーローをリストに追加できるマイクロアプリケーションにまとめましょう。
 ユーザーは、入力ボックスにヒーローの名前を入力して**Add**をクリックすると、ヒーローを追加できます。
 
 
@@ -298,7 +310,7 @@ Angular also supports passive event listeners. For example, you can use the foll
 
 ```
 import './zone-flags';
-import 'zone.js/dist/zone';  // Included with Angular CLI.
+import 'zone.js';  // Included with Angular CLI.
 ```
 
 After those steps, if you add event listeners for the `scroll` event, the listeners will be `passive`.
@@ -311,4 +323,4 @@ After those steps, if you add event listeners for the `scroll` event, the listen
 大量のユーザー入力を処理する場合は、すぐに煩雑になります。
 双方向データバインディングは、データ入力フィールドとモデルプロパティの間で値を移動するための、
 よりエレガントでコンパクトな方法です。
-次のページ `フォーム` では、`NgModel`を使用して双方向バインディングを作成する方法について説明します。
+[`フォーム`](guide/forms-overview) ページでは、`NgModel`を使用して双方向バインディングを作成する方法について説明します。

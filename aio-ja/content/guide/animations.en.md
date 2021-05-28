@@ -65,12 +65,23 @@ In the component file, add a metadata property called `animations:` within the `
 
 ## Animating a simple transition
 
-Let's animate a simple transition that changes a single HTML element from one state to another. For example, you can specify that a button displays either **Open** or **Closed** based on the user's last action. When the button is in the `open` state, it's visible and yellow. When it's the `closed` state, it's transparent and green.
+Let's animate a simple transition that changes a single HTML element from one state to another. For example, you can specify that a button displays either **Open** or **Closed** based on the user's last action. When the button is in the `open` state, it's visible and yellow. When it's in the `closed` state, it's transparent and green.
 
 In HTML, these attributes are set using ordinary CSS styles such as color and opacity. In Angular, use the `style()` function to specify a set of CSS styles for use with animations. You can collect a set of styles in an animation state, and give the state a name, such as `open` or `closed`.
 
 <div class="lightbox">
   <img src="generated/images/guide/animations/open-closed.png" alt="open and closed states">
+</div>
+
+<div class="alert is-helpful">
+
+  Let's create a new `open-close` component to animate with simple transitions.
+
+  Run the following command in terminal to generate the component:
+
+  `ng g component open-close`
+
+  This will create the component at `src/app/open-close.component.ts`.
 </div>
 
 ### Animation state and styles
@@ -118,7 +129,7 @@ The second argument, `delay`, has the same syntax as `duration`. For example:
 
 * Wait for 100ms and then run for 200ms: `'0.2s 100ms'`
 
-The third argument, `easing`, controls how the animation [accelerates and decelerates](http://easings.net/) during its runtime. For example, `ease-in` causes the animation to begin slowly, and to pick up speed as it progresses.
+The third argument, `easing`, controls how the animation [accelerates and decelerates](https://easings.net/) during its runtime. For example, `ease-in` causes the animation to begin slowly, and to pick up speed as it progresses.
 
 * Wait for 100ms, run for 200ms. Use a deceleration curve to start out fast and slowly decelerate to a resting point: `'0.2s 100ms ease-out'`
 
@@ -192,7 +203,7 @@ The animation is executed or triggered when the expression value changes to a ne
 The following code snippet binds the trigger to the value of the `isOpen` property.
 
 <code-example path="animations/src/app/open-close.component.1.html" header="src/app/open-close.component.html"
-region="compare">
+region="trigger">
 </code-example>
 
 In this example, when the `isOpen` expression evaluates to a defined state of `open` or `closed`, it notifies the trigger `openClose` of a state change. Then it's up to the `openClose` code to handle the state change and kick off a state change animation.
@@ -286,7 +297,7 @@ What it does
 
 <tr>
 <td><code>query()</code></td>
-<td>Use to find one or more inner HTML elements within the current element. </td>
+<td>Finds one or more inner HTML elements within the current element. </td>
 </tr>
 
 <tr>
@@ -327,5 +338,5 @@ You may also be interested in the following:
 
 <div class="alert is-helpful">
 
-Check out this full animation [demo](http://animationsftw.in/#/) with accompanying [presentation](https://www.youtube.com/watch?v=JhNo3Wvj6UQ&feature=youtu.be&t=2h47m53s), shown at the AngularConnect conference in November 2017.
+Check out this [presentation](https://www.youtube.com/watch?v=rnTK9meY5us), shown at the AngularConnect conference in November 2017, and the accompanying [source code](https://github.com/matsko/animationsftw.in).
 </div>

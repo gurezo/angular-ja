@@ -21,7 +21,7 @@
 フィーチャーモジュールは、ユーザーのワークフロー、ルーティング、フォームなど、
 特定のアプリケーションのニーズにフォーカスした一貫した機能のセットを提供します。
 ルートモジュール内だけですべてを完結できますが、
-フィーチャーモジュールはアプリを集中した領域に分割するのに役立ちます。 
+フィーチャーモジュールはアプリケーションを集中した領域に分割するのに役立ちます。 
 フィーチャーモジュールは、それが提供するサービスや共有するコンポーネント、
 ディレクティブ、およびパイプを介して、ルートモジュールおよび他のモジュールと連携します。
 
@@ -79,7 +79,7 @@ ng generate component customer-dashboard/CustomerDashboard
 <code-example path="feature-modules/src/app/app.module.ts" region="app-module" header="src/app/app.module.ts"></code-example>
 
 
-これで`AppModule`はフィーチャーモジュールについて知っている状態になりました。フィーチャーモジュールにサービスプロバイダーを追加した場合、他のフィーチャーモジュールと同様に`AppModule`もそれについて知っている状態になります。ただし、NgModuleは自身のコンポーネントを公開しません。
+これで`AppModule`はフィーチャーモジュールについて知っている状態になりました。フィーチャーモジュールにサービスプロバイダーを追加した場合、他のフィーチャーモジュールと同様に`AppModule`もそれについて知っている状態になります。ただし、NgModuleはデフォルトでは自身のコンポーネントを公開しません。
 
 
 ## フィーチャーモジュールのコンポーネントテンプレートをレンダリングする
@@ -105,8 +105,6 @@ CLIがフィーチャーモジュールのために`CustomerDashboardComponent`�
 <div class="lightbox">
   <img src="generated/images/guide/feature-modules/feature-module.png" alt="feature module component">
 </div>
-
-<hr />
 
 ## NgModuleについてのさらに詳しい情報
 

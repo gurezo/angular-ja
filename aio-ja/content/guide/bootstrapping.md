@@ -18,8 +18,6 @@ NgModuleは、アプリケーションパーツがどのように組み合わさ
 /* JavaScript imports */
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 
@@ -29,9 +27,7 @@ import { AppComponent } from './app.component';
     AppComponent
   ],
   imports: [
-    BrowserModule,
-    FormsModule,
-    HttpClientModule
+    BrowserModule
   ],
   providers: [],
   bootstrap: [AppComponent]
@@ -87,8 +83,6 @@ Angular CLIで作成されたデフォルトのアプリケーションにはコ
 宣言は1つのモジュールにしか属せないので、1つの`@NgModule`だけに宣言します。
 必要なときは、必要な宣言をもつモジュールをインポートします。
 
-**`@NgModule`の参照のみ**が`imports`配列に格納されます。
-
 
 ### `@NgModule`とディレクティブの使用
 
@@ -116,10 +110,7 @@ Angular CLIで作成されたデフォルトのアプリケーションにはコ
 
 これで`ItemDirective`をコンポーネントで使えるようになりました。この例では`AppModule`を使いましたが、フィーチャーモジュールでも同じようにできます。ディレクティブの詳細については、[属性ディレクティブ](guide/attribute-directives)と[構造ディレクティブ](guide/structural-directives)を参照してください。また、[パイプ](guide/pipes)やコンポーネントにも同じテクニックを使用します。
 
-コンポーネント、ディレクティブ、およびパイプは、1つのモジュールにのみ属することを忘れないでください。必要なモジュールをインポートしてシェアするために、アプリケーション中で宣言しなければならないのは一度だけです。これにより時間が節約され、アプリをリーンに保つのに役立ちます。
-
-
-
+コンポーネント、ディレクティブ、およびパイプは、1つのモジュールにのみ属することを忘れないでください。必要なモジュールをインポートしてシェアするために、アプリケーション中で宣言しなければならないのは一度だけです。これにより時間が節約され、アプリケーションをリーンに保つのに役立ちます。
 
 {@a imports}
 
@@ -127,6 +118,12 @@ Angular CLIで作成されたデフォルトのアプリケーションにはコ
 
 モジュールの`imports`配列は、`@NgModule`メタデータオブジェクトの中にだけ現れます。
 このモジュールが適切に機能するために必要な他のNgModuleについてAngularに伝えます。
+
+<code-example
+    path="bootstrapping/src/app/app.module.ts"
+    region="imports"
+    header="src/app/app.module.ts (excerpt)">
+</code-example>
 
 このモジュールのリストは、このモジュール内のコンポーネントのテンプレートが参照するコンポーネント、
 ディレクティブ、またはパイプをエクスポートするモジュールです。
@@ -136,12 +133,14 @@ Angular CLIで作成されたデフォルトのアプリケーションにはコ
 クラスが別のモジュールからインポートされたときに、
 別のコンポーネント、ディレクティブ、またはパイプを参照できます。
 
+
+
 {@a bootstrap-array}
 
 ## `providers`配列
 
 プロバイダー配列は、アプリケーションが必要とするサービスを並べます。
-ここにサービスを並べると、アプリ全体で利用できるようになります。
+ここにサービスを並べると、アプリケーション全体で利用できるようになります。
 フィーチャモジュールと遅延ロードを使用しているときにはスコープを設定できます。
 詳細については、[プロバイダー](guide/providers)を参照してください。
 
@@ -162,4 +161,4 @@ Angular CLIで作成されたデフォルトのアプリケーションにはコ
 
 ## Angularモジュールについての詳細
 
-アプリ中でよく使われるAngularモジュールについては、[よく使用されるモジュール](guide/frequent-ngmodules)を参照してください。
+アプリケーション中でよく使われるAngularモジュールについては、[よく使用されるモジュール](guide/frequent-ngmodules)を参照してください。

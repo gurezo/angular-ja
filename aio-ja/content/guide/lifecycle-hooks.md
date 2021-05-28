@@ -1,4 +1,4 @@
-# コンポーネントのライフサイクルにフックする
+# ライフサイクルフック
 
 コンポーネントインスタンスには、 Angular がコンポーネントクラスをインスタンス化してコンポーネントビューとその子ビューをレンダリングするときに開始するライフサイクルがあります。
 Angular はデータバインドプロパティがいつ変更されたかを確認し、必要に応じてビューとコンポーネントインスタンスの両方を更新するため、ライフサイクルは変更の検出を続けます。
@@ -12,7 +12,7 @@ Angular は実行中にインスタンスを作成、更新、破棄するため
 ライフサイクルフックを使用する前に、次の基本的な知識が必要です:
 
 * [TypeScript プログラミング](https://www.typescriptlang.org/)
-* [Angularの概念](guide/architecture "Introduction to fundamental app-design concepts") で説明されている Angular アプリの設計の基礎。
+* [Angularの概念](guide/architecture "Introduction to fundamental app-design concepts") で説明されている Angular アプリケーションの設計の基礎。
 
 {@a hooks-overview}
 
@@ -24,7 +24,7 @@ Angular の `core` ライブラリ中の 1 つ以上の *ライフサイクル�
 各インターフェースは、単一のフックメソッドのプロトタイプを定義します。その名前は、接頭辞が `ng` のインターフェース名です。
 たとえば、 `OnInit` インターフェースには `ngOnInit()` という名前のフックメソッドがあります。 このメソッドをコンポーネントまたはディレクティブクラスに実装する場合、 Angular はそのコンポーネントまたはディレクティブの入力プロパティをはじめて確認した直後にこのメソッドを呼び出します。
 
-<code-example path="lifecycle-hooks/src/app/peek-a-boo.component.ts" region="ngOnInit" header="peek-a-boo.component.ts (excerpt)"></code-example>
+<code-example path="lifecycle-hooks/src/app/peek-a-boo.directive.ts" region="ngOnInit" header="peek-a-boo.directive.ts (excerpt)"></code-example>
 
 ライフサイクルフックのすべて（またはいずれか）を実装する必要はなく、必要なものだけを実装します。
 
@@ -60,7 +60,9 @@ Angular は次のシーケンスでフックメソッドを実行します。 �
     </td>
     <td>
 
-      `ngOnInit()` の前、および1つ以上のデータバインド入力プロパティが変更されるたびに呼び出されます。
+      （コンポーネントがバインドされた入力を持つ場合）`ngOnInit()` の前、および1つ以上のデータバインド入力プロパティが変更されるたびに呼び出されます。
+
+      コンポーネントが入力を持たない場合や入力を提供せずに使用している場合、フレームワークは `ngOnChanges()` を呼び出さないことに注意してください。
 
     </td>
   </tr>
@@ -77,7 +79,7 @@ Angular は次のシーケンスでフックメソッドを実行します。 �
     </td>
     <td>
 
-      最初の `ngOnChanges()` の後で1回呼び出されます。
+      最初の `ngOnChanges()` の後で1回呼び出されます。`ngOnInit()` is still called even when `ngOnChanges()` is not (which is the case when there are no template-bound inputs).
 
     </td>
   </tr>
@@ -162,7 +164,7 @@ Angular は次のシーケンスでフックメソッドを実行します。 �
 
     <td>
 
-      `ngAfterViewInit()` およびその後のすべての `ngAfterContentChecke()` の後に呼び出されます。
+      `ngAfterViewInit()` およびその後のすべての `ngAfterContentChecked()` の後に呼び出されます。
 
     </td>
   </tr>
@@ -303,12 +305,6 @@ Angular は次のシーケンスでフックメソッドを実行します。 �
   `ngOnInit()` は、コンポーネントが初期データをフェッチするのに適した場所です。
   例については、 [Tour of Heroesチュートリアル](tutorial/toh-pt4#oninit) を参照してください。
 
-  <div class="alert is-helpful">
-
-  Angular チームリーダーの Misko Hevery は、 [Flaw：Constructor does Real Work](http://misko.hevery.com/code-reviewers-guide/flaw-constructor-does-real-work/) で、複雑なコンストラクターロジックを避けるべき理由を説明しています。
-
-  </div>
-
 * Angular が入力プロパティを設定した後にコンポーネントを設定します。
   コンストラクターは、初期ローカル変数を単純な値に設定するだけです。
 
@@ -398,14 +394,7 @@ Angular がフックを予想される順序で呼び出す方法を示すため
 
 <code-example path="lifecycle-hooks/src/app/spy.component.html" region="template" header="src/app/spy.component.html"></code-example>
 
-各スパイの作成と破棄は、次のように、 *フックログ* のエントリで、
-アタッチされた hero の `<div>` の出現と消滅をマークします:
-
-<div class="lightbox">
-  <img src='generated/images/guide/lifecycle-hooks/spy-directive.gif' alt="Spy Directive">
-</div>
-
-ヒーローを追加すると、新しい hero の `<div>` が作成されます。 スパイの `ngOnInit()` はそのイベントを記録します。
+各スパイの作成と破棄は、次のように、 *フックログ* のエントリで、アタッチされた hero の `<div>` の出現と消滅をマークします。ヒーローを追加すると、新しい hero の `<div>` が作成されます。 スパイの `ngOnInit()` はそのイベントを記録します。
 
 *リセット* ボタンは `heroes` リストをクリアします。
 Angular は DOM からすべての hero の `<div>` 要素を削除し、同時にそれらのスパイディレクティブを破棄します。
@@ -467,7 +456,7 @@ Angular が呼び出す `AfterViewInit()` および `AfterViewChecked()` フッ�
 
 `<input>` にヒーローの名前を表示する子ビューは次のとおりです:
 
-<code-example path="lifecycle-hooks/src/app/after-view.component.ts" region="child-view" header="ChildComponent"></code-example>
+<code-example path="lifecycle-hooks/src/app/child-view.component.ts" region="child-view" header="ChildViewComponent"></code-example>
 
 `AfterViewComponent` は、 *テンプレート内に* この子ビューを表示します:
 
@@ -531,7 +520,7 @@ Angular が呼び出す `AfterViewInit()` および `AfterViewChecked()` フッ�
 `AfterContentComponent` の親からコンテンツをインポートします。
 以下は、親のテンプレートです。
 
-<code-example path="lifecycle-hooks/src/app/after-content.component.ts" region="parent-template" header="AfterContentParentComponent (template excerpt)"></code-example>
+<code-example path="lifecycle-hooks/src/app/after-content-parent.component.ts" region="parent-template" header="AfterContentParentComponent (template excerpt)"></code-example>
 
 `<app-child>` タグが `<after-content>` タグの間に隠れていることに注意してください。
 *コンテンツをコンポーネントに投影する場合を除き*
@@ -550,7 +539,7 @@ Angular が呼び出す `AfterViewInit()` および `AfterViewChecked()` フッ�
 </div>
 
 
-#### AfterContent フックの使用
+#### AfterContent フックの使用 {@a using-aftercontent-hooks}
 
 *AfterContent* フックは *AfterView* フックに似ています。
 主な違いは、子コンポーネントにあります。

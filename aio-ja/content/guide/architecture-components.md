@@ -3,7 +3,7 @@
 *コンポーネント*は、[*ビュー*](guide/glossary#view "Definition of view")と呼ばれる画面のパッチを制御します。
 たとえば、個々のコンポーネントは[Tour of Heroes チュートリアル](tutorial)の次のビューを定義して制御します。
 
-* ナビゲーションリンクをもつアプリのルート
+* ナビゲーションリンクをもつアプリケーションのルート
 * ヒーローのリスト
 * ヒーローエディタ
 
@@ -12,12 +12,12 @@
 
 たとえば、`HeroListComponent`にはヒーローの配列を保持する`heroes`プロパティがあります。
 その`selectHero()`メソッドは、ユーザーがクリックしてそのリストからヒーローを選択すると`selectedHero`プロパティを設定します。
-コンポーネントはサービスからヒーローを取得します。これはコンストラクターのTypeScript[パラメータプロパティ](http://www.typescriptlang.org/docs/handbook/classes.html#parameter-properties)です。
+コンポーネントはサービスからヒーローを取得します。これはコンストラクターのTypeScript[パラメータプロパティ](https://www.typescriptlang.org/docs/handbook/classes.html#parameter-properties)です。
 サービスは、依存性の注入システムを介してコンポーネントに提供されます。
 
 <code-example path="architecture/src/app/hero-list.component.ts" header="src/app/hero-list.component.ts (class)" region="class"></code-example>
 
-Angularは、ユーザーがアプリケーションを移動するときにコンポーネントを作成、更新、および破棄します。アプリは、ライフサイクルの各段階で、`ngOnInit()`などの[ライフサイクルフック](guide/lifecycle-hooks)を使用してアクションを実行できます。
+Angularは、ユーザーがアプリケーションを移動するときにコンポーネントを作成、更新、および破棄します。アプリケーションは、ライフサイクルの各段階で、`ngOnInit()`などの[ライフサイクルフック](guide/lifecycle-hooks)を使用してアクションを実行できます。
 
 ## コンポーネントメタデータ {@a component-metadata}
 
@@ -59,7 +59,7 @@ Angularはこれらのタグ間に`HeroListComponent`ビューのインスタン
 
 ## テンプレート構文 {@a template-syntax}
 
-テンプレートは通常のHTMLと似ていますが、アプリのロジックとアプリとDOMデータの状態に基づいてHTMLを変更するAngular[テンプレート構文](guide/template-syntax)も含まれています。テンプレートは*データバインディング*を使用してアプリケーションとDOMデータを調整し、表示する前に*パイプ*でデータを変換し、*ディレクティブ*を使用して表示されるものにアプリケーションロジックを適用することができます。
+テンプレートは通常のHTMLと似ていますが、アプリケーションのロジックとアプリケーションとDOMデータの状態に基づいてHTMLを変更するAngular[テンプレート構文](guide/template-syntax)も含まれています。テンプレートは*データバインディング*を使用してアプリケーションとDOMデータを調整し、表示する前に*パイプ*でデータを変換し、*ディレクティブ*を使用して表示されるものにアプリケーションロジックを適用することができます。
 
 たとえば、チュートリアルの`HeroListComponent`のテンプレートは次のようになります。
 
@@ -89,7 +89,7 @@ Angular は、テンプレートの部分をコンポーネントの各部分に
 
 <code-example path="architecture/src/app/hero-list.component.1.html" header="src/app/hero-list.component.html (binding)" region="binding"></code-example>
 
-* `{{hero.name}}`[*補間*](guide/displaying-data#interpolation)は
+* `{{hero.name}}`[*補間*](guide/interpolation)は
 `<li>`要素内にコンポーネントの `hero.name`プロパティ値を表示します。
 
 * `[hero]`[*プロパティバインディング*](guide/property-binding)は、
@@ -126,7 +126,7 @@ Angular のパイプを使用すると、テンプレートHTMLの表示値変�
 
 Angular は、[date](api/common/DatePipe)パイプや[currency](api/common/CurrencyPipe)パイプなどのさまざまなパイプを定義します。完全なリストについては、[Pipes API リスト](api?type=pipe)を参照してください。新しいパイプを定義することもできます。
 
-HTMLテンプレートで値の変換を指定するには、[パイプ演算子 (|)](guide/template-expression-operators#pipe)を使用します。
+HTMLテンプレートで値の変換を指定するには、[パイプ演算子 (|)](guide/pipes)を使用します。
 
 `{{interpolated_value | pipe_name}}`
 
@@ -166,8 +166,8 @@ Angularは両方の種類のディレクティブを定義し、`@Directive()` �
 
 <code-example path="architecture/src/app/hero-list.component.1.html" header="src/app/hero-list.component.html (structural)" region="structural"></code-example>
 
-* [`*ngFor`](guide/displaying-data#ngFor) は繰り返しで、`heroes`リストのヒーローごとに `<li>` を打つようAngular に指示します。
-* [`*ngIf`](guide/displaying-data#ngIf) は条件分岐で、選択されたヒーローが存在する場合のみ `HeroDetail` コンポーネントが含まれます。
+* [`*ngFor`](guide/built-in-directives#ngFor) は繰り返しで、`heroes`リストのヒーローごとに `<li>` を打つようAngular に指示します。
+* [`*ngIf`](guide/built-in-directives#ngIf) は条件分岐で、選択されたヒーローが存在する場合のみ `HeroDetail` コンポーネントが含まれます。
 
 #### 属性ディレクティブ
 
@@ -181,7 +181,7 @@ Angularは両方の種類のディレクティブを定義し、`@Directive()` �
 Angularには、レイアウト構造を変更する
 （たとえば、[ngSwitch](guide/built-in-directives#ngSwitch)）  
 、あるいはDOM要素とコンポーネントのよう相を変更する  
-（たとえば、[ngStyle](guide/built-in-directives#ngStyle) や [ngClass](guide/built-in-directives#ngClass)）ディレクティブがあらかじめ定義されています。
+（たとえば、[ngStyle](guide/built-in-directives#ngstyle) や [ngClass](guide/built-in-directives#ngClass)）ディレクティブがあらかじめ定義されています。
 
 <div class="alert is-helpful">
 

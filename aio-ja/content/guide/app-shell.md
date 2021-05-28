@@ -24,27 +24,49 @@ CLI を使用して App shell を自動的に作成します。
 ng generate app-shell
 </code-example>
 
-* `client-project` はクライアントアプリケーションの名前を取ります。
+For more information about this command see [App shell command](cli/generate#app-shell-command). 
 
 このコマンドを実行した後、`angular.json` 設定ファイルが更新されて、他にいくつかの変更が加わり2つの新しいターゲットが追加されていることに気付くでしょう。
 
 <code-example language="json">
 "server": {
   "builder": "@angular-devkit/build-angular:server",
+  "defaultConfiguration": "production",
   "options": {
-    "outputPath": "dist/my-app-server",
+    "outputPath": "dist/my-app/server",
     "main": "src/main.server.ts",
     "tsConfig": "tsconfig.server.json"
+  },
+  "configurations": {
+    "development": {
+      "outputHashing": "none",
+    },
+    "production": {
+      "outputHashing": "media",
+      "fileReplacements": [
+        {
+          "replace": "src/environments/environment.ts",
+          "with": "src/environments/environment.prod.ts"
+        }
+      ],
+      "sourceMap": false,
+      "optimization": true
+    }
   }
 },
 "app-shell": {
   "builder": "@angular-devkit/build-angular:app-shell",
+  "defaultConfiguration": "production",
   "options": {
     "browserTarget": "my-app:build",
     "serverTarget": "my-app:server",
     "route": "shell"
   },
   "configurations": {
+    "development": {
+      "browserTarget": "my-app:build:development",
+      "serverTarget": "my-app:server:development",
+    },
     "production": {
       "browserTarget": "my-app:build:production",
       "serverTarget": "my-app:server:production"
@@ -53,12 +75,12 @@ ng generate app-shell
 }
 </code-example>
 
-## ステップ 3: アプリがシェルコンテンツで構築されていることを確認します
+## ステップ 3: アプリケーションがシェルコンテンツで構築されていることを確認します
 
 CLI を使って `app-shell` ターゲットを構築します。
 
 <code-example language="bash">
-ng run my-app:app-shell
+ng run my-app:app-shell:development
 </code-example>
 
 あるいは、プロダクション設定を利用します。
@@ -67,6 +89,6 @@ ng run my-app:app-shell
 ng run my-app:app-shell:production
 </code-example>
 
-ビルド出力を確認するには、`dist/my-app/index.html` を開きます。デフォルトのテキスト `app-shell works!` を探して、App shell の経路が出力の一部としてレンダリングされたことを示します。
+ビルド出力を確認するには、`dist/my-app/browser/index.html` を開きます。デフォルトのテキスト `app-shell works!` を探して、App shell の経路が出力の一部としてレンダリングされたことを示します。
 
 

@@ -5,7 +5,7 @@ Angular is written in TypeScript.
 It implements core and optional functionality as a set of TypeScript libraries that you import into your apps.
 
 The architecture of an Angular application relies on certain fundamental concepts.
-The basic building blocks are *NgModules*, which provide a compilation context for *components*. NgModules collect related code into functional sets; an Angular app is defined by a set of NgModules. An app always has at least a *root module* that enables bootstrapping, and typically has many more *feature modules*.
+The basic building blocks of the Angular framework are Angular components that are organized into *NgModules*. NgModules collect related code into functional sets; an Angular app is defined by a set of NgModules. An app always has at least a *root module* that enables bootstrapping, and typically has many more *feature modules*.
 
 * Components define *views*, which are sets of screen elements that Angular can choose among and modify according to your program logic and data.
 
@@ -114,13 +114,12 @@ The router interprets a link URL according to your app's view navigation rules a
 
 To define navigation rules, you associate *navigation paths* with your components. A path uses a URL-like syntax that integrates your program data, in much the same way that template syntax integrates your views with your program data. You can then apply program logic to choose which views to show or to hide, in response to user input and your own access rules.
 
- <div class="alert is-helpful">
+<div class="alert is-helpful">
 
-   For a more detailed discussion, see [Routing and navigation](guide/router).
+  For a more detailed discussion, see [Routing and navigation](guide/router).
 
- </div>
+</div>
 
-<hr/>
 
 ## What's next
 

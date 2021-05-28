@@ -10,7 +10,7 @@ Schematics を使用して、アーキテクチャのルールと規則を適用
 
 ## Angular CLI の Schematics
 
-Schematics は Angular エコシステムの一部です。 [Angular CLI](guide/glossary#cli)  は  Schematics を使用して Web アプリプロジェクトを変換します。
+Schematics は Angular エコシステムの一部です。 [Angular CLI](guide/glossary#cli)  は  Schematics を使用して Web アプリケーションプロジェクトを変換します。
 Schematics を変更し、新たに定義して、たとえば、依存関係の重大な変更を修正するためにコードを更新したり、既存のプロジェクトに新しいオプションやフレームワークを追加したりすることができます。
 
 `@schematics/angular` コレクションに含まれる Schematics は、デフォルトでは `ng generate` および `ng add` コマンドによって実行されます。
@@ -33,7 +33,7 @@ Schematic に関連付けられた JSON スキーマは、コマンドとサブ�
 これらのデフォルトは、コマンドラインのオプションに別の値を指定することで上書きできます。
 ワークスペースの生成オプションのデフォルトを変更する方法については、[ワークスペースの設定](guide/workspace-config) を参照してください。
 
-CLI がプロジェクトとプロジェクトの一部を生成するために使用するデフォルトの Schematics の JSON スキーマは、パッケージ [`@schematics/angular`](https://raw.githubusercontent.com/angular/angular-cli/v7.0.0/packages/schematics/angular/application/schema.json) に集約されます。
+CLI がプロジェクトとプロジェクトの一部を生成するために使用するデフォルトの Schematics の JSON スキーマは、パッケージ [`@schematics/angular`](https://github.com/angular/angular-cli/tree/master/packages/schematics/angular) に集約されます。
 `--help` の出力に示されているように、スキーマは `ng generate` サブコマンドごとに CLI で使用可能なオプションを記述しています。
 
 ## ライブラリの Schematics の開発
@@ -59,7 +59,7 @@ CLI がプロジェクトとプロジェクトの一部を生成するために�
 あなたはこれを、自身の追加 Schematic の例およびモデルとして見ることができます。
 
 パートナーライブラリとサードパーティライブラリも、追加 Schematics により Angular CLIをサポートしています。
-たとえば、`@ng-bootstrap/schematics` はアプリに [ng-bootstrap](https://ng-bootstrap.github.io/) を追加し、`@clr/angular` は [VMWare から Clarity](https://vmware.github.io/clarity/documentation/v1.0/get-started) をインストールして設定します。
+たとえば、`@ng-bootstrap/schematics` はアプリケーションに [ng-bootstrap](https://ng-bootstrap.github.io/) を追加し、`@clr/angular` は [VMWare から Clarity](https://vmware.github.io/clarity/documentation/v1.0/get-started) をインストールして設定します。
 
 また、追加 Schematic は設定の変更のためにプロジェクトを更新したり、依存関係（ポリフィルなど）を追加したり、スキャフォールドパッケージ固有の初期化コードを追加したりできます。
 たとえば、`@angular/pwa` Schematic は、マニフェストとサービスワーカーを追加することでアプリケーションを PWA に変換し、`@angular/elements` Schematic は、Angular Elements の `document-register-element.js` ポリフィルと依存関係を追加します。
