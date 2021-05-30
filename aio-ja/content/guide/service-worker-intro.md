@@ -6,7 +6,7 @@ Service Workerは、従来のWebデプロイメントモデルを強化し、ネ
 
 Service Workerは、ネットワークプロキシとして機能します。アプリケーションによって行われたすべてのHTTPリクエストを傍受し、応答する方法を選択できます。たとえば、ローカルキャッシュを参照し、キャッシュされたレスポンスがある場合はそのレスポンスを送信することができます。プロキシは、`fetch`のようなプログラム的にAPIによって作られたリクエストでも制限されません。HTMLで参照されるリソースや、最初の`index.html`へのリクエストでさえも含みます。したがって、Service Workerベースのキャッシュは完全にプログラム可能であり、サーバー指定のキャッシュヘッダーに依存しません。
 
-アプリケーションを構成する他のスクリプト（Angularアプリなど）とは異なり、Service Workerは、ユーザーがタブを閉じた後も保持されます。次にブラウザがアプリケーションをロードすると、Service Workerが最初にロードされ、アプリケーションのロードに必要なすべてのリソース要求をインターセプトできます。Service Workerの設計次第では、アプリケーションを *ネットワークに接続せずに完全にロードできます*。
+アプリケーションを構成する他のスクリプト（Angularアプリケーションなど）とは異なり、Service Workerは、ユーザーがタブを閉じた後も保持されます。次にブラウザがアプリケーションをロードすると、Service Workerが最初にロードされ、アプリケーションのロードに必要なすべてのリソース要求をインターセプトできます。Service Workerの設計次第では、アプリケーションを *ネットワークに接続せずに完全にロードできます*。
 
 高速で信頼性あるネットワークであっても、ラウンドトリップ遅延はアプリケーションをロードする際に大きな遅延を招く可能性があります。Service Workerを使用してネットワークへの依存を減らすと、ユーザー体験が大幅に向上します。
 
@@ -70,7 +70,7 @@ The rest of the articles in this section specifically address the Angular implem
 
 Service Workerの一般的な情報については、[Service Workerの紹介](https://developers.google.com/web/fundamentals/primers/service-workers/)を参照してください。
 
-ブラウザサポートの詳細については、[Service Workerの紹介](https://developers.google.com/web/fundamentals/primers/service-workers/)の[サポートしているブラウザを使う](https://developers.google.com/web/fundamentals/primers/service-workers/#browser_support)セクションや、Jake Archibaldの[Is Serviceworker ready?](https://jakearchibald.github.io/isserviceworkerready/)、[Can I Use](http://caniuse.com/#feat=serviceworkers)を参照してください。
+ブラウザサポートの詳細については、[Service Workerの紹介](https://developers.google.com/web/fundamentals/primers/service-workers/)の[サポートしているブラウザを使う](https://developers.google.com/web/fundamentals/primers/service-workers/#browser_support)セクションや、Jake Archibaldの[Is Serviceworker ready?](https://jakearchibald.github.io/isserviceworkerready/)、[Can I Use](https://caniuse.com/#feat=serviceworkers)を参照してください。
 
 For additional recommendations and examples, see:
 

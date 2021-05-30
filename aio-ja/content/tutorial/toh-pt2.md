@@ -1,6 +1,6 @@
 # 選択リストを表示する
 
-このページでは「Tour of Heroes」アプリを拡張してヒーローのリストを表示し、
+このページでは「Tour of Heroes」アプリケーションを拡張してヒーローのリストを表示し、
 ユーザーがヒーローを選択してヒーローの詳細を表示できるようにします。
 
 <div class="alert is-helpful">
@@ -53,8 +53,7 @@
 <code-example path="toh-pt2/src/app/heroes/heroes.component.1.html" region="li">
 </code-example>
 
-[`*ngFor`](guide/built-in-directives#ngFor) はAngularの _繰り返し_ ディレクティブです。
-これは、リスト内の各要素に対して、ホスト要素を繰り返します。
+プロパティ 'hero' が存在しないため、エラーが表示されます。個々のヒーローにアクセスしてすべてのヒーローをリストアップするには、`<li>` に `*ngFor` を追加してヒーローのリストを繰り返し表示します。
 
 この例の構文は次のとおりです。
 
@@ -104,9 +103,9 @@ CLIが `HeroesComponent` を生成するとき、 `HeroesComponent` のために
 
 </div>
 
-## Master/Detail
+## 詳細の表示
 
-あなたが **master** リストの中のヒーローをクリックしたとき、コンポーネントは選択されたヒーローの **詳細** をページの下部に表示させる必要があります。
+あなたがリストの中のヒーローをクリックしたとき、コンポーネントは選択されたヒーローの詳細をページの下部に表示させる必要があります。
 
 この章では、ヒーローのアイテムがクリックされるのを待ち、クリックされたらヒーローの詳細を更新してみましょう。
 
@@ -146,13 +145,13 @@ CLIが `HeroesComponent` を生成するとき、 `HeroesComponent` のために
 
 ブラウザの開発者ツールを開いて、コンソールの中のこのようなエラーメッセージを探してください：
 
-<code-example language="sh" class="code-shell">
+<code-example language="sh">
   HeroesComponent.html:3 ERROR TypeError: Cannot read property 'name' of undefined
 </code-example>
 
 ### なにが起きたのか？
 
-アプリを起動した際、 `selectedHero` は _意図的に_ `undefined` です。
+アプリケーションを起動した際、 `selectedHero` は _意図的に_ `undefined` です。
 
 `selectedHero` のプロパティを参照するテンプレート内での式のバインディングは &mdash; `{{selectedHero.name}}` のような式 &mdash; 選択されたヒーローが存在しないため _失敗_ しなければなりません。
 
@@ -186,18 +185,14 @@ Angularの `*ngIf` ディレクティブを `<div>` に追加し、 `selectedHer
 
 ### 選択されたヒーローを装飾する
 
-すべての `<li>` 要素が同じように見える場合 _選択されたヒーロー_ をリスト内で識別することは困難です。
-
-もしユーザーが "Magneta" をクリックすると、そのヒーローはこのような目立った背景色で描画されるべきです：
+選択されたヒーローを識別しやすくするために、[先に追加したスタイル](#styles)の中の`.selected`というCSSクラスを使用することができます。
+ユーザーがクリックしたときに `.selected` クラスを `<li>` に適用するには、クラスバインディングを使用します。
 
 <div class="lightbox">
-  <img src='generated/images/guide/toh/heroes-list-selected.png' alt="Selected hero">
+  <img src='generated/images/guide/toh/heroes-list-selected.png' alt="Selected hero with dark background and light text that differentiates it from unselected list items">
 </div>
 
-_選択されたヒーロー_ の着色は [あなたが先ほど追加したスタイル](#styles) の `.selected` CSSクラスの仕事です。
-あなたはただ、ユーザーがクリックしたときに `.selected` クラスを `<li>` に適用するだけです。
-
-Angularの [クラスバインディング](guide/attribute-binding#class-binding) は条件がついたCSSクラスの追加と削除を容易にします。
+Angularの [クラスバインディング](guide/attribute-binding#class-binding) は条件に応じたCSSクラスの追加と削除ができます。
 装飾したい要素に `[class.some-css-class]="some-condition"` を追加するだけです。
 
 `HeroesComponent` テンプレートの中の `<li>` に `[class.selected]` バインディングを追加してください：
@@ -232,7 +227,7 @@ Angularの [クラスバインディング](guide/attribute-binding#class-bindin
 
 ## まとめ
 
-* 「Tour of Heroes」アプリはMaster/Detail画面にヒーローのリストを表示します
+* 「Tour of Heroes」アプリケーションはヒーローのリストと詳細ビューを表示します
 * ユーザーはヒーローを選択し、そのヒーローの詳細を見ることができます
 * リストを表示するために `*ngFor` を使いました
 * HTMLのブロックを条件付きで含める、または除外するために `*ngIf` を使いました

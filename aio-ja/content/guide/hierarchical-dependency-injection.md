@@ -1,7 +1,7 @@
 # 階層的インジェクター
 
 Angularのインジェクターには、
-アプリで期待とおりのインジェクターブルの可視性を実現するために活用できるルールがあります。
+アプリケーションで期待とおりのインジェクターブルの可視性を実現するために活用できるルールがあります。
 これらのルールを理解することにより、
 プロバイダーを宣言する必要があるNgModuleまたはコンポーネントを決定できます。
 
@@ -34,13 +34,13 @@ Angularには2つのインジェクター階層があります。
 `@NgModule()`の`providers`
 配列を使用するよりも望ましい方法です。
 なぜなら、`@Injectable()`の`providedIn`を使用することで、
-最適化ツールはアプリで使用されていないサービスをツリーシェイキングし、
+最適化ツールはアプリケーションで使用されていないサービスをツリーシェイキングし、
 バンドルサイズをより小さくできるからです。
 
 ツリーシェイキングは特にライブラリで役立ちます。
-ライブラリを使用しているアプリにとって注入する必要のないものもあるからです。
-詳しくは[DI プロバイダー](guide/dependency-injection-providers)
-の[ツリーシェイク可能なプロバイダー](guide/dependency-injection-providers#tree-shakable-providers)
+ライブラリを使用しているアプリケーションにとって注入する必要のないものもあるからです。
+詳しくは[サービスと依存性の注入の紹介](guide/architecture-services)
+の[ツリーシェイク可能なプロバイダー](guide/architecture-services#providing-services)
 のセクションを参照してください。
 
 </div>
@@ -77,7 +77,7 @@ export class ItemService {
 `ModuleInjector`と`NullInjector()`です。
 
 Angularが、次の`main.ts`
-を使用してどのようにアプリをブートストラップするかを確認してください:
+を使用してどのようにアプリケーションをブートストラップするかを確認してください:
 
 ```javascript
 platformBrowserDynamic().bootstrapModule(AppModule).then(ref => {...})
@@ -90,8 +90,8 @@ platformBrowserDynamic().bootstrapModule(AppModule).then(ref => {...})
 `platformBrowserDynamic()`メソッドは、
 `PlatformModule`によって設定された、プラットフォーム固有の依存関係を含むインジェクターを作成します。
 これにより、
-複数のアプリがプラットフォームの設定を共有できます。
-たとえば、実行しているアプリの数に関係なく、
+複数のアプリケーションがプラットフォームの設定を共有できます。
+たとえば、実行しているアプリケーションの数に関係なく、
 ブラウザにはURLバーは1つしかありません。
 `platformBrowser()`関数を使用して`extraProviders`を提供することにより、
 プラットフォームレベルで追加のプラットフォーム固有のプロバイダーを設定できます。
@@ -125,10 +125,10 @@ Routerが、子`ModuleInjector`を作成するように、
 
 <h4><code>@Injectable()</code> vs. <code>@NgModule()</code></h4>
 
-`AppModule`の`@NgModule()`でアプリ全体のプロバイダーを設定すると、
+`AppModule`の`@NgModule()`でアプリケーション全体のプロバイダーを設定すると、
 `@Injectable()`メタデータで`root`用に設定されたプロバイダーをオーバーライドします。
 これを行うと、
-複数のアプリで共有されるサービスのデフォルト以外のプロバイダーを設定できます。
+複数のアプリケーションで共有されるサービスのデフォルト以外のプロバイダーを設定できます。
 
 コンポーネントのルーターの設定がデフォルト以外の
 [LocationStrategy](guide/router#location-strategy)をもつように、
@@ -227,7 +227,7 @@ Angularの解決動作は、`@Optional()`、
 `@Self()`、`@SkipSelf()`、`@Host()`で変更できます。
 `@angular/core`からそれぞれをインポートし、サービスを注入するときにコンポーネントクラスのコンストラクターでそれぞれを使用します。
 
-このセクションがカバーする、解決修飾子を紹介する動作中のアプリについては、
+このセクションがカバーする、解決修飾子を紹介する動作中のアプリケーションについては、
 <live-example name="resolution-modifiers">解決修飾子の例</live-example>を参照してください。
 
 ### 修飾子のタイプ
@@ -254,7 +254,7 @@ Angularは注入するサービスをオプショナルと見なすことがで�
 この方法では、実行時に解決できない場合、Angularはエラーをスローするのではなく、
 単にサービスを`null`として解決します。次の例では、`OptionalService` サービスが、
 `@NgModule()`、またはコンポーネントクラスで提供されていないため、
-アプリのどこからも利用できません。
+アプリケーションのどこからも利用できません。
 
 <code-example path="resolution-modifiers/src/app/optional/optional.component.ts" header="resolution-modifiers/src/app/optional/optional.component.ts" region="optional-component">
 
@@ -387,7 +387,7 @@ Angularのテンプレートの根本的な論理構造を理解すると、
 
 コンポーネントクラス内でサービスを設定する場合は、`<#VIEW>`境界の概念を理解することが特に重要です。
 
-## `@Component()`内でサービスを提供する
+## `@Component()`内でサービスを提供する {@a providing-services-in-component}
 
 どのように`@Component()`(または`@Directive()`)デコレーターを介してサービスを提供するかによって、
 それらの可視性が決まります。
@@ -442,14 +442,14 @@ Angularのテンプレートの根本的な論理構造を理解すると、
 
 ### アプリケーション構造の例
 
-サンプルアプリでは、`🌺`(赤いハイビスカス)
+サンプルアプリケーションでは、`🌺`(赤いハイビスカス)
 が値の`emoji`をもつ`FlowerService`が`root`で提供されます。
 
 <code-example path="providers-viewproviders/src/app/flower.service.ts" header="providers-viewproviders/src/app/flower.service.ts" region="flowerservice">
 
 </code-example>
 
-`AppComponent`と`ChildComponent`のみをもつシンプルなアプリを考えてください。
+`AppComponent`と`ChildComponent`のみをもつシンプルなアプリケーションを考えてください。
 もっとも基本的なレンダリングビューは、
 次のようなネストされたHTML要素のように見えます:
 
@@ -615,7 +615,7 @@ Emoji from FlowerService: 🌻
 </div>
 
 
-サンプルアプリでは、`viewProviders`を説明するために
+サンプルアプリケーションでは、`viewProviders`を説明するために
 `AnimalService`という2つ目のサービスを取り上げます。
 
 最初に、クジラの`emoji`🐳プロパティをもつ`AnimalService`を作成します :
@@ -803,7 +803,7 @@ Emoji from AnimalService: 🐶
 
 {@a modify-visibility}
 
-## サービスの可視性を変更する
+## サービスの可視性を変更する {@a modifying-service-visibility}
 
 このセクションでは、可視性デコレーター`@Host()`、`@Self()`、および
 `@SkipSelf()`を使用して、
@@ -855,7 +855,7 @@ Emoji from FlowerService: 🌺
 `<app-child>`
 は🌻(ヒマワリ)を提供しますが、`@SkipSelf()`
 により現在のインジェクターがそれ自体をスキップして親を見るため、
-アプリは🌺(赤いハイビスカス)をレンダリングします。
+アプリケーションは🌺(赤いハイビスカス)をレンダリングします。
 
 `FlowerService`の`@Inject`に(`@SkipSelf()`に加えて)`@Host()`を追加すると、
 結果は`null`になります。
@@ -880,8 +880,8 @@ Emoji from FlowerService: 🌺
 
 <div class="alert is-helpful">
 
-**Note:** サンプルアプリは`@Optional()`を使用しているため、
-アプリはエラーをスローしませんが、原則は同じです。
+**Note:** サンプルアプリケーションは`@Optional()`を使用しているため、
+アプリケーションはエラーをスローしませんが、原則は同じです。
 
 </div>
 
@@ -1045,7 +1045,7 @@ export class ChildComponent {
 
 さまざまなレベルで1つ以上のプロバイダーを設定する機能により、
 興味深く有用な可能性が生まれます。
-次の複数のシナリオの動作するアプリについては、<live-example>ヒーローのユースケースの例</live-example>を参照してください。
+次の複数のシナリオの動作するアプリケーションについては、<live-example>ヒーローのユースケースの例</live-example>を参照してください。
 
 ### シナリオ: サービスの隔離
 
@@ -1182,8 +1182,6 @@ _編集中の納税申告書_は、ゲッターとセッターで実装されて
   <img src="generated/images/guide/dependency-injection/injector-tree.png" alt="car injector tree">
 </div>
 
-
-<hr />
 
 ## 依存性の注入の詳細について
 

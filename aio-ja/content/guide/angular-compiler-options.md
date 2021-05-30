@@ -1,4 +1,4 @@
-# Angular コンパイラオプション
+# Angular コンパイラオプション {@a angular-compiler-options}
 
 [AOTコンパイル](guide/aot-compiler) を使用する場合、[TypeScript 設定ファイル](guide/typescript-configuration)で *テンプレート* コンパイラオプションを指定することにより、アプリケーションのコンパイル方法を制御できます。
 
@@ -31,7 +31,7 @@ TypeScript 設定は、`extends` プロパティを使用して別のファイ�
 
 ```json
 {
-  "extends": "../tsconfig.base.json",
+  "extends": "../tsconfig.json",
   "compilerOptions": {
     "experimentalDecorators": true,
     ...
@@ -64,8 +64,17 @@ TypeScript 設定は、`extends` プロパティを使用して別のファイ�
 
 ### `annotateForClosureCompiler`
 
-`true` の場合、 [Closure Compiler](https://github.com/google/closure-compiler) に必要な [JSDoc](http://usejsdoc.org/) コメントを、出力された JavaScript に注釈するために [Tsickle](https://github.com/angular/tsickle) を使用します。
+`true` の場合、 [Closure Compiler](https://github.com/google/closure-compiler) に必要な [JSDoc](https://jsdoc.app/) コメントを、出力された JavaScript に注釈するために [Tsickle](https://github.com/angular/tsickle) を使用します。
 デフォルトは `false` です。
+
+### `compilationMode`
+
+Specifies the compilation mode to use. The following modes are available:
+
+- `'full'`: generates fully AOT-compiled code according to the version of Angular that is currently being used.
+- `'partial'`: generates code in a stable, but intermediate form suitable for a published library.
+
+The default value is `'full'`.
 
 ### `disableExpressionLowering`
 
@@ -77,11 +86,24 @@ TypeScript 設定は、`extends` プロパティを使用して別のファイ�
 
 `true` の場合、このオプションはコンパイラに TypeScript のバージョンをチェックしないように指示します。TypeScript のサポートされていないバージョンが使用されている場合、コンパイラはチェックをスキップし、エラーにはなりません。このオプションを `true` に設定することは TypeScript のサポートされていないバージョンが未定義の動作をするかもしれないのでお勧めできません。このオプションはデフォルトでは `false` です。
 
+### `enableI18nLegacyMessageIdFormat`
+
+Instructs the Angular template compiler to generate legacy ids for messages that are tagged in templates by the `i18n` attribute.
+See [Localizing your app](guide/i18n#mark-text-for-translations) for more information about marking messages for localization.
+
+Set this option to `false` unless your project relies upon translations that were previously generated using legacy ids. Default is `true`.
+
+The pre-Ivy message extraction tooling generated a variety of legacy formats for extracted message ids.
+These message formats have a number of issues, such as whitespace handling and reliance upon information inside the original HTML of a template.
+
+The new message format is more resilient to whitespace changes, is the same across all translation file formats, and can be generated directly from calls to `$localize`.
+This allows `$localize` messages in application code to use the same id as identical `i18n` messages in component templates.
+
 ### `enableIvy`
 
 [Ivy](guide/ivy) コンパイルおよびレンダリングパイプラインを有効にします。バージョン9では、デフォルトは `true` です。バージョン9では、[Ivy をオプトアウト](guide/ivy#opting-out-of-angular-ivy) して、以前のコンパイラである View Engine を引き続き使用できます。
 
-CLI で生成されたライブラリプロジェクトの場合、バージョン9の `prod` 設定のデフォルトは `false` です。
+CLI で生成されたライブラリプロジェクトの場合、バージョン9の production 設定のデフォルトは `false` です。
 
 ### `enableResourceInlining`
 
@@ -89,7 +111,7 @@ CLI で生成されたライブラリプロジェクトの場合、バージョ�
 
 有効にすると、`ngc` の `.js` 出力には、遅延ロードされた `templateUrl` または `styleUrls` がありません。
 
-CLI で生成されたライブラリプロジェクトの場合、dev 構成のデフォルトは `true` です。
+CLI で生成されたライブラリプロジェクトの場合、development 構成のデフォルトは `true` です。
 
 
 {@a enablelegacytemplate}
@@ -128,7 +150,7 @@ CLI で生成されたライブラリプロジェクトの場合、dev 構成の
 
 `true` (推奨) の場合、TypeScript を使用してバインディング式を検証するテンプレートコンパイラの[バインディング式の検証](guide/aot-compiler#binding-expression-validation)フェーズを有効にするようにコンパイラに指示します。 For more information, see [Template type checking](guide/template-typecheck).
 
-デフォルトは `false` ですが、CLI コマンド `ng new` を使用すると、生成されたプロジェクトの設定でデフォルトで `true` に設定されます。
+デフォルトは `false` ですが、CLI コマンド `ng new --strict` を使用すると、生成されたプロジェクトの設定でデフォルトで `true` に設定されます。
 
 ### `generateCodeForLibraries`
 
@@ -162,12 +184,12 @@ TypeScript の `--outFile` オプションを使用している場合は、こ�
 
 このオプションは、`npm` に配布できない `.ngfactory.js` および `.ngstyle.js` ファイルの作成を避けながら、`npm` パッケージで配布するための `.metadata.json` ファイルを作成するようにテンプレートコンパイラに指示するために使用できます。
 
-CLI で生成されたライブラリプロジェクトの場合、dev 構成のデフォルトは `true` です。
+CLI で生成されたライブラリプロジェクトの場合、development 構成のデフォルトは `true` です。
 
 ### `strictMetadataEmit`
 
 `true` の場合、`"skipMetadataEmit"` が `false` のときに `.metadata.json` ファイルにエラーを報告するようにテンプレートコンパイラに指示します。
-このオプションはデフォルトでは `false` です。これは、`"skipMetadataEmit"` が `false` で `"skipTemplateCodeGen"` が `true` の場合にのみ使用します。
+このオプションはデフォルトでは `false` です。これは、`"skipMetadataEmit"` が `false` で `"skipTemplateCodegen"` が `true` の場合にのみ使用します。
 
 このオプションは、`npm` パッケージとのバンドル用に発行された `.metadata.json` ファイルを検証するためのものです。検証は厳密であり、テンプレートコンパイラで使用されたときにエラーが発生しないようなメタデータに対してエラーを発生させる可能性があります。シンボルを説明するコメントに `@dynamic` を含めることで、エクスポートされたシンボルに対してこのオプションによって発生するエラーを抑制することを選択できます。
 
@@ -180,7 +202,7 @@ CLI で生成されたライブラリプロジェクトの場合、dev 構成の
 このオプションはライブラリのビルド段階でこれらのエラーを検出することを可能にし、
 たとえば Angular ライブラリ自身を作成する際に使用されます。
 
-CLI で生成されたライブラリプロジェクトの場合、dev 構成のデフォルトは `true` です。
+CLI で生成されたライブラリプロジェクトの場合、development 構成のデフォルトは `true` です。
 
 ### `strictInjectionParameters`
 
@@ -190,7 +212,7 @@ CLI コマンド `ng new --strict` を使用すると、生成されたプロジ
 
 ### `strictTemplates`
 
-`true` の場合、Angular バージョン9で [厳格なテンプレートタイプチェック](guide/template-typecheck#strict-mode) を有効にします。厳格モードは [Ivy](guide/ivy) を使用する場合にのみ使用できます。
+`true` の場合、[厳格なテンプレートタイプチェック](guide/template-typecheck#strict-mode) を有効にします。厳格モードは [Ivy](guide/ivy) を使用する場合にのみ使用できます。(Angularバージョン9以上).
 
 追加の厳密性フラグを使用すると、特定のタイプの厳密なテンプレートタイプチェックを有効または無効にできます。[テンプレートエラーのトラブルシューティング](guide/template-typecheck#troubleshooting-template-errors) をご覧ください。
 
@@ -199,3 +221,14 @@ CLI コマンド `ng new --strict` を使用すると、生成されたプロジ
 ### `trace`
 
 `true` の場合、テンプレートのコンパイル中に追加情報を出力します。デフォルトは false です。
+
+
+{@a cli-options}
+## Command Line Options
+
+While most of the time you interact with the Angular Compiler indirectly using Angular CLI, when debugging certain issues, you might find it useful to invoke the Angular Compiler directly.
+You can use the `ngc` command provided by the `@angular/compiler-cli` npm package to call the compiler from the command line.
+
+The `ngc` command is just a wrapper around TypeScript's `tsc` compiler command and is primarily configured via the `tsconfig.json` configuration options documented in [the previous sections](#angular-compiler-options).
+
+In addition to the configuration file, you can also use [`tsc` command line options](https://www.typescriptlang.org/docs/handbook/compiler-options.html) to configure `ngc`.

@@ -300,8 +300,11 @@ E2E は、空と空では無い名前を含む入力プロパティのセッタ�
 しかし、親子の結びつきは親のテンプレート内で完結する必要があるため、制限があります。
 親コンポーネント *自身* は子へのアクセス権を持ちません。
 
-仮に親のコンポーネント *クラス* のインスタンスが、子のコンポーネントの変数の読み書きの必要性、または子の
-コンポーネントメソッド呼び出しの必要性があったとしても、*ローカル変数* テクニックを使うことはできません、
+You can't use the *local variable* technique if the parent component's *class* relies on the
+child component's *class*.  The parent-child relationship of the components is not established
+within each components respective *class* with the *local variable* technique.  Since the *class*
+instances are not connected to one another, the parent *class* cannot access the child *class*
+properties and methods.
 
 親コンポーネント *クラス* が、そのような種類のアクセスを要求する際、
 子のコンポーネントを 親の *ViewChild* として ***注入します*** 。
@@ -350,7 +353,7 @@ E2E は、空と空では無い名前を含む入力プロパティのセッタ�
 その後Angularは、親ビューのカウントダウン秒の表示を更新するには *遅すぎる* 時に
 `ngAfterViewInit` ライフサイクルフックを呼び出します。
  Angularの単方向データフロールールは、同じサイクル内の親ビューの更新を防ぎます。
-アプリは秒を表示するようになる前に　*1ターン待つ*　必要があります。
+アプリケーションは秒を表示するようになる前に　*1ターン待つ*　必要があります。
 
 `setTimeout()` を使用して1回の刻みを待ってから、
 タイマーコンポーネントから将来の値を取得するように `seconds()` メソッドを変更します。
@@ -406,7 +409,7 @@ E2E は、空と空では無い名前を含む入力プロパティのセッタ�
 
 この例は `subscription` を捕捉し、 `AstronautComponent` が破棄されたときに `unsubscribe()` していることに注意してください。
 これはメモリリークガードのステップです。 `AstronautComponent` のライフタイムは、
-アプリ自体のライフタイムと同じなので、このアプリには実際のリスクはありません。
+アプリケーション自体のライフタイムと同じなので、このアプリケーションには実際のリスクはありません。
 それは、より複雑なアプリケーションでは常に **真ではありません** 。
 
 このガードを`MissionControlComponent`に追加しないのは、

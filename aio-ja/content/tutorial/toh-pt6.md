@@ -9,7 +9,7 @@
 
 <div class="alert is-helpful">
 
-  For the sample app that this page describes, see the <live-example></live-example>.
+  For the sample application that this page describes, see the <live-example></live-example>.
 
 </div>
 
@@ -17,12 +17,12 @@
 
 `HttpClient` はHTTPを通してリモートサーバーと通信するための仕組みです。
 
-2つのステップでアプリのどこでも `HttpClient`を利用できるようにします。まず、インポートしてルートの `AppModule`に追加します：
+2つのステップでアプリケーションのどこでも `HttpClient`を利用できるようにします。まず、インポートしてルートの `AppModule`に追加します：
 
 <code-example path="toh-pt6/src/app/app.module.ts" region="import-http-client" header="src/app/app.module.ts (HttpClientModule import)">
 </code-example>
 
-次に、また `AppModule`で、`HttpClient` を `imports`配列に追加します。
+次に、また `AppModule`で、`HttpClientModule` を `imports`配列に追加します。
 
 <code-example path="toh-pt6/src/app/app.module.ts" region="import-httpclientmodule" header="src/app/app.module.ts (imports array excerpt)">
 </code-example>
@@ -30,10 +30,10 @@
 
 ## データサーバーをシミュレートする
 
-本チュートリアルでは [In-memory Web API](https://github.com/angular/in-memory-web-api "インメモリWebAPI")モジュール
+本チュートリアルでは [In-memory Web API](https://github.com/angular/angular/tree/master/packages/misc/angular-in-memory-web-api "インメモリWebAPI")モジュール
 を利用してリモートデータサーバーとの通信を再現します。
 
-このモジュールをインストールすると、アプリは*インメモリWeb API*がリクエストをインターセプトして、そのリクエストを
+このモジュールをインストールすると、アプリケーションは*インメモリWeb API*がリクエストをインターセプトして、そのリクエストを
 インメモリデータストアに適用し、シミュレートされたレスポンスを返すということを知らずに
 `HttpClient`を使ってリクエストを送信し、レスポンスを受信することができます。
 
@@ -50,7 +50,7 @@
 
 次のコマンドを使用して、npmからインメモリWeb APIパッケージをインストールします。
 
-<code-example language="sh" class="code-shell">
+<code-example language="sh">
   npm install angular-in-memory-web-api --save
 </code-example>
 
@@ -71,7 +71,7 @@
 
 次のコマンドで `src/app/in-memory-data.service.ts` クラスを生成します:
 
-<code-example language="sh" class="code-shell">
+<code-example language="sh">
   ng generate service InMemoryData
 </code-example>
 
@@ -82,7 +82,7 @@
 `in-memory-data.service.ts`ファイルは` mock-heroes.ts`の機能を引き継ぎます。
 ただし、このチュートリアルのいくつかのステップで必要になるため、まだ `mock-heroes.ts`を削除しないでください。
 
-サーバーが準備されたら、インメモリWeb APIを外せば、アプリのリクエストはサーバーに送信されます。
+サーバーが準備されたら、インメモリWeb APIを外せば、アプリケーションのリクエストはサーバーに送信されます。
 
 
 {@a import-heroes}
@@ -128,7 +128,7 @@ RxJSの`of()`を使って、
 ヒーローデータがモックサーバーから正しくロードされているはずです。
 
 `of()`と`http.get()`を取り替えましたが、
-どちらの関数も`Observable<Hero[]>`を返すので、アプリは他の変更を加えずに動作しています。
+どちらの関数も`Observable<Hero[]>`を返すので、アプリケーションは他の変更を加えずに動作しています。
 
 ### `HttpClient`のメソッドはひとつの値を返す
 
@@ -179,11 +179,11 @@ _Tour of Heroes_のデータAPIはヒーロー情報を配列で返します。
 <code-example path="toh-pt6/src/app/hero.service.ts" region="getHeroes-2" header="src/app/hero.service.ts">
 </code-example>
 
-`catchError()`オペレーターは**失敗したObservable**をインターセプトします。
-これはエラーをそれを処理するエラーハンドラーに渡します。
+`catchError()`オペレーターは**失敗したObservable**に割り込みます。
+そうするとオペレーターはエラーをエラーハンドリング関数に渡します。
 
 次の`handleError()`メソッドはエラーを報告し、
-アプリを動作し続けるために無害な結果を返します。
+アプリケーションを動作し続けるために無害な結果を返します。
 
 #### `handleError`
 
@@ -196,11 +196,11 @@ _Tour of Heroes_のデータAPIはヒーロー情報を配列で返します。
 <code-example path="toh-pt6/src/app/hero.service.ts" header="src/app/hero.service.ts" region="handleError">
 </code-example>
 
-エラーをコンソールに出力したあと、ハンドラーはユーザーフレンドリーなメッセージを生成し、アプリを
+エラーをコンソールに出力したあと、ハンドラーはユーザーフレンドリーなメッセージを生成し、アプリケーションを
 動作し続けるための安全な値を返却します。
 
 サービスの各メソッドはそれぞれ違う種類の`Observable`な結果を返すため、
-`handleError()`は型パラメーターを取り、アプリが期待する型の値を返却できます。
+`handleError()`は型パラメーターを取り、アプリケーションが期待する型の値を返却できます。
 
 ### `Observable`に侵入
 
@@ -283,7 +283,7 @@ URLは変わりません。ヒーローWeb APIはヒーローの`id`を見てど
 
 ## 新しいヒーローを追加する
 
-ヒーローを追加するためには、このアプリではヒーローの名前だけ必要です。
+ヒーローを追加するためには、このアプリケーションではヒーローの名前だけ必要です。
 追加ボタンとペアになった`<input>`要素が使えます。
 
 下記を`HeroesComponent`の
@@ -406,7 +406,7 @@ _削除されるべきヒーロー_をリストから即座に削除します。
 
 CLIで`HeroSearchComponent`を作ります。
 
-<code-example language="sh" class="code-shell">
+<code-example language="sh">
   ng generate component hero-search
 </code-example>
 
@@ -496,7 +496,7 @@ CLIは`HeroSearchComponent`ファイルを作成し、`AppModule`のdeclarations
 <div class="alert is-helpful">
   
 
-  [switchMap operator](http://www.learnrxjs.io/operators/transformation/switchmap.html)により
+  [switchMap operator](https://www.learnrxjs.io/learn-rxjs/operators/transformation/switchmap)により
   すべての適格なキーイベントが`HttpClient.get`メソッドを呼び出すことができます。
   各リクエスト間の300msの休止により、複数のHTTPリクエストを送信できますが、
   それらは順序どおりに戻ってこないかもしれません。
@@ -515,11 +515,11 @@ CLIは`HeroSearchComponent`ファイルを作成し、`AppModule`のdeclarations
 
 #### 試しましょう
 
-アプリを再度起動しましょう。*Dashboard*にて、検索ボックスで何かテキストを入力してください。
+アプリケーションを再度起動しましょう。*Dashboard*にて、検索ボックスで何かテキストを入力してください。
 ヒーロー名にマッチするような文字を入力すると、こんなふうに見えるはずです。
 
 <div class="lightbox">
-  <img src='generated/images/guide/toh/toh-hero-search.png' alt="Hero Search Component">
+  <img src='generated/images/guide/toh/toh-hero-search.gif' alt="Hero Search field with the letters 'm' and 'a' along with four search results that match the query displayed in a list beneath the search input">
 </div>
 
 ## 最終的なコードレビュー
@@ -610,7 +610,7 @@ CLIは`HeroSearchComponent`ファイルを作成し、`AppModule`のdeclarations
 
 旅はここで終わりです。あなたは多くのことを成し遂げました。
 
-* アプリにHTTPで必要な依存パッケージを追加しました。
+* アプリケーションにHTTPで必要な依存パッケージを追加しました。
 * `HeroService`をリファクタリングして、Web APIからヒーローを読み込めるようにしました。
 * `HeroService`を拡張して、`post()`, `put()`, そして `delete()`メソッドを使えるようにしました。
 * コンポーネントを更新して、ヒーローを追加、更新、そして削除できるようにしました。

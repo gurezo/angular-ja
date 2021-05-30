@@ -1,5 +1,12 @@
 # エントリーコンポーネント
 
+<div class="alert is-helpful">
+
+Entry components have been deprecated with the [Ivy rendering engine](https://angular.io/guide/ivy). 
+For more information, see [entryComponents deprecation](https://angular.io/guide/deprecations#entrycomponents-and-analyze_for_entry_components-no-longer-required) in the [Deprecated APIs and features](https://angular.io/guide/deprecations).
+
+</div>
+
 エントリーコンポーネントは、Angularが型に基づいて命令的にロードするコンポーネント(つまり、そのコンポーネントはテンプレートで参照していないことを意味します)です。 エントリーコンポーネントは、NgModuleでブートストラップするか、ルーティング定義に含めることで指定します。
 
 <div class="alert is-helpful">
@@ -75,6 +82,11 @@ const routes: Routes = [
 
 
 ## `entryComponents`配列
+<div class="alert is-helpful">
+
+   Ivyを使う9.0.0からは、`entryComponents`プロパティはもはや必要ありません。[非推奨ガイド](guide/deprecations#entryComponents)を参照してください。
+
+</div>
 
 `@NgModule`デコレーターは`entryComponents`配列を持っていますが、
 Angularが`@NgModule.bootstrap`にリストされたコンポーネントと、ルーティング定義内のコンポーネントをエントリーコンポーネントとして自動的に追加するので、ほとんどの場合エントリーコンポーネントを明示的に設定する必要はありません。これらの2つのメカニズムによって追加されたエントリーコンポーネントがほとんどを占めますが、アプリケーションからブートストラップを行ったり、コンポーネントを型に基づいて命令的に動的ロードしたりする場合は、
@@ -94,8 +106,6 @@ Angularが`@NgModule.bootstrap`にリストされたコンポーネントと、�
 ツリーシェーカーはそれを投げ捨てるでしょう。
 なので、アプリケーションのサイズをできるだけ小さく保つためには、本当に必要なエントリーコンポーネントだけを追加することをお勧めします。
 
-
-<hr />
 
 ## Angularのモジュールについてのさらに詳しい情報
 

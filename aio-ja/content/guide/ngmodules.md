@@ -18,7 +18,7 @@ NgModule セクションの関連ページを参照してください。
 
 `FormsModule`、`HttpClientModule`や`RouterModule`などの Angular ライブラリは NgModule です。
 <a href="https://material.angular.io/">Material Design</a>、
-<a href="http://ionicframework.com/">Ionic</a>や
+<a href="https://ionicframework.com/">Ionic</a>や
 <a href="https://github.com/angular/angularfire2">AngularFire2</a>
 のような多くのサードパーティライブラリも NgModule として利用することができます。
 
@@ -55,8 +55,6 @@ NgModule のメタデータでは次のようなことを行います:
 </code-example>
 
 まずはインポート文から始まります。次にどのようなコンポーネントとディレクティブが属するか(`declarations`)、使用する他のモジュール(`imports`)を記述することで`@NgModule`の設定を行います。もし、`@NgModule` の構造のより詳細な情報について知りたい場合は [ブートストラップ](guide/bootstrapping) を参照してください。
-
-<hr />
 
 ## NgModule についてのさらに詳しい情報
 

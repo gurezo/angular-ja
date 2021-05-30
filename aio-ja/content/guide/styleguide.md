@@ -55,7 +55,7 @@ _常に_ は少し言葉が強いかもしれません。
 すべてのコンポーネント、サービス、およびその他のシンボルに
 <a href="https://wikipedia.org/wiki/Single_responsibility_principle"><i>単一責任の原則</i> (SRP)</a>
 を適用させます。
-これは、アプリをよりきれいにし、読みやすく、維持しやすくし、テストをしやすくするのに役立ちます。
+これは、アプリケーションをよりきれいにし、読みやすく、維持しやすくし、テストをしやすくするのに役立ちます。
 
 {@a 01-01}
 
@@ -121,7 +121,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 重要なことは、コードを再利用しやすく読みやすいものにして、間違いやすさを減らすことです。
 
-次の *negative* な例は、 `AppComponent` を定義し、アプリを自動起動し、 `Hero` モデルオブジェクトを定義し、サーバーからHeroを全件取得することが同じファイルで読み込まれます。
+次の *negative* な例は、 `AppComponent` を定義し、アプリケーションを自動起動し、 `Hero` モデルオブジェクトを定義し、サーバーからHeroを全件取得することが同じファイルで読み込まれます。
 *これはしないでください*。
 
 
@@ -168,7 +168,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 
-アプリが成長するにつれて、このルールはさらに重要になります。
+アプリケーションが成長するにつれて、このルールはさらに重要になります。
 <a href="#toc">トップに戻る</a>
 
 
@@ -842,7 +842,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 <div class="s-rule do">
 
-**Do** アプリのブートストラップとプラットフォームのロジックを`main.ts`というファイルに配置します。
+**Do** アプリケーションのブートストラップとプラットフォームのロジックを`main.ts`というファイルに配置します。
 
 </div>
 
@@ -854,13 +854,13 @@ _常に_ は少し言葉が強いかもしれません。
 
 <div class="s-rule avoid">
 
-**Avoid** アプリのロジックを`main.ts`に入れることは避けましょう。代わりに、コンポーネントまたはサービスに配置することを検討してください。
+**Avoid** アプリケーションのロジックを`main.ts`に入れることは避けましょう。代わりに、コンポーネントまたはサービスに配置することを検討してください。
 
 </div>
 
 <div class="s-why">
 
-**Why?** アプリの起動ロジックに関する一貫した規約に従います。
+**Why?** アプリケーションの起動ロジックに関する一貫した規約に従います。
 
 </div>
 
@@ -879,7 +879,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 {@a 05-02}
 
-### コンポーネントセレクター
+### コンポーネントセレクター {@a component-selectors}
 
 #### Style 05-02
 
@@ -935,7 +935,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 <div class="s-rule do">
 
-**Do** 機能領域またはアプリ自体を識別する接頭辞を使用します。
+**Do** 機能領域またはアプリケーション自体を識別する接頭辞を使用します。
 
 </div>
 
@@ -947,7 +947,7 @@ _常に_ は少し言葉が強いかもしれません。
 
 <div class="s-why">
 
-**Why?** コンポーネントを宣伝したり他のアプリと共有したりするのが簡単になります。
+**Why?** コンポーネントを宣伝したり他のアプリケーションと共有したりするのが簡単になります。
 
 </div>
 
@@ -1024,6 +1024,15 @@ _常に_ は少し言葉が強いかもしれません。
 
 
 **Do** ネイティブのHTML属性にマッチさせることを意図しない限り、非要素のセレクターはlowerCamelCaseで命名してください。
+
+
+</div>
+
+<div class="s-rule avoid">
+
+
+
+**Don't** prefix a directive name with `ng` because that prefix is reserved for Angular and using it could cause bugs that are difficult to diagnose.
 
 
 </div>
@@ -1210,7 +1219,7 @@ The `name` string cannot use hyphens ("dash-case" or "kebab-case").
 
 
 
-**Why?** [karma](http://karma-runner.github.io/) や他のテストランナーでパターンマッチできるようになります。
+**Why?** [karma](https://karma-runner.github.io/) や他のテストランナーでパターンマッチできるようになります。
 
 
 </div>
@@ -1623,9 +1632,9 @@ The `name` string cannot use hyphens ("dash-case" or "kebab-case").
 
 ## アプリケーション構造とNgModule
 
-短期的な実装の視点と長期的なビジョンを持ってください。小さく始めますが、アプリがどこへ向かっているのかを意識しておきましょう。
+短期的な実装の視点と長期的なビジョンを持ってください。小さく始めますが、アプリケーションがどこへ向かっているのかを意識しておきましょう。
 
-アプリのコードはすべて`src`という名前のフォルダーに入っています。
+アプリケーションのコードはすべて`src`という名前のフォルダーに入っています。
 すべての機能領域は、独自のNgModuleとともに、独自のフォルダにあります。
 
 すべてのコンテンツはファイルごとの1つのアセットです。各コンポーネント、サービス、およびパイプはそれぞれ独自のファイルにあります。
@@ -1648,7 +1657,7 @@ The `name` string cannot use hyphens ("dash-case" or "kebab-case").
 **Do** すぐにコードを見つけられるように（**L**ocate）、
 一目でコードを識別できるように（**I**dentify）、
 できる限りフラットな（**F**lattest）構造を維持し、
-そしてDRYを目指して（**T**ry）アプリを構築してください。
+そしてDRYを目指して（**T**ry）アプリケーションを構築してください。
 
 
 </div>
@@ -1891,7 +1900,7 @@ _1ファイルに1つ_のルールから逸脱することが有利な場合が�
 
 
 
-**Do** 小さく始めますが、アプリがどこに向かっているのかは意識しておきます。
+**Do** 小さく始めますが、アプリケーションがどこに向かっているのかは意識しておきます。
 
 
 </div>
@@ -1913,7 +1922,7 @@ _1ファイルに1つ_のルールから逸脱することが有利な場合が�
 
 
 
-**Do** アプリのすべてのコードを `src` という名前のフォルダーに入れます。
+**Do** アプリケーションのすべてのコードを `src` という名前のフォルダーに入れます。
 
 
 </div>
@@ -1935,7 +1944,7 @@ _1ファイルに1つ_のルールから逸脱することが有利な場合が�
 
 
 
-**Why?** アプリの構造を小さくし、初期段階で保守しやすくする一方で、アプリが大きくなっても進化しやすくなります。
+**Why?** アプリケーションの構造を小さくし、初期段階で保守しやすくする一方で、アプリケーションが大きくなっても進化しやすくなります。
 
 
 </div>
@@ -2188,7 +2197,7 @@ _1ファイルに1つ_のルールから逸脱することが有利な場合が�
 
 
 コンポーネントを専用のフォルダ内に配置することが広く好まれていますが、
-小さなアプリのための別の選択肢はコンポーネントをフラットに保つことです（専用のフォルダ内ではありません）。
+小さなアプリケーションのための別の選択肢はコンポーネントをフラットに保つことです（専用のフォルダ内ではありません）。
 これにより、既存のフォルダに最大4つのファイルが追加されますが、フォルダのネストも減少します。
 どの方法を選んだとしても、一貫性を保ってください。
 
@@ -2226,7 +2235,7 @@ _1ファイルに1つ_のルールから逸脱することが有利な場合が�
 <div class="s-why">
 
 **Why?** 中身を整理してLIFTのガイドラインに沿った状態に保つことで、
-アプリが雑然とするのを防ぐのに役立ちます。
+アプリケーションが雑然とするのを防ぐのに役立ちます。
 
 </div>
 
@@ -2269,7 +2278,7 @@ _1ファイルに1つ_のルールから逸脱することが有利な場合が�
 
 {@a 04-08}
 
-### アプリの _ルートモジュール_
+### アプリケーションの _ルートモジュール_
 
 #### Style 04-08
 
@@ -2277,7 +2286,7 @@ _1ファイルに1つ_のルールから逸脱することが有利な場合が�
 
 
 
-**Do** アプリのルートフォルダ、
+**Do** アプリケーションのルートフォルダ、
 たとえば `/src/app` にNgModuleを作成します。
 
 
@@ -2289,7 +2298,7 @@ _1ファイルに1つ_のルールから逸脱することが有利な場合が�
 
 
 
-**Why?** すべてのアプリには少なくとも1つのルートNgModuleが必要です。
+**Why?** すべてのアプリケーションには少なくとも1つのルートNgModuleが必要です。
 
 
 </div>
@@ -2566,7 +2575,7 @@ _1ファイルに1つ_のルールから逸脱することが有利な場合が�
 
 
 
-**Avoid** `SharedModule`でアプリ全体のシングルトンプロバイダーを指定することは避けましょう。意図的なものは問題ありません。注意しましょう。
+**Avoid** `SharedModule`でアプリケーション全体のシングルトンプロバイダーを指定することは避けましょう。意図的なものは問題ありません。注意しましょう。
 
 
 </div>
@@ -3399,6 +3408,23 @@ AngularのTypeScript Language Serviceは、HTMLテンプレートをサポート
 
 <a href="#toc">トップに戻る</a>
 
+### Initialize inputs
+
+#### Style 05-18
+
+TypeScript's `--strictPropertyInitialization` compiler option ensures that a class initializes its properties during construction. When enabled, this option causes the TypeScript compiler to report an error if the class does not set a value to any property that is not explicitly marked as optional.
+
+By design, Angular treats all `@Input` properties as optional. When possible, you should satisfy `--strictPropertyInitialization` by providing a default value.
+
+<code-example path="styleguide/src/05-18/app/heroes/hero/hero.component.ts" region="example" header="app/heroes/hero/hero.component.ts"></code-example>
+
+If the property is hard to construct a default value for, use `?` to explicitly mark the property as optional.
+
+<code-example path="styleguide/src/05-18/app/heroes/hero/hero.component.optional.ts" region="example" header="app/heroes/hero/hero.component.ts"></code-example>
+
+You may want to have a required `@Input` field, meaning all your component users are required to pass that attribute. In such cases, use a default value. Just suppressing the TypeScript error with `!` is insufficient and should be avoided because it will prevent the type checker ensure the input value is provided.
+
+<code-example path="styleguide/src/05-18/app/heroes/hero/hero.component.avoid.ts" region="example" header="app/heroes/hero/hero.component.ts"></code-example>
 
 ## ディレクティブ
 
@@ -3555,7 +3581,7 @@ AngularのTypeScript Language Serviceは、HTMLテンプレートをサポート
 
 
 
-**Why?** サービスは、機能領域やアプリ間でメソッドを共有するのに理想的です。
+**Why?** サービスは、機能領域やアプリケーション間でメソッドを共有するのに理想的です。
 
 
 </div>
@@ -3643,7 +3669,7 @@ AngularのTypeScript Language Serviceは、HTMLテンプレートをサポート
 
 
 
-**Do** サービスの `@Injectable` デコレーターでアプリルートインジェクターを使用してサービスを提供します。
+**Do** サービスの `@Injectable` デコレーターでアプリケーションルートインジェクターを使用してサービスを提供します。
 
 
 </div>
@@ -3887,35 +3913,6 @@ Angular用の便利なツールとヒント。
 
 <a href="#toc">トップに戻る</a>
 
-{@a A-01}
-
-### Codelyzer
-
-#### Style A-01
-
-
-<div class="s-rule do">
-
-
-
-**Do** [codelyzer](https://www.npmjs.com/package/codelyzer)を使ってこのスタイルガイドに従います。
-
-
-</div>
-
-
-
-<div class="s-rule consider">
-
-
-
-**Consider** あなたのニーズに合うようにcodelyzerのルールを調整します。
-
-
-</div>
-
-<a href="#toc">トップに戻る</a>
-
 {@a A-02}
 
 ### ファイルテンプレートとスニペット
@@ -3944,9 +3941,9 @@ Angular用の便利なツールとヒント。
 
 **Consider** スタイルガイドに従った[Atom](https://atom.io/)用の[スニペット](https://atom.io/packages/angular-2-typescript-snippets) を使います。
 
-**Consider** スタイルガイドに従った[Sublime Text](http://www.sublimetext.com/)用の[スニペット](https://github.com/orizens/sublime-angular2-snippets)を使います。
+**Consider** スタイルガイドに従った[Sublime Text](https://www.sublimetext.com/)用の[スニペット](https://github.com/orizens/sublime-angular2-snippets)を使います。
 
-**Consider** スタイルガイドに従った[Vim](http://www.vim.org/)用の[スニペット](https://github.com/mhartington/vim-angular2-snippets) を使います。
+**Consider** スタイルガイドに従った[Vim](https://www.vim.org/)用の[スニペット](https://github.com/mhartington/vim-angular2-snippets) を使います。
 
 
 </div>

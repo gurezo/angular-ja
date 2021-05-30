@@ -83,6 +83,15 @@ Stackblitz で <live-example></live-example> を実行でき、ここからコ�
 
 <code-example path="component-styles/src/app/hero-details.component.css" region="hostfunction" header="src/app/hero-details.component.css"></code-example>
 
+`:host` セレクターは他のセレクターと組み合わせることもできます。
+子要素を選択するには、 `:host` の後ろにセレクターを追加します。たとえば、`:host h2` を使って、コンポーネントのビュー内にあるすべての `<h2>` 要素をターゲットにすることができます。
+
+<div class="alert is-helpful">
+
+コンポーネントのビューの外側のコンテキストに基づいてコンポーネントのスタイルを決めるために、`:host` セレクターの前に (`:host-context` 以外の) セレクターを追加してはいけません。このようなセレクターはコンポーネントのビューにスコープされておらず、外側のコンテキストを選択してしまいますが、これはネイティブな動作ではありません。そのような場合には、`:host-context` セレクターを使用してください。
+
+</div>
+
 ### :host-context
 
 場合によっては、コンポーネントのビューの *外* にある条件に基づいてスタイルを適用すると便利です。
@@ -102,11 +111,11 @@ Stackblitz で <live-example></live-example> を実行でき、ここからコ�
 
 コンポーネントスタイルは通常、コンポーネント自身のテンプレートのHTMLにのみ適用されます。
 
-Applying the `::ng-deep` pseudo-class to any CSS rule completely disables view-encapsulation for
-that rule. Any style with `::ng-deep` applied becomes a global style. In order to scope the specified style
-to the current component and all its descendants, be sure to include the `:host` selector before
-`::ng-deep`. If the `::ng-deep` combinator is used without the `:host` pseudo-class selector, the style
-can bleed into other components.
+擬似クラス `::ng-deep` を任意の CSS ルールに適用すると、そのルールに対するビューのカプセル化が
+完全に無効になります。また、`::ng-deep` が適用されたすべてのスタイルは、グローバルなスタイルになります。指定されたスタイルを
+現在のコンポーネントとそのすべての子孫に適用するには、必ず `::ng-deep` の前に `:host` セレクターを含めるように
+してください。擬似セレクター `:host` を使用せずに `::ng-deep` コンビネーターを使用すると、スタイルが
+他のコンポーネントに波及する可能性があります。
 
 次の例では、ホスト要素からこのコンポーネントを経由してDOM内のすべての子要素に至るまで、
 すべての `<h3>` 要素を対象としています。
@@ -119,13 +128,13 @@ can bleed into other components.
 
 `/deep/`、 `>>>` および `::ng-deep` は、 *エミュレートされた* ビューカプセル化でのみ使用してください。
 Emulatedは、デフォルトでもっともよく使用されるビューカプセル化です。
-詳細については、[ビューのカプセル化の制御](guide/component-styles#view-encapsulation) セクションを参照してください。
+詳細については、[ビューのカプセル化](guide/view-encapsulation) セクションを参照してください。
 
 </div>
 
 <div class="alert is-important">
 
-shadow-piercing子孫コンビネータは廃止され、主要なツールや[ブラウザからサポートが削除されています](https://www.chromestatus.com/features/6750456638341120) 。
+shadow-piercing子孫コンビネータは廃止され、主要なツールや[ブラウザからサポートが削除されています](https://www.chromestatus.com/feature/6750456638341120) 。
 そのため、Angular (`/deep/`、 `>>>` および `::ng-deep` の3つすべて) のサポートを落とす予定です。
 それまでは、ツールの幅広い互換性のために、`::ng-deep` を選択すべきです。
 
@@ -161,7 +170,7 @@ shadow-piercing子孫コンビネータは廃止され、主要なツールや[�
 
 Angular CLIコマンド [`ng generate component`](cli/generate) は、 `--inline-style` フラグを使用してコンポーネントを作成するときに空の `styles` 配列を定義します。
 
-<code-example language="sh" class="code-shell">
+<code-example language="sh">
 ng generate component hero-app --inline-style
 </code-example>
 
@@ -190,7 +199,7 @@ ng generate component hero-app --inline-style
 
 Angular CLIコマンド [`ng generate component`](cli/generate) を `--inline-style` フラグなしで使用すると、空のスタイルファイルを生成し、コンポーネントの生成された `styleUrls` で参照します。
 
-<code-example language="sh" class="code-shell">
+<code-example language="sh">
 ng generate component hero-app
 </code-example>
 
@@ -211,8 +220,7 @@ CSSスタイルをHTMLテンプレートに直接埋め込むことができま�
 
 <div class="alert is-critical">
 
-CLIを使用して構築する場合は、[CLI wiki](https://github.com/angular/angular-cli/wiki/stories-asset-configuration) の説明にしたがって、リンクされたスタイルファイルをアセットに含めてサーバーにコピーしてください。
-<!-- 2018-10-16: The link above is still the best source for this information. -->
+CLIを使用して構築する場合は、[Assets configuration guide](guide/workspace-config#assets-configuration) の説明にしたがって、リンクされたスタイルファイルをアセットに含めてサーバーにコピーしてください。
 
 リンクタグのhref URLがアプリケーションルートまたはコンポーネントファイルのどちらへの相対パスであっても、CLIはスタイルシートを取り込みます。
 
@@ -235,13 +243,13 @@ CLIを使用して構築する場合、外部スタイルファイルを含む _
 
 デフォルトでグローバルな `styles.css` ファイルを事前設定している `styles` セクションに、 **グローバル** スタイルファイルを登録します。
 
-もっと学びたい場合は、 [CLI wiki](https://github.com/angular/angular-cli/wiki/stories-global-styles) を参照してください。
-<!-- 2018-10-16: The link above is still the best source for this information. -->
+もっと学びたい場合は、 [Styles configuration guide](guide/workspace-config#styles-and-scripts-configuration) を参照してください。
+
 
 ### CSS以外のスタイルファイル
 
 CLIを使用して構築する場合、
-スタイルファイルを、次の例のように、 [sass](http://sass-lang.com/)、 [less](http://lesscss.org/)、または[stylus](http://stylus-lang.com/) に書き込んで、 `@Component.styleUrls` メタデータに適切な拡張子 (`.scss`, `.less`, `.styl`) をもつファイルを次のように指定できます：
+スタイルファイルを、次の例のように、 [sass](https://sass-lang.com/)、 [less](http://lesscss.org/)、または[stylus](https://stylus-lang.com/) に書き込んで、 `@Component.styleUrls` メタデータに適切な拡張子 (`.scss`, `.less`, `.styl`) をもつファイルを次のように指定できます：
 
 <code-example>
 @Component({
@@ -255,99 +263,11 @@ CLIを使用して構築する場合、
 CLIビルドプロセスは、適切なCSSプリプロセッサを実行します。
 
 `ng generate component` を使用してコンポーネントファイルを生成する場合、CLI は、デフォルトで空の CSS　スタイルファイル(`.css`)を生成します。
-[CLI wiki](https://github.com/angular/angular-cli/wiki/stories-css-preprocessors
-"CSS Preprocessor integration") 
+[Workspace configuration guide](guide/workspace-config#generation-schematics) 
 で説明されているように、CLIのデフォルトのプリプロセッサを設定することができます。
-<!-- 2018-10-16: The link above is still the best source for this information. -->
 
 <div class="alert is-important">
 
 CLIはインラインスタイルにプリプロセッサを適用できないため、`@Component.styles` 配列に追加されたスタイル文字列は _CSSで記述する必要があります_ 。
 
 </div>
-
-{@a view-encapsulation}
-
-## ビューのカプセル化
-
-前に説明したように、コンポーネントのCSSスタイルはコンポーネントのビューにカプセル化され、
-アプリケーションの残りの部分には影響しません。
-
-このカプセル化が *コンポーネントごとに* どのように行われるかを制御するには、
-コンポーネントのメタデータに *ビューのカプセル化モード* を設定します。
-次のモードから選択してください：
-
-* `ShadowDom` ビューカプセル化では、ブラウザのネイティブShadow DOM実装
-（[MDN](https://developer.mozilla.org/ja/)サイトの
-[Shadow DOM](https://developer.mozilla.org/ja/docs/Web/Web_Components/Using_shadow_DOM)を参照）を使用して、
-Shadow DOMをコンポーネントのホスト要素にアタッチし、
-そのShadow DOM内にコンポーネントビューを配置します。コンポーネントのスタイルは、Shadow DOM内に含まれています。
-
-* `Native` ビューカプセル化は、ブラウザのネイティブShadow DOM実装の非推奨バージョンを使用します。 - [この変更について学びましょう](https://hayato.io/2016/shadowdomv1/).
-
-* `Emulated` ビューカプセル化（デフォルト）は、CSSコードを事前処理（および名前変更）して、
-Shadow DOMの動作をエミュレートし、CSSをコンポーネントのビューに効果的に適用します。
-  詳細は、[付録1](guide/component-styles#inspect-generated-css) を参照してください。
-
-* `None` は、Angularビューカプセル化を行わないことを意味します。
-AngularはCSSをグローバルスタイルに追加します。
-先に説明したスコープのルール、隔離および保護は適用されません。
-これは、コンポーネントのスタイルをHTMLに貼り付けるのと本質的に同じです。
-
-コンポーネントのカプセル化モードを設定するには、コンポーネントメタデータ内の `encapsulation` プロパティを使用します：
-
-<code-example path="component-styles/src/app/quest-summary.component.ts" region="encapsulation.native" header="src/app/quest-summary.component.ts"></code-example>
-
-`ShadowDom` ビューカプセル化は、Shadow DOM をネイティブサポートしているブラウザでのみ機能します
-( [Can I use](http://caniuse.com) サイトの
-[Shadow DOM v1](http://caniuse.com/#feat=shadowdomv1) を参照)。サポートは未だ限定的です。
-そのため、`Emulated`ビューカプセル化がデフォルトモードであり、
-ほとんどの場合に推奨されます。
-
-{@a inspect-generated-css}
-
-## 生成されたCSSの検査
-
-エミュレートされたビューカプセル化を使用する場合、Angularはすべてのコンポーネントスタイルを前処理して、
-標準的なShadow CSSスコープルールに近似させます。
-
-エミュレートされたビューカプセル化が有効になっている
-実行中のAngularアプリケーションのDOMでは、
-各DOM要素にはいくつかの特別な属性が付加されています：
-
-<code-example format="">
-  &lt;hero-details _nghost-pmm-5>
-    &lt;h2 _ngcontent-pmm-5>Mister Fantastic&lt;/h2>
-    &lt;hero-team _ngcontent-pmm-5 _nghost-pmm-6>
-      &lt;h3 _ngcontent-pmm-6>Team&lt;/h3>
-    &lt;/hero-team>
-  &lt;/hero-detail>
-
-</code-example>
-
-生成される属性には2種類あります。：
-
-* ネイティブのカプセル化でShadow DOMのホストになる要素には、生成された`_nghost`属性があります。
-これは、一般的にコンポーネントのホスト要素のケースです。
-* コンポーネントのビュー内の要素には、この要素がどのホストのエミュレートされたShadow DOMに
-属するかを識別する`_ngcontent`属性があります。
-
-これらの属性の正確な値は重要ではありません。
-それらは自動的に生成され、アプリケーションコードで参照することはありません。
-しかし、生成されたコンポーネントスタイルは、DOMの`<head>`セクションにあります。
-
-<code-example format="">
-  [_nghost-pmm-5] {
-    display: block;
-    border: 1px solid black;
-  }
-
-  h3[_ngcontent-pmm-6] {
-    background-color: white;
-    border: 1px solid #777;
-  }
-</code-example>
-
-これらのスタイルは後処理され、
-各セレクターに`_nghost`または`_ngcontent`属性セレクターが追加されます。
-これらの追加のセレクターは、このページで説明しているスコープルールを有効にします。

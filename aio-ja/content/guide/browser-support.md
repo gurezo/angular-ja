@@ -3,107 +3,61 @@
 Angularは最新のブラウザをサポートしています。サポートしているブラウザは次の表のとおりです。
 
 <table>
-
   <tr>
-
-<th>
-      ブラウザ
-</th>
-
-<th>
-      サポートバージョン
-</th>
-
+    <th>ブラウザ</th>
+    <th>サポートバージョン</th>
   </tr>
-
   <tr>
-
-    <td>
-      Chrome
-    </td>
-
-    <td>
-      latest
-    </td>
+    <td>Chrome</td>
+    <td>latest</td>
   </tr>
-
   <tr>
-
-    <td>
-      Firefox
-    </td>
-
-    <td>
-      latest and extended support release (ESR)
-    </td>
+    <td>Firefox</td>
+    <td>latest and extended support release (ESR)</td>
   </tr>
-
   <tr>
-
+    <td>Edge</td>
+    <td>2 most recent major versions</td>
+  </tr>
+  <tr>
+    <td>IE</td>
     <td>
-      Edge
-    </td>
-
-    <td>
-      2 most recent major versions
+      11<br>
+      <em>*deprecated, see the <a href="guide/deprecations#internet-explorer-11">deprecations guide</a></em>
     </td>
   </tr>
   <tr>
-    <td>
-      IE
-    </td>
-    <td>
-      <div> 11, 10*, 9* ("compatibility view" mode not supported) </div>
-      <div>*deprecated in v10, see the {@link guide/deprecations#ie-9-10-and-mobile deprecations guide}.</div>
-    </td>
-  </tr>
- <tr>
-   <tr>
-    <td>
-      IE Mobile*
-    </td>
-    <td>
-      11
-      <div>*deprecated in v10, see the {@link guide/deprecations#ie-9-10-and-mobile deprecations guide}.</div>
-    </td>
-  </tr>
- <tr>
-    <td>
-      Safari
-    </td>
-
-    <td>
-      2 most recent major versions
-    </td>
+    <td>Safari</td>
+    <td>2 most recent major versions</td>
   </tr>
   <tr>
-    <td>
-      iOS
-    </td>
-
-    <td>
-      2 most recent major versions
-    </td>
+    <td>iOS</td>
+    <td>2 most recent major versions</td>
   </tr>
   <tr>
-    <td>
-      Android
-    </td>
-
-    <td>
-      X (10.0), Pie (9.0), Oreo (8.0), Nougat (7.0)
-    </td>
+    <td>Android</td>
+    <td>Q (10.0), Pie (9.0), Oreo (8.0), Nougat (7.0)</td>
   </tr>
-
 </table>
+
 
 <div class="alert is-helpful">
 
 Angularの開発プロセスでは、各プルリクエストに対して、すべてのサポート対象ブラウザ上でユニットテストを実行しています。
-ユニットテスト実行には<a href="https://saucelabs.com/">SauceLabs</a>と
-<a href="https://www.browserstack.com">Browserstack</a>を使用しています。
+ユニットテスト実行には[Sauce Labs](https://saucelabs.com/)と
+[BrowserStack](https://www.browserstack.com/)を使用しています。
 
 </div>
+
+
+{@a ie11}
+## Configuring Angular CLI for compatibility with IE11
+
+While Angular supports all browsers listed above, in order to improve the build times and output,  Angular CLI applications don't support IE11 by default.
+
+Angular CLI uses [`browserlist`](https://github.com/browserslist/browserslist) to configure browser support for applications.
+
+You can enable the IE11 support by following the instructions in the `.browserslistrc` file at the root of your project.
 
 ## ポリフィル {@a polyfills}
 
@@ -141,9 +95,9 @@ When you create a project with the `ng new` command, a `src/polyfills.ts` config
 
 * If you need an _optional_ polyfill, you must install its npm package, then uncomment or create the corresponding import statement in the `src/polyfills.ts` configuration file.
 
-たとえば、[WEBアニメーションのポリフィルが必要な場合](http://caniuse.com/#feat=web-animation)、次のコマンドによりnpmでインストールできます。(yarnでも同様)
+たとえば、[WEBアニメーションのポリフィルが必要な場合](https://caniuse.com/#feat=web-animation)、次のコマンドによりnpmでインストールできます。(yarnでも同様)
 
-<code-example language="sh" class="code-shell">
+<code-example language="sh">
   # install the optional web animations polyfill
   npm install --save web-animations-js
 </code-example>
@@ -154,7 +108,7 @@ For many polyfills, you can simply un-comment the corresponding `import` stateme
 <code-example header="src/polyfills.ts">
   /**
   * Required to support Web Animations `@angular/platform-browser/animations`.
-  * Needed for: All but Chrome, Firefox and Opera. http://caniuse.com/#feat=web-animation
+  * Needed for: All but Chrome, Firefox and Opera. https://caniuse.com/#feat=web-animation
   **/
   import 'web-animations-js';  // Run `npm install --save web-animations-js`.
 </code-example>
@@ -168,161 +122,70 @@ If the polyfill you want is not already in `polyfills.ts` file, add the `import`
 サポートするブラウザ上でAngularアプリケーションを動作するためには、これらのポリフィルが必要です。
 
 <table>
-
   <tr style="vertical-align: top">
-
-    <th>
-      ブラウザ
-    </th>
-
-    <th>
-      必要なポリフィル
-    </th>
-
+    <th>ブラウザ</th>
+    <th>必要なポリフィル</th>
   </tr>
-
   <tr style="vertical-align: top">
-
     <td>
       Chrome, Firefox, Edge, <br>
-      Safari, Android, IE 10+
+      Safari, Android, IE 11
     </td>
-
     <td>
-
-      [ES2015](guide/browser-support#core-es6)
-
+      <a href="guide/browser-support#core-es6">ES2015</a>
     </td>
-
   </tr>
-
-  <tr style="vertical-align: top">
-
-    <td>
-      IE 9
-    </td>
-
-    <td>
-
-      ES2015<br>[classList](guide/browser-support#classlist)
-
-    </td>
-
-  </tr>
-
 </table>
-
 
 ### ポリフィルが必要なオプショナルのブラウザ機能
 
 Angularのいくつかの機能では追加のポリフィルが必要になるかもしれません。
 
 <table>
-
   <tr style="vertical-align: top">
-
-    <th>
-      機能
-    </th>
-
-    <th>
-      ポリフィル
-    </th>
-
-    <th style="width: 50%">
-       ブラウザ
-    </th>
-
+    <th>機能</th>
+    <th>ポリフィル</th>
+    <th style="width: 50%">ブラウザ</th>
   </tr>
-
   <tr style="vertical-align: top">
-
     <td>
-
-      [AnimationBuilder](api/animations/AnimationBuilder).
+      <a href="api/animations/AnimationBuilder">AnimationBuilder</a>
       (Standard animation support does not require polyfills.)
-
     </td>
-
     <td>
-
-      [Web Animations](guide/browser-support#web-animations)
-
+      <a href="guide/browser-support#web-animations">Web Animations</a>
     </td>
-
     <td>
       <p>If AnimationBuilder is used, enables scrubbing
       support for IE/Edge and Safari.
       (Chrome and Firefox support this natively).</p>
     </td>
-
   </tr>
 
   <tr style="vertical-align: top">
-
     <td>
-
-       [NgClass](api/common/NgClass) on SVG elements
+      <a href="api/common/NgClass">NgClass</a> on SVG elements
     </td>
-
     <td>
-
-      [classList](guide/browser-support#classlist)
-
+      <a href="guide/browser-support#classlist">classList</a>
     </td>
-
-    <td>
-      IE 10, IE 11
-    </td>
-
-  </tr>
-
-  <tr style="vertical-align: top">
-
-    <td>
-
-      [Http](guide/http) when sending and receiving binary data
-    </td>
-
-    <td>
-
-      [Typed&nbsp;Array](guide/browser-support#typedarray)<br>
-
-      [Blob](guide/browser-support#blob)<br>
-
-      [FormData](guide/browser-support#formdata)
-
-    </td>
-
-    <td>
-      IE 9
-    </td>
-
-  </tr>
-
-  <tr style="vertical-align: top">
-
-    <td>
-
-      [Router](guide/router) when using
-      [hash-based routing](guide/router#location-strategy)
-    </td>
-
-    <td>
-
-      [ES7/array](guide/browser-support#core-es7-array)
-
-    </td>
-
     <td>
       IE 11
     </td>
-
   </tr>
 
+  <tr style="vertical-align: top">
+    <td>
+      <a href="guide/router">Router</a> when using <a href="guide/router#location-strategy">hash-based routing</a>
+    </td>
+    <td>
+      <a href="guide/browser-support#core-es7-array">ES7/array</a>
+    </td>
+    <td>
+      IE 11
+    </td>
+  </tr>
 </table>
-
-
 
 ### 推奨ポリフィル
 
@@ -330,172 +193,67 @@ Angularのいくつかの機能では追加のポリフィルが必要になる�
 
 
 <table>
-
   <tr>
-
     <th>
       ポリフィル
     </th>
-
     <th>
       ライセンス
     </th>
-
     <th>
       サイズ*
     </th>
-
   </tr>
-
   <tr>
-
     <td>
-
       <a id='core-es7-array' href="https://github.com/zloirock/core-js/tree/v2/fn/array">ES7/array</a>
-
     </td>
-
     <td>
       MIT
     </td>
-
     <td>
       0.1KB
     </td>
-
   </tr>
-
   <tr>
-
     <td>
-
       <a id='core-es6' href="https://github.com/zloirock/core-js">ES2015</a>
-
     </td>
-
     <td>
       MIT
     </td>
-
     <td>
       27.4KB
     </td>
-
   </tr>
 
   <tr>
-
     <td>
-
       <a id='classlist' href="https://github.com/eligrey/classList.js">classList</a>
-
     </td>
-
     <td>
       Public domain
     </td>
-
     <td>
       1KB
     </td>
-
   </tr>
-
   <tr>
-
     <td>
-
-      <a id='intl' href="https://github.com/andyearnshaw/Intl.js">Intl</a>
-
-    </td>
-
-    <td>
-      MIT / Unicode license
-    </td>
-
-    <td>
-      13.5KB
-    </td>
-
-  </tr>
-
-  <tr>
-
-    <td>
-
        <a id='web-animations' href="https://github.com/web-animations/web-animations-js">Web Animations</a>
-
     </td>
-
     <td>
       Apache
     </td>
-
     <td>
       14.8KB
     </td>
-
   </tr>
-
-  <tr>
-
-    <td>
-
-      <a id='typedarray' href="https://github.com/inexorabletash/polyfill/blob/master/typedarray.js">Typed Array</a>
-
-    </td>
-
-    <td>
-      MIT
-    </td>
-
-    <td>
-      4KB
-    </td>
-
-  </tr>
-
-  <tr>
-
-    <td>
-
-       <a id='blob' href="https://github.com/eligrey/Blob.js">Blob</a>
-
-    </td>
-
-    <td>
-      MIT
-    </td>
-
-    <td>
-      1.3KB
-    </td>
-
-  </tr>
-
-  <tr>
-
-    <td>
-
-       <a id='formdata' href="https://github.com/francois2metz/html5-formdata">FormData</a>
-
-    </td>
-
-    <td>
-      MIT
-    </td>
-
-    <td>
-      0.4KB
-    </td>
-
-  </tr>
-
 </table>
 
 
 \* 数値は縮小し、gzip圧縮されたコードを
-<a href="http://closure-compiler.appspot.com/home">closure compiler</a>で計算したものです。
+[closure compiler](https://closure-compiler.appspot.com/home)で計算したものです。
 
 {@a non-cli}
 
@@ -518,7 +276,6 @@ Angularのいくつかの機能では追加のポリフィルが必要になる�
     // __Zone_disable_requestAnimationFrame = true; // disable patch requestAnimationFrame
     // __Zone_disable_on_property = true; // disable patch onProperty such as onclick
     // __zone_symbol__UNPATCHED_EVENTS = ['scroll', 'mousemove']; // disable patch specified eventNames
-
     /*
      * in IE/Edge developer tools, the addEventListener will also be wrapped by zone.js
      * with the following flag, it will bypass `zone.js` patch for IE/Edge
@@ -526,7 +283,6 @@ Angularのいくつかの機能では追加のポリフィルが必要になる�
     // __Zone_enable_cross_context_check = true;
   &lt;/script>
   &lt;!-- zone.js required by Angular -->
-  &lt;script src="node_modules/zone.js/dist/zone.js">&lt;/script>
-
+  &lt;script src="node_modules/zone.js/bundles/zone.umd.js">&lt;/script>
   &lt;!-- application polyfills -->
 </code-example>

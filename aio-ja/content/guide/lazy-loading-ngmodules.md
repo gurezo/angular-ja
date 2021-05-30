@@ -1,6 +1,6 @@
 # フィーチャーモジュールの遅延ロード
 
-デフォルトでは、NgModuleは即時にロードされます。つまり、アプリがロードされるとすぐに、すぐに必要であるかどうかにかかわらず、すべてのNgModuleがロードされます。多数のルートをもつ大規模なアプリケーションの場合は、遅延ロード（必要に応じてNgModuleをロードする設計パターン）を検討してください。
+デフォルトでは、NgModuleは即時にロードされます。つまり、アプリケーションがロードされるとすぐに、すぐに必要であるかどうかにかかわらず、すべてのNgModuleがロードされます。多数のルートをもつ大規模なアプリケーションの場合は、遅延ロード（必要に応じてNgModuleをロードする設計パターン）を検討してください。
 遅延ロードは、初期バンドルサイズを小さく保つのに役立ち、これによりロード時間が短縮されます。
 
 <div class="alert is-helpful">
@@ -12,12 +12,12 @@
 
 {@a lazy-loading}
 
-## Lazy loading basics
+## 遅延ロードの基本 {@a lazy-loading-basics}
 
-This section introduces the basic procedure for configuring a lazy-loaded route.
-For a step-by-step example, see the [step-by-step setup](#step-by-step) section on this page.
+このセクションでは、遅延ロードされるルートを設定するための基本的な手順を紹介します。
+ステップバイステップの例については、このページの[ステップバイステップのセットアップ](#step-by-step)セクションを参照してください。
 
-To lazy load Angular modules, use `loadchildren` (instead of `component`) in your `AppRoutingModule` `routes` configuration as follows.
+Angularモジュールを遅延ロードするには、次のように、`AppRoutingModule`の`routes`設定で`loadChildren`を(`component`の代わりに)使用します。
 
 <code-example header="AppRoutingModule (excerpt)">
 
@@ -30,7 +30,7 @@ const routes: Routes = [
 
 </code-example>
 
-In the lazy-loaded module's routing module, add a route for the component.
+遅延ロードされるモジュールのルーティングモジュールで、そのコンポーネントのためのルートを追加します。
 
 <code-example header="Routing module for lazy loaded module (excerpt)">
 
@@ -43,12 +43,12 @@ const routes: Routes = [
 
 </code-example>
 
-Also be sure to remove the `ItemsModule` from the `AppModule`.
-For step-by-step instructions on lazy loading modules, continue with the following sections of this page.
+また、`AppModule`から`ItemsModule`を必ず削除します。
+遅延ロードのモジュールのステップバイステップの説明については、このページの次のセクションに進みましょう。
 
 {@a step-by-step}
 
-## Step-by-step setup
+## ステップバイステップのセットアップ {@a step-by-step-setup}
 
 遅延ロードするフィーチャーモジュールをセットアップするための主なステップが2つあります:
 
@@ -87,7 +87,7 @@ ng new customer-app --routing
 ng generate module customers --route customers --module app.module
 </code-example>
 
-これにより、`customers.module.ts`ファイルで定義された新しい遅延ロード可能なモジュール`CustomersModule`をもつ、`customers`フォルダーが作成されます。コマンドは`CustomersComponent`を新しいフィーチャーモジュール内に自動的に宣言します。
+これにより、`customers.module.ts`ファイルで定義された新しい遅延ロード可能なフィーチャーモジュール`CustomersModule`と、`customers-routing.module.ts`ファイルで定義されたルーティングモジュール`CustomersRoutingModule`をもつ、`customers`フォルダが作成されます。このコマンドは自動的に`CustomersComponent`を宣言し、新しいフィーチャーモジュール内に`CustomersRoutingModule`をインポートします。
 
 新しいモジュールは遅延ロードされることを意図しているため、コマンドは新しいフィーチャーモジュールへの参照をルートアプリケーションモジュールの`app.module.ts`ファイルに追加「しません」。
 代わりに、`--module`オプションで指定したモジュール内の`routes`配列に、宣言したルート(route)`customers`を追加します。
@@ -100,6 +100,15 @@ ng generate module customers --route customers --module app.module
 
 遅延ロード構文では、関数が後ろに続く`loadChildren`を使うことに注目してください。関数はブラウザ組み込みの動的インポート用の`import('...')`構文を用います。
 インポートのパスはそのモジュールへの相対パスです。
+
+<div class="callout is-helpful">
+<header>文字列ベースの遅延ロード</header>
+
+Angularバージョン8では、`loadChildren`のルート指定のための文字列構文は、`import()`構文の推奨によって[非推奨に](https://angular.io/guide/deprecations#loadchildren-string-syntax)なりました。ただし、`tsconfig`ファイルに遅延ロードされるルートを含めることで、文字列ベースの遅延ロード(`loadChildren: './path/to/module#Module'`)の使用を選択できます。それらはコンパイルで遅延ロードされるファイルを含みます。
+
+デフォルトでCLIは、`import()`構文で使用することを意図したより厳密なファイル構成のプロジェクトを生成します。
+
+</div>
 
 #### もう1つのフィーチャーモジュールを追加する
 
@@ -126,7 +135,7 @@ ng generate module orders --route orders --module app.module
 
 <code-example path="lazy-loading-ngmodules/src/app/app.component.html" header="app.component.html" region="app-component-template" header="src/app/app.component.html"></code-example>
 
-今まであなたが作成したアプリをブラウザで確認するために、ターミナルで次のコマンドを入力してください:
+今まであなたが作成したアプリケーションをブラウザで確認するために、ターミナルで次のコマンドを入力してください:
 
 <code-example language="bash">
 ng serve
@@ -217,16 +226,16 @@ CLIは、フィーチャールーティングモジュールにも`RouterModule.
 
 {@a preloading}
 
-## Preloading
+## プリロード
 
-Preloading improves UX by loading parts of your app in the background.
-You can preload modules or component data.
+プリロードは、アプリケーションの一部をバックグラウンドでロードすることでUXを向上させます。
+モジュールまたはコンポーネントデータをプリロードできます。
 
-### Preloading modules
+### モジュールをプリロードする {@a preloading-modules}
 
-Preloading modules improves UX by loading parts of your app in the background so users don't have to wait for the elements to download when they activate a route.
+モジュールのプリロードはアプリケーションの一部をバックグラウンドでロードすることでUXを向上させるため、ユーザーはルートをアクティブ化するときにその要素がダウンロードされるのを待つ必要がありません。
 
-To enable preloading of all lazy loaded modules, import the `PreloadAllModules` token from the Angular `router`.
+遅延ロードされたモジュールすべてのプリロードを有効にするには、Angularの`router`から`PreloadAllModules`トークンをインポートします。
 
 <code-example header="AppRoutingModule (excerpt)">
 
@@ -234,7 +243,7 @@ import { PreloadAllModules } from '@angular/router';
 
 </code-example>
 
-Still in the `AppRoutingModule`, specify your preloading strategy in `forRoot()`.
+引き続き`AppRoutingModule`で、`forRoot()`でプリロード戦略を指定します。
 
 <code-example header="AppRoutingModule (excerpt)">
 
@@ -247,22 +256,22 @@ RouterModule.forRoot(
 
 </code-example>
 
-### Preloading component data
+### コンポーネントデータをプリロードする {@a preloading-component-data}
 
-To preload component data, you can use a `resolver`.
-Resolvers improve UX by blocking the page load until all necessary data is available to fully display the page.
+コンポーネントデータをプリロードするために、`resolver`を使用できます。
+リゾルバは、ページを完全に表示するために必要なすべてのデータが利用可能になるまで、ページのロードをブロックしてUXを向上させます。
 
-#### Resolvers
+#### リゾルバ {@a resolvers}
 
-Create a resolver service.
-With the CLI, the command to generate a service is as follows:
+リゾルバサービスを作成します。
+CLIでサービスを生成するコマンドは次のとおりです:
 
 
-<code-example language="none" class="code-shell">
+<code-example language="sh">
   ng generate service <service-name>
 </code-example>
 
-In your service, import the following router members, implement `Resolve`, and inject the `Router` service:
+In the newly-created service, implement the `Resolve` interface provided by the `@angular/router` package:
 
 <code-example header="Resolver service (excerpt)">
 
@@ -270,51 +279,84 @@ import { Resolve } from '@angular/router';
 
 ...
 
-export class CrisisDetailResolverService implements Resolve<> {
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<> {
+/* An interface that represents your data model */
+export interface Crisis {
+  id: number;
+  name: string;
+}
+
+export class CrisisDetailResolverService implements Resolve<Crisis> {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Crisis> {
     // your logic goes here
   }
 }
 
 </code-example>
 
-Import this resolver into your module's routing module.
+このリゾルバをモジュールのルーティングモジュールにインポートします。
 
 <code-example header="Feature module's routing module (excerpt)">
 
-import { YourResolverService }    from './your-resolver.service';
+import { CrisisDetailResolverService } from './crisis-detail-resolver.service';
 
 </code-example>
 
-Add a `resolve` object to the component's `route` configuration.
+コンポーネントの`route`設定に`resolve`オブジェクトを追加します。
 
 <code-example header="Feature module's routing module (excerpt)">
 {
   path: '/your-path',
   component: YourComponent,
   resolve: {
-    crisis: YourResolverService
+    crisis: CrisisDetailResolverService
   }
 }
 </code-example>
 
 
-In the component, use an `Observable` to get the data from the `ActivatedRoute`.
+In the component's constructor, inject an instance of the `ActivatedRoute` class that represents the current route.
 
+<code-example header="Component's constructor (excerpt)">
 
-<code-example header="Component (excerpt)">
-ngOnInit() {
-  this.route.data
-    .subscribe((your-parameters) => {
-      // your data-specific code goes here
-    });
+import { ActivatedRoute } from '@angular/router';
+
+@Component({ ... })
+class YourComponent {
+  constructor(private route: ActivatedRoute) {}
 }
+
 </code-example>
 
-For more information with a working example, see the [routing tutorial section on preloading](guide/router-tutorial-toh#preloading-background-loading-of-feature-areas).
+Use the injected instance of the `ActivatedRoute` class to access `data` associated with a given route.
 
+<code-example header="Component's ngOnInit lifecycle hook (excerpt)">
 
-<hr>
+import { ActivatedRoute } from '@angular/router';
+
+@Component({ ... })
+class YourComponent {
+  constructor(private route: ActivatedRoute) {}
+
+  ngOnInit() {
+    this.route.data
+      .subscribe(data => {
+        const crisis: Crisis = data.crisis;
+        // ...
+      });
+  }
+}
+
+</code-example>
+
+動作例と詳細については、[ルーティングチュートリアルのプリロードのセクション](guide/router-tutorial-toh#preloading-background-loading-of-feature-areas)を参照してください。
+
+## Troubleshooting lazy-loading modules
+
+A common error when lazy-loading modules is importing common modules in multiple places within an application.  You can test for this condition by first generating the module using the Angular CLI and including the `--route route-name` parameter, where `route-name` is the name of your module. Next, generate the module without the `--route` parameter. If the Angular CLI generates an error when you use the `--route` parameter, but runs correctly without it, you may have imported the same module in multiple places.
+
+Remember, many common Angular modules should be imported at the base of your application.
+
+For more information on Angular Modules, see [NgModules](guide/ngmodules).
 
 ## NgModuleとルーティングの詳細
 

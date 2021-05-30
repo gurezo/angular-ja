@@ -12,7 +12,7 @@ Angular アプリケーションを設計するためのベストプラクティ
 
 <div class="alert is-helpful">
 
-  For the sample app that this page describes, see the <live-example></live-example>.
+  For the sample application that this page describes, see the <live-example></live-example>.
 
 </div>
 
@@ -37,8 +37,6 @@ Angular 内で ARIA 属性をバインドするためには接頭辞として `a
 <!-- 静的な ARIA 属性には特別な記法は必要ありません -->
 <button aria-label="Save document">...</button>
 ```
-
-備考:
 
 <div class="alert is-helpful">
 
@@ -70,7 +68,7 @@ Angular コンポーネントを作成する際は、すでにサポートされ
 たとえば、新しく色々なボタンのためにカスタム要素を作成するのではなく、属性のセレクターにネイティブの `<button>` 要素を使用したコンポーネントを作成することができます。
 これは `<button>` と `<a>` に典型的に適用できますが、他の多くのタイプの要素にも使うことができるでしょう。
 
-Angular Material において上記のパターンのサンプルは [`MatButton`](https://github.com/angular/components/blob/master/src/material/button/button.ts#L66-L68) や [`MatTabNav`](https://github.com/angular/components/blob/master/src/material/tabs/tab-nav-bar/tab-nav-bar.ts#L67) 、[`MatTable`](https://github.com/angular/components/blob/master/src/material/table/table.ts#L17) などがあります。
+Angular Material において上記のパターンのサンプルは [`MatButton`](https://github.com/angular/components/blob/50d3f29b6dc717b512dbd0234ce76f4ab7e9762a/src/material/button/button.ts#L67-L69) や [`MatTabNav`](https://github.com/angular/components/blob/50d3f29b6dc717b512dbd0234ce76f4ab7e9762a/src/material/tabs/tab-nav-bar/tab-nav-bar.ts#L139) 、[`MatTable`](https://github.com/angular/components/blob/50d3f29b6dc717b512dbd0234ce76f4ab7e9762a/src/material/table/table.ts#L22) などがあります。
 
 ### ネイティブ要素にコンテナを使う
 
@@ -86,7 +84,7 @@ Angular Material において上記のパターンのサンプルは [`MatButton
 
 ## ケーススタディ: 独自のプログレスバーを実装する
 
-次のサンプルではアクセシビリティ関連の属性を制御するために、ホストバインディングを使った簡易的なプログレスバーを作る方法を説明します。
+次のサンプルではアクセシビリティ関連の属性を制御するために、ホストバインディングを使ったプログレスバーを作る方法を説明します。
 
 * このコンポーネントは標準の HTML 属性の `role` と ARIA 属性の両方をもつ、アクセシビリティが有効の要素を定義します。ARIA 属性の `aria-valuenow` はユーザーの入力にひもづきます。
 
@@ -143,15 +141,10 @@ router.events.pipe(filter(e => e instanceof NavigationEnd)).subscribe(() => {
 
 * [Rob Dodson A11ycasts](https://www.youtube.com/watch?v=HtTyRajRuyY)
 
-* [Codelyzer](http://codelyzer.com/rules/) ではアクセシビリティ標準に適合しているかを確認するための助けとなる Lint のルールが提供されています。
+* [Angular ESLint](https://github.com/angular-eslint/angular-eslint#functionality) ではアクセシビリティ標準に適合しているかを確認するための助けとなる Lint のルールが提供されています。
 
 書籍
 
 * "A Web for Everyone: Designing Accessible User Experiences", Sarah Horton and Whitney Quesenbery
 
 * "Inclusive Design Patterns", Heydon Pickering
-
-## さらなるアクセシビリティについて
-
-以下が参考になるかもしれません。
-* [codelyzer を使って Angulr アプリケーションのアクセシビリティをチェックする](https://web.dev/accessible-angular-with-codelyzer/)。

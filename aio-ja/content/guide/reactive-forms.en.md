@@ -12,7 +12,7 @@ Try this <live-example title="Reactive Forms in Stackblitz">Reactive Forms live-
 
 Before going further into reactive forms, you should have a basic understanding of the following:
 
-* TypeScript programming.
+* [TypeScript](https://www.typescriptlang.org/ "The TypeScript language") programming.
 * Angular app-design fundamentals, as described in [Angular Concepts](guide/architecture "Introduction to Angular concepts.").
 * The form-design concepts that are presented in [Introduction to Forms](guide/forms-overview "Overview of Angular forms.").
 
@@ -24,7 +24,7 @@ Reactive forms use an explicit and immutable approach to managing the state of a
 
 Reactive forms also provide a straightforward path to testing because you are assured that your data is consistent and predictable when requested. Any consumers of the streams have access to manipulate that data safely.
 
-Reactive forms differ from [template-driven forms](guide/forms "Template-driven forms guide") in distinct ways. Reactive forms provide more predictability with synchronous access to the data model, immutability with observable operators, and change tracking through observable streams.
+Reactive forms differ from [template-driven forms](guide/forms "Template-driven forms guide") in distinct ways. Reactive forms provide synchronous access to the data model, immutability with observable operators, and change tracking through observable streams.
 
 Template-driven forms allow direct access to modify data in your template, but are less explicit than reactive forms because they rely on directives embedded in the template, along with mutable data to track changes asynchronously. See the [Forms Overview](guide/forms-overview "Overview of Angular forms.") for detailed comparisons between the two paradigms.
 
@@ -32,7 +32,7 @@ Template-driven forms allow direct access to modify data in your template, but a
 
 There are three steps to using form controls.
 
-1. Register the reactive forms module in your app. This module declares the reactive-form directives that you need to use reactive forms.
+1. Register the reactive forms module in your application. This module declares the reactive-form directives that you need to use reactive forms.
 2. Generate a new `FormControl` instance and save it in the component.
 3. Register the `FormControl` in the template.
 
@@ -50,7 +50,7 @@ To use reactive form controls, import `ReactiveFormsModule` from the `@angular/f
 
 Use the [CLI command](cli "Using the Angular command-line interface.") `ng generate` to generate a component in your project to host the control.
 
-<code-example language="sh" class="code-shell">
+<code-example language="sh">
 
   ng generate component NameEditor
 
@@ -146,7 +146,7 @@ Just as a form control instance gives you control over a single input field, a f
 
 Generate a `ProfileEditor` component and import the `FormGroup` and `FormControl` classes from the `@angular/forms` package.
 
-<code-example language="sh" class="code-shell">
+<code-example language="sh">
 
   ng generate component ProfileEditor
 
@@ -180,7 +180,7 @@ A form group tracks the status and changes for each of its controls, so if one o
 
 <code-example path="reactive-forms/src/app/profile-editor/profile-editor.component.1.html" region="formgroup" header="src/app/profile-editor/profile-editor.component.html (template form group)"></code-example>
 
-Note that just as a form group contains a group of controls, the *profile form* `FormGroup` is bound to the `form` element with the `FormGroup` directive, creating a communication layer between the model and the form containing the inputs. The `formControlName` input provided by the `FormControlName` directive binds each individual input to the form control defined in `FormGroup`. The form controls communicate with their respective elements. They also communicate changes to the form group instance, which provides the source of truth for the model value.
+Note that just as a form group contains a group of controls, the *profileForm* `FormGroup` is bound to the `form` element with the `FormGroup` directive, creating a communication layer between the model and the form containing the inputs. The `formControlName` input provided by the `FormControlName` directive binds each individual input to the form control defined in `FormGroup`. The form controls communicate with their respective elements. They also communicate changes to the form group instance, which provides the source of truth for the model value.
 
 **Save form data**
 

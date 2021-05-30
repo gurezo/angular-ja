@@ -79,7 +79,7 @@ Angular の `upgrade/static` モジュールを使って *順次移行* を
 それらのタグを正しい順番でメンテナンスしなければいけない場合は特にそうです。
 そのため、 *モジュールローダー* を使い始めるとよいでしょう。
 
-[SystemJS](https://github.com/systemjs/systemjs) や、[Webpack](http://webpack.github.io/) 、
+[SystemJS](https://github.com/systemjs/systemjs) や、[Webpack](https://webpack.github.io/) 、
 [Browserify](http://browserify.org/) のようなモジュールローダーを使うことで
 TypeScript や ES2015 の組み込みモジュール機構を使うことができます。
 アプリケーションの別々の部分でどのソースコードが共有されるべきかを
@@ -480,6 +480,15 @@ AngularJS のモジュールの中に登録できます。
 
 <code-example path="upgrade-module/src/app/downgrade-static/app.module.ts" region="downgradecomponent" header="app.module.ts">
 </code-example>
+
+<div class="alert is-helpful">
+
+By default, Angular change detection will also run on the component for every
+AngularJS `$digest` cycle. If you wish to only have change detection run when
+the inputs change, you can set `propagateDigest` to `false` when calling
+`downgradeComponent()`.
+
+</div>
 
 `HeroDetailComponent` は Angular のコンポーネントであるため、 `AppModule` の中で宣言
 する必要があります。
@@ -992,7 +1001,7 @@ Angular のアプリケーションの AOT の恩恵をすべて得るために�
 ## PhoneCat のアップグレードのチュートリアル
 
 この章では、`ngUpgrade` を使ってアプリケーションのアップグレードを準備する方法を学びます。
-サンプルのアプリは私たちの多くが Angular の冒険を開始したであろう、
+サンプルのアプリケーションは私たちの多くが Angular の冒険を開始したであろう、
 [AngularJS のチュートリアル](https://docs.angularjs.org/tutorial)の
 [Angular PhoneCat](https://github.com/angular/angular-phonecat) です。
 これから、このアプリケーションを Angular の勇敢な新しい世界へ連れてくる方法を見ていきます。
@@ -1438,7 +1447,7 @@ Angular のコンポーネントはまだ動かしていません。それは次
 グローバルに利用する代わりに `import` 文を使ってインポートする必要があります。
 
 AngularJS は `index.html` で script タグを使ってロードされています。そのため、
-アプリ全体へグローバルにアクセスでき、`angular` 変数の同じインスタンスを使っています。
+アプリケーション全体へグローバルにアクセスでき、`angular` 変数の同じインスタンスを使っています。
 もし、`import * as angular from 'angular'` を代わりに使った場合は、AngularJS を
 正しくロードするために、AngularJS のアプリケーションのすべてのファイルで
 ES2015 のモジュールを使う必要があります。
@@ -1798,7 +1807,7 @@ Angular のルーターはルートパラメータを異なる方法で渡しま
 
 ### AngularJS に別れを告げる
 
-補助輪を外し、アプリケーションが純粋な、輝かしい Angular アプリとして新しい命を始める時間です。
+補助輪を外し、アプリケーションが純粋な、輝かしい Angular アプリケーションとして新しい命を始める時間です。
 残っているタスクはコードの削除 - すべてのプログラマーにとって、
 もちろんお気に入りの作業です - をするだけです！
 

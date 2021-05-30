@@ -1,6 +1,7 @@
 # Attribute, class, and style bindings
 
-The template syntax provides specialized one-way bindings for scenarios less well-suited to property binding.
+Attribute binding in Angular helps you set values for attributes directly.
+With attribute binding, you can improve accessibility, style your application dynamically, and manage multiple CSS classes or styles simultaneously.
 
 <div class="alert is-helpful">
 
@@ -8,23 +9,36 @@ See the <live-example></live-example> for a working example containing the code 
 
 </div>
 
+## Binding to an attribute
 
-## Attribute binding
+It is recommended that you set an element property with a [property binding](guide/property-binding) whenever possible.
+However, sometimes you don't have an element property to bind.
+In those situations, you can use attribute binding.
 
-Set the value of an attribute directly with an **attribute binding**. This is the only exception to the rule that a binding sets a target property and the only binding that creates and sets an attribute.
+For example, [ARIA](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA) and
+[SVG](https://developer.mozilla.org/en-US/docs/Web/SVG) are purely attributes.
+Neither ARIA nor SVG correspond to element properties and don't set element properties.
+In these cases, you must use attribute binding because there are no corresponding property targets.
 
-Usually, setting an element property with a [property binding](guide/property-binding)
-is preferable to setting the attribute with a string. However, sometimes
-there is no element property to bind, so attribute binding is the solution.
 
-Consider the [ARIA](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA) and
-[SVG](https://developer.mozilla.org/en-US/docs/Web/SVG). They are purely attributes, don't correspond to element properties, and don't set element properties. In these cases, there are no property targets to bind to.
+## Syntax
 
-Attribute binding syntax resembles property binding, but
-instead of an element property between brackets, start with the prefix `attr`,
-followed by a dot (`.`), and the name of the attribute.
-You then set the attribute value, using an expression that resolves to a string,
-or remove the attribute when the expression resolves to `null`.
+Attribute binding syntax resembles [property binding](guide/property-binding), but instead of an element property between brackets, you precede the name of the attribute with the prefix `attr`, followed by a dot.
+Then, you set the attribute value with an expression that resolves to a string.
+
+<code-example language="html">
+
+ &lt;p [attr.attribute-you-are-targeting]="expression"&gt;&lt;/p&gt;
+
+</code-example>
+
+<div class="alert is-helpful">
+
+When the expression resolves to `null` or `undefined`, Angular removes the attribute altogether.
+
+</div>
+
+## Binding ARIA attributes
 
 One of the primary use cases for attribute binding
 is to set ARIA attributes, as in this example:
@@ -33,61 +47,66 @@ is to set ARIA attributes, as in this example:
 
 {@a colspan}
 
+## Binding to `colspan`
+
+Another common use case for attribute binding is with the `colspan` attribute in tables.
+Binding to the `colspan` attribute helps you keep your tables programmatically dynamic.
+Depending on the amount of data that your application populates a table with, the number of columns that a row spans could change.
+
+To use attribute binding with the `<td>` attribute `colspan`:
+
+1. Specify the `colspan` attribute by using the following syntax: `[attr.colspan]`.
+1. Set `[attr.colspan]` equal to an expression.
+
+In the following example, we bind the `colspan` attribute to the expression `1 + 1`.
+
+<code-example path="attribute-binding/src/app/app.component.html" region="colspan" header="src/app/app.component.html"></code-example>
+
+This binding causes the `<tr>` to span two columns.
+
 <div class="alert is-helpful">
 
-#### `colspan` and `colSpan`
+Sometimes there are differences between the name of property and an attribute.
 
-Notice the difference between the `colspan` attribute and the `colSpan` property.
-
-If you wrote something like this:
-
-<code-example language="html">
-  &lt;tr&gt;&lt;td colspan="{{1 + 1}}"&gt;Three-Four&lt;/td&gt;&lt;/tr&gt;
-</code-example>
-
-You'd get this error:
-
-<code-example language="bash">
-  Template parse errors:
-  Can't bind to 'colspan' since it isn't a known native property
-</code-example>
-
-As the message says, the `<td>` element does not have a `colspan` property. This is true
-because `colspan` is an attribute&mdash;`colSpan`, with a capital `S`, is the
-corresponding property. Interpolation and property binding can set only *properties*, not attributes.
-
-Instead, you'd use property binding and write it like this:
-
-<code-example path="attribute-binding/src/app/app.component.html" region="colSpan" header="src/app/app.component.html"></code-example>
+`colspan` is an attribute of `<tr>`, while `colSpan`  with a capital "S" is a property.
+When using attribute binding, use `colspan` with a lowercase "s".
+For more information on how to bind to the `colSpan` property, see the [`colspan` and `colSpan`](guide/property-binding#colspan) section of [Property Binding](guide/property-binding).
 
 </div>
 
-<hr/>
 
 {@a class-binding}
+## Binding to the `class` attribute
 
-## Class binding
+You can use class binding to add and remove CSS class names from an element's `class` attribute.
 
-Here's how to set the `class` attribute without a binding in plain HTML:
+### Binding to a single CSS `class`
 
-```html
-<!-- standard class attribute setting -->
-<div class="foo bar">Some text</div>
-```
+To create a single class binding, use the prefix `class` followed by a dot and the name of the CSS class&mdash;for example, `[class.sale]="onSale"`.
+Angular adds the class when the bound expression, `onSale` is truthy, and it removes the class when the expression is falsy&mdash;with the exception of `undefined`.
+See [styling delegation](guide/style-precedence#styling-delegation) for more information.
 
-You can also add and remove CSS class names from an element's `class` attribute with a **class binding**.
+### Binding to multiple CSS classes
 
-To create a single class binding, start with the prefix `class` followed by a dot (`.`) and the name of the CSS class (for example, `[class.foo]="hasFoo"`).
-Angular adds the class when the bound expression is truthy, and it removes the class when the expression is falsy (with the exception of `undefined`, see [styling delegation](#styling-delegation)).
+To bind to multiple classes, use `[class]` set to an expression&mdash;for example, `[class]="classExpression"`.
+The expression can be one of:
 
-To create a binding to multiple classes, use a generic `[class]` binding without the dot (for example, `[class]="classExpr"`).
-The expression can be a space-delimited string of class names, or you can format it as an object with class names as the keys and truthy/falsy expressions as the values.
-With object format, Angular will add a class only if its associated value is truthy.
+* A space-delimited string of class names.
+* An object with class names as the keys and truthy or falsy expressions as the values.
+* An array of class names.
 
-It's important to note that with any object-like expression (`object`, `Array`, `Map`, `Set`, etc), the identity of the object must change for the class list to be updated.
-Updating the property without changing object identity will have no effect.
+With the object format, Angular adds a class only if its associated value is truthy.
 
-If there are multiple bindings to the same class name, conflicts are resolved using [styling precedence](#styling-precedence).
+<div class="alert is-important">
+
+With any object-like expression&mdash;such as `object`, `Array`, `Map`, or `Set`&mdash;the identity of the object must change for Angular to update the class list.
+Updating the property without changing object identity has no effect.
+
+</div>
+
+If there are multiple bindings to the same class name, Angular uses [styling precedence](guide/style-precedence) to determine which binding to use.
+
+The following table summarizes class binding syntax.
 
 <style>
   td, th {vertical-align: top}
@@ -118,18 +137,18 @@ If there are multiple bindings to the same class name, conflicts are resolved us
   </tr>
   <tr>
     <td>Single class binding</td>
-    <td><code>[class.foo]="hasFoo"</code></td>
+    <td><code>[class.sale]="onSale"</code></td>
     <td><code>boolean | undefined | null</code></td>
     <td><code>true</code>, <code>false</code></td>
   </tr>
   <tr>
     <td rowspan=3>Multi-class binding</td>
-    <td rowspan=3><code>[class]="classExpr"</code></td>
+    <td rowspan=3><code>[class]="classExpression"</code></td>
     <td><code>string</code></td>
     <td><code>"my-class-1 my-class-2 my-class-3"</code></td>
   </tr>
   <tr>
-    <td><code>{[key: string]: boolean | undefined | null}</code></td>
+    <td><code>Record&lt;string, boolean | undefined | null&gt;</code></td>
     <td><code>{foo: true, bar: false}</code></td>
   </tr>
   <tr>
@@ -139,43 +158,55 @@ If there are multiple bindings to the same class name, conflicts are resolved us
 </table>
 
 
-The [NgClass](guide/built-in-directives/#ngclass) directive can be used as an alternative to direct `[class]` bindings.
-However, using the above class binding syntax without `NgClass` is preferred because due to improvements in class binding in Angular, `NgClass` no longer provides significant value, and might eventually be removed in the future.
+{@a style-binding}
+## Binding to the style attribute
 
+You can use style binding to set styles dynamically.
 
-<hr/>
+### Binding to a single style
 
-## Style binding
-
-Here's how to set the `style` attribute without a binding in plain HTML:
-
-```html
-<!-- standard style attribute setting -->
-<div style="color: blue">Some text</div>
-```
-
-You can also set styles dynamically with a **style binding**.
-
-To create a single style binding, start with the prefix `style` followed by a dot (`.`) and the name of the CSS style property (for example, `[style.width]="width"`).
-The property will be set to the value of the bound expression, which is normally a string.
+To create a single style binding, use the prefix `style` followed by a dot and the name of the CSS style property&mdash;for example, `[style.width]="width"`.
+Angular sets the property to the value of the bound expression, which is usually a string.
 Optionally, you can add a unit extension like `em` or `%`, which requires a number type.
 
 <div class="alert is-helpful">
 
-Note that a _style property_ name can be written in either
-[dash-case](guide/glossary#dash-case), as shown above, or
-[camelCase](guide/glossary#camelcase), such as `fontSize`.
+You can write a style property name in either [dash-case](guide/glossary#dash-case), or
+[camelCase](guide/glossary#camelcase).
+
+<code-example language="html">
+  &lt;nav [style.background-color]="expression"&gt;&lt;/nav&gt;
+
+  &lt;nav [style.backgroundColor]="expression"&gt;&lt;/nav&gt;
+</code-example>
 
 </div>
 
-If there are multiple styles you'd like to toggle, you can bind to the `[style]` property directly without the dot (for example, `[style]="styleExpr"`).
-The expression attached to the `[style]` binding is most often a string list of styles like `"width: 100px; height: 100px;"`.
+### Binding to multiple styles
 
-You can also format the expression as an object with style names as the keys and style values as the values, like `{width: '100px', height: '100px'}`.
-It's important to note that with any object-like expression (`object`, `Array`, `Map`, `Set`, etc), the identity of the object must change for the class list to be updated.
-Updating the property without changing object identity will have no effect.
+To toggle multiple styles, bind to the `[style]` attribute&mdash;for example, `[style]="styleExpression"`.
+The `styleExpression` can be one of:
 
-If there are multiple bindings to the same style property, conflicts are resolved using [styling precedence rules](#styling-precedence).
+* A string list of styles such as `"width: 100px; height: 100px; background-color: cornflowerblue;"`.
+* An object with style names as the keys and style values as the values, such as `{width: '100px', height: '100px', backgroundColor: 'cornflowerblue'}`.
+
+Note that binding an array to `[style]` is not supported.
+
+<div class="alert is-important">
+
+When binding `[style]` to an object expression, the identity of the object must change for Angular to update the class list.
+Updating the property without changing object identity has no effect.
+
+</div>
+
+#### Single and multiple-style binding example
+
+<code-example path="attribute-binding/src/app/single-and-multiple-style-binding.component.ts" header="nav-bar.component.ts">
+</code-example>
+
+If there are multiple bindings to the same style attribute, Angular uses [styling precedence](guide/style-precedence) to determine which binding to use.
+
+The following table summarizes style binding syntax.
 
 <style>
   td, th {vertical-align: top}
@@ -218,29 +249,25 @@ If there are multiple bindings to the same style property, conflicts are resolve
     <td><code>100</code></td>
   </tr>
     <tr>
-    <td rowspan=3>Multi-style binding</td>
-    <td rowspan=3><code>[style]="styleExpr"</code></td>
+    <td rowspan=2>Multi-style binding</td>
+    <td rowspan=2><code>[style]="styleExpression"</code></td>
     <td><code>string</code></td>
     <td><code>"width: 100px; height: 100px"</code></td>
   </tr>
   <tr>
-    <td><code>{[key: string]: string | undefined | null}</code></td>
+    <td><code>Record&lt;string, string | undefined | null&gt;</code></td>
     <td><code>{width: '100px', height: '100px'}</code></td>
   </tr>
-  <tr>
-    <td><code>Array</code><<code>string</code>></td>
-    <td><code>['width', '100px']</code></td>
-  </tr>
 </table>
+
+<div class="alert is-helpful">
 
 The [NgStyle](guide/built-in-directives/#ngstyle) directive can be used as an alternative to direct `[style]` bindings.
 However, using the above style binding syntax without `NgStyle` is preferred because due to improvements in style binding in Angular, `NgStyle` no longer provides significant value, and might eventually be removed in the future.
 
-
-<hr/>
+</div>
 
 {@a styling-precedence}
-
 ## Styling Precedence
 
 A single HTML element can have its CSS class list and style values bound to multiple sources (for example, host bindings from multiple directives).
@@ -301,3 +328,40 @@ For example, consider the following template:
 Imagine that the `dirWithHostBinding` directive and the `comp-with-host-binding` component both have a `[style.width]` host binding.
 In that case, if `dirWithHostBinding` sets its binding to `undefined`, the `width` property will fall back to the value of the `comp-with-host-binding` host binding.
 However, if `dirWithHostBinding` sets its binding to `null`, the `width` property will be removed entirely.
+
+
+## Injecting attribute values
+
+There are cases where you need to differentiate the behavior of a [Component](api/core/Component) or [Directive](api/core/Directive) based on a static value set on the host element as an HTML attribute. For example, you might have a directive that needs to know the `type` of a `<button>` or `<input>` element.
+
+The [Attribute](api/core/Attribute) parameter decorator is great for passing the value of an HTML attribute to a component/directive constructor using [dependency injection](guide/dependency-injection).
+
+<div class="alert is-helpful">
+
+  The injected value captures the value of the specified HTML attribute at that moment.
+  Future updates to the attribute value are not reflected in the injected value.
+
+</div>
+
+<code-example
+  path="attribute-binding/src/app/my-input-with-attribute-decorator.component.ts"
+  header="src/app/my-input-with-attribute-decorator.component.ts">
+</code-example>
+
+<code-example
+  path="attribute-binding/src/app/app.component.html"
+  region="attribute-decorator"
+  header="src/app/app.component.html">
+</code-example>
+
+In the preceding example, the result of `app.component.html` is **The type of the input is: number**.
+
+Another example is the [RouterOutlet](api/router/RouterOutlet) directive, which makes use of the [Attribute](api/core/Attribute) decorator to retrieve the unique [name](api/router/RouterOutlet#description) on each outlet.
+
+<div class="callout is-helpful">
+
+  <header>@Attribute() vs @Input()</header>
+
+  Remember, use [@Input()](api/core/Input) when you want to keep track of the attribute value and update the associated property. Use [@Attribute()](api/core/Attribute) when you want to inject the value of an HTML attribute to a component or directive constructor.
+
+</div>

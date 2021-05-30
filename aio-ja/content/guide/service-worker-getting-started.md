@@ -11,7 +11,7 @@
 ## アプリケーションにService Workerを追加する
 
 プロジェクトでAngular Service Workerを設定するには、CLIコマンド`ng add @angular/pwa`を使用します。
-必要なサポートファイルの設定とともに`service-worker`パッケージを追加することで、Service Workerを使用するようにアプリを設定します。
+必要なサポートファイルの設定とともに`service-worker`パッケージを追加することで、Service Workerを使用するようにアプリケーションを設定します。
 
 ```sh
 ng add @angular/pwa --project *project-name* 
@@ -25,14 +25,14 @@ ng add @angular/pwa --project *project-name*
 4. `index.html`ファイルを更新します。
     * `manifest.webmanifest`ファイルを追加するためのリンクを含めます。
     * `theme=color`のメタタグを追加します。
-5. インストール可能なプログレッシブウェブアプリ（PWA）をサポートするアイコンファイルをインストールします。 
+5. インストール可能なプログレッシブウェブアプリケーション（PWA）をサポートするアイコンファイルをインストールします。 
 6. [`ngsw-config.json`](/guide/service-worker-config)というService Worker構成ファイルを作成します。このファイルは、キャッシュの動作やその他の設定を指定します。
 
 
 今度は、プロジェクトをビルドします。
 
 ```sh
-ng build --prod
+ng build
 ```
 
 CLIプロジェクトはAngular Service Workerを使用するように設定されました。
@@ -115,7 +115,7 @@ networkタブを見ると、Service Workerがアクティブであることを�
 ### アプリケーションを変更する
 
 Service Workerがアプリケーションをキャッシュする方法を見てきました。
-次のステップは、アップデートの仕組みを理解することです。
+次のステップは、アップデートの仕組みを理解することです。アプリケーションを変更して、Service Workerが更新プログラムをインストールするのを確認しましょう。
 
 1. シークレットウィンドウでテストする場合は、2つ目のタブを空白で開きます。これにより、テスト中にシークレットとキャッシュの状態が維持されます。
 
@@ -123,16 +123,14 @@ Service Workerがアプリケーションをキャッシュする方法を見て
 
 3. `http-server`をシャットダウンします。
 
-4. 次に、アプリケーションを変更して、Service Workerが更新プログラムをインストールするのを確認します。
+4. 編集するために`src/app/app.component.html`を開きます。
 
-5. 編集するために`src/app/app.component.html`を開きます。
+5. `Welcome to {{title}}!`のテキストを`Bienvenue à {{title}}!`に変えます。
 
-6. `Welcome to {{title}}!`のテキストを`Bienvenue à {{title}}!`に変えます。
-
-7. もう一度ビルドしてサーバーを起動します。
+6. もう一度ビルドしてサーバーを起動します。
 
 ```sh
-ng build --prod
+ng build
 http-server -p 8080 -c-1 dist/<project-name>
 ```
 
@@ -157,8 +155,6 @@ http-server -p 8080 -c-1 dist/<project-name>
 </div>
 
 Service Workerは、あなたのアプリケーションの更新版を*バックグラウンドで*インストールし、次にページを読み込んだりリロードしたりすると、Service Workerは最新のバージョンに切り替わります。
-
-<hr />
 
 ## もっとAngular Service Workerを知りたい
 

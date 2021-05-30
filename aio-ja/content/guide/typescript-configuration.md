@@ -15,46 +15,28 @@ TypeScriptは、*tsc*コンパイラを使用してJavaScriptに "変換"する�
 
 {@a tsconfig}
 
-## 構成ファイル
+## 設定ファイル
 
-A given Angular workspace contains several TypeScript configuration files.
-At the root level, there are two main TypeScript configuration files: a `tsconfig.json` file and a `tsconfig.base.json` file.
+既定のAngularワークスペースには、いくつかのTypeScript設定ファイルが含まれています。
+ルートにある`tsconfig.json`は、ワークスペース内のすべてのプロジェクトが継承する基本となるTypeScriptとAngularコンパイラオプションを指定します。
 
-The `tsconfig.json` file is a ["Solution Style"](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-9.html#support-for-solution-style-tsconfigjson-files) TypeScript configuration file.
-Code editors and TypeScript’s language server use this file to improve development experience.
-Compilers do not use this file.
-
-The `tsconfig.json` file contains a list of paths to the other TypeScript configuration files used in the workspace.
-
-<code-example lang="json" header="tsconfig.json" linenums="false">
-{
- "files": [],
- "references": [
-   {
-     "path": "./tsconfig.app.json"
-   },
-   {
-     "path": "./tsconfig.spec.json"
-   },
-   {
-     "path": "./projects/my-lib/tsconfig.lib.json"
-   }
- ]
-}
-</code-example>
-
-The `tsconfig.base.json` file specifies the base TypeScript and Angular compiler options that all projects in the workspace inherit.
-
-The TypeScript and Angular have a wide range of options which can be used to configure type-checking features and generated output.
-For more information, see the [Configuration inheritance with extends](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html#configuration-inheritance-with-extends) section of the TypeScript documentation.
 <div class="alert is-helpful">
 
-For more information TypeScript configuration files, see the official [TypeScript wiki](http://www.typescriptlang.org/docs/handbook/tsconfig-json.html)
-For details about configuration inheritance, see the [Configuration inheritance with extends](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html#configuration-inheritance-with-extends) section.
+See the [Angular compiler options](guide/angular-compiler-options) guide for information about what Angular specific options are available.
 
 </div>
 
-Angular アプリケーションの最初の `tsconfig.base.json` は通常、次の例のようになります：
+TypeScriptとAngularには、型チェック機能と生成される出力を設定するために使用できる幅広いオプションがあります。
+詳しくはTypeScriptドキュメントの[extendsによる設定の継承](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html#configuration-inheritance-with-extends)のセクションを参照してください。
+
+<div class="alert is-helpful">
+
+TypeScript設定ファイルの詳細は、公式の[TypeScript wiki](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html)を参照してください。
+設定の継承について詳しくは、[extendsによる設定の継承](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html#configuration-inheritance-with-extends)のセクションを参照してください。
+
+</div>
+
+Angular アプリケーションの最初の `tsconfig.json` は通常、次の例のようになります：
 
 <code-example lang="json" header="tsconfig.json" linenums="false">
 {
@@ -78,11 +60,6 @@ Angular アプリケーションの最初の `tsconfig.base.json` は通常、�
 }
 </code-example>
 
-
-### Strict mode
-
-When you create new workspaces and projects, you have the option to use Angular's strict mode, which can help you write better, more maintainable code.
-For more information, see [Strict mode](/guide/strict-mode).
 
 {@a noImplicitAny}
 
@@ -115,7 +92,7 @@ JavaScriptファイルは生成されますが、**エラーも出力されま�
 
 <div class="alert is-helpful">
 
-TypeScriptの構成がコンパイルに与える影響の詳細については、 [Angular コンパイラオプション](guide/angular-compiler-options) および [Template の型チェック](guide/template-typecheck) を参照してください。
+TypeScriptの構成がコンパイルに与える影響の詳細については、 [Angular コンパイラオプション](guide/angular-compiler-options) および [テンプレートの型チェック](guide/template-typecheck) を参照してください。
 
 </div>
 
@@ -162,7 +139,7 @@ _追加の_アンビエント宣言を追加します。
 公開しています。
 
 これらの型定義ファイルは、
-[`@types/*` スコープ化パッケージ](http://www.typescriptlang.org/docs/handbook/declaration-files/consumption.html)を使って`npm`でインストールすることができ、
+[`@types/*` スコープ化パッケージ](https://www.typescriptlang.org/docs/handbook/declaration-files/consumption.html)を使って`npm`でインストールすることができ、
 TypeScript 2.0以降では自動認識されます。
 
 たとえば`jasmine`の型定義ファイルをインストールするには、`npm install @types/jasmine --save-dev`を実行します。

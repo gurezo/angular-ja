@@ -1,46 +1,30 @@
-# Strict mode
+# strictモード
 
-When you create a new workspace or a project you have an option to create them in a strict mode using the `--strict` flag.
+Angular CLI creates all new workspaces and projects with **strict mode** enabled.
 
-Enabling this flag initializes your new workspace or project with a few new settings that improve maintainability, help you catch bugs ahead of time, and allow the CLI to perform advanced optimizations on your application.
-Additionally, applications that use these stricter settings are easier to statically analyze, which can help the `ng update` command refactor code more safely and precisely when you are updating to future versions of Angular.
+Strict mode improves maintainability and helps you catch bugs ahead of time.
+Additionally, strict mode applications are easier to statically analyze and can help the `ng update` command refactor code more safely and precisely when you are updating to future versions of Angular.
 
-Specifically, the `strict` flag does the following:
+Specifically, strict mode affects newly generated applications in the following way:
 
-* Enables [`strict` mode in TypeScript](https://www.staging-typescript.org/tsconfig#strict), as well as other strictness flags recommended by the TypeScript team. Specifically, `forceConsistentCasingInFileNames`, `noImplicitReturns`,  `noFallthroughCasesInSwitch`.
-* Turns on strict Angular compiler flags [`strictTemplates`](guide/angular-compiler-options#stricttemplates) and [`strictInjectionParameters`](guide/angular-compiler-options#strictinjectionparameters)
-* [Bundle size budgets](guide/build#configuring-size-budgets) have been reduced by ~75%
-* Turns on [`no-any` tslint rule](https://palantir.github.io/tslint/rules/no-any/) to prevent declarations of type `any`
-* [Marks your application as side-effect free](https://webpack.js.org/guides/tree-shaking/#mark-the-file-as-side-effect-free) to enable more advanced tree-shaking
+* [TypeScriptで`strict`モード](https://www.typescriptlang.org/tsconfig#strict)を有効にします。TypeScriptチームが推奨するその他の厳密フラグも同様で、具体的には`forceConsistentCasingInFileNames`、`noImplicitReturns`、`noFallthroughCasesInSwitch`です。
+* Angularコンパイラの厳密フラグをオンにします。[`strictTemplates`](guide/angular-compiler-options#stricttemplates)、[`strictInjectionParameters`](guide/angular-compiler-options#strictinjectionparameters)、[`strictInputAccessModifiers`](guide/template-typecheck#troubleshooting-template-errors)です。
+* Reduces the [bundle size budgets](guide/build#configuring-size-budgets) for the `initial` and `anyComponentStyle` budget types by 75% compared to the previous defaults.
 
-You can apply these settings at the workspace and project level.
+これらの設定は、ワークスペースおよびプロジェクトレベルで適用できます。
 
-To create a new workspace and application using the strict mode, run the following command:
+基本的な `ng new` コマンドを使用して新しいワークスペースとアプリケーションを作成すると、自動的に strict モードが使用されます。
 
-<code-example language="sh" class="code-shell">
+<code-example language="sh">
 
-ng new [project-name] --strict
+ng new [project-name]
 
 </code-example>
 
-To create a new application in the strict mode within an existing non-strict workspace, run the following command:
+既存のstrictではないワークスペース内にstrictモードで新しいアプリケーションを作成するには、次のコマンドを実行します:
 
-<code-example language="sh" class="code-shell">
+<code-example language="sh">
 
 ng generate application [project-name] --strict
 
 </code-example>
-
-{@a side-effect}
-
-### Non-local side effects in applications
-
-When you create projects and workspaces using the `strict` mode, you'll notice an additional `package.json` file, located in `src/app/` directory.
-This file informs tools and bundlers that the code under this directory is free of non-local side effects. Non-local side effects in the application code are not common and using them is not considered a good coding pattern.
-More importantly, code with these types of side effects cannot be optimized, resulting in increased bundle sizes and applications that load more slowly.
-
-If you need more information, the following links may be helpful.
-
-* [Tree-shaking](https://webpack.js.org/guides/tree-shaking/)
-* [Dealing with side effects and pure functions in JavaScript](https://dev.to/vonheikemen/dealing-with-side-effects-and-pure-functions-in-javascript-16mg)
-* [How to deal with dirty side effects in your pure function JavaScript](https://jrsinclair.com/articles/2018/how-to-deal-with-dirty-side-effects-in-your-pure-functional-javascript/)

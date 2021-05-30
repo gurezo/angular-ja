@@ -4,6 +4,20 @@ Angular Language ServiceはコードエディタにAngularテンプレート内�
 ヒント、ナビゲーションの機能を提供します。
 これらの機能はHTMLファイルとして分割された外部テンプレートやインラインテンプレートに対して動作します。
 
+## Configuring compiler options for the Angular Language Service
+
+To enable the latest Language Service features, set the `strictTemplates` option in `tsconfig.json` by setting `strictTemplates` to `true,` as shown in the following example:
+
+<code-example language="json">
+
+  "angularCompilerOptions": {
+    "strictTemplates": true
+  }
+
+</code-example>
+
+For more information, see the [Angular compiler options](guide/angular-compiler-options) guide.
+
 ## 機能
 
 エディタはAngularファイルを開いていることを自動で検出します。
@@ -54,46 +68,25 @@ Angular Language Serviceは、コード内の間違いを予告することも�
 ## エディターにおけるAngular Language Service
 
 現状では、Angular Language Serviceは[Visual Studio Code](https://code.visualstudio.com/)、
-[WebStorm](https://www.jetbrains.com/webstorm)、[Sublime Text](https://www.sublimetext.com/)の拡張機能として利用可能です。
+[WebStorm](https://www.jetbrains.com/webstorm)、[Sublime Text](https://www.sublimetext.com/)、[Eclipse IDE](https://www.eclipse.org/eclipseide/)の拡張機能として利用可能です。
 
 ### Visual Studio Code
 
-[Visual Studio Code](https://code.visualstudio.com/)では、[Extensions: Marketplace](https://marketplace.visualstudio.com/items?itemName=Angular.ng-template)から拡張機能をインストールしてください。マーケットプレイスは、左側のメニューペインにおける拡張機能アイコンから開けます。また、VS Quick Open (⌘+P on Mac, CTRL+P on Windows) に"? ext"と入力して開くことも可能です。
+[Visual Studio Code](https://code.visualstudio.com/)では、[Extensions: Marketplace](https://marketplace.visualstudio.com/items?itemName=Angular.ng-template)から拡張機能をインストールしてください。マーケットプレイスは、左側のメニューペインにおける拡張機能アイコンから開けます。また、VS Quick Open (⌘+P on Mac, CTRL+P on Windows) に"? ext"と入力して開くことも可能です。In the marketplace, search for Angular Language Service extension, and click the **Install** button.
 
-マーケットプレイスを開いたら、Angular Language Service拡張機能を検索し、**Install**ボタンをクリックしてください。
+The Visual Studio Code integration with the Angular language service is maintained and distributed by the Angular team.
+
+### Visual Studio
+
+In [Visual Studio](https://visualstudio.microsoft.com/), install the extension from the [Extensions: Marketplace](https://marketplace.visualstudio.com/items?itemName=TypeScriptTeam.AngularLanguageService). You can open the marketplace from the editor selecting Extensions on the top menu pane, and then selecting Manage Extensions. In the marketplace, search for Angular Language Service extension, and click the **Install** button.
+
+The Visual Studio integration with the Angular language service is maintained and distributed by Microsoft with help from the Angular team. Check out the project [here](https://github.com/microsoft/vs-ng-language-service)
 
 ### WebStorm
 
-[WebStorm](https://www.jetbrains.com/webstorm/)では、プロジェクトの開発用依存関係としてLanguage Serviceをインストールする必要があります。
+In [WebStorm](https://www.jetbrains.com/webstorm/), enable the plugin [Angular and AngularJS](https://plugins.jetbrains.com/plugin/6971-angular-and-angularjs).
 
-1. 下記をプロジェクトの`package.json`内の`devDependencies`に追記します
-
-<code-example language="json" header="package.json">
-devDependencies {
-  "@angular/language-service": "^6.0.0"
-}
-</code-example>
-
-2. プロジェクトルートのターミナルで、この`devDependencies`を`npm`か`yarn`でインストールします：
-
-```sh
-npm install
-```
-*または*
-
-```sh
-yarn
-```
-
-*または*
-
-```sh
-yarn install
-```
-
-Angularはこの開発用依存関係を認識すると、WebStorm環境内で言語機能を提供します。
-WebStormは、Language Serviceに加えて、テンプレート内の色付けとオートコンプリートを提供します。
-
+Since WebStorm 2019.1, the `@angular/language-service` is not required anymore and should be removed from your `package.json`.
 
 ### Sublime Text
 
@@ -130,7 +123,9 @@ npm install --save-dev @angular/language-service
 
 これでAngular Language Serviceがエラーチェックや補完を`.ts`ファイルで提供するようになります。
 
+### Eclipse IDE
 
+Either directly install the "Eclipse IDE for Web and JavaScript developers" package which comes with the Angular Language Server included, or from other Eclipse IDE packages, use Help > Eclipse Marketplace to find and install [Eclipse Wild Web Developer](https://marketplace.eclipse.org/content/wild-web-developer-html-css-javascript-typescript-nodejs-angular-json-yaml-kubernetes-xml).
 
 
 ## Language Serviceの仕組み
@@ -149,8 +144,6 @@ Angularのコンパイラがパースされた木構造を解析して、テン�
 このHTML ASTは、ただ"`{{data.---}}`"というテキスト文字列が存在していることをコンパイラへ伝えるだけです。
 テンプレートパーサーがテンプレートAST内にあるAngular expression ASTを生成するのはこのときです。
 Angular Language Serviceは、このコンテキストにおける`data.---`を見つけて、TypeScriptの言語サービスに`data`のメンバを問い合わせることで、補完可能な候補のリストを返却するのです。
-
-<hr>
 
 ## 詳細な情報
 

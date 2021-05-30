@@ -20,9 +20,9 @@ A builder handler function receives two arguments; a set of input `options` (a J
 
 The separation of concerns here is the same as with [schematics](guide/glossary#schematic), which are used for other CLI commands that touch your code (such as `ng generate`).
 
-* Options are given by the CLI user, context is provided by and provides access to the CLI Builder API, and the developer provides the behavior.
+* The `options` object is provided by the CLI user, while the `context` object is provided by the CLI Builder API.
 
-* The `BuilderContext` object provides access to the scheduling method, `BuilderContext.scheduleTarget()`. The scheduler executes the builder handler function with a given [target configuration](guide/glossary#target).
+* In addition to the contextual information, the `context` object, which is an instance of the `BuilderContext`, also provides access to a scheduling method, `BuilderContext.scheduleTarget()`. The scheduler executes the builder handler function with a given [target configuration](guide/glossary#target).
 
 The builder handler function can be synchronous (return a value) or asynchronous (return a Promise), or it can watch and return multiple values (return an Observable).
 The return value or values must always be of type `BuilderOutput`.
@@ -42,7 +42,7 @@ For example, your `myBuilder` folder could contain the following files.
 | `src/my-builder.ts`      | Main source file for the builder definition. |
 | `src/my-builder.spec.ts` | Source file for tests. |
 | `src/schema.json`        | Definition of builder input options. |
-| `builders.json`          | Testing configuration. |
+| `builders.json`          | Builders definition. |
 | `package.json`           | Dependencies. See https://docs.npmjs.com/files/package.json. |
 | `tsconfig.json`          | [TypeScript configuration](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html). |
 
@@ -106,7 +106,7 @@ Pass an empty string to remove the status.
 
 <code-example 
   path="cli-builder/src/my-builder.ts" 
-  header="src/my-builder.ts (progess reporting)" 
+  header="src/my-builder.ts (progress reporting)" 
   region="progress-reporting">
 </code-example>
 
@@ -119,7 +119,7 @@ In either case, you must provide required inputs, but can allow other inputs to 
 
 You define builder inputs in a JSON schema associated with that builder.
 The Architect tool collects the resolved input values into an `options` object, and validates their types against the schema before passing them to the builder function.
-(The Schematics library does the same kind of validation of user input).
+(The Schematics library does the same kind of validation of user input.)
 
 For our example builder, we expect the `options` value to be a `JsonObject` with two keys: a `command` that is a string, and an `args` array of string values.
 
@@ -153,7 +153,7 @@ For more information, see the [JSON schemas website](http://json-schema.org/).
 
 To link our builder implementation with its schema and name, we need to create a *builder definition* file, which we can point to in `package.json`.
 
-Create a file named `builders.json` file that looks like this.
+Create a file named `builders.json` that looks like this:
 
 <code-example language="json" header="builders.json">
 
@@ -204,7 +204,7 @@ Targets are defined in the `angular.json` [CLI configuration file](guide/workspa
 A target specifies the builder to use, its default options configuration, and named alternative configurations.
 The Architect tool uses the target definition to resolve input options for a given run.
 
-The  `angular.json` file has a section for each project, and the "architect" section of each project configures targets for builders used by CLI commands such as 'build', 'test', and 'lint'.
+The `angular.json` file has a section for each project, and the "architect" section of each project configures targets for builders used by CLI commands such as 'build', 'test', and 'lint'.
 By default, for example, the `build` command runs the builder  `@angular-devkit/build-angular:browser` to perform the build task, and passes in default option values as specified for the `build` target in   `angular.json`.
 
 <code-example language="json" header="angular.json">
@@ -276,7 +276,7 @@ For more information see [Workspace Configuration](guide/workspace-config).
    You can also invoke a builder directly from another builder or test by calling `BuilderContext.scheduleBuilder()`.
    You pass an `options` object directly to the method, and those option values are validated against the schema of the builder without further adjustment.
 
-   Only the  `BuilderContext.scheduleTarget()` method resolves the configuration and overrides through the `angular.json` file.
+   Only the `BuilderContext.scheduleTarget()` method resolves the configuration and overrides through the `angular.json` file.
 
 </div>
 
@@ -340,7 +340,7 @@ We need to update the `angular.json` file to add a target for this builder to th
 
 * We'll add a new target section to the "architect" object for our project.
 
-* The target named "touch" uses our builder, which we published to `@example/command-runner`. (See [Publishing your Library](guide/creating-libraries#publishing-your-library))
+* The target named "touch" uses our builder, which we published to `@example/command-runner`. (See [Publishing your Library](guide/creating-libraries#publishing-your-library).)
 
 * The options object provides default values for the two inputs that we defined; `command`, which is the Unix command to execute, and `args`, an array that contains the file to operate on.
 

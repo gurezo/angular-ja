@@ -35,13 +35,12 @@ monorepoワークスペースをセットアップするには、ルートアプ
 | `.editorconfig`        | コードエディタ向けの設定です。 [EditorConfig](https://editorconfig.org/)を参照してください。 |
 | `.gitignore`           | [Git](https://git-scm.com/)に無視してほしい、意図的な未追跡ファイルの指定をします。 |
 | `README.md`            | 紹介用のドキュメントです。|
-| `angular.json`         | ワークスペース内のすべてのプロジェクトを対象としたCLIのデフォルト設定をします。CLIの使うビルド、サーブ、テストツールの設定オプションを規定します。たとえば、[TSLint](https://palantir.github.io/tslint/)、[Karma](https://karma-runner.github.io/)や[Protractor](http://www.protractortest.org/)などです。詳しくは [Angularワークスペースの設定](guide/workspace-config)を参照してください。 |
+| `angular.json`         | ワークスペース内のすべてのプロジェクトを対象としたCLIのデフォルト設定をします。CLIの使うビルド、サーブ、テストツールの設定オプションを規定します。たとえば、[TSLint](https://palantir.github.io/tslint/)、[Karma](https://karma-runner.github.io/)や[Protractor](https://www.protractortest.org/)などです。詳しくは [Angularワークスペースの設定](guide/workspace-config)を参照してください。 |
 | `package.json`         | ワークスペース内の全プロジェクトが利用可能な[npmパッケージの依存関係](guide/npm-packages) の設定をします。具体的なフォーマットやファイルの中身については[npm documentation](https://docs.npmjs.com/files/package.json) を参照してください。|
 | `package-lock.json`    | npmクライアントにより`node_modules`にインストールされたすべてのパッケージのバージョン情報を提供します。詳しくは[npm documentation](https://docs.npmjs.com/files/package-lock.json)を参照してください。yarnクライアントを利用している場合は、代わりに[yarn.lock](https://yarnpkg.com/lang/en/docs/yarn-lock/)ファイルが使われます。 |
 | `src/`                 | ルートレベルのアプリケーションプロジェクトのソースファイル。 |
 | `node_modules`         | [npmパッケージ](guide/npm-packages)をワークスペース全体に提供します。 |
-| `tsconfig.json`         | The `tsconfig.json` file is a ["Solution Style"](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-9.html#support-for-solution-style-tsconfigjson-files) TypeScript configuration file. Code editors and TypeScript’s language server use this file to improve development experience. Compilers do not use this file. |
-| `tsconfig.base.json`    | The base [TypeScript](https://www.typescriptlang.org/) configuration for projects in the workspace. All other configuration files inherit from this base file. For more information, see the [Configuration inheritance with extends](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html#configuration-inheritance-with-extends) section of the TypeScript documentation.|
+| `tsconfig.json`    | ワークスペースのプロジェクトの[TypeScript](https://www.typescriptlang.org/)の基本設定。他のすべての設定ファイルはこの基本となるファイルを継承します。詳しくはTypeScriptドキュメントの[extendsによる設定の継承](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html#configuration-inheritance-with-extends)のセクションを参照してください。|
 | `tslint.json`          | ワークスペース内のアプリケーションが利用する[TSLint](https://palantir.github.io/tslint/)のデフォルト設定です。 |
 
 
@@ -69,7 +68,7 @@ monorepoワークスペースをセットアップするには、ルートアプ
 | APPソース & 設定ファイル  | 目的 |
 | :--------------------- | :------------------------------------------|
 | `app/`                 | アプリケーションのロジックやデータが定義されているコンポーネントファイルが含まれています。詳しくは[後述](#app-src)を参照してください。|
-| `assets/`              | 画像ファイルやその他のアセットファイルなどアプリケーションをビルドした時にそのままコピーされるべきものが格納されます。 | 
+| `assets/`              | 画像ファイルやその他のアセットファイルなどアプリケーションをビルドした時にそのままコピーされるべきものが格納されます。 |
 | `environments/`        | 特定のターゲット環境向けのビルド設定を持ちます。デフォルトでは名前のない標準開発環境と本番("prod")環境が用意されています。追加でターゲット環境設定を定義することができます。 |
 | `favicon.ico`          | ブックマークバーで利用されるアプリケーションのアイコンです。|
 | `index.html`           | 誰かがサイトを訪れた際に表示されるメインのHTMLページです。アプリケーションをビルドする時にCLIは自動的にすべてのJavaScriptとCSSファイルを追加するため、基本的には`<script>`や`<link>`タグを手で足す必要はありません。 |
@@ -80,7 +79,7 @@ monorepoワークスペースをセットアップするには、ルートアプ
 
 <div class="alert is-helpful">
 
-If you create an application using Angular's strict mode, you will also have an additional `package.json` file in the `src/app` directory. For more information, see [Strict mode](/guide/strict-mode).
+New Angular projects use strict mode by default. If this is not desired you can opt-out when creating the project. For more information, see [Strict mode](/guide/strict-mode).
 
 </div>
 
@@ -91,19 +90,18 @@ Angularコンポーネント、テンプレート、スタイルはここにあ�
 
 | `src/app/` ファイル          | 目的 |
 | :-------------------------- | :------------------------------------------|
-| `app/app.component.ts`      | `AppComponent` という名前のアプリのルートコンポーネントのロジックを定義します。 このルートコンポーネントに関連付けられたビューは、コンポーネントやサービスをアプリケーションに追加したときに [ビュー階層](guide/glossary#view-hierarchy) のルートになります。 |
+| `app/app.component.ts`      | `AppComponent` という名前のアプリケーションのルートコンポーネントのロジックを定義します。 このルートコンポーネントに関連付けられたビューは、コンポーネントやサービスをアプリケーションに追加したときに [ビュー階層](guide/glossary#view-hierarchy) のルートになります。 |
 | `app/app.component.html`    | ルート `AppComponent` に関連付けられているHTMLテンプレートを定義します。 |
 | `app/app.component.css`     | ルート `AppComponent` の基本CSSスタイルシートを定義します。 |
 | `app/app.component.spec.ts` | ルート `AppComponent` のユニットテストを定義します。 |
-| `app/app.module.ts`         | `AppModule` という名前のルートモジュールを定義し、Angularにアプリケーションの組み立て方法を指示します。最初は `AppComponent` のみを宣言しています。 アプリにコンポーネントを追加すると、それらをここで宣言する必要があります。 |
-| `app/package.json`              | This file is generated only in applications created using `--strict` mode. This file is not used by package managers. It is used to tell the tools and bundlers whether the code under this directory is free of non-local [side-effects](guide/strict-mode#side-effect). |
+| `app/app.module.ts`         | `AppModule` という名前のルートモジュールを定義し、Angularにアプリケーションの組み立て方法を指示します。最初は `AppComponent` のみを宣言しています。 アプリケーションにコンポーネントを追加すると、それらをここで宣言する必要があります。 |
 
 ### アプリケーション設定ファイル {@a application-configuration-files}
 
 ルートアプリケーション用のアプリケーション固有の設定ファイルは、ワークスペースのルートレベルにあります。
 マルチプロジェクトワークスペースの場合、プロジェクト固有の設定ファイルはプロジェクトルートの `projects/project-name/` にあります。
 
-プロジェクト固有の [TypeScript](https://www.typescriptlang.org/) 設定ファイルは、ワークスペース全体の `tsconfig.base.json` から継承し、プロジェクト固有の [TSLint](https://palantir.github.io/tslint/) 設定ファイルは、ワークスペース全体の `tslint.json` から継承します。
+プロジェクト固有の [TypeScript](https://www.typescriptlang.org/) 設定ファイルは、ワークスペース全体の `tsconfig.json` から継承し、プロジェクト固有の [TSLint](https://palantir.github.io/tslint/) 設定ファイルは、ワークスペース全体の `tslint.json` から継承します。
 
 | アプリケーション固有の設定ファイル    | 目的 |
 | :--------------------- | :------------------------------------------|
@@ -140,10 +138,10 @@ Angularコンポーネント、テンプレート、スタイルはここにあ�
 次のコマンドは、すべてのワークスペース全体の構成ファイルを使用してワークスペースを作成しますが、ルートレベルのアプリケーションは作成しません。
 
 <code-example language="bash">
-ng new my-workspace --createApplication="false"
+ng new my-workspace --create-application="false"
 </code-example>
 
-その後、ワークスペース内でユニークな名前でアプリやライブラリを生成できます。
+その後、ワークスペース内でユニークな名前でアプリケーションやライブラリを生成できます。
 
 <code-example language="bash">
 cd my-workspace
@@ -173,7 +171,7 @@ my-workspace/
 
 ## ライブラリプロジェクトファイル {@a library-project-files}
 
-CLIを使用して（ `ng generate library my-lib` などのコマンドを使用して）ライブラリを生成すると、生成されたファイルはワークスペースのprojects/フォルダに入ります。 独自のライブラリを作成する方法の詳細については、 [ライブラリの作成](guide/creating-libraries) を参照してください。
+CLIを使用して（ `ng generate library my-lib` などのコマンドを使用して）ライブラリを生成すると、生成されたファイルはワークスペースの`projects/`フォルダに入ります。 独自のライブラリを作成する方法の詳細については、 [ライブラリの作成](guide/creating-libraries) を参照してください。
 
 ライブラリは（アプリケーションや関連するe2eプロジェクトとは異なり）独自の `package.json` 設定ファイルを持っています。
 
@@ -188,5 +186,6 @@ CLIを使用して（ `ng generate library my-lib` などのコマンドを使�
 | `ng-package.json`    | ライブラリを構築するために [ng-packagr](https://github.com/ng-packagr/ng-packagr) によって使用される設定ファイル。 |
 | `package.json`       | このライブラリに必要な [npmパッケージの依存関係](guide/npm-packages) を設定します。 |
 | `tsconfig.lib.json`  | TypeScriptおよびAngularテンプレートコンパイラオプションを含む、ライブラリ固有の [TypeScript](https://www.typescriptlang.org/) の設定。 [TypeScriptの設定](guide/typescript-configuration) を参照してください。 |
+| `tsconfig.lib.prod.json`  | Library-specific [TypeScript](https://www.typescriptlang.org/) configuration that is used when building the library in production mode.              |
 | `tsconfig.spec.json` | ライブラリテスト用の [TypeScript](https://www.typescriptlang.org/) の設定。 [TypeScriptの設定](guide/typescript-configuration) を参照してください。 |
 | `tslint.json`        | ライブラリ固有の [TSLint](https://palantir.github.io/tslint/) の設定 |

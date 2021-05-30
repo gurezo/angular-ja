@@ -6,7 +6,7 @@ For example, you would use a pipe to show a date as **April 15, 1988** rather th
 
 <div class="alert is-helpful">
 
-  For the sample app used in this topic, see the <live-example></live-example>.
+  For the sample application used in this topic, see the <live-example></live-example>.
 
 </div>
 
@@ -57,9 +57,7 @@ The tabs in the example show the following:
   </code-pane>
 </code-tabs>
 
-The component's `birthday` value flows through the
-[pipe operator](guide/template-expression-operators#pipe) ( | ) to the [`date`](api/common/DatePipe)
-function.
+The component's `birthday` value flows through the pipe operator, `|` to the [`date`](api/common/DatePipe) function.
 
 {@a parameterizing-a-pipe}
 
@@ -155,7 +153,7 @@ Use `name` in template expressions as you would for a built-in pipe.
 
 <div class="alert is-important">
 
-* Include your pipe in the `declarations` field of the `NgModule` metadata in order for it to be available to a template. See the `app.module.ts` file in the example app (<live-example></live-example>). For details, see [NgModules](guide/ngmodules "NgModules introduction").
+* Include your pipe in the `declarations` field of the `NgModule` metadata in order for it to be available to a template. See the `app.module.ts` file in the example application (<live-example></live-example>). For details, see [NgModules](guide/ngmodules "NgModules introduction").
 * Register your custom pipes. The [Angular CLI](cli "CLI Overview and Command Reference") [`ng generate pipe`](cli/generate#pipe "ng generate pipe in the CLI Command Reference") command registers the pipe automatically.
 
 </div>
@@ -254,7 +252,7 @@ Angular updates the display every time the user adds a hero.
 If the user clicks the **Reset** button, Angular replaces `heroes` with a new array of the original heroes and updates the display.
 If you add the ability to remove or change a hero, Angular would detect those changes and update the display as well.
 
-However, executing a pipe to update the display with every change would slow down your app's performance.
+However, executing a pipe to update the display with every change would slow down your application's performance.
 So Angular uses a faster change-detection algorithm for executing a pipe, as described in the next section.
 
 {@a pure-and-impure-pipes}
@@ -293,7 +291,7 @@ The tabs for the example show the following:
   </code-pane>
 </code-tabs>
 
-The app now shows unexpected behavior: When the user adds flying heroes, none of them appear under "Heroes who fly."
+The application now shows unexpected behavior: When the user adds flying heroes, none of them appear under "Heroes who fly."
 This happens because the code that adds a hero does so by pushing it onto the `heroes` array:
 
 <code-example path="pipes/src/app/flying-heroes.component.ts" region="push" header="src/app/flying-heroes.component.ts"></code-example>
@@ -329,7 +327,7 @@ Angular executes an impure pipe every time it detects a change with every keystr
 
 <div class="alert is-important">
 
-While an impure pipe can be useful, be careful using one. A long-running impure pipe could dramatically slow down your app.
+While an impure pipe can be useful, be careful using one. A long-running impure pipe could dramatically slow down your application.
 
 </div>
 
@@ -396,13 +394,13 @@ The following code example binds an observable of message strings
 
 ## Caching HTTP requests
 
-To [communicate with backend services using HTTP](/guide/http "Communicating with backend services using HTTP"), the `HttpClient` service uses observables and offers the `HTTPClient.get()` method to fetch data from a server.
-The aynchronous method sends an HTTP request, and returns an observable that emits the requested data for the response.
+To [communicate with backend services using HTTP](/guide/http "Communicating with backend services using HTTP"), the `HttpClient` service uses observables and offers the `HttpClient.get()` method to fetch data from a server.
+The asynchronous method sends an HTTP request, and returns an observable that emits the requested data for the response.
 
 As shown in the previous section, you can use the impure `AsyncPipe` to accept an observable as input and subscribe to the input automatically.
 You can also create an impure pipe to make and cache an HTTP request.
 
-Impure pipes are called whenever change detection runs for a component, which could be every few milliseconds for `CheckAlways`.
+Impure pipes are called whenever change detection runs for a component, which could be as often as every few milliseconds.
 To avoid performance problems, call the server only when the requested URL changes, as shown in the following example, and use the pipe to cache the server response.
 The tabs show the following:
 
@@ -438,3 +436,13 @@ The `fetch` and `fetch-json` pipes display the heroes as shown in Figure 5.
 The built-in [JsonPipe](api/common/JsonPipe "API description for JsonPipe") provides a way to diagnose a mysteriously failing data binding or to inspect an object for future binding.
 
 </div>
+
+## Pipes and precedence
+
+The pipe operator has a higher precedence than the ternary operator (`?:`), which means `a ? b : c | x` is parsed as `a ? b : (c | x)`.
+The pipe operator cannot be used without parentheses in the first and second operands of `?:`.
+
+Due to precedence, if you want a pipe to apply to the result of a ternary, wrap the entire expression in parentheses; for example, `(a ? b : c) | x`.
+
+<code-example path="pipes/src/app/precedence.component.html" region="precedence" header="src/app/precedence.component.html">
+</code-example>
