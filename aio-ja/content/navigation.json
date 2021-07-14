@@ -64,7 +64,7 @@
       "title": "はじめに",
       "tooltip": "Set up your environment and learn basic concepts",
       "children": [
-        { 
+        {
           "url": "guide/what-is-angular",
           "title": "Angularとは？",
           "tooltip": "A brief description of the Angular platform."
@@ -159,8 +159,9 @@
             },
             {
               "url": "guide/content-projection",
-              "title": "Content Projection",
-              "tooltip": "Learn how to create reusable components using Angular's content projection feature."
+              "title": "コンテンツ投影",
+              "tooltip": "Angularのコンテンツ投影機能を使った再利用可能なコンポーネントの作り方を学びましょう。",
+              "translated": true
             },
             {
               "url": "guide/dynamic-component-loader",
@@ -284,9 +285,9 @@
             },
             {
               "url": "guide/dependency-injection-providers",
-              "title": "依存関係プロバイダー",
-              "tooltip": "More about the different kinds of providers.",
-              "translated": false
+              "title": "依存性のプロバイダー",
+              "tooltip": "様々な種類のプロバイダーについて",
+              "translated": true
             }
           ]
         }
@@ -511,6 +512,23 @@
               "translated": true
             }
           ]
+        },
+        {
+          "url": "guide/web-worker",
+          "title": "Web Worker",
+          "tooltip": "Using web workers for background processing.",
+          "translated": true
+        },
+        {
+          "url": "guide/universal",
+          "title": "サーバーサイドレンダリング",
+          "tooltip": "Angular Universalを使ってサーバーサイドでHTMLをレンダリングしましょう。",
+          "translated": true
+        },
+        {
+          "url": "guide/prerendering",
+          "title": "Prerendering",
+          "tooltip": "Prerender HTML server-side with Angular Universal."
         }
       ]
     },
@@ -611,12 +629,6 @@
           "tooltip": "Using builders to customize Angular CLI."
         },
         {
-          "url": "guide/universal",
-          "title": "サーバーサイドレンダリング",
-          "tooltip": "Angular Universalを使ってサーバーサイドでHTMLをレンダリングしましょう。",
-          "translated": true
-        },
-        {
           "url": "guide/language-service",
           "title": "Language Service",
           "tooltip": "Angular Language Serviceを使って開発時間を短縮しましょう。",
@@ -715,12 +727,6 @@
           "url": "guide/forms",
           "title": "Building a Template-driven Form",
           "tooltip": "Create a template-driven form using directives and Angular template syntax."
-        },
-        {
-          "url": "guide/web-worker",
-          "title": "Web Worker",
-          "tooltip": "Using web workers for background processing.",
-          "translated": true
         },
         {
           "title": "Angularライブラリ",
