@@ -6,7 +6,7 @@ As users perform application tasks, they need to move between the different [vie
 To handle the navigation from one [view](guide/glossary#view) to the next, you use the Angular **`Router`**.
 The **`Router`** enables navigation by interpreting a browser URL as an instruction to change the view.
 
-To explore a sample app featuring the router's primary features, see the <live-example stackblitz="router"></live-example>.
+To explore a sample app featuring the router's primary features, see the <live-example name="router"></live-example>.
 
 ## Prerequisites
 
@@ -14,7 +14,7 @@ Before creating a route, you should be familiar with the following:
 
 * [Basics of components](guide/architecture-components)
 * [Basics of templates](guide/glossary#template)
-* An Angular app&mdash;you can generate a basic Angular app using the [Angular CLI](cli).
+* An Angular app&mdash;you can generate a basic Angular application using the [Angular CLI](cli).
 
 ## Learn about Angular routing
 

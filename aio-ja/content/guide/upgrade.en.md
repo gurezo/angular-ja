@@ -193,6 +193,12 @@ seamlessly. That means you don't have to do the upgrade work all at once,
 since there's a natural coexistence between the two frameworks during the
 transition period.
 
+<div class="alert is-helpful">
+With the <a href="https://blog.angular.io/finding-a-path-forward-with-angularjs-7e186fdd4429">
+deprecation of AngularJS</a>, ngUpgrade is now in a feature complete state. We will continue
+publishing security and bug fixes until December 31st, 2022.
+</div>
+
 ### How ngUpgrade Works
 
 One of the primary tools provided by ngUpgrade is called the `UpgradeModule`.
@@ -590,7 +596,7 @@ The safest bet for ensuring compatibility is using the
 [component API](https://docs.angularjs.org/api/ng/type/angular.Module)
 introduced in AngularJS 1.5.
 
-An example of an upgradable component is one that just has a template
+An example of an upgradeable component is one that just has a template
 and a controller:
 
 <code-example path="upgrade-module/src/app/upgrade-static/hero-detail.component.ts" region="hero-detail" header="hero-detail.component.ts">

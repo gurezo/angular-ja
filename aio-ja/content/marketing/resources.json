@@ -49,19 +49,30 @@
             "desc": "Add API Based CMS to your Angular app",
             "url": "https://github.com/ButterCMS/buttercms-angular-tutorial",
             "title": "API Based CMS with Butter"
+          },
+          "angular-community-meetup": {
+            "desc": "Come learn technical skills and network at this monthly, multi-series, multi-event, multi-timezone online meetup.",
+            "url": "https://angularcommunity.net",
+            "title": "Angular Community Meetup"
           }
         }
       },
       "Podcasts": {
         "order": 3,
         "resources": {
-          "sdfjkdkfj": {
+          "adventures-in-angular": {
             "desc": "Adventures in Angular is a weekly podcast dedicated to the Angular platform and related technologies, tools, languages, and practices.",
             "logo": "",
             "title": "Adventures in Angular",
             "url": "https://devchat.tv/adv-in-angular/"
           },
-          "sdlkfjsldfkj": {
+          "angular-show": {
+            "desc": "ng-conf's official all-Angular podcast.",
+            "logo": "",
+            "title": "The Angular Show",
+            "url": "https://www.spreaker.com/show/angular-show"
+          },
+          "angular-air": {
             "desc": "Weekly video podcast hosted by Jeff Whelpley with all the latest and greatest happenings in the wild world of Angular.",
             "logo": "",
             "title": "AngularAir",
@@ -73,10 +84,10 @@
             "title": "Angular Rocks",
             "url": "https://angularrocks.com"
           },
-          "sdlkfjsldfkz": {
+          "happy-angular": {
             "desc": "A weekly German podcast for Angular on the go",
             "logo": "",
-            "title": "Happy Angular Podcast",
+            "title": "Happy Angular",
             "url": "https://happy-angular.de/"
           },
           "ngruair": {
@@ -85,11 +96,11 @@
             "title": "NgRuAir",
             "url": "https://github.com/ngRuAir/ngruair"
           },
-          "the-deep-dive": {
-            "desc": "The advanced web development podcast about Angular, RxJS, TypeScript and other technologies. English, audio only.",
-            "logo": "https://i.imgur.com/mmE5Feq.jpg",
-            "title": "The Deep Dive",
-            "url": "https://thedeepdive.simplecast.com"
+          "ngxp": {
+            "desc": "Weekly technical-adjacent podcast by Brooke Avery & Erik Slack. Don't just code in Angular, come enjoy the Angular Experience!",
+            "logo": "",
+            "title": "Angular Experience (NgXP)",
+            "url": "https://ngxp.show"
           }
         }
       }
@@ -604,6 +615,11 @@
             "desc": "Integrate a Headless CMS into your Angular App, create blog posts and pages",
             "url":"https://medium.com/orlyknop/how-to-integrate-buttercms-into-angular-2-app-a1baaa51402",
             "logo": ""
+          },
+          "angular-projects": {
+            "title": "Angular Projects - Second Edition",
+            "desc": "Build modern web apps by exploring Angular with 10 different projects and cutting-edge technologies",
+            "url": "https://www.packtpub.com/product/angular-projects-second-edition/9781800205260"
           }
         }
       },
@@ -722,6 +738,11 @@
             "logo": "",
             "title": "DotNetTricks",
             "url": "https://www.dotnettricks.com/courses/angular"
+          },
+          "architect-angular-nation": {
+            "desc": "Whether you're already an architect or you'd like to become one, come learn how to keep your apps clean and fast (especially at the enterprise level). Four weeks of training includes live office hours every week with an Angular GDE, diversity discounts, and scholarships available!",
+            "title": "Angular Architect Training",
+            "url": "https://www.angularnation.net/"
           }
         }
       },

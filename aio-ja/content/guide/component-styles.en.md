@@ -249,7 +249,7 @@ See the [Styles configuration guide](guide/workspace-config#styles-and-scripts-c
 ### Non-CSS style files
 
 If you're building with the CLI,
-you can write style files in [sass](https://sass-lang.com/), [less](http://lesscss.org/), or [stylus](https://stylus-lang.com/) and specify those files in the `@Component.styleUrls` metadata with the appropriate extensions (`.scss`, `.less`, `.styl`) as in the following example:
+you can write style files in [sass](https://sass-lang.com/), or [less](http://lesscss.org/), and specify those files in the `@Component.styleUrls` metadata with the appropriate extensions (`.scss`, `.less`) as in the following example:
 
 <code-example>
 @Component({
@@ -271,3 +271,5 @@ You can configure the CLI to default to your preferred CSS preprocessor as expla
 Style strings added to the `@Component.styles` array _must be written in CSS_ because the CLI cannot apply a preprocessor to inline styles.
 
 </div>
+
+@reviewed 2021-09-17

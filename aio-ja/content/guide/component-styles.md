@@ -249,7 +249,7 @@ CLIを使用して構築する場合、外部スタイルファイルを含む _
 ### CSS以外のスタイルファイル
 
 CLIを使用して構築する場合、
-スタイルファイルを、次の例のように、 [sass](https://sass-lang.com/)、 [less](http://lesscss.org/)、または[stylus](https://stylus-lang.com/) に書き込んで、 `@Component.styleUrls` メタデータに適切な拡張子 (`.scss`, `.less`, `.styl`) をもつファイルを次のように指定できます：
+スタイルファイルを、次の例のように、 [sass](https://sass-lang.com/)、または [less](http://lesscss.org/) に書き込んで、`@Component.styleUrls` メタデータに適切な拡張子 (`.scss`, `.less`, `.styl`) をもつファイルを次のように指定できます：
 
 <code-example>
 @Component({
@@ -271,3 +271,5 @@ CLIビルドプロセスは、適切なCSSプリプロセッサを実行しま�
 CLIはインラインスタイルにプリプロセッサを適用できないため、`@Component.styles` 配列に追加されたスタイル文字列は _CSSで記述する必要があります_ 。
 
 </div>
+
+@reviewed 2021-09-17

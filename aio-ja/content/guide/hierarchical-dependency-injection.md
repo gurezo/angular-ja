@@ -381,7 +381,7 @@ Angularのテンプレートの根本的な論理構造を理解すると、
        ...content goes here...
      </#VIEW>
     </app-child>
-  <#VIEW>
+  </#VIEW>
 </app-root>
  ```
 
@@ -1022,8 +1022,8 @@ export class ChildComponent {
          @Inject(AnimalService, @Optional)=>"🦔">
     <!-- ^^@SkipSelf() starts here,  @Host() stops here^^ -->
     <app-child>
-      <#VIEW @Provide(AnimalService="🦔")
-             @Inject(AnimalService, @SkipSelf, @Host, @Optional)=>"🐶">
+      <#VIEW @Provide(AnimalService="🐶")
+             @Inject(AnimalService, @SkipSelf, @Host, @Optional)=>"🦔">
                <!-- Add @SkipSelf ^^-->
       </#VIEW>
       </app-child>

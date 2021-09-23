@@ -380,7 +380,7 @@ The following is an example of how the `<app-root>` and `<app-child>` view trees
        ...content goes here...
      </#VIEW>
     </app-child>
-  <#VIEW>
+  </#VIEW>
 </app-root>
  ```
 
@@ -1021,8 +1021,8 @@ The logical tree representation shows why this is:
          @Inject(AnimalService, @Optional)=>"🦔">
     <!-- ^^@SkipSelf() starts here,  @Host() stops here^^ -->
     <app-child>
-      <#VIEW @Provide(AnimalService="🦔")
-             @Inject(AnimalService, @SkipSelf, @Host, @Optional)=>"🐶">
+      <#VIEW @Provide(AnimalService="🐶")
+             @Inject(AnimalService, @SkipSelf, @Host, @Optional)=>"🦔">
                <!-- Add @SkipSelf ^^-->
       </#VIEW>
       </app-child>
