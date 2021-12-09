@@ -199,7 +199,7 @@ StackBlitzの使い方については、[StackBlitz documentation](https://devel
 
   <code-example header="src/app/product-alerts/product-alerts.component.html" path="getting-started/src/app/product-alerts/product-alerts.component.1.html"></code-example>
 
-1. To make `ProductAlertsComponent` available to other components in the application, add it to `AppModule`'s declarations in `app.module.ts`.
+1. `ProductAlertsComponent`を他のコンポーネント内でも使えるように、 `app.module.ts`内の`AppModule`の　`declarations`に追加します。
 
   <code-example header="src/app/app.module.ts" path="getting-started/src/app/app.module.ts" region="declare-product-alerts"></code-example>
   
@@ -274,3 +274,5 @@ Angularの探索を続け、このアプリケーションを開発するには�
 
 * 製品の詳細ページを作成するには、[アプリ内ナビゲーション](start/start-routing "Getting started: In-app navigation")に進みます。
 * [デプロイ](start/start-deployment "Getting started: Deployment")にスキップしてローカル開発に移行したり、Firebaseや独自のサーバーにアプリケーションをデプロイしたりします。
+
+@reviewed 2021-09-15
