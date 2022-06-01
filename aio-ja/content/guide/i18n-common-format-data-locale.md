@@ -1,49 +1,51 @@
-# Format data based on locale
+# ロケールに応じたデータフォーマット
 
-Angular provides the following built-in data transformation [pipes][AioGuideGlossaryPipe].  The data transformation pipes use the [`LOCALE_ID`][AioApiCoreLocaleId] token to format data based on rules of each locale.
+Angularは次の組み込みデータ変換[パイプ][AioGuideGlossaryPipe]を提供します。
+データ変換パイプは[`LOCALE_ID`][AioApiCoreLocaleId]トークンを使用して、各ロケールの規則に基づいてデータをフォーマットします。
 
-| Data transformation pipe | Details |
-|:--- |:--- |
-| [`DatePipe`][AioApiCommonDatepipe] | Formats a date value. |
-| [`CurrencyPipe`][AioApiCommonCurrencypipe] | Transforms a number into a currency string. |
-| [`DecimalPipe`][AioApiCommonDecimalpipe] | Transforms a number into a decimal number string. |
-| [`PercentPipe`][AioApiCommonPercentpipe] | Transforms a number into a percentage string. |
+| データ変換パイプ                   | 詳細 |
+|:---                                        |:---     |
+| [`DatePipe`][AioApiCommonDatepipe]         | 日付をフォーマットします。                             |
+| [`CurrencyPipe`][AioApiCommonCurrencypipe] | 数値を通貨文字列に変換します。       |
+| [`DecimalPipe`][AioApiCommonDecimalpipe]   | 数値を10進数の文字列に変換します。 |
+| [`PercentPipe`][AioApiCommonPercentpipe]   | 数値をパーセンテージ文字列に変換します。     |
 
-## Use DatePipe to display the current date
+## DatePipeを使用して現在の日付を表示する
 
-To display the current date in the format for the current locale, use the following format for the `DatePipe`.
+現在の日付を現在のロケールのフォーマットで表示するには、次のフォーマットで`DatePipe`を使用します。
 
 <!--todo: replace with code-example -->
 
 <code-example format="typescript" language="typescript">
 
-{{ today | date }}
+{{ today &verbar; date }}
 
 </code-example>
 
-## Override current locale for CurrencyPipe
+## CurrencyPipeの現在のロケールをオーバーライドする
 
-Add the `locale` parameter to the pipe to override the current value of `LOCALE_ID` token.
+パイプに`locale`パラメータを追加して、`LOCALE_ID`トークンの現在の値をオーバーライドしてください。
 
-To force the currency to use American English (`en-US`), use the following format for the `CurrencyPipe`
+通貨にアメリカ英語\(`en-US`\)を使用させるには、`CurrencyPipe`に次のフォーマットを使用します。
 
 <!--todo: replace with code-example -->
 
 <code-example format="typescript" language="typescript">
 
-{{ amount | currency : 'en-US' }}
+{{ amount &verbar; currency : 'en-US' }}
 
 </code-example>
 
 <div class="alert is-helpful">
 
-**NOTE**: The locale specified for the `CurrencyPipe` overrides the global `LOCALE_ID` token of your application.
+**NOTE**: <br />
+`CurrencyPipe`に指定されたロケールは、アプリケーションのグローバルな`LOCALE_ID`トークンをオーバーライドします。
 
 </div>
 
-## What's next
+## 次のステップ
 
-*   [Prepare templates for translations][AioGuideI18nCommonPrepare]
+*   [翻訳用コンポーネントの準備][AioGuideI18nCommonPrepare]
 
 <!-- links -->
 
@@ -61,4 +63,4 @@ To force the currency to use American English (`en-US`), use the following forma
 
 <!-- end links -->
 
-@reviewed 2021-10-28
+@reviewed 2022-02-28
