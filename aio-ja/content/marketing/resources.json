@@ -232,7 +232,7 @@
           "amexio-canvas": {
             "desc": "Amexio Canvas is Drag and Drop Environment to create Fully Responsive Web and Smart Device HTML5/Angular Apps. Code will be auto generated and hot deployed by the Canvas for live testing. Out of the box 50+ Material Design Theme support. Commit your code to GitHub public or private repository.",
             "title": "Amexio Canvas Web Based Drag and Drop IDE by MetaMagic",
-            "url": "https://amexio.tech/"
+            "url": "https://api.amexio.org/"
           }
         }
       },
@@ -287,8 +287,8 @@
             "url": "https://github.com/chrisguttandin/angular-prerender"
           },
           "nx": {
-            "desc": "Nx (Nrwl Extensions for Angular) is an open source toolkit built on top of Angular CLI to help enterprise teams develop Angular at scale.",
-            "title": "Nx",
+            "desc": "Nx is an open source build system featuring a lot of monorepo features that help enterprise teams develop Angular at scale.",
+            "title": "Nx - Smart, Fast and Extensible Build System",
             "logo": "https://nrwl.io/assets/nx-logo.png",
             "url": "https://nrwl.io/nx"
           },
@@ -530,6 +530,27 @@
             "desc": "Open Source UI Components library for creating modern, beautiful, and responsive applications in half the time with high-performing and easy-to-customize UI components.",
             "title": "CoreUI for Angular",
             "url": "https://coreui.io/angular"
+          },
+          "poui": {
+            "desc": "PO UI, Brazilian UI Components, focused on ease and productivity to Angular applications.",
+            "rev": true,
+            "title": "PO UI",
+            "url": "https://po-ui.io"
+          },
+          "ngx-gantt": {
+            "desc": "A modern and powerful gantt chart component for Angular",
+            "title": "Angular Gantt Chart Component",
+            "url": "https://github.com/worktile/ngx-gantt"
+          },
+          "ngx-youi": {
+            "desc": "NGX-YOUI is an Angular UI Library that can be highly customized with content and styles. You can easily integrate with other CSS frameworks and UI Library, such as Tailwind, Bootstrap, PrimeNG, Angular Material etc.",
+            "title": "NGX-YOUI",
+            "url": "https://ngx-youi.github.io/NGX-YOUI/"
+          },
+          "ngx-cookie-service": {
+            "desc": "NGX Cookie Service is an Angular Library that can be used to read, set and delete browser cookies",
+            "title": "NGX Cookie Service",
+            "url": "https://github.com/stevermeister/ngx-cookie-service"
           }
         }
       }
@@ -631,6 +652,16 @@
             "title": "Angular Projects - Second Edition",
             "desc": "Build modern web apps by exploring Angular with 10 different projects and cutting-edge technologies",
             "url": "https://www.packtpub.com/product/angular-projects-second-edition/9781800205260"
+          },
+          "rangle-angular-training-book": {
+            "title": "Rangle’s Angular Training Book",
+            "desc": "It's a free book, drawn from years of collective experience and aligned with the best practices of modern software development. The book covers the most important Angular topics, from getting started with the Angular toolchain to writing Angular applications in a scalable and maintainable manner.",
+            "url": "https://angular-training-guide.rangle.io/"
+          },
+          "angular-from-scratch": {
+            "title": "Angular from Scratch",
+            "desc": "Learn Angular from Scratch, building a sales application",
+            "url": "https://leanpub.com/book-angular"
           }
         }
       },
@@ -656,6 +687,11 @@
             "desc": "Spanish language Angular articles and information",
             "title": "Academia Binaria (español)",
             "url": "https://academia-binaria.com/"
+          },
+          "-KLIxHwg-glQLXni1hvA": {
+            "desc": "How to write cost effective Angular tests without wasting time on slow and brittle techniques. This masterclass will show you the most effective testing strategies that will accelerate your learning and start you off on the right track. Brought to you by Shai Reznik (HiRez.io) totally free of charge.",
+            "title": "Angular FREE Testing Masterclass - Cost Effective Angular Testing",
+            "url": "https://hirez.link/aio-cost-effective-angular-testing"
           },
           "-KN3uNQvxifu26D6WKJW": {
             "category": "Education",
@@ -754,6 +790,11 @@
             "desc": "Whether you're already an architect or you'd like to become one, come learn how to keep your apps clean and fast (especially at the enterprise level). Four weeks of training includes live office hours every week with an Angular GDE, diversity discounts, and scholarships available!",
             "title": "Angular Architect Training",
             "url": "https://www.angularnation.net/"
+          },
+          "platzi": {
+            "desc": "An online education platform with a complete path in Angular and TypeScript from zero to advanced. Platzi helps students from all over the world acquire new, in-demand skills.",
+            "title": "Platzi (Español)",
+            "url": "https://platzi.com/angular-io"
           }
         }
       },
@@ -769,6 +810,11 @@
             "desc": "YouTube Channel about Angular & Web Development",
             "title": "Decoded Frontend",
             "url": "https://www.youtube.com/DecodedFrontend"
+          },
+          "angular-university": {
+            "desc": "A website to learn and keep up with the Angular ecosystem",
+            "title": "Angular University",
+            "url": "https://angular-university.io/"
           },
           "-acceleb": {
             "desc": "Customized, Instructor-Led Angular Training",

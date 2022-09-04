@@ -113,7 +113,12 @@ if some _ancestor_ element of the host element has the CSS class `active`.
 
 <code-example path="component-styles/src/app/hero-details.component.css" region="hostcontext" header="src/app/hero-details.component.css"></code-example>
 
-Note that only the host element and its descendants will be affected, not the ancestor with the assigned `active` class.
+<div class="alert is-helpful">
+
+**NOTE**: <br />
+Only the host element and its descendants will be affected, not the ancestor with the assigned `active` class.
+
+</div>
 
 ### (非推奨) `/deep/` 、 `>>>` と `::ng-deep` {@a deprecated-deep--and-ng-deep}
 
@@ -274,10 +279,10 @@ CLIビルドプロセスは、適切なCSSプリプロセッサを実行しま�
 [Workspace configuration guide](guide/workspace-config#generation-schematics) 
 で説明されているように、CLIのデフォルトのプリプロセッサを設定することができます。
 
-<div class="alert is-important">
+<!-- links -->
 
-CLIはインラインスタイルにプリプロセッサを適用できないため、`@Component.styles` 配列に追加されたスタイル文字列は _CSSで記述する必要があります_ 。
+<!-- external links -->
 
-</div>
+<!-- end links -->
 
-@reviewed 2021-09-17
+@reviewed 2022-02-28

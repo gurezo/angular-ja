@@ -59,7 +59,7 @@ Schematics では、ユーザーは `ng add` を使用してライブラリの�
 
 ### Define dependency type
 
-Use the `save` option of `ng-add` to configure if the library should be added to the `dependencies`, the `devDepedencies`, or not saved at all in the project's `package.json` configuration file.
+Use the `save` option of `ng-add` to configure if the library should be added to the `dependencies`, the `devDependencies`, or not saved at all in the project's `package.json` configuration file.
 
 <code-example header="projects/my-lib/package.json (ng-add Reference)" path="schematics-for-libraries/projects/my-lib/package.json" region="ng-add">
 </code-example>
@@ -92,15 +92,14 @@ Angular ワークスペースにライブラリプロジェクト `my-lib` が�
 
   * `outDir` はライブラリの出力フォルダーにマップされます。デフォルトでは、これはワークスペースのルートにある `dist/my-lib` フォルダーです。
 
-1. Schematics ソースファイルがライブラリバンドルにコンパイルされるようにするには、ライブラリプロジェクトのルートフォルダー (`projects/my-lib`) の `package.json` ファイルに次のスクリプトを追加します。
+1.  Schematics ソースファイルがライブラリバンドルにコンパイルされるようにするには、ライブラリプロジェクトのルートフォルダー (`projects/my-lib`) の `package.json` ファイルに次のスクリプトを追加します。
 
-<code-example header="projects/my-lib/package.json (Build Scripts)" path="schematics-for-libraries/projects/my-lib/package.json">
-</code-example>
+    <code-example header="projects/my-lib/package.json (Build Scripts)" path="schematics-for-libraries/projects/my-lib/package.json"></code-example>
 
-  * `build` スクリプトは、カスタム `tsconfig.schematics.json` ファイルを使用して Schematic をコンパイルします。
-  * `build` スクリプトが完了すると、`postbuild` スクリプトが Schematic ファイルをコピーします。
-  * Both the `build` and the `postbuild` scripts require dependencies that are found in their parent directory.
-    They can be installed by running `npm install` prior to running the scripts.
+    * `build` スクリプトは、カスタム `tsconfig.schematics.json` ファイルを使用して Schematic をコンパイルします。
+    * `build` スクリプトが完了すると、`postbuild` スクリプトが Schematic ファイルをコピーします。
+    * Both the `build` and the `postbuild` scripts require the `copyfiles` and `typescript` dependencies.
+      To install them, navigate to their path defined in `devDependencies` and run `npm install` before running the scripts.
 
 ## 生成サポートの提供
 
@@ -184,7 +183,7 @@ Schematics フレームワークは、パステンプレートとコンテンツ
 システムは、入力 `Tree` にロードされたファイルまたはパス内で定義されたプレースホルダーを操作します。
 `Rule` に渡された値を使用してこれらを埋めます。
 
-これらのデータ構造と構文の詳細については、[Schematics の README](https://github.com/angular/angular-cli/blob/master/packages/angular_devkit/schematics/README.md) を参照してください。
+これらのデータ構造と構文の詳細については、[Schematics の README](https://github.com/angular/angular-cli/blob/main/packages/angular_devkit/schematics/README.md) を参照してください。
 
 1. メインファイル `index.ts` を作成し、Schematic ファクトリ関数のソースコードを追加します。
 
@@ -227,12 +226,6 @@ Schematics フレームワークは、パステンプレートとコンテンツ
 </code-example>
 
   コンテキストが存在することを確認し、適切なエラーをスローしてください。
-
-1. `workspace.extensions`プロパティには、指定されていない場合に使用するプロジェクトを決定するための `defaultProject` 値が含まれています。
-   `ng generate` コマンドでプロジェクトが明示的に指定されていない場合は、その値をフォールバックとして使用します。
-
-<code-example header="projects/my-lib/schematics/my-service/index.ts (Default Project)" path="schematics-for-libraries/projects/my-lib/schematics/my-service/index.ts" region="project-fallback">
-</code-example>
 
 1. これでプロジェクト名がわかったので、それを使用してプロジェクト固有の設定情報を取得します。
 

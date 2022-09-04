@@ -148,7 +148,7 @@ Angular の ngUpgrade ライブラリは本当に小さいアプリケーショ�
 
 The [end of life of AngularJS][AngularBlogFindingAPathForwardWithAngularjs7e186fdd4429] is December 31st, 2021.
 With this event, ngUpgrade is now in a feature complete state.
-We will continue publishing security and bug fixes for ngUpgrade at least until December 31st, 2022.
+We will continue publishing security and bug fixes for ngUpgrade at least until December 31st, 2023.
 
 </div>
 
@@ -1280,7 +1280,7 @@ AngularJS の　`ng-app` ディレクティブを使って、ブートストラ�
 AngularJS と Angular を両方同時に動かすようになりました。とてもエキサイティングです！
 Angular のコンポーネントはまだ動かしていません。それは次で行います。
 
-<div class="alert is-helpful">
+<div class="callout is-helpful">
 
 #### なぜ *angular* を *angular.IAngularStatic* として宣言するか
 
@@ -1298,7 +1298,7 @@ ES2015 のモジュールを使う必要があります。
 代わりに、`angular` を `angular.IAngularStatic` として宣言することで、
 グローバル変数ということを示し、すべての型サポートを得ることができます。
 
-<div class="alert is-important">
+<div class="callout is-important">
 
 <header>Manually create a UMD bundle for your Angular application</header>
 

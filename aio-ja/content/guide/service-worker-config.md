@@ -1,9 +1,13 @@
 # Service Workerの設定
 
+This topic describes the properties of the service worker configuration file.
+
 #### 前提条件
 
 次の基本的理解があること
-* [プロダクションにおけるService Worker](guide/service-worker-devops)
+
+*   [Service worker overview](https://developer.chrome.com/docs/workbox/service-worker-overview/)
+*   [プロダクションにおけるService Worker](guide/service-worker-devops)
 
 <hr />
 
@@ -19,13 +23,40 @@ Angular Service WorkerがキャッシュすべきファイルとデータのURL�
 設定ファイルはJSON形式を使用します。すべてのファイルパスは`/`で始まらなければなりません。
 これはCLIプロジェクトでの展開ディレクトリに対応し、通常は `dist/<project-name>`です。
 
-{@a glob-patterns}
-特に指定のない限り、パターンは制限されたglobフォーマットを使います。
+<a id="glob-patterns"></a>
+
+Unless otherwise commented, patterns use a **limited*** glob format that internally will be converted into regex:
 
 * `**`は、0個以上のパスセグメントに一致します。
 * `*`は、厳密に0個以上の`/`を除く文字に一致します。
 * `?` は、厳密に1個の`/`を除く文字に一致します。
 * `!`接頭辞は、パターンを否定的なものとしてマークします。つまり、パターンに一致しないファイルのみが含まれます。
+
+<div class="alert is-helpful">
+
+  **\*** Pay attention that some characters with a special meaning in a regular expression are not escaped and also the pattern is not wrapped in `^`/`$` in the internal glob to regex conversion.
+
+  *   `$` is a special character in regex that matches the end of the string and will not be automatically escaped when converting the glob pattern to a regular expression.
+      If you want to literally match the `$` character, you have to escape it yourself (with `\\$`).
+
+      <div class="alert is-important">
+
+        For example, the glob pattern `/foo/bar/$value` results in an unmatchable expression, because it is impossible to have a string that has any characters after it has ended.
+
+      </div>
+
+  *   The pattern will not be automatically wrapped in `^` and `$` when converting it to a regular expression.
+      Therefore, the patterns will partially match the request URLs.
+      If you want your patterns to match the beginning and/or end of URLs, you can add `^`/`$` yourself.
+
+      <div class="alert is-important">
+
+        For example, the glob pattern `/foo/bar/*.js` will match both `.js` and `.json` files.
+        If you want to only match `.js` files, use `/foo/bar/*.js$`.
+
+      </div>
+
+</div>
 
 パターン例
 
@@ -33,18 +64,20 @@ Angular Service WorkerがキャッシュすべきファイルとデータのURL�
 * `/*.html`は、ルートのHTMLファイルのみを指定します。
 * `!/**/*.map`は、すべてのソースマップを除外します。
 
+## Service worker configuration properties
+
 設定ファイルの各セクションについて後述します。
 
-## `appData`
+### `appData`
 
 このセクションでは、この特定のバージョンのアプリケーションを記述するために、任意のデータを渡すことができます。`SwUpdate`サービスは、更新通知にそのデータを含めます。このセクションを使用して、UIポップアップの表示のための追加情報を提供し、ユーザーに利用可能なアップデートを通知します。
 
 {@a index-file}
-## `index`
+### `index`
 
 ナビゲーション要求を満たすためにインデックスページとして機能するファイルを指定します。通常これは`/index.html`です。
 
-## `assetGroups`
+### `assetGroups`
 
 *Assets*は、アプリケーションとともに更新される、アプリケーションバージョンの一部であるリソースです。ページのオリジンドメインからロードされたリソースだけでなく、CDNや他の外部URLからロードされたサードパーティのリソースを含めることができます。ビルド時にこのような外部URLをすべて知っているわけではないので、URLパターンを照合することができます。
 
@@ -92,11 +125,13 @@ interface AssetGroup {
 }
 ```
 
-### `name`
+Each `AssetGroup` is defined by the following asset group properties.
+
+#### `name`
 
 `name`は必須です。これにより設定のバージョン間で特定のアセットグループを識別します。
 
-### `installMode`
+#### `installMode`
 
 `installMode`は、これらのリソースが最初にどのようにキャッシュされるかを決定します。`installMode`は次の2つの値のいずれかです。
 
@@ -106,7 +141,7 @@ interface AssetGroup {
 
 デフォルトでは `prefetch` です。
 
-### `updateMode`
+#### `updateMode`
 
 すでにキャッシュにあるリソースの場合、`updateMode`は新しいバージョンのアプリケーションが発見されたときのキャッシングの動作を決定します。以前のバージョン以降に変更されたグループ内のリソースは、`updateMode`にしたがって更新されます。
 
@@ -116,7 +151,7 @@ interface AssetGroup {
 
 デフォルトでは `installMode` と同じです。
 
-### `resources`
+#### `resources`
 
 このセクションでは、キャッシュするリソースを次のグループに分けて説明します。
 
@@ -125,13 +160,13 @@ interface AssetGroup {
 * `urls`は、実行時に照合されるURLとURLパターンの両方が含まれます。これらのリソースは直接取得されず、コンテンツハッシュもありませんが、HTTPヘッダーにしたがってキャッシュされます。これは、Google FontsサービスなどのCDNでもっとも便利です。<br>
 _(否定のglobパターンはサポートされず、?は文字通り一致します。つまり、?以外の文字は一致しません)_
 
-### `cacheQueryOptions`
+#### `cacheQueryOptions`
 
 These options are used to modify the matching behavior of requests. They are passed to the browsers `Cache#match` function. See [MDN](https://developer.mozilla.org/en-US/docs/Web/API/Cache/match) for details. Currently, only the following options are supported:
 
 * `ignoreSearch`: Ignore query parameters. Defaults to `false`.
 
-## `dataGroups`
+### `dataGroups`
 
 アセットリソースとは異なり、データリクエストはアプリケーションとともにバージョン管理されません。これらは、手動で構成されたポリシーにしたがってキャッシュされます。このポリシーは、API要求やその他のデータの依存関係などの状況に役立ちます。
 
@@ -179,29 +214,41 @@ export interface DataGroup {
 }
 ```
 
-### `name`
+Each `DataGroup` is defined by the following data group properties.
+
+#### `name`
+
 `assetGroups`と同様に、すべてのデータグループはそれを一意に識別する`name`を持っています。
 
-### `urls`
+#### `urls`
+
 A list of URL patterns. URLs that match these patterns are cached according to this data group's policy. Only non-mutating requests (GET and HEAD) are cached.
  * Negative glob patterns are not supported.
  * `?` is matched literally; that is, it matches *only* the character `?`.
 
-### `version`
+#### `version`
+
 時には、APIは下位互換性のない形式でフォーマットを変更します。新しいバージョンのアプリケーションは古いAPI形式と互換性がなく、そのAPIの既存のキャッシュされたリソースと互換性がない可能性があります。
 
 `version`は、キャッシュされているリソースが下位互換性のない方法で更新されたこと、古いキャッシュエントリ(以前のバージョンからのキャッシュエントリ）を破棄するべきであることを示すためのメカニズムを提供します。
 
 `version`は、整数フィールドで、デフォルトは `1` です。
 
-### `cacheConfig`
+#### `cacheConfig`
+
 このセクションでは、一致したリクエストをキャッシュするポリシーを定義します。
 
-#### `maxSize`
-（必須）キャッシュ内のエントリまたはレスポンスの最大数。オープンエンドのキャッシュは無限に成長しますが、最終的にはストレージクォータを超えたら、ストレージから追い出します。
+##### `maxSize`
 
-#### `maxAge`
-（必須）`maxAge`パラメータは、レスポンスが無効であるとみなされる前にキャッシュに残ることが許される期間を示します。`maxAge`は、次の単位接尾辞を使用した継続時間文字列です。
+**Required**
+
+キャッシュ内のエントリまたはレスポンスの最大数。オープンエンドのキャッシュは無限に成長しますが、最終的にはストレージクォータを超えたら、ストレージから追い出します。
+
+##### `maxAge`
+
+**Required**
+
+`maxAge`パラメータは、レスポンスが無効であるとみなされる前にキャッシュに残ることが許される期間を示します。`maxAge`は、次の単位接尾辞を使用した継続時間文字列です。
 
 * `d`: days
 * `h`: hours
@@ -211,7 +258,8 @@ A list of URL patterns. URLs that match these patterns are cached according to t
 
 たとえば、文字列 `3d12h`はコンテンツを3日半までキャッシュします。
 
-#### `timeout`
+##### `timeout`
+
 この継続時間文字列は、ネットワークタイムアウトを指定します。ネットワークのタイムアウトは、キャッシュされたレスポンスが構成されている場合に、キャッシュされたレスポンスを使用する前にAngular Service Workerがネットワークが応答するまで待機する時間です。`timeout`は期間文字列で、次の単位接尾辞を使います。
 
 * `d`: 日
@@ -222,7 +270,7 @@ A list of URL patterns. URLs that match these patterns are cached according to t
 
 たとえば、文字列 `5s30u` は、5秒と30ミリ秒のネットワークタイムアウトに変換されます。
 
-#### `strategy`
+##### `strategy`
 
 Angular Service Workerは、データリソース用の2つのキャッシング戦略のいずれかを使用できます。
 
@@ -244,15 +292,38 @@ This will essentially do the following:
 
 </div>
 
-### `cacheQueryOptions`
+##### `cacheOpaqueResponses`
+
+Whether the Angular service worker should cache opaque responses or not.
+
+If not specified, the default value depends on the data group's configured strategy:
+
+| Strategies                             | Details |
+|:---                                    |:---     |
+| Groups with the `freshness` strategy   | The default value is `true` and the service worker caches opaque responses. These groups will request the data every time and only fall back to the cached response when offline or on a slow network. Therefore, it doesn't matter if the service worker caches an error response.                                    |
+| Groups with the `performance` strategy | The default value is `false` and the service worker doesn't cache opaque responses. These groups would continue to return a cached response until `maxAge` expires, even if the error was due to a temporary network or server issue. Therefore, it would be problematic for the service worker to cache an error response. |
+
+<div class="callout is-important">
+
+<header>Comment on opaque responses</header>
+
+In case you are not familiar, an [opaque response][WhatwgFetchSpecConceptFilteredResponseOpaque] is a special type of response returned when requesting a resource that is on a different origin which doesn't return CORS headers.
+One of the characteristics of an opaque response is that the service worker is not allowed to read its status, meaning it can't check if the request was successful or not.
+See [Introduction to fetch()][GoogleDeveloperWebUpdates201503IntroductionToFetchResponseTypes] for more details.
+
+If you are not able to implement CORS &mdash;for example, if you don't control the origin&mdash; prefer using the `freshness` strategy for resources that result in opaque responses.
+
+</div>
+
+#### `cacheQueryOptions`
 
 See [assetGroups](#assetgroups) for details.
 
-## `navigationUrls`
+### `navigationUrls`
 
 このオプションのセクションでは、インデックスファイルにリダイレクトされるURLのカスタムリストを指定できます。
 
-### ナビゲーションリクエストの処理
+#### ナビゲーションリクエストの処理
 
 Service Workerは、`asset`または`data`グループと一致しないナビゲーションリクエストを指定された[index file](#index-file)にリダイレクトします。次の場合、リクエストはナビゲーション要求とみなされます。
 
@@ -272,7 +343,7 @@ To configure whether navigation requests are sent through to the network or not,
 
 </div>
 
-### ナビゲーションリクエストURLのマッチング
+#### ナビゲーションリクエストURLのマッチング
 
 ほとんどの場合、これらのデフォルト基準は問題ありませんが、異なるルールを設定することが望ましい場合があります。たとえば、Angularアプリケーションの一部ではない特定のルートを無視して、それらをサーバーに渡すことができます。
 
@@ -293,7 +364,7 @@ URLがネガティブでないURL/パターンの _いずれか_ と一致し、
 
 {@a navigation-request-strategy}
 
-## `navigationRequestStrategy`
+### `navigationRequestStrategy`
 
 This optional property enables you to configure how the service worker handles navigation requests:
 
@@ -307,7 +378,7 @@ Possible values:
 
 - `'performance'`: The default setting. Serves the specified [index file](#index-file), which is typically cached.
 - `'freshness'`: Passes the requests through to the network and falls back to the `performance` behavior when offline.
-  This value is useful when the server redirects the navigation requests elsewhere using an HTTP redirect (3xx status code).
+  This value is useful when the server redirects the navigation requests elsewhere using an HTTP redirect (`3xx` status code).
   Reasons for using this value include:
     - Redirecting to an authentication website when authentication is not handled by the application.
     - Redirecting specific URLs to avoid breaking existing links/bookmarks after a website redesign.
@@ -319,3 +390,15 @@ The `freshness` strategy usually results in more requests sent to the server, wh
 It is recommended that you use the default performance strategy whenever possible.
 
 </div>
+
+<!-- links -->
+
+<!-- external links -->
+
+[GoogleDeveloperWebUpdates201503IntroductionToFetchResponseTypes]: https://developers.google.com/web/updates/2015/03/introduction-to-fetch#response_types
+
+[WhatwgFetchSpecConceptFilteredResponseOpaque]: https://fetch.spec.whatwg.org#concept-filtered-response-opaque
+
+<!-- end links -->
+
+@reviewed 2022-02-28

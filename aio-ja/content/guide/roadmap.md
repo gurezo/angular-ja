@@ -1,45 +1,74 @@
 # Angularのロードマップ
 
-<p class="roadmap-last-updated">Last updated: 2021-11-03</p>
+<p class="roadmap-last-updated">Last updated: 2022-05-23</p>
 
-Angularは、Google内からも、より広範なオープンソースコミュニティからも、多くの機能リクエストを受け取ります。 同時に、私たちのプロジェクトのリストには、メンテナンスタスク、コードのリファクタリング、潜在的なパフォーマンスの向上などがたくさん含まれています。 私たちは、Dev Relや製品管理、エンジニアリングの代表者を集めて、このリストに優先順位を付けます。 新しいプロジェクトがキューに入ると、他のプロジェクトに対する相対的な優先順位に基づいて、それらを定期的に配置します。 作業が完了すると、プロジェクトはキューの上位に移動します。
+Angularは、Google内からも、より広範なオープンソースコミュニティからも、多くの機能リクエストを受け取ります。
+同時に、私たちのプロジェクトのリストには、メンテナンスタスク、コードのリファクタリング、潜在的なパフォーマンスの向上などがたくさん含まれています。 
+私たちは、Dev Relや製品管理、エンジニアリングの代表者を集めて、このリストに優先順位を付けます。 
+新しいプロジェクトがキューに入ると、他のプロジェクトに対する相対的な優先順位に基づいて、それらを定期的に配置します。 
+作業が完了すると、プロジェクトはキューの上位に移動します。
 
-次のプロジェクトは、特定のAngularバージョンに関連付けられていません。 完了したときにリリースされ、セマンティックバージョニングにしたがって、リリーススケジュールに基づいて特定のバージョンの一部になります。 たとえば、機能追加は完成後に次のマイナーでリリースされますが、破壊的な変更が含まれている場合は次のメジャーでリリースされます。
+次のプロジェクトは、特定のAngularバージョンに関連付けられていません。 
+完了したときにリリースされ、セマンティックバージョニングにしたがって、リリーススケジュールに基づいて特定のバージョンの一部になります。 
+たとえば、機能追加は完成後に次のマイナーでリリースされますが、破壊的な変更が含まれている場合は次のメジャーでリリースされます。
 
 ## 進行中
 
-### 開発者が使いやすい `@angular/forms` の厳格なタイピングを実現
+### Implement APIs for optional NgModules
 
-リアクティブフォームのより厳密な型チェックの実装に取り組みます。 このようにして、開発者は開発中により多くの問題をキャッチし、テキストエディターとIDEへのより優れたサポートを有効にし、リアクティブフォームの型チェックを改善できます。
-### オプショナルのNgModulesを使用したシンプルなAngularメンタルモデル
+In the process of making Angular simpler, we are working on introducing APIs that allow developers to initialize applications, instantiate components, and use the router without NgModules.
+Angular v14 introduces developer preview of the APIs for standalone components, directives, and pipes. In the next few quarters we'll collect feedback from developers and finalize the project making the APIs stable. As the next step we will work on improving use cases such as `TestBed`, Angular elements, etc.
 
-Angularメンタルモデルと学習経路を簡略化するために、NgModulesをオプションにすることに取り組みます。この作業により、開発者はスタンドアロンコンポーネントを開発し、コンポーネントのコンパイルスコープを宣言するための代替APIを実装できます。We kicked this project off with high-level design discussions that we captured in an [RFC](https://github.com/angular/angular/discussions/43784).
+### Improve image performance
+
+The [Aurora](https://web.dev/introducing-aurora/) and the Angular teams are working on the implementation of an image directive that aims to improve [Core Web Vitals](https://web.dev/vitals). Currently, the project is in a prototyping phase and the teams are validating the image directive with partners.
 
 ### Investigate micro frontend architecture for scalable development processes
 
-Look into independent deployability and development of large-scale applications to improve efficiency and productivity. The Angular community has an established story for micro frontend support. As part of this effort, we’d investigate what would be the correct abstractions to provide better support.
+We conducted a series of 40 interviews to understand the requirements for micro-frontend architecture of the community. We followed up with a broader community survey. As the next step, we'll share analysis of the results publicly.
 
-### [MDC Web](https://material.io/develop/web/)の統合によるAngular Material Componentsの強化
+### Investigate modern bundles
 
-MDC Webは、GoogleのMaterial Designチームが作成したライブラリで、Material Designコンポーネントを構築するための再利用可能なプリミティブを提供します。 AngularチームはこれらのプリミティブをAngular Materialに組み込んでいます。 MDC Webを使用すると、Angular MaterialがMaterial Designの仕様により密接に連携し、アクセシビリティが拡張され、全体的にコンポーネントの品質が向上し、チームの速度が向上します。
+To improve development experience by speeding up build times research modern bundles.
+As part of the project experiment with [esbuild](https://esbuild.github.io) and other open source solutions, compare them with the state of the art tooling in Angular CLI, and report the findings. In Angular v14 we're releasing an [experimental support](https://github.com/angular/angular-cli/pull/22995) for esbuild. Next, the team will focus on validating the new prototype and implementing watch and Sass support.
 
-### Angular コンポーネントアクセシビリティ
+### Modern CSS
 
-Angular MaterialのコンポーネントをWCAGなどのアクセシビリティ基準に照らし合わせて評価し、そこから発生した問題を解決するための作業を行っています。
+The Web ecosystem evolves constantly and we want to reflect the latest modern standards in Angular. In this project we aim to provide guidelines on using modern CSS features in Angular to ensure developers follow best practices for layout, styling, etc.
 
-### レガシー[View Engine](guide/glossary#ve)の削除
+### Support adding directives to host elements
 
-すべての内部ツールのIvyへの移行が完了したら、レガシーView Engineを削除して、Angularの概念的オーバーヘッドを小さくし、パッケージサイズを小さくして、メンテナンスコストを削減し、コードベースの複雑さを減らします。
+A [long-standing feature request](https://github.com/angular/angular/issues/8785) is to add the ability to add directives to host elements.
+The feature lets developers augment their own components with additional behaviors without using inheritance.
+The project requires substantial effort in terms of the definition of APIs, semantics, and implementation.
 
-### Launch advanced compiler diagnostics
+### Better stack traces
 
-Extend the diagnostics of the Angular compiler outside type checking. Introduce other correctness and conformance checks to further guarantee correctness and best practices.
+The Angular and the Chrome DevTools are working together to enable more readable stack traces for error messages.
 
-### Improve Angular DevTools' integration with framework
+### New CDK primitives
 
-To improve the integration of Angular DevTools with the framework, we are working on moving the codebase to the [angular/angular](https://github.com/angular/angular) monorepository. This includes transitioning Angular DevTools to Bazel and integrating it into the existing processes and CI pipeline.
+We are working on new CDK primitives to facilitate creating custom components based on the WAI-ARIA design patterns for [Listbox](https://www.w3.org/TR/wai-aria-practices-1.1/#Listbox) and [Combobox](https://www.w3.org/TR/wai-aria-practices-1.1/#combobox). Angular v14 introduced stable [menu and dialog primitives](https://material.angular.io/cdk/categories) as part of this project.
+
+### Enhanced Angular Material components by integrating MDC Web
+
+[MDC Web](https://material.io/develop/web) is a library created by the Google Material Design team that provides reusable primitives for building Material Design components.
+The Angular team is incorporating these primitives into Angular Material.
+Using MDC Web aligns Angular Material more closely with the Material Design specification, expand accessibility, improve component quality, and improve the velocity of our team.
+
+### Angular component accessibility
+
+We are evaluating components in Angular Material against accessibility standards such as WCAG and working to fix any issues that arise from this process.
+
+### Documentation refactoring
+
+Ensure all existing documentation fits into a consistent set of content types. Update excessive use of tutorial-style documentation into independent topics. We want to ensure the content outside the main tutorials is self-sufficient without being tightly coupled to a series of guides. In Q2 2022, we refactored the [template content](https://github.com/angular/angular/pull/45897). The next steps are to introduce better structure for components and dependency injection.
 
 ## 将来
+
+### Explore hydration and server-side rendering usability improvements
+
+As part of this effort we'll explore the problem space of hydration with server-side rendering, different approaches, and opportunities for Angular. As outcome of this project we'll have validation of the effort as well as a plan for action.
 
 ### Revamp performance dashboards to detect regressions
 
@@ -53,21 +82,21 @@ Zone.jsをAngularアプリケーションからオプショナルにするため
 
 Angular コンパイラを TypeScript コンパイラのプラグインとして配布することで、開発者のビルドパフォーマンスを大幅に向上させ、メンテナンスコストを削減することができます。
 
-### Support adding directives to host elements
-
-A long-standing feature request is to add the ability to add directives to host elements. The feature will allow developers to augment their own components with additional behaviors without using inheritance. The project will require substantial effort in terms of the definition of APIs, semantics, and implementation.
-
 ### 使いやすいコンポーネントレベルのコード分割API
 
 Webアプリケーションの一般的な問題は、初期ロード時間が遅いことです。それを改善するひとつの方法は、コンポーネントレベルでより細かいコード分割を適用することです。このプラクティスを促進するために、より使いやすいコード分割APIに取り組みます。
 
-### Publish guides on advanced concepts
-
-Develop and publish an in-depth guide on change detection. Develop content for performance profiling of Angular applications. Cover how change detection interacts with Zone.js and explain when it gets triggered, how to profile its duration, as well as common practices for performance optimization.
-
 ### 将来のRxJSの変更（v7以降）にスムーズに対応できるようにする
 
 Angular開発者がRxJSの最新機能を活用し、フレームワークの次のメジャーリリースにスムーズに移行できるようにしたいと考えています。この目的のために、RxJSのv7以降の変更の範囲を調査および文書化し、更新戦略を計画します。
+
+### Introduce dependency injection debugging APIs
+
+To improve the debugging utilities of Angular and Angular DevTools, we'll work on APIs that provide access the dependency injection runtime. As part of the project we'll expose debugging methods that allow us to explore the injector hierarchy and the dependencies across their associated providers.
+
+### Support two-dimensional drag-and-drop
+
+As part of this project we'd like to implement mixed orientation support for the Angular CDK drag and drop. This is one of the most highly [requested features](https://github.com/angular/components/issues/13372) in the repository.
 
 <details class="completed-details" open="true">
 <summary>
@@ -79,6 +108,61 @@ Angular開発者がRxJSの最新機能を活用し、フレームワークの次
   </span>
 </summary>
 <div class="details-content">
+
+### Allow binding to protected fields in templates
+
+*Completed Q2 2022*
+
+To improve the encapsulation of Angular components we enabled binding to protected members of the component instance. This way you'll no longer have to expose a field or a method as public to use it inside your templates.
+
+### Publish guides on advanced concepts
+
+*Completed Q2 2022*
+
+Develop and publish an in-depth guide on change detection.
+Develop content for performance profiling of Angular applications.
+Cover how change detection interacts with Zone.js and explain when it gets triggered, how to profile its duration, as well as common practices for performance optimization.
+
+### Rollout strict typings for `@angular/forms`
+
+In Q4 2021 we designed a solution for introducing strict typings for forms and in Q1 2022 we concluded the corresponding [request for comments](https://github.com/angular/angular/discussions/44513).
+Currently, we are implementing a rollout strategy with an automated migration step that will enable the improvements for existing projects.
+We are first testing the solution with more than 2,500 projects at Google to ensure a smooth migration path for the external community.
+
+### Remove legacy [View Engine](guide/glossary#ve)
+
+*Completed Q1 2022*
+
+After the transition of all our internal tooling to Ivy is completed, we will remove the legacy View Engine for reduced Angular conceptual overhead, smaller package size, lower maintenance cost, and lower codebase complexity.
+
+### Simplified Angular mental model with optional NgModules
+
+*Completed Q1 2022*
+
+To simplify the Angular mental model and learning journey, we will be working on making NgModules optional.
+This work lets developers develop standalone components and implement an alternative API for declaring the compilation scope of the component.
+We kicked this project off with high-level design discussions that we captured in an [RFC](https://github.com/angular/angular/discussions/43784).
+
+### Design strict typing for `@angular/forms`
+
+*Completed Q1 2022*
+
+We will work on finding a way to implement stricter type checking for reactive forms with minimal backward incompatible implications.
+This way, we let developers catch more issues during development time, enable better text editor and IDE support, and improve the type checking for reactive forms.
+
+### Improve integration of Angular DevTools with framework
+
+*Completed Q1 2022*
+
+To improve the integration of Angular DevTools with the framework, we are working on moving the codebase to the [angular/angular](https://github.com/angular/angular) monorepository.
+This includes transitioning Angular DevTools to Bazel and integrating it into the existing processes and CI pipeline.
+
+### Launch advanced compiler diagnostics
+
+*Completed Q1 2022*
+
+Extend the diagnostics of the Angular compiler outside type checking.
+Introduce other correctness and conformance checks to further guarantee correctness and best practices.
 
 ### E2Eテスト戦略のアップデート
 
@@ -187,3 +271,11 @@ We are actively investing up to 50% of our engineering capacity on triaging issu
 
 </div>
 </details>
+
+<!-- links -->
+
+<!-- external links -->
+
+<!-- end links -->
+
+@reviewed 2022-02-28

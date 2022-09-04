@@ -1,24 +1,36 @@
-<h1 class="no-toc">ツアー・オブ・ヒーローズ アプリケーションとチュートリアル</h1>
+# ツアー・オブ・ヒーローズ アプリケーションとチュートリアル
 
 <div class="callout is-helpful">
+
 <header>入門</header>
 
-このチュートリアルでは、独自のアプリケーションをゼロから構築し、一般的な開発プロセスの経験を提供するとともに、アプリケーション設計の基本的な概念、ツール、用語の概要を紹介します。
+このチュートリアルでは、あなた自身のAngularアプリケーションを最初から構築します。
+これは、Angularアプリケーション設計のコンセプト、ツール、および用語を学びながら、典型的な開発プロセスを経験するよい方法です。
 
-Angularにまったく慣れていない場合は、まず[**いますぐ試す**](start)のクイックスタートアプリケーションを試してみてください。
-これは、既成の部分的に完成したプロジェクトに基づいており、StacBlitzのインタラクティブ開発環境で調査および変更でき、結果をリアルタイムで確認できます。
+Angularがはじめての方は、まず[**試してみよう**]（スタート）のクイックスタート・アプリケーションを試してみてください。
+**試してみよう** は、既製の部分的に完成したプロジェクトをベースにしています。
+StackBlitzでアプリケーションを編集し、その結果をリアルタイムで確認することができます。
 
-「試してみよう」チュートリアルでは、コンポーネント、テンプレートの構文、ルーティング、サービス、HTTPを介したデータへのアクセスなど、同じ主要なトピックを最新のベストプラクティスにしたがって要約した形式で説明しています。
+**試してみよう**では、コンポーネント、テンプレート構文、ルーティング、サービス、HTTPによるデータアクセスなどの主要なトピックを網羅し、ベストプラクティスに沿って凝縮しています。
 
 </div>
 
-この _ツアー・オブ・ヒーローズ_ のチュートリアルでは、ローカル開発環境をセットアップし、[Angular CLIツール](cli "CLI command reference")を使用してアプリケーションを開発する方法を示し、Angularの基本を紹介します。
+この *Tour of Heroes* チュートリアルでは、Angularの基本を紹介し、次の方法を説明します。
+
+* Angularのローカル開発環境を構築する
+* [Angular CLI](cli "CLIコマンドリファレンス")を使用してアプリケーションを開発する
 
 作成した _ツアー・オブ・ヒーローズ_ アプリケーションは、人材派遣会社がヒーローの安定を管理するのに役立ちます。
 アプリケーションには、データ駆動型アプリケーションで見つかると思われる多くの機能があります。
-完成したアプリケーションは、ヒーローのリストを取得して表示し、選択したヒーローの詳細を編集し、ヒーローデータのさまざまなビュー間を移動します。
 
-このチュートリアルが終わるときには、あなたは次のことができるようになっています。
+完成したアプリケーションは次のことができます:
+
+* ヒーローのリストを取得する
+* リスト内のヒーローを表示する
+* 選択したヒーローの詳細を編集する
+* ヒーローのデータの異なるビュー間を移動する
+
+このチュートリアルでは、Angularで必要なことを何でもできるという確信を得ることができるよう、その方法を紹介します。
 
 * 要素を表示・隠蔽する、そしてヒーローデータのリストを表示するための組み込みAngular[ディレクティブ](guide/glossary#directive "Directives definition")を使う。
 * ヒーローの詳細やヒーローのリストを表示するためのAngular[コンポーネント](guide/glossary#component "Components definition")を作成する。
@@ -33,36 +45,43 @@ Angularにまったく慣れていない場合は、まず[**いますぐ試す*
 Angularを始めるためにAngularのことを十分に学び、Angularは必要なことを何でもできるということを確信するでしょう。
 
 <div class="callout is-helpful">
+
 <header>解答</header>
 
-すべてのチュートリアルステップを終えると、最終的なアプリケーションはこのような姿になります: <live-example name="toh-pt6"></live-example>
+すべてのチュートリアルステップを終えると、最終的なアプリケーションはこのような姿になります: 
+<live-example name="toh-pt6"></live-example>
 
 </div>
 
-## これから何を作るか
+## Design your new application
 
 これは、このチュートリアルがもっとも勇敢なヒーローを表示するダッシュボードから始まり、どこに誘導するか
 という視覚的アイデアです。
 
 <div class="lightbox">
-  <img src='generated/images/guide/toh/heroes-dashboard-1.png' alt="Output of heroes dashboard">
+
+<img alt="Output of heroes dashboard" src="generated/images/guide/toh/heroes-dashboard-1.png">
+
 </div>
 
-ダッシュボード上の2つのリンク("Dashboard" と "Heroes")をクリックすることができ、
-このダッシュボード画面とヒーローの画面を遷移します。
+You can click the **Dashboard** and **Heroes** links in the dashboard to navigate between the views.
 
 ダッシュボードで"Magneta"というヒーローをクリックしたら、ルーターはヒーローの名前を編集できる"Hero Details"画面を開きます。
 
 <div class="lightbox">
-  <img src='generated/images/guide/toh/hero-details-1.png' alt="Details of hero in app">
+
+<img alt="Details of hero in application" src="generated/images/guide/toh/hero-details-1.png">
+
 </div>
 
 ”Back"ボタンをクリックすることでダッシュボードに戻ります。
 上部にあるリンクは個々のメインビューに遷移させます。
-"Heroes"をクリックしたら、アプリケーションは"Heroes"のマスターリストのビューを表示します。
+"Heroes"をクリックしたら、アプリケーションは"Heroes"のリストのビューを表示します。
 
 <div class="lightbox">
-  <img src='generated/images/guide/toh/heroes-list-2.png' alt="Output of heroes list app">
+
+<img alt="Output of heroes list application" src="generated/images/guide/toh/heroes-list-2.png">
+
 </div>
 
 別のヒーローの名前をクリックすると、リストの下にある読み取り専用の小さな詳細ビューが、新しく選択されたものを反映します。
@@ -72,11 +91,17 @@ Angularを始めるためにAngularのことを十分に学び、Angularは必�
 次の図はすべての遷移の選択肢をキャプチャしたものです。
 
 <div class="lightbox">
-  <img src='generated/images/guide/toh/nav-diagram.png' alt="View navigations">
+
+<img alt="View navigations" src="generated/images/guide/toh/nav-diagram.png">
+
 </div>
 
 以下がアプリケーションでユーザーがアクションを取っている様子です。
 
 <div class="lightbox">
-  <img src='generated/images/guide/toh/toh-anim.gif' alt="Tour of Heroes in Action">
+
+<img alt="Tour of Heroes in Action" src="generated/images/guide/toh/toh-anim.gif">
+
 </div>
+
+@reviewed 2022-05-16

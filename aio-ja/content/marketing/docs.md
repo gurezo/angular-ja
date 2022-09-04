@@ -5,7 +5,6 @@ Angularは、効率的で洗練されたシングルページアプリケーシ�
 これらのAngularドキュメントは、最初のアプリケーションから複雑なエンタープライズアプリケーションの最適化まで、Angularのプラットフォームとフレームワークの学習と使用に役立ちます。
 チュートリアルとガイドには、プロジェクトを加速するためのダウンロード可能なサンプルが含まれています。
 
-
 <div class="card-container">
   <a href="guide/what-is-angular" class="docs-card" title="Angular Platform Overview">
       <section>Angularとは何か</section>
@@ -34,15 +33,12 @@ Angularは、効率的で洗練されたシングルページアプリケーシ�
   </a>
 </div>
 
-
 ## 想定読者
 
-
-これらのドキュメントは、あなたがすでに[HTML](https://developer.mozilla.org/docs/Learn/HTML/Introduction_to_HTML "Learn HTML")、[CSS](https://developer.mozilla.org/docs/Learn/CSS/First_steps "Learn CSS")、 [JavaScript](https://developer.mozilla.org/ja/docs/Web/JavaScript/A_re-introduction_to_JavaScript "Learn JavaScript") 、
-そして [クラス](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Classes "ES2015 Classes") や [モジュール](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Statements/import "ES2015 Modules") のような [最新の標準](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Language_Resources "Latest JavaScript standards") からのツールのいくつかに慣れていることを前提としています。
+これらのドキュメントは、あなたがすでに[HTML](https://developer.mozilla.org/docs/Learn/HTML/Introduction_to_HTML "Learn HTML")、[CSS](https://developer.mozilla.org/docs/Learn/CSS/First_steps "Learn CSS")、 [JavaScript](https://developer.mozilla.org/docs/Web/JavaScript/A_re-introduction_to_JavaScript "Learn JavaScript") 、
+そして [クラス](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Classes "ES2015 Classes") や [モジュール](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/import "ES2015 Modules") のような [最新の標準](https://developer.mozilla.org/docs/Web/JavaScript/Language_Resources "Latest JavaScript standards") からのツールのいくつかに慣れていることを前提としています。
 コードサンプルは [TypeScript](https://www.typescriptlang.org/ "TypeScript") を使って書かれています。ほとんどのAngularコードは、依存性の注入に [型](https://www.typescriptlang.org/docs/handbook/classes.html "TypeScript Types") を使用し、メタデータに [デコレーター](https://www.typescriptlang.org/docs/handbook/decorators.html "Decorators") を使用して、
 最新のJavaScriptだけで記述できます。
-
 
 ## フィードバック
 
@@ -54,7 +50,7 @@ AngularのGithubリポジトリに
 [プルリクエスト](https://github.com/angular/angular/pulls "Angular Github pull requests") を作成して
 Angularドキュメントに貢献してください。
 提出ガイドラインについては、 
-[Angularへの貢献](https://github.com/angular/angular/blob/master/CONTRIBUTING.md "Contributing guide") を参照してください。
+[Angularへの貢献](https://github.com/angular/angular/blob/main/CONTRIBUTING.md "Contributing guide") を参照してください。
 
 私たちのコミュニティは、尊重、協力的なコミュニケーションを大切にしています。 
-[行動規範](https://github.com/angular/angular-ja/blob/master/CODE_OF_CONDUCT.md "Contributor code of conduct") を参照し、遵守してください。
+[行動規範](https://github.com/angular/angular-ja/blob/main/CODE_OF_CONDUCT.md "Contributor code of conduct") を参照し、遵守してください。

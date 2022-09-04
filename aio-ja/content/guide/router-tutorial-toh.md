@@ -1,4 +1,5 @@
-{@a router-tutorial}
+
+<a id="router-tutorial"></a>
 
 # ルーターチュートリアル：ツアーオブヒーローズ
 
@@ -7,7 +8,7 @@
 
 最終的なバージョンのアプリケーションのサンプルは、次を参照してください。<live-example name="router"></live-example>
 
-{@a router-tutorial-objectives}
+<a id="router-tutorial-objectives"></a>
 
 ## 目的
 
@@ -126,13 +127,33 @@ _Crisis Detail_ は、同じページの、リストの下にある子コンポ�
   <img src='generated/images/guide/router/router-1-anim.gif' alt="Animated image of application with a Crisis Center button and a Heroes button. The pointer clicks each button to show a view for each.">
 </div>
 
-{@a import}
+<a id="import"></a>
 
-Angular CLI でサンプルアプリケーションを生成します。
+### Create a sample application
 
-<code-example language="sh">
-  ng new angular-router-sample
-</code-example>
+1. Create a new Angular project, _angular-router-tour-of-heroes_.
+
+   <code-example format="shell" language="shell">
+    ng new angular-router-tour-of-heroes
+   </code-example>
+
+   When prompted with `Would you like to add Angular routing?`, select `N`.
+
+   When prompted with `Which stylesheet format would you like to use?`, select `CSS`.
+
+   After a few moments, a new project, `angular-router-tour-of-heroes`, is ready.
+   
+1. From your terminal, navigate to the `angular-router-tour-of-heroes` directory.
+
+1. Verify that your new application runs as expected by running the `ng serve` command.
+
+   <code-example language="sh">
+    ng serve
+   </code-example>
+
+1. Open a browser to `http://localhost:4200`.
+
+   You should see the application running in your browser.
 
 ### Routes を定義する
 
@@ -809,7 +830,7 @@ ng generate module my-module --routing
 
 各ルーティングモジュールは、インポートされた順にルート設定を拡張します。
 もし `AppRoutingModule` を最初にリストアップした場合、ワイルドカードルートはヒーロールートの_前_に登録されます。
-ワイルドカードルート&mdash;は_全ての_URL&mdash;にマッチする_ので、ヒーロールートにナビゲートしようとする試みを遮断します。
+ワイルドカードルート&mdash;は_すべての_URL&mdash;にマッチする_ので、ヒーロールートにナビゲートしようとする試みを遮断します。
 
 
 <div class="alert is-helpful">
@@ -1166,7 +1187,7 @@ UXを向上させるために、ルーターは同じコンポーネントイン
 `paramMap` は、ユーザーがコンポーネントに移動したときに、`id` を含む新しい値のマップを発行します。
 `ngOnInit()` では、これらの値を購読して `selectedId` を設定し、ヒーローを取得します。
 
-テンプレートを[クラスバインディング](guide/attribute-binding#class-binding)で更新します。
+テンプレートを[クラスバインディング](guide/class-binding)で更新します。
 このバインディングは、比較結果が `true` を返すと `selected` の CSS クラスを追加し、`false` を返すと削除します。
 このバインディングは、次のように繰り返される `<li>` タグの中にあります：
 
@@ -1909,7 +1930,7 @@ _Heroes_ リンクをクリックして、もう一度URLを見てみましょ�
 <div class="alert is-helpful">
 
 **注意：** ガードは、ルーターに別の場所に移動するように指示することもでき、現在の移動を効果的にキャンセルします。
-ガードの中でそれを行う場合、ガードは `false` を返さなければなりません。
+ガードの中でそれを行う場合、ガードは `UrlTree` を返さなければなりません。
 
 </div>
 
@@ -1929,22 +1950,23 @@ _Heroes_ リンクをクリックして、もう一度URLを見てみましょ�
 
 ルーターは複数のガードインターフェースをサポートしています：
 
-* [`CanActivate`](api/router/CanActivate) は、ルート*への*ナビゲーションを仲介します。
-
-* [`CanActivateChild`](api/router/CanActivateChild) は、子ルート*への*ナビゲーションを仲介します。
-
-* [`CanDeactivate`](api/router/CanDeactivate) は、現在のルートから*離れる*ためのナビゲーションを仲介します。
-
-* [`Resolve`](api/router/Resolve) は、ルートをアクティブにする*前に*、ルートデータの検索を行います。
-
-* [`CanLoad`](api/router/CanLoad) は、_非同期的に_ロードされたフィーチャーモジュール*への*ナビゲーションを仲介します。
-
+| Guard interfaces                                  | Details |
+|:---                                               |:---     |
+| [`CanActivate`](api/router/CanActivate)           | To mediate navigation *to* a route                                  |
+| [`CanActivateChild`](api/router/CanActivateChild) | To mediate navigation *to* a child route                            |
+| [`CanDeactivate`](api/router/CanDeactivate)       | To mediate navigation *away* from the current route                 |
+| [`Resolve`](api/router/Resolve)                   | To perform route data retrieval *before* route activation           |
+| [`CanLoad`](api/router/CanLoad)                   | To mediate navigation *to* a feature module loaded *asynchronously* |
+| [`CanMatch`](api/router/CanMatch)                 | To control whether a `Route` should be used at all, even if the `path` matches the URL segment. |
 
 ルーティング階層の各レベルで複数のガードをもつことができます。
 ルーターは、一番深い子ルートから上に向かって、最初に `CanDeactivate` ガードをチェックします。
 次に、`CanActivate` と `CanActivateChild` のガードを、一番上から一番下の子ルートまでチェックします。
 フィーチャーモジュールが非同期にロードされる場合は、モジュールがロードされる前に `CanLoad` ガードがチェックされます。
-もし、_いずれかの_ガードが false を返すと、完了していない保留中のガードがキャンセルされ、ナビゲーション全体がキャンセルされます。
+
+With the exception of `CanMatch`, if *any* guard returns false, pending guards that have not completed are canceled, and the entire navigation is canceled. If a `CanMatch` guard returns `false`, the `Router` continues
+processing the rest of the `Routes` to see if a different `Route` config matches the URL. You can think of this 
+as though the `Router` is pretending the `Route` with the `CanMatch` guard did not exist.
 
 次のいくつかのセクションでは、複数の例を紹介します。
 
@@ -2251,6 +2273,18 @@ The admin feature file structure looks like this:
 
 </code-tabs>
 
+<a id="can-match-guard"></a>
+
+### `CanMatch`: Controlling `Route` matching based on application conditions
+
+As an alternative to using a `CanActivate` guard which redirects the user to a new page if they do not have access, you can instead
+use a `CanMatch` guard to control whether the `Router` even attempts to activate a `Route`. This allows you to have
+multiple `Route` configurations which share the same `path` but are matched based on different conditions. In addition, this approach
+can allow the `Router` to match the wildcard `Route` instead.
+
+<code-example path="router/src/app/auth/auth.guard.2.ts" header="src/app/auth/auth.guard.ts (excerpt)" region="can-match"></code-example>
+
+<code-example path="router/src/app/admin/admin-routing.module.2.ts" header="src/app/admin/admin-routing.module.ts (guarded admin route)" region="can-match"></code-example>
 
 {@a can-activate-child-guard}
 
@@ -2613,14 +2647,6 @@ Guards
 最後に、要求されたルートを目的の admin コンポーネントにロードします。
 
 遅延ロードと再設定は、ルートが最初にリクエストされたときに一度だけ行われます。モジュールとルートは、その後のリクエストですぐに利用できます。
-
-
-<div class="alert is-helpful">
-
-Angularは、SystemJSをサポートする組み込みモジュールローダーを提供し、非同期にモジュールをロードします。
-もし、あなたがWebpack のような他のバンドルツールを使用している場合は、モジュールを非同期にロードするために Webpack のメカニズムを使用します。
-
-</div>
 
 最後のステップとして、メインのアプリケーションからアドミン機能セットを切り離します。
 ルートの `AppModule` は、`AdminModule` やそのファイルをロードしたり、参照したりしてはいけません。
