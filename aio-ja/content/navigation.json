@@ -315,29 +315,31 @@
           "children": [
             {
               "url": "guide/dependency-injection-overview",
-              "title": "Dependency injection in Angular",
-              "tooltip": "Dependency injection is a design pattern in which a class requests dependencies from external sources."
+              "title": "Angularにおける依存性の注入",
+              "tooltip": "依存性の注入は、クラスが外部にある依存オブジェクトを要求するデザインパターンです。",
+              "translated": true
             },
             {
               "url": "guide/dependency-injection",
-              "title": "Understanding dependency injection",
+              "title": "依存性の注入を理解する",
               "tooltip": "Angularの依存性の注入システムは、依存するサービスを \"ジャストインタイム\"で作成し、配信します。",
-              "translated": false
+              "translated": true
             },
             {
               "url": "guide/creating-injectable-service",
-              "title": "Creating an injectable service",
-              "tooltip": "Example of creating an injectable service."
+              "title": "注入可能なサービスの作成",
+              "tooltip": "注入可能なサービスの作成例です。",
+              "translated": true
             },
             {
               "url": "guide/dependency-injection-providers",
-              "title": "Defining dependency providers",
+              "title": "依存性プロバイダーの定義",
               "tooltip": "様々な種類のプロバイダーについて",
-              "translated": false
+              "translated": true
             },
             {
               "url": "guide/hierarchical-dependency-injection",
-              "title": "階層的インジェクター",
+              "title": "階層化インジェクター",
               "tooltip": "インジェクターツリーはコンポーネントツリーと平行し、入れ子になった依存関係をサポートします。",
               "translated": true
             }
