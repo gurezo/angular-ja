@@ -115,9 +115,6 @@ Angularでは、サービスはAngularの [依存性の注入システム](guide
 
     <code-example header="src/app/cart/cart.component.ts" path="getting-started/src/app/cart/cart.component.1.ts"></code-example>
 
-    また、StackBlitzはデフォルトで `ngOnInit()`をコンポーネント内に生成します。
-    このチュートリアルでは `CartComponent`の`ngOnInit()`は無視できます。
-
 1.  新しく作成した`CartComponent`が、`app.module.ts`のモジュールの`declarations`に追加されていることを確認します。
 
     <code-example header="src/app/app.module.ts" path="getting-started/src/app/app.module.ts" region="declare-cart"></code-example>
@@ -262,7 +259,7 @@ Angularの`HttpClient`の詳細については、 [クライアント・サー�
 
     <code-example header="src/app/shipping/shipping.component.ts" path="getting-started/src/app/shipping/shipping.component.ts" region="imports"></code-example>
 
-1.  `shippingCosts` プロパティを定義します。
+1.  `ShippingComponent` の `constructor()` にカートサービスを注入します。
 
     <code-example header="src/app/shipping/shipping.component.ts" path="getting-started/src/app/shipping/shipping.component.ts" region="inject-cart-service"></code-example>
 
