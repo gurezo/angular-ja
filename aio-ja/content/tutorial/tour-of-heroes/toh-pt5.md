@@ -299,7 +299,7 @@ ng generate component dashboard
 
 <code-example header="src/app/heroes/heroes.component.html (list with onSelect)" path="toh-pt4/src/app/heroes/heroes.component.html" region="list"></code-example>
 
-この`<li>`を`*ngFor`だけをもつように戻し、
+`<li>`の内側のHTMLを削除します。
 アンカー要素 (`<a>`) でバッジと名前を囲み、
 ダッシュボードのテンプレートと同じようにアンカーに`routerLink`要素を追加します。
 
@@ -394,7 +394,7 @@ RxJSの`of()`関数を使って_モックのヒーロー_を `Observable`とし�
 ブラウザがリフレッシュされ、アプリケーションは再び動くようになります。
 ダッシュボードまたはヒーローリストでヒーローをクリックでき、そのヒーローの詳細ビューに移動することができます。
 
-`localhost:4200/detail/11`をブラウザのアドレスバーに貼り付けると、ルーターは、`id:11`つまり **Dr. Nice** というヒーローの詳細ビューに遷移します。
+`localhost:4200/detail/12`をブラウザのアドレスバーに貼り付けると、ルーターは、`id:12`つまり **Dr. Nice** というヒーローの詳細ビューに遷移します。
 
 <!-- markdownlint-enable MD024 -->
 
