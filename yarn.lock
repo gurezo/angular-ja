@@ -148,10 +148,10 @@
   resolved "https://registry.yarnpkg.com/@esbuild/win32-x64/-/win32-x64-0.21.5.tgz#acad351d582d157bb145535db2a6ff53dd514b5c"
   integrity sha512-tQd/1efJuzPC6rCFwEvLtci/xNFcTZknmXs98FYDfGE4wP9ClFV98nyKrzJKVPMhdDnjzLhdUyMX4PsQAPjwIw==
 
-"@google/generative-ai@0.14.1":
-  version "0.14.1"
-  resolved "https://registry.yarnpkg.com/@google/generative-ai/-/generative-ai-0.14.1.tgz#a9dcdf0b929fb0fa8c072007d6461c1c3cfe1175"
-  integrity sha512-pevEyZCb0Oc+dYNlSberW8oZBm4ofeTD5wN01TowQMhTwdAbGAnJMtQzoklh6Blq2AKsx8Ox6FWa44KioZLZiA==
+"@google/generative-ai@0.17.0":
+  version "0.17.0"
+  resolved "https://registry.yarnpkg.com/@google/generative-ai/-/generative-ai-0.17.0.tgz#8a3d360e60b308a2fd1ae139529d6308aa95d32d"
+  integrity sha512-HNIrX4x6EY5UPOTTDC5DepBFVluognTXR0MTWLiSVsJmzqdEYxGtz/9NWIknUbPNnPZOu7N1BoA/Ho24aPUh3g==
 
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
