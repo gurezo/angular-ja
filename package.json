@@ -18,7 +18,7 @@
   "packageManager": "yarn@1.22.10",
   "devDependencies": {
     "@google/generative-ai": "0.17.1",
-    "@types/node": "22.5.1",
+    "@types/node": "22.5.2",
     "chokidar": "3.6.0",
     "consola": "3.2.3",
     "execa": "^9.3.1",
