@@ -153,10 +153,10 @@
   resolved "https://registry.yarnpkg.com/@esbuild/win32-x64/-/win32-x64-0.23.1.tgz#81fd50d11e2c32b2d6241470e3185b70c7b30699"
   integrity sha512-BHpFFeslkWrXWyUPnbKm+xYYVYruCinGcftSBaa8zoF9hZO4BcSCFUvHVTtzpIY6YzUnYtuEhZ+C9iEXjxnasg==
 
-"@google/generative-ai@0.19.0":
-  version "0.19.0"
-  resolved "https://registry.yarnpkg.com/@google/generative-ai/-/generative-ai-0.19.0.tgz#02cb718e596d390e5356dfb71ab8316acca72a41"
-  integrity sha512-iGf/62v3sTwtEJGJY6S5m7PfkglU8hi1URaxqIjiRg1OItV27xyc4aVeR0og8cDkZFkUlGZKv+23bJtT1QWFzQ==
+"@google/generative-ai@0.20.0":
+  version "0.20.0"
+  resolved "https://registry.yarnpkg.com/@google/generative-ai/-/generative-ai-0.20.0.tgz#c270f60bf50255f15d489eb2acab169fbbd50e12"
+  integrity sha512-uJQNDr1sihvBJ9w8B0ESpNdX9aEueAMXgwnTuhTo+LnI7DD0M1KHnOWzxb2l6cM1rRHzvkdgJNNfeybcqg7uVg==
 
 "@isaacs/cliui@^8.0.2":
   version "8.0.2"
