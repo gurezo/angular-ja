@@ -66,7 +66,7 @@ export class ItemService {
 
 `ModuleInjector` は、 `@NgModule.providers` および `NgModule.imports` プロパティによって構成されます。 `ModuleInjector` は、 `NgModule.imports` を再帰的にたどることによって到達できるすべてのプロバイダー配列をフラット化したものです。
 
-子 `ModuleInjector` 階層は、他の `@NgModules` を遅延ロードするときに作成されます。
+子 `ModuleInjector` 階層は、他の `@NgModules` を遅延読み込みするときに作成されます。
 
 ### プラットフォームインジェクター
 
@@ -215,7 +215,7 @@ export class OptionalComponent {
 `@Self()` の良いユースケースは、サービスを注入することですが、現在のホスト要素で使用可能な場合のみです。
 この状況でエラーを回避するには、 `@Self()` と `@Optional()` を組み合わせます。
 
-たとえば、次の `SelfComponent` では、コンストラクターで注入された `LeafService` に注目してください。
+たとえば、次の `SelfNoDataComponent` では、コンストラクターで注入された `LeafService` に注目してください。
 
 <docs-code header="src/app/self-no-data/self-no-data.component.ts" language="typescript"
            highlight="[7]">
@@ -466,7 +466,7 @@ Emoji from FlowerService: &#x1F33A;
         これは、同じ場所に一致するディレクティブでは発生しません。
     * 終了位置は、コンポーネント自体と同じになります。なぜなら、これはこのアプリケーションの最上位コンポーネントだからです。
 
-1. `ApplicationConfig` によって提供される `ElementInjector` は、インジェクショントークンが `ElementInjector` 階層で見つからない場合のフォールバックインジェクターとして機能します。
+1. `ApplicationConfig` によって提供される `EnvironmentInjector` は、インジェクショントークンが `ElementInjector` 階層で見つからない場合のフォールバックインジェクターとして機能します。
 
 ### `providers` 配列を使用する
 
@@ -816,9 +816,8 @@ Emoji from FlowerService: &#x1F33A;
 `FlowerService` の例と同様に、コンストラクターに `@SkipSelf()` を追加すると、インジェクターは現在の `<app-child>` の `ElementInjector` を `AnimalService` について検索しません。
 代わりに、インジェクターは `<app-root>` の `ElementInjector` で検索を開始します。
 
-<docs-code language="typescript" highlight="[6]">
+<docs-code language="typescript" highlight="[5]">
 @Component({
-  standalone: true,
   selector: 'app-child',
   …
   viewProviders: [
@@ -853,9 +852,8 @@ Emoji from FlowerService: &#x1F33A;
 `ChildComponent` は、 `viewProviders` を構成して、犬の絵文字が `AnimalService` 値として提供されるようにします。
 また、コンストラクターに `@Host()` があることもわかります。
 
-<docs-code language="typescript" highlight="[[6],[10]]">
+<docs-code language="typescript" highlight="[[5],[9]]">
 @Component({
-  standalone: true
   selector: 'app-child',
   …
   viewProviders: [
@@ -886,9 +884,8 @@ export class ChildComponent {
 
 3番目の動物、ハリネズミ <code>&#x1F994;</code> を含む `viewProviders` 配列を、 `app.component.ts` の `@Component()` メタデータに追加します。
 
-<docs-code language="typescript" highlight="[7]">
+<docs-code language="typescript" highlight="[6]">
 @Component({
-  standalone: true,
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: [ './app.component.css' ],

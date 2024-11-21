@@ -247,7 +247,6 @@ Within a component, you can combine `@if` with the `async` pipe to render the UI
 <docs-code language="ts">
 import { AsyncPipe } from '@angular/common';
 @Component({
-  standalone: true,
   imports: [AsyncPipe],
   template: `
     @if (user$ | async; as user) {
@@ -263,7 +262,7 @@ export class UserProfileComponent {
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
-    this.user$ = userService.getUser(this.userId);
+    this.user$ = this.userService.getUser(this.userId);
   }
 }
 </docs-code>

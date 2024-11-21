@@ -14,7 +14,6 @@ import { CurrencyPipe, DatePipe, TitleCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
   imports: [CurrencyPipe, DatePipe, TitleCasePipe],
   template: `
     <main>
@@ -70,7 +69,7 @@ Angularには、`@angular/common`パッケージに組み込みパイプのセ�
 Angularのパイプ演算子は、テンプレート式内で縦棒文字(`|`)を使用します。パイプ演算子は二項演算子です。左側のオペランドは変換関数に渡される値であり、右側のオペランドはパイプの名前とその後の追加の引数（下記参照）です。
 
 ```angular-html
-<p>The event will occur on {{ scheduledOn | date }}.</p>
+<p>Total: {{ amount | currency }}</p>
 ```
 
 この例では、`amount`の値は、パイプ名が`currency`である`CurrencyPipe`に渡されます。その後、ユーザーのロケールに対するデフォルトの通貨がレンダリングされます。
@@ -113,7 +112,6 @@ import { CurrencyPipe} from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
   imports: [CurrencyPipe],
   template: `
     <main>
@@ -138,7 +136,7 @@ export class AppComponent {
 
 ```angular-html
 <!-- firstName and lastName are concatenated before the result is passed to the uppercase pipe -->
-{{ (firstName + lastName | uppercase }}
+{{ firstName + lastName | uppercase }}
 ```
 
 パイプ演算子は、条件（三項）演算子よりも優先順位が高くなっています。
@@ -184,7 +182,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
   name: 'kebabCase',
-  standalone: true,
 })
 export class KebabCasePipe implements PipeTransform {
   transform(value: string): string {
@@ -202,15 +199,11 @@ import { Pipe } from '@angular/core';
 
 @Pipe({
   name: 'myCustomTransformation',
-  standalone: true
 })
 export class MyCustomTransformationPipe {}
 ```
 
-`@Pipe`デコレーターには、次の2つの構成オプションが必要です。
-
-- `name`: テンプレートで使用されるパイプ名
-- `standalone: true` - パイプをスタンドアロンアプリケーションで使用できるようにします
+`@Pipe` デコレーターは `name` を必要とします。この `name` は、テンプレート内でパイプをどのように使用するかを制御します。
 
 ### カスタムパイプの名前付け規則
 
@@ -228,7 +221,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
   name: 'myCustomTransformation',
-  standalone: true
 })
 export class MyCustomTransformationPipe implements PipeTransform {}
 ```
@@ -244,7 +236,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
   name: 'myCustomTransformation',
-  standalone: true
 })
 export class MyCustomTransformationPipe implements PipeTransform {
   transform(value: string): string {
@@ -262,7 +253,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
   name: 'myCustomTransformation',
-  standalone: true
 })
 export class MyCustomTransformationPipe implements PipeTransform {
   transform(value: string, format: string): string {
@@ -289,7 +279,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 @Pipe({
   name: 'featuredItemsImpure',
   pure: false,
-  standalone: true
 })
 export class FeaturedItemsImpurePipe implements PipeTransform {
   transform(value: string, format: string): string {

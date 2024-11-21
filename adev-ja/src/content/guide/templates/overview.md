@@ -3,7 +3,7 @@ Angularにおけるテンプレートとは、HTMLの断片です。
 テンプレート内で特別な構文を使用することで、Angularの多くの機能を活用できます。
 </docs-decorative-header>
 
-Tip: この包括的なガイドに進む前に、Angularの[基本概念](essentials/rendering-dynamic-templates)をご覧ください。
+Tip: この包括的なガイドに進む前に、Angularの[基本概念](essentials/templates)をご覧ください。
 
 すべてのAngularコンポーネントには、コンポーネントがページにレンダリングする[DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model)を定義する**テンプレート**があります。テンプレートを使用することで、Angularはデータが変化してもページを自動的に最新の状態に保つことができます。
 
@@ -43,6 +43,6 @@ AngularはテンプレートをJavaScriptにコンパイルして、アプリケ
 | [ng-templateによるテンプレートフラグメントの作成](guide/templates/ng-template)   | テンプレートフラグメントを宣言します。                                                            |
 | [ng-containerによる要素のグループ化](guide/templates/ng-container)         | 複数の要素をグループ化するか、レンダリングする場所をマークします。                      |
 | [テンプレート内の変数](guide/templates/variables)                         | 変数の宣言について学びます。                                                      |
-| [@deferによる遅延ロード](guide/templates/defer)                       | `@defer`を使用して遅延可能なビューを作成します。                                                  |
+| [@deferによる遅延読み込み](guide/templates/defer)                       | `@defer`を使用して遅延可能ビューを作成します。                                                  |
 | [式構文](guide/templates/expression-syntax)                      | Angular式と標準JavaScriptの違いについて学びます。 |
 | [テンプレート内の空白](guide/templates/whitespace)                       | Angularが空白をどのように処理するかについて学びます。                                                   |

@@ -2397,4 +2397,121 @@ export const RECOMMENDATIONS: Step[] = [
     action:
       '`ComponentFixture.autoDetect` が `ApplicationRef.tick` 内のフィクスチャの変更検出を実行するようになったため、`ComponentFixture.autoDetect` を使用しているときに変更検出の実行順序に依存しているテストがあると、テストに失敗することがあります。たとえば、これによってテストフィクスチャは、これまではその逆であったかもしれませんが、作成するダイアログの前にリフレッシュされます。',
   },
+
+  {
+    action:
+      'Angularディレクティブ、コンポーネント、パイプはデフォルトでスタンドアロンになりました。現在NgModuleで宣言されている宣言には "standalone: false" を指定してください。Angular CLIは自動的にコードを更新します。',
+    level: ApplicationComplexity.Basic,
+    necessaryAsOf: 1900,
+    possibleIn: 1900,
+    step: '19.0.0-standalone-declarations',
+  },
+  {
+    action:
+      'テンプレート参照変数にアクセスする際にthis.プレフィックスを削除してください。例えば、`<div #foo></div>{{ this.foo }}`を`<div #foo></div>{{ foo }}`にリファクタリングしてください。',
+    level: ApplicationComplexity.Medium,
+    necessaryAsOf: 1900,
+    possibleIn: 1900,
+    step: '19.0.0-remove-this',
+  },
+  {
+    action:
+      '`BrowserModule.withServerTransition()`の使用を、アプリケーションの`id`を設定するための`APP_ID`トークンの注入に置き換えてください。',
+    level: ApplicationComplexity.Basic,
+    necessaryAsOf: 1900,
+    possibleIn: 1900,
+    step: '19.0.0-remove-browser-module-with-server-transition',
+  },
+  {
+    action: '`KeyValueDiffers`の`factories`プロパティは削除されました。',
+    level: ApplicationComplexity.Advanced,
+    necessaryAsOf: 1900,
+    possibleIn: 1900,
+    step: '19.0.0-remove-key-value-differs-factories',
+  },
+  {
+    action:
+      'angular.jsonで、`@angular/localize`ビルダーの"name"オプションを"project"に置き換えてください。',
+    level: ApplicationComplexity.Medium,
+    necessaryAsOf: 1900,
+    possibleIn: 1900,
+    step: '19.0.0_localize_builder_project_option',
+  },
+  {
+    action: '`ExperimentalPendingTasks`を`PendingTasks`に名前変更します。',
+    level: ApplicationComplexity.Advanced,
+    necessaryAsOf: 1900,
+    possibleIn: 1900,
+    step: '19.0.0_rename_experimental_pending_tasks',
+  },
+  {
+    action:
+      "`Promise` のタイミングに依存していたエフェクトのテストを更新し、`await whenStable()` を使用するか、`.detectChanges()` を呼び出してエフェクトをトリガーするようにします。変更検出中にトリガーされるエフェクトについては、アプリケーションが完全にレンダリングされることに依存していないことを確認するか、`afterRenderEffect()` の使用を検討してください。フェイククロックを使用するテストでは、クロックを高速化/フラッシュする必要がある場合があります。",
+    level: ApplicationComplexity.Medium,
+    necessaryAsOf: 1900,
+    possibleIn: 1900,
+    step: '19.0.0.1',
+  },
+  {
+    action: 'TypeScriptバージョン5.5以降にアップグレードしてください。',
+    level: ApplicationComplexity.Basic,
+    necessaryAsOf: 1900,
+    possibleIn: 1900,
+    step: '19.0.0.2',
+  },
+  {
+    action:
+      '`fakeAsync` を使用したテストを更新します。変更がAngularゾーン外で発生した場合（ハイブリッドモードのスケジュール）、ゾーンの連結とスケジュールの特定のタイミングに依存するテストは、これらのタイマーが現在`tick`と`flush`の影響を受けるためです。',
+    level: ApplicationComplexity.Advanced,
+    necessaryAsOf: 1900,
+    possibleIn: 1900,
+    step: '19.0.0-timers-in-zone',
+  },
+  {
+    action:
+      "`createComponent` API を使用し、最初の `ng-content` にコンテンツを渡さない場合、デフォルトのフォールバックコンテンツのレンダリングを防ぐために、`projectableNode` として `document.createTextNode('')` を指定してください。",
+    level: ApplicationComplexity.Medium,
+    necessaryAsOf: 1900,
+    possibleIn: 1900,
+    step: '19.0.0-render-default-fallback',
+  },
+  {
+    action:
+      'カスタム要素周辺の変更検知の特定のタイミングまたは順序に依存するテストを更新します。ハイブリッドスケジューラへの切り替えにより、タイミングが変更されている可能性があるためです。',
+    level: ApplicationComplexity.Advanced,
+    necessaryAsOf: 1900,
+    possibleIn: 1900,
+    step: '19.0.0-hybrid-scheduler-timing',
+  },
+  {
+    action:
+      '`Router.errorHandler`から`provideRouter`の`withNavigationErrorHandler`または`RouterModule.forRoot`の`errorHandler`へ移行します。',
+    level: ApplicationComplexity.Basic,
+    necessaryAsOf: 1900,
+    possibleIn: 1900,
+    step: '19.0.0-router-error-handler',
+  },
+  {
+    action:
+      '`ApplicationRef.tick`実行中に発生したエラーを、変更検知を同期的にトリガーするか、未処理の`ComponentFixture.whenStable` のPromiseを拒否することで処理するように、テストを更新します。',
+    level: ApplicationComplexity.Advanced,
+    necessaryAsOf: 1900,
+    possibleIn: 1900,
+    step: '19.0.0-testbed-error-handling',
+  },
+  {
+    action: '`Resolve`インターフェースの使用を更新して、戻り値の型に`RedirectCommand`を含めます。',
+    level: ApplicationComplexity.Medium,
+    necessaryAsOf: 1900,
+    possibleIn: 1900,
+    step: '19.0.0-update-resolve-interface-return-type',
+  },
+  {
+    action:
+      '`fakeAsync`はデフォルトで保留中のタイマーをフラッシュします。以前の動作が必要なテストでは、オプションパラメーターに明示的に`{flush: false}`を渡してください。',
+    level: ApplicationComplexity.Advanced,
+    necessaryAsOf: 1900,
+    possibleIn: 1900,
+    step: '19.0.0-update-fakeasync-to-flush-pending-timers',
+  },
 ];
