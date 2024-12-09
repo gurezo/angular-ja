@@ -1048,10 +1048,10 @@ esprima@^4.0.0:
   resolved "https://registry.yarnpkg.com/esprima/-/esprima-4.0.1.tgz#13b04cdb3e6c5d19df91ab6987a8695619b0aa71"
   integrity sha512-eGuFFw7Upda+g4p+QHvnW0RyTX/SVeJBDM/gCtMARO0cLuT2HcEKnTPvhjV6aGeqrCB/sbNop0Kszm0jsaWU4A==
 
-execa@^9.5.0:
-  version "9.5.0"
-  resolved "https://registry.yarnpkg.com/execa/-/execa-9.5.0.tgz#b4437553fdd084f65184b5537a9bc38eac26c59a"
-  integrity sha512-t7vvYt+oKnMbF3O+S5+HkylsPrsUatwJSe4Cv+4017R0MCySjECxnVJ2eyDXVD/Xpj5H29YzyYn6eEpugG7GJA==
+execa@^9.5.2:
+  version "9.5.2"
+  resolved "https://registry.yarnpkg.com/execa/-/execa-9.5.2.tgz#a4551034ee0795e241025d2f987dab3f4242dff2"
+  integrity sha512-EHlpxMCpHWSAh1dgS6bVeoLAXGnJNdR93aabr4QCGbzOM73o5XmRfM/e5FUqsw3aagP8S8XEWUWFAxnRBnAF0Q==
   dependencies:
     "@sindresorhus/merge-streams" "^4.0.0"
     cross-spawn "^7.0.3"
