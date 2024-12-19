@@ -19,7 +19,7 @@
   "devDependencies": {
     "@google/generative-ai": "0.21.0",
     "@types/node": "22.8.1",
-    "chokidar": "4.0.1",
+    "chokidar": "4.0.3",
     "consola": "3.2.3",
     "execa": "^9.5.0",
     "globby": "14.0.2",
