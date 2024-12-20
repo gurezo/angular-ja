@@ -789,10 +789,10 @@ concat-map@0.0.1:
   resolved "https://registry.yarnpkg.com/concat-map/-/concat-map-0.0.1.tgz#d8a96bd77fd68df7793a73036a3ba0d5405d477b"
   integrity sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=
 
-consola@3.2.3:
-  version "3.2.3"
-  resolved "https://registry.yarnpkg.com/consola/-/consola-3.2.3.tgz#0741857aa88cfa0d6fd53f1cff0375136e98502f"
-  integrity sha512-I5qxpzLv+sJhTVEoLYNcTW+bThDCPsit0vLNKShZx6rLtpilNpmmeTPaeqJb9ZE9dV3DGaeby6Vuhrw38WjeyQ==
+consola@3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/consola/-/consola-3.3.0.tgz#b89affdff331a40eac2f11ecc571eb230b7b560b"
+  integrity sha512-kxltocVQCwQNFvw40dlVRYeAkAvtYjMFZYNlOcsF5wExPpGwPxMwgx4IfDJvBRPtBpnQwItd5WkTaR0ZwT/TmQ==
 
 cross-spawn@^7.0.0, cross-spawn@^7.0.3:
   version "7.0.3"
