@@ -20,7 +20,7 @@
     "@google/generative-ai": "0.21.0",
     "@types/node": "20.14.10",
     "chokidar": "3.6.0",
-    "consola": "3.2.3",
+    "consola": "3.3.3",
     "execa": "^9.3.0",
     "globby": "14.0.2",
     "prh-rules": "prh/rules",
