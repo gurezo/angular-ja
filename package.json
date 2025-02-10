@@ -22,7 +22,7 @@
     "chokidar": "3.6.0",
     "consola": "3.4.0",
     "execa": "^9.3.0",
-    "globby": "14.0.2",
+    "globby": "14.1.0",
     "prh-rules": "prh/rules",
     "rxjs": "7.8.1",
     "sitemap": "8.0.0",
