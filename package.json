@@ -31,6 +31,6 @@
     "textlint-rule-preset-ja-spacing": "2.4.3",
     "textlint-rule-preset-ja-technical-writing": "10.0.1",
     "textlint-rule-prh": "^6.0.0",
-    "tsx": "4.19.2"
+    "tsx": "4.19.3"
   }
 }
