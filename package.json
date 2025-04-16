@@ -23,7 +23,7 @@
     "consola": "3.2.3",
     "execa": "^9.3.0",
     "globby": "14.0.2",
-    "rxjs": "7.8.1",
+    "rxjs": "7.8.2",
     "sitemap": "8.0.0",
     "textlint": "^14.6.0",
     "textlint-filter-rule-allowlist": "4.0.0",
