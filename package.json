@@ -18,7 +18,7 @@
   "packageManager": "yarn@1.22.10",
   "devDependencies": {
     "@google/genai": "^0.13.0",
-    "@types/node": "22.15.15",
+    "@types/node": "22.15.17",
     "chokidar": "3.6.0",
     "consola": "3.4.2",
     "execa": "^9.3.0",
