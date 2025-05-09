@@ -173,10 +173,10 @@
   resolved "https://registry.yarnpkg.com/@esbuild/win32-x64/-/win32-x64-0.25.2.tgz#839f72c2decd378f86b8f525e1979a97b920c67d"
   integrity sha512-kM3HKb16VIXZyIeVrM1ygYmZBKybX8N4p754bw390wGO3Tf2j4L2/WYL+4suWujpgf6GBYs3jv7TyUivdd05JA==
 
-"@google/genai@^0.12.0":
-  version "0.12.0"
-  resolved "https://registry.yarnpkg.com/@google/genai/-/genai-0.12.0.tgz#60cfa419f6e75fc1d47619e74f403e35a871b1a4"
-  integrity sha512-SJtCHac+HPgmwELpJpPKbaV4rk397bS2D42XgFR2NBEARDKd/79RcaRUFFd55pYUJ+gfaz9Bv6KYoiz/P6eZKA==
+"@google/genai@^0.13.0":
+  version "0.13.0"
+  resolved "https://registry.yarnpkg.com/@google/genai/-/genai-0.13.0.tgz#f074b4772473d9e054c45a35b06c404b1a4e6125"
+  integrity sha512-eaEncWt875H7046T04mOpxpHJUM+jLIljEf+5QctRyOeChylE/nhpwm1bZWTRWoOu/t46R9r+PmgsJFhTpE7tQ==
   dependencies:
     google-auth-library "^9.14.2"
     ws "^8.18.0"
